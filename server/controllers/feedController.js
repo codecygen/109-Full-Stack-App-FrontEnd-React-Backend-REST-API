@@ -7,9 +7,9 @@ const getPosts = (req, res, next) => {
         content: "This is the first post!",
         imageUrl: "images/duck.webp",
         creator: {
-          name: "Aras"
+          name: "Aras",
         },
-        createdAt: new Date()
+        createdAt: new Date(),
       },
     ],
   });
@@ -22,9 +22,13 @@ const postPost = (req, res, next) => {
   res.status(201).json({
     message: "Post created!",
     post: {
-      id: new Date().toISOString(),
+      _id: new Date().toISOString(),
       title,
       content,
+      creator: {
+        name: "Aras",
+      },
+      createdAt: new Date(),
     },
   });
 };
