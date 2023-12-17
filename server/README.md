@@ -2,7 +2,7 @@
 
 - Here are some differences in between a coupled front and backend vs REST API.
 
-  <img src="Pictures/REST-API.png" alt="test" style="width:400px">
+  <img src="pictures/REST-API.png" alt="test" style="width:400px">
 
 - There are 5 different requests in REST API. These are GET, POST, PUT, PATCH and DELETE requests.
 
