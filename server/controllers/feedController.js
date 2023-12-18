@@ -1,3 +1,5 @@
+const DB = require("../models/DB");
+
 const getPosts = (req, res, next) => {
   res.status(200).json({
     posts: [
@@ -15,9 +17,21 @@ const getPosts = (req, res, next) => {
   });
 };
 
-const postPost = (req, res, next) => {
+const postPost = async (req, res, next) => {
   const title = req.body.title;
   const content = req.body.content;
+
+  const newMessage = new DB.Message({
+    messageTitle: title,
+    messageImgUrl: "www.google.com",
+    messageContent: content,
+    messageCreator: {
+      name: "Aras",
+    },
+  });
+
+  const result = await newMessage.createMessage();
+  console.log(result);
 
   res.status(201).json({
     message: "Post created!",
