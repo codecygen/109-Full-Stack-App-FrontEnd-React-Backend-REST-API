@@ -30,9 +30,7 @@ const messageSchema = new mongoose.Schema(
 
 messageSchema.methods.createMessage = async function () {
   try {
-    // const createdPost = await this.save();
-
-    const createdPost = "";
+    const createdPost = await this.save();
 
     if (!createdPost) {
       const creationError = new Error("Database failed to save data!");

@@ -19,10 +19,10 @@ app.use(express.json({ limit: "50mb" }));
 // so localhost:4000/uploads/img.jpg will be the actual path
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use(errorMiddleware);
-
 app.use("/feed", feedRoutes);
 
+// Always keep error middleware in the end of the app
+app.use(errorMiddleware);
 
 const SERVER_PORT = 4000;
 

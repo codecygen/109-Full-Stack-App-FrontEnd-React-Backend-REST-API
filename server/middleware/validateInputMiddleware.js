@@ -20,7 +20,8 @@ const validateInputMiddleware = async (req, res, next) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const validationError = new Error("Incorrect entered data! Validation failed!");
+      const validationError = new Error("Input validation error!");;
+      validationError.inputErrors = errors.array();
       validationError.statusCode = 422;
       throw validationError;
     }
