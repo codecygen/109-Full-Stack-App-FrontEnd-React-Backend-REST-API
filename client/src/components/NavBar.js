@@ -16,7 +16,12 @@ const NavBar = (props) => {
   return (
     <main className={`commonPadding ${classes.navbar}`}>
       <button>
-        <NavLink to="/">Welcome</NavLink>
+        <NavLink
+          className={(linkState) => (linkState.isActive ? "" : "")}
+          to="/"
+        >
+          Welcome
+        </NavLink>
       </button>
 
       <section className={classes["right-group"]}>
@@ -24,14 +29,24 @@ const NavBar = (props) => {
           onClick={props.setPageHandler.bind(null, "Feed")}
           className={feedButtonClasses}
         >
-          <NavLink to="/">Feed</NavLink>
+          <NavLink
+            className={(linkState) => (linkState.isActive ? "" : "")}
+            to="/"
+          >
+            Feed
+          </NavLink>
         </button>
 
         <button
           onClick={props.setPageHandler.bind(null, "Logout")}
           className={logoutButtonClasses}
         >
-          <NavLink to="/login">Logout</NavLink>
+          <NavLink
+            className={(linkState) => (linkState.isActive ? "" : "")}
+            to="/login"
+          >
+            Logout
+          </NavLink>
         </button>
       </section>
     </main>
