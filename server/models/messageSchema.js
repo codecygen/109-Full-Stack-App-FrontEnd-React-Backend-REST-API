@@ -30,10 +30,11 @@ const messageSchema = new mongoose.Schema(
 
 messageSchema.methods.createMessage = async function () {
   try {
-    const result = await this.save();
+    const result = await this.ssave();
     return result;
   } catch (err) {
-    console.error(err);
+    // rethrow the error to propagate it to the calling code
+    throw err;
   }
 };
 
