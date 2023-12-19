@@ -3,16 +3,6 @@ import { NavLink } from "react-router-dom";
 import classes from "./NavBar.module.scss";
 
 const NavBar = (props) => {
-  const feedButtonClasses =
-    props.currentPage === "Feed"
-      ? `${classes["higlighted-button"]} ${classes.button}`
-      : classes.button;
-
-  const logoutButtonClasses =
-    props.currentPage === "Logout"
-      ? `${classes["higlighted-button"]} ${classes.button}`
-      : classes.button;
-
   return (
     <main className={`commonPadding ${classes.navbar}`}>
       <button>
@@ -25,10 +15,7 @@ const NavBar = (props) => {
       </button>
 
       <section className={classes["right-group"]}>
-        <button
-          onClick={props.setPageHandler.bind(null, "Feed")}
-          className={feedButtonClasses}
-        >
+        <button>
           <NavLink
             className={(linkState) => (linkState.isActive ? "" : "")}
             to="/"
@@ -37,10 +24,7 @@ const NavBar = (props) => {
           </NavLink>
         </button>
 
-        <button
-          onClick={props.setPageHandler.bind(null, "Logout")}
-          className={logoutButtonClasses}
-        >
+        <button>
           <NavLink
             className={(linkState) => (linkState.isActive ? "" : "")}
             to="/login"
