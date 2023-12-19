@@ -2,22 +2,22 @@ const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema(
   {
-    messageTitle: {
+    title: {
       type: String,
       required: true,
     },
 
-    messageImgUrl: {
+    imgUrl: {
       type: String,
       required: true,
     },
 
-    messageContent: {
+    content: {
       type: String,
       required: true,
     },
 
-    messageCreator: {
+    creator: {
       type: Object,
       required: true,
     },
@@ -42,6 +42,15 @@ messageSchema.methods.createMessage = async function () {
   } catch (err) {
     // rethrow the error to propagate it to the calling code
     throw err;
+  }
+};
+
+messageSchema.statics.getMessages = async function (postId) {
+  try {
+    const allPosts = this.find();
+    return allPosts;
+  } catch (err) {
+    console.error(err);
   }
 };
 

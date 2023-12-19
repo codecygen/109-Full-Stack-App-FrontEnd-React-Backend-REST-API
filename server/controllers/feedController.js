@@ -1,19 +1,10 @@
 const DB = require("../models/DB");
 
-const getPosts = (req, res, next) => {
+const getPosts = async (req, res, next) => {
+  const allMessages = await DB.Message.getMessages();
+
   res.status(200).json({
-    posts: [
-      {
-        _id: "1",
-        title: "First Post",
-        content: "This is the first post!",
-        imageUrl: "images/duck.webp",
-        creator: {
-          name: "Aras",
-        },
-        createdAt: new Date(),
-      },
-    ],
+    posts: allMessages,
   });
 };
 
@@ -22,10 +13,10 @@ const postPost = async (req, res, next) => {
   const content = req.body.content;
 
   const newMessage = new DB.Message({
-    messageTitle: title,
-    messageImgUrl: "www.google.com",
-    messageContent: content,
-    messageCreator: {
+    title: title,
+    imgUrl: "duck.webp",
+    content: content,
+    creator: {
       name: "Aras",
     },
   });
