@@ -1,7 +1,9 @@
+@import "../styles/variables.scss";
+
 .navbar {
-    background-color: red;
+    background-color: #7c95a4;
     display: flex;
-    padding: 30px;
+    padding: 20px $paddingMain;
     justify-content: space-between;
 }
 
