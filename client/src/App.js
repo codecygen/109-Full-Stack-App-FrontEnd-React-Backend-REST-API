@@ -1,13 +1,21 @@
+import { useState } from "react";
+
 import NavBar from "./components/NavBar";
 import Body from "./components/Body";
 
-function App() {
+const App = () => {
+  const [currentPage, setCurrentPage] = useState("Feed");
+
+  const pageChangeHandler = (pageName) => {
+    setCurrentPage(pageName);
+  };
+
   return (
     <>
-      <NavBar />
+      <NavBar setPageHandler={pageChangeHandler} currentPage={currentPage} />
       <Body />
     </>
   );
-}
+};
 
 export default App;
