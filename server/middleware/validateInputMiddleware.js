@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const { check } = require("express-validator");
 
-const validateInput = async (req, res, next) => {
+const validateInputMiddleware = async (req, res, next) => {
   const inputs = [
     check("title")
       .trim()
@@ -19,10 +19,12 @@ const validateInput = async (req, res, next) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(402).json({ errors: errors.array() });
+    const error = new Error("Incorrect entered data! Validation failed!");
+    error.statusCode = 422;
+    throw error;
   }
 
   next();
 };
 
-module.exports = validateInput;
+module.exports = validateInputMiddleware;
