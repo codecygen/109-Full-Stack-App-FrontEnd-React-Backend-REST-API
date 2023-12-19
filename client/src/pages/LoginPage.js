@@ -1,5 +1,7 @@
+import Body from "../components/Body";
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return <Body>LoginPage</Body>;
 };
 
 export default LoginPage;
