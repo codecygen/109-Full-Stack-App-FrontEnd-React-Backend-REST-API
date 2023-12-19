@@ -18,7 +18,6 @@ const getPosts = (req, res, next) => {
 };
 
 const postPost = async (req, res, next) => {
-  try {
   const title = req.body.title;
   const content = req.body.content;
 
@@ -31,21 +30,22 @@ const postPost = async (req, res, next) => {
     },
   });
 
-  const createdMessage = await newMessage.createMessage();
+  try {
+    const createdMessage = await newMessage.createMessage();
 
-  res.status(201).json({
-    message: "Post created!",
-    post: {
-      _id: createdMessage._id,
-      title: createdMessage.messageTitle,
-      content: createdMessage.messageContent,
-      creator: createdMessage.messageCreator,
-      createdAt: createdMessage.createdAt,
-    },
-  });
-} catch (err) {
-  next(err);
-}
+    res.status(201).json({
+      message: "Post created!",
+      post: {
+        _id: createdMessage._id,
+        title: createdMessage.messageTitle,
+        content: createdMessage.messageContent,
+        creator: createdMessage.messageCreator,
+        createdAt: createdMessage.createdAt,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = { getPosts, postPost };
