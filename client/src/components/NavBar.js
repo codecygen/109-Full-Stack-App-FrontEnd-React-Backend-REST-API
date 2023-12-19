@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import classes from "./NavBar.module.scss";
 
 const NavBar = (props) => {
@@ -13,20 +15,23 @@ const NavBar = (props) => {
 
   return (
     <main className={`commonPadding ${classes.navbar}`}>
-      <button>MessageNode</button>
+      <button>
+        <NavLink to="/">Welcome</NavLink>
+      </button>
+
       <section className={classes["right-group"]}>
         <button
           onClick={props.setPageHandler.bind(null, "Feed")}
           className={feedButtonClasses}
         >
-          Feed
+          <NavLink to="/">Feed</NavLink>
         </button>
 
         <button
           onClick={props.setPageHandler.bind(null, "Logout")}
           className={logoutButtonClasses}
         >
-          Logout
+          <NavLink to="/login">Logout</NavLink>
         </button>
       </section>
     </main>

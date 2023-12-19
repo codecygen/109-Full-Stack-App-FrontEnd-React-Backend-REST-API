@@ -2,4 +2,10 @@
 
 .body {
     padding: 20px $paddingMain;
+    margin: auto;
+
+    > * {
+        margin: auto;
+        text-align: center;
+    }
 }
