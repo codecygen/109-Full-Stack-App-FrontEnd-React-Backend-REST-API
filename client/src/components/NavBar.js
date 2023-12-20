@@ -3,36 +3,35 @@ import { NavLink } from "react-router-dom";
 import classes from "./NavBar.module.scss";
 
 const NavBar = (props) => {
-  return (
-    <main className={`commonPadding ${classes.navbar}`}>
-      <button>
-        <NavLink
-          className={(linkState) => (linkState.isActive ? "" : "")}
-          to="/"
-        >
-          Welcome
-        </NavLink>
-      </button>
+  const highlightButton = (linkState) =>
+    linkState.isActive ? classes.active : "";
 
-      <section className={classes["right-group"]}>
-        <button>
-          <NavLink
-            className={(linkState) => (linkState.isActive ? "" : "")}
-            to="/"
-          >
+  return (
+    <main className={`${classes.navbar}`}>
+      <ul>
+        <li>
+          <NavLink className={highlightButton} to="/">
+            Welcome
+          </NavLink>
+        </li>
+      </ul>
+
+      <ul className={classes["right-group"]}>
+        <li>
+          <NavLink className={highlightButton} to="/">
             Feed
           </NavLink>
-        </button>
+        </li>
 
-        <button>
+        <li>
           <NavLink
-            className={(linkState) => (linkState.isActive ? "" : "")}
+            className={highlightButton}
             to="/login"
           >
             Logout
           </NavLink>
-        </button>
-      </section>
+        </li>
+      </ul>
     </main>
   );
 };

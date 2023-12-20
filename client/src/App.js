@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+import NewPostModal from "./components/NewPostModal";
 import NavBar from "./components/NavBar";
 
 import FeedPage from "./pages/FeedPage";
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
+      <NewPostModal />
     </>
   );
 };
