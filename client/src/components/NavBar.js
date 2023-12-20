@@ -10,8 +10,8 @@ const NavBar = (props) => {
     <main className={`${classes.navbar}`}>
       <ul>
         <li>
-          <NavLink className={highlightButton} to="/">
-            Welcome
+          <NavLink to="/">
+            Message App
           </NavLink>
         </li>
       </ul>

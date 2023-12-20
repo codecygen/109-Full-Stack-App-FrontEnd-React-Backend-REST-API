@@ -10,4 +10,53 @@
     transform: translate(-50%, -50%);
     height: 640px;
     width: 627px;
+
+    display: flex;
+    flex-direction: column;
+
+    > header, > form, > div {
+        margin: auto;
+        width: 95%;
+    }
+
+    > header {
+        text-align: center;
+        background-color: rgb(255, 0, 0, 0.3);
+    }
+
+    > form {
+        height: 75%;
+        box-sizing: border-box;
+        background-color: rgba(0, 255, 21, 0.3);
+
+        * {
+            font-size: 20px;
+        }
+
+        > div {
+            display: flex;
+            flex-direction: column;
+
+            > label {
+                margin: 5px 0;
+            }
+        }
+
+        .input {
+            margin: 1rem 0;
+            width: 100%;
+        }
+
+        .image-preview {
+            background-color: red;
+            width: 15rem;
+            height: 7rem;
+        }
+    }
+
+    > div {
+        background-color: rgba(0, 13, 255, 0.3);
+    }
+
+
 }
