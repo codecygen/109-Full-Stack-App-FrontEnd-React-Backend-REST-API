@@ -1,7 +1,9 @@
 import ReactDOM from "react-dom";
 
+import classes from "./NewPostModal.module.scss";
+
 const NewPostOverlay = () => {
-  return <p>This is the NewPost overlay!</p>;
+  return <p className={classes["form-box"]}>This is the NewPost overlay!</p>;
 };
 
 const NewPostModal = () => {
