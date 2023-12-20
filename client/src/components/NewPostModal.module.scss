@@ -1,5 +1,23 @@
-.form-box {
+.backdrop {
+    display: none;
+    // background-color: rgba(33, 53, 53, 0.4);
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    // bottom: 0;
+}
+
+.form {
     color: red;
     position: absolute;
     border: 2px solid red;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 640px;
+    width: 627px;
 }
