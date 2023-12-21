@@ -1,0 +1,73 @@
+$paddingMain: 100px;
+$borderRadius: 10px;
+
+/* Colors */
+$white: #ffffff;
+$canvas: $white;
+$navbarWhite: $white;
+$navbarGrey: #eeedeb;
+$lightGrey: #f6f5f3;
+$footerColor: $navbarGrey;
+$blackOpaque: #000000cc;
+$black: #000;
+$green: #003941;
+
+/* Button Colors */
+$buttonColor1: transparent;
+$buttonColorHOver1: transparent;
+$buttonColor2: #595f7a;
+$buttonColorHOver2: #3f4357;
+$buttonColor3: #aa677a;
+$buttonColorHOver3: #7f4052;
+
+@mixin buttonStyle($width, $height, $buttonType) {
+    width: $width;
+    height: $height;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+    margin: 0 10px;
+    background-color: $buttonColor1;
+
+    transition: background-color 0.2s ease-in-out;
+
+    @if $buttonType == 1 {
+        font-weight: 600;
+        background-color: $buttonColor1;
+        color: $writingBlue;
+        border-radius: 0;
+    } @else if $buttonType == 2 {
+        background-color: $buttonColor2;
+        color: $white;
+        border-radius: 10px;
+    } @else if $buttonType == 3 {
+        background-color: $buttonColor3;
+        color: $white;
+        border-radius: 10px;
+    } @else if $buttonType == 4 {
+        font-weight: 600;
+        background-color: $buttonColor1;
+        color: #f9eef8;
+        border-radius: 0;
+        font-size: 30px;
+        letter-spacing: 5px;	
+        text-shadow: #00000080 0px 3px 3px;
+    } @else {
+        background-color: $buttonColor1;
+        color: $black;
+        border-radius: 0;
+    }
+
+    &:hover {
+        @if $buttonType == 1 {
+            background-color: $buttonColorHOver1;
+        } @else if $buttonType == 2 {
+            background-color: $buttonColorHOver2;
+        } @else if $buttonType == 3 {
+            background-color: $buttonColorHOver3;
+        }
+    }
+}

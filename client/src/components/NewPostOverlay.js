@@ -8,24 +8,27 @@ const NewPostOverlay = () => {
       </header>
 
       <form>
-        <div className={classes.input} >
+        <div className={classes.input}>
           <label htmlFor="title">Title</label>
           <input id="title" placeholder="Title..." type="text" />
         </div>
-        <div className={classes.input} >
+        <div className={classes.input}>
           <label htmlFor="image">Image</label>
-          <input id="image" placeholder="Image..." type="file" />
+          <input id="image" type="file" />
         </div>
-        <div className={classes["image-preview"]} >
+        <div className={classes["image-preview"]}>
           <p>Please choose an image!</p>
         </div>
-        <div className={classes.input} >
+        <div className={classes.input}>
           <label htmlFor="message">Message</label>
           <textarea id="message" placeholder="Message..." type="text" />
         </div>
       </form>
 
-      <div>Some Text</div>
+      <div>
+        <button className={classes.button3}>Cancel</button>
+        <button className={classes.button2}>Send</button>
+      </div>
     </section>
   );
 };
