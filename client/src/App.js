@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
 
-      {/* New post window */}
+      {/* Message Posting Window */}
       {isPostWindowOpen && <NewPostModal cancelWindow={quitPostWindow} />}
     </>
   );
