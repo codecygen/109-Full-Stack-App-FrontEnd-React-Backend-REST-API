@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Route, Routes } from "react-router-dom";
 
 import NewPostModal from "./components/NewPostModal";
@@ -8,6 +10,12 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 
 const App = () => {
+  const [isPostWindowOpen, setIsPostWindowOpen] = useState(true);
+
+  const quitPostWindow = () => {
+    setIsPostWindowOpen(false);
+  };
+
   return (
     <>
       <NavBar />
@@ -16,7 +24,9 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
-      <NewPostModal />
+
+      {/* New post window */}
+      {isPostWindowOpen && <NewPostModal cancelWindow={quitPostWindow} />}
     </>
   );
 };

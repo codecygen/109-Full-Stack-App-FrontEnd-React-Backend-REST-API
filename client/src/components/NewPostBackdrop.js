@@ -1,7 +1,13 @@
 import classes from "./NewPostBackdrop.module.scss";
 
-const NewPostBackdrop = () => {
-    return <section className={classes.backdrop}></section>;
+const NewPostBackdrop = (props) => {
+
+  return (
+    <section
+      className={classes.backdrop}
+      onClick={props.cancelFunc}
+    ></section>
+  );
 };
 
 export default NewPostBackdrop;

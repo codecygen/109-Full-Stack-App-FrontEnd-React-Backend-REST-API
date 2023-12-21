@@ -3,15 +3,19 @@ import ReactDOM from "react-dom";
 import NewPostBackdrop from "./NewPostBackdrop";
 import NewPostOverlay from "./NewPostOverlay";
 
-const NewPostModal = () => {
+const NewPostModal = (props) => {
+  const cancelHandler = () => {
+    props.cancelWindow();
+  };
+
   return (
     <>
       {ReactDOM.createPortal(
-        <NewPostBackdrop />,
+        <NewPostBackdrop cancelFunc={cancelHandler} />,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <NewPostOverlay />,
+        <NewPostOverlay cancelFunc={cancelHandler} />,
         document.getElementById("overlay-root")
       )}
     </>

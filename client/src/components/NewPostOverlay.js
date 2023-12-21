@@ -1,6 +1,7 @@
 import classes from "./NewPostOverlay.module.scss";
 
-const NewPostOverlay = () => {
+const NewPostOverlay = (props) => {
+
   return (
     <section className={classes.form}>
       <header>
@@ -26,7 +27,9 @@ const NewPostOverlay = () => {
       </form>
 
       <div>
-        <button className={classes.button3}>Cancel</button>
+        <button className={classes.button3} onClick={props.cancelFunc}>
+          Cancel
+        </button>
         <button className={classes.button2}>Send</button>
       </div>
     </section>
