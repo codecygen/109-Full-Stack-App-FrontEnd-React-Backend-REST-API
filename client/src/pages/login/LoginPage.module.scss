@@ -9,4 +9,8 @@
         margin: auto;
         text-align: center;
     }
+
+    @media (max-width: 900px) {
+        padding: 0 $paddingMainNarrowScreen;
+    }
 }

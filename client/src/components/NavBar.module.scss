@@ -39,4 +39,8 @@
         display: flex;
         justify-content: space-between;
     }
+
+    @media (max-width: 900px) {
+        padding: 0 $paddingMainNarrowScreen;
+    }
 }
