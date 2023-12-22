@@ -55,6 +55,12 @@ $buttonColorHOver3: #7f4052;
         font-size: 30px;
         letter-spacing: 5px;	
         text-shadow: #00000080 0px 3px 3px;
+    } @else if $buttonType == 5 {
+        background-color: #4d6cc0;
+        color: $white;
+        border-radius: 50px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        caret-color: transparent;
     } @else {
         background-color: $buttonColor1;
         color: $black;
@@ -68,6 +74,10 @@ $buttonColorHOver3: #7f4052;
             background-color: $buttonColorHOver2;
         } @else if $buttonType == 3 {
             background-color: $buttonColorHOver3;
+        } @else if $buttonType == 5 {
+            background-color: #7088c8;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
         }
+        
     }
 }

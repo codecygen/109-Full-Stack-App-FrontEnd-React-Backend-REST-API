@@ -5,22 +5,26 @@ import { Route, Routes } from "react-router-dom";
 import NewPostModal from "./components/NewPostModal";
 import NavBar from "./components/NavBar";
 
-import FeedPage from "./pages/FeedPage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
+import FeedPage from "./pages/root/FeedPage";
+import LoginPage from "./pages/login/LoginPage";
+import SignupPage from "./pages/signup/SignupPage";
 
 const App = () => {
-  const [isPostWindowOpen, setIsPostWindowOpen] = useState(true);
+  const [isPostWindowOpen, setIsPostWindowOpen] = useState(false);
 
   const quitPostWindow = () => {
     setIsPostWindowOpen(false);
+  };
+
+  const openPostWindow = () => {
+    setIsPostWindowOpen(true);
   };
 
   return (
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={<FeedPage />} />
+        <Route path="/" element={<FeedPage openMessageWindow={openPostWindow} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>

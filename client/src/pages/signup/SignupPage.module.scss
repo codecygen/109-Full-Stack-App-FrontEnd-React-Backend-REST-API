@@ -1,0 +1,12 @@
+@import "../../variables.scss";
+
+.main {
+    padding: 20px $paddingMain;
+    margin: auto;
+    text-align: center;
+
+    > * {
+        margin: auto;
+        text-align: center;
+    }
+}
