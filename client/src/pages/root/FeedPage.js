@@ -3,6 +3,7 @@ import classes from "./FeedPage.module.scss";
 const FeedPage = (props) => {
   const dummyPostData = [
     {
+      _id: 1,
       title: "Title 1",
       creator: {
         name: "Aras",
@@ -10,6 +11,7 @@ const FeedPage = (props) => {
       createdAt: new Date("2023-12-19T15:00:13.206+00:00"),
     },
     {
+      _id: 2,
       title: "Title 2",
       creator: {
         name: "Vahit",
@@ -30,7 +32,7 @@ const FeedPage = (props) => {
     const formattedDate = post.createdAt.toLocaleDateString("en-US", options);
 
     return (
-      <div className={classes.post}>
+      <div className={classes.post} key={post._id}>
         <p>
           Posted by {post.creator.name} on {formattedDate}
         </p>
