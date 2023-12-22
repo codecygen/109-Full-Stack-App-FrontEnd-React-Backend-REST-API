@@ -11,6 +11,8 @@ $footerColor: $navbarGrey;
 $blackOpaque: #000000cc;
 $black: #000;
 $green: #003941;
+$writingBlue: #063d49;
+$writingRed: #9d0c2c;
 
 /* Button Colors */
 $buttonColor1: transparent;
@@ -28,39 +30,39 @@ $buttonColorHOver3: #7f4052;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
-    line-height: 50px;
+    line-height: $height;
     margin: 0 10px;
     background-color: $buttonColor1;
+    caret-color: transparent;
 
     transition: background-color 0.2s ease-in-out;
 
     @if $buttonType == 1 {
-        font-weight: 600;
         background-color: $buttonColor1;
         color: $writingBlue;
         border-radius: 0;
+        margin: 0 5px;
     } @else if $buttonType == 2 {
         background-color: $buttonColor2;
         color: $white;
         border-radius: 10px;
+        margin: 0 10px;
     } @else if $buttonType == 3 {
         background-color: $buttonColor3;
         color: $white;
         border-radius: 10px;
+        margin: 0 10px;
     } @else if $buttonType == 4 {
-        font-weight: 600;
         background-color: $buttonColor1;
-        color: #f9eef8;
+        color: $writingRed;
         border-radius: 0;
-        font-size: 30px;
-        letter-spacing: 5px;	
-        text-shadow: #00000080 0px 3px 3px;
+        margin: 0 5px
     } @else if $buttonType == 5 {
         background-color: #4d6cc0;
         color: $white;
         border-radius: 50px;
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-        caret-color: transparent;
+        margin: 0 10px;
     } @else {
         background-color: $buttonColor1;
         color: $black;
@@ -69,11 +71,13 @@ $buttonColorHOver3: #7f4052;
 
     &:hover {
         @if $buttonType == 1 {
-            background-color: $buttonColorHOver1;
+            color: #046a84;
         } @else if $buttonType == 2 {
             background-color: $buttonColorHOver2;
         } @else if $buttonType == 3 {
             background-color: $buttonColorHOver3;
+        } @else if $buttonType == 4 {
+            color: #cc3e5d;
         } @else if $buttonType == 5 {
             background-color: #7088c8;
             box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;

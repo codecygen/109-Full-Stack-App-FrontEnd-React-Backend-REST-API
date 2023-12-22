@@ -35,9 +35,11 @@ const FeedPage = (props) => {
           Posted by {post.creator.name} on {formattedDate}
         </p>
         <h1>{post.title}</h1>
-        <button>View</button>
-        <button>Edit</button>
-        <button>Delete</button>
+        <div className={classes.buttons}>
+          <button className={classes.button1}>View</button>
+          <button className={classes.button1}>Edit</button>
+          <button className={classes.button4}>Delete</button>
+        </div>
       </div>
     );
   });
