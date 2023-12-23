@@ -10,7 +10,7 @@ const useWindowSize = () => {
 
   useLayoutEffect(() => {
     const handleResize = () => {
-      setWindowSize(getWindowSize());
+      setWindowSize(getWindowSize);
     };
 
     window.addEventListener("resize", handleResize);

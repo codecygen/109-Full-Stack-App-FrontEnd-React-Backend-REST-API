@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import useWindowSize from "../hooks/use-windowSize";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpa } from "@fortawesome/free-solid-svg-icons";
+import { faSpa, faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./NavBar.module.scss";
 
@@ -23,12 +23,13 @@ const NavBar = (props) => {
       <ul>
         <li>
           <NavLink to="/">
-              <FontAwesomeIcon
-                icon={faSpa}
-                size="xl"
-                style={{ verticalAlign: "middle", marginRight: "10px" }}
-              />
-              Message App
+            <FontAwesomeIcon
+              icon={faSpa}
+              size="xl"
+              style={{ verticalAlign: "middle", marginRight: "10px" }}
+            />
+            <FontAwesomeIcon icon={faBarsStaggered} fade />
+            Message App
           </NavLink>
         </li>
       </ul>
