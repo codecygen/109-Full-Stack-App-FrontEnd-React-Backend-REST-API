@@ -14,7 +14,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
     height: 640px;
-    width: 627px;
+
+    max-width: 627px;
+    width: 90%;
+    min-width: 200px;
 
     display: flex;
     flex-direction: column;
