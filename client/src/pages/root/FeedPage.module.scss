@@ -2,7 +2,6 @@
 
 .main {
     padding: 20px $paddingMain;
-    margin-top: 20px;
 
     .button5 {
         @include buttonStyle(120px, 50px, 5);

@@ -1,6 +1,16 @@
+import { useState } from "react";
+
 import classes from "./MenuIcon.module.scss";
 
-const MenuIcon = () => {
+const MenuIcon = (props) => {
+  const [clickState, setClickState] = useState(false);
+
+  const menuClickHandler = () => {
+    setClickState((prevValue) => !prevValue);
+  };
+
+  props.menuIconStateHandler(clickState);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,7 +19,8 @@ const MenuIcon = () => {
       strokeWidth=".6"
       fill="rgba(0,0,0,0)"
       strokeLinecap="round"
-      className= {classes.burger}
+      className={classes.burger}
+      onClick={menuClickHandler}
     >
       <path d="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7">
         <animate

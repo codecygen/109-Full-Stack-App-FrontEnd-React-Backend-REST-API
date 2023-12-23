@@ -12,6 +12,10 @@ import classes from "./NavBar.module.scss";
 const NavBar = () => {
   const windowSize = useWindowSize();
 
+  const menuClickHandler = (isMenuOpen) => {
+    console.log(isMenuOpen);
+  };
+
   const highlightButton = (linkState) =>
     linkState.isActive ? classes.active : "";
 
@@ -19,8 +23,10 @@ const NavBar = () => {
   let rightSideNavBarContent;
 
   if (windowSize.width < 700) {
-    leftSideAppName = ""
-    rightSideNavBarContent = <MenuIcon />;
+    leftSideAppName = "";
+    rightSideNavBarContent = (
+      <MenuIcon menuIconStateHandler={menuClickHandler} />
+    );
   } else {
     leftSideAppName = "Message App";
 
@@ -64,9 +70,7 @@ const NavBar = () => {
         </li>
       </ul>
 
-      <ul className={classes["right-group"]}>
-        {rightSideNavBarContent}
-      </ul>
+      <ul className={classes["right-group"]}>{rightSideNavBarContent}</ul>
     </main>
   );
 };
