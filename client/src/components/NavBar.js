@@ -1,40 +1,31 @@
 import { NavLink } from "react-router-dom";
 
+import MenuIcon from "./MenuIcon";
+
 import useWindowSize from "../hooks/use-windowSize";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpa, faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
+import { faSpa } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./NavBar.module.scss";
 
-const NavBar = (props) => {
+const NavBar = () => {
   const windowSize = useWindowSize();
-
-  if (windowSize.width < 700) {
-    console.log("Screen is less than 700px!");
-    console.log(windowSize.width);
-  }
 
   const highlightButton = (linkState) =>
     linkState.isActive ? classes.active : "";
 
-  return (
-    <main className={`${classes.navbar}`}>
-      <ul>
-        <li>
-          <NavLink to="/">
-            <FontAwesomeIcon
-              icon={faSpa}
-              size="xl"
-              style={{ verticalAlign: "middle", marginRight: "10px" }}
-            />
-            <FontAwesomeIcon icon={faBarsStaggered} fade />
-            Message App
-          </NavLink>
-        </li>
-      </ul>
+  let leftSideAppName;
+  let rightSideNavBarContent;
 
-      <ul className={classes["right-group"]}>
+  if (windowSize.width < 700) {
+    leftSideAppName = ""
+    rightSideNavBarContent = <MenuIcon />;
+  } else {
+    leftSideAppName = "Message App";
+
+    rightSideNavBarContent = (
+      <>
         <li>
           <NavLink
             className={highlightButton}
@@ -54,6 +45,27 @@ const NavBar = (props) => {
             Logout
           </NavLink>
         </li>
+      </>
+    );
+  }
+
+  return (
+    <main className={`${classes.navbar}`}>
+      <ul>
+        <li>
+          <NavLink to="/">
+            <FontAwesomeIcon
+              icon={faSpa}
+              size="xl"
+              style={{ verticalAlign: "middle", marginRight: "10px" }}
+            />
+            {leftSideAppName}
+          </NavLink>
+        </li>
+      </ul>
+
+      <ul className={classes["right-group"]}>
+        {rightSideNavBarContent}
       </ul>
     </main>
   );
