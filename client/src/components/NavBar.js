@@ -56,22 +56,25 @@ const NavBar = () => {
   }
 
   return (
-    <main className={`${classes.navbar}`}>
-      <ul>
-        <li>
-          <NavLink to="/">
-            <FontAwesomeIcon
-              icon={faSpa}
-              size="xl"
-              style={{ verticalAlign: "middle", marginRight: "10px" }}
-            />
-            {leftSideAppName}
-          </NavLink>
-        </li>
-      </ul>
+    <section>
+      <main className={`${classes.navbar}`}>
+        <ul>
+          <li>
+            <NavLink to="/">
+              <FontAwesomeIcon
+                icon={faSpa}
+                size="xl"
+                style={{ verticalAlign: "middle", marginRight: "10px" }}
+              />
+              {leftSideAppName}
+            </NavLink>
+          </li>
+        </ul>
 
-      <ul className={classes["right-group"]}>{rightSideNavBarContent}</ul>
-    </main>
+        <ul className={classes["right-group"]}>{rightSideNavBarContent}</ul>
+      </main>
+      <div className={classes["mobile-menu"]}>Aras</div>
+    </section>
   );
 };
 

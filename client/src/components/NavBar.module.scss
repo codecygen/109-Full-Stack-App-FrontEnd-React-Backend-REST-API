@@ -1,58 +1,71 @@
 @import "../variables.scss";
 
-.navbar {
-    user-select: none;
-    background-color: #123852;
-    display: flex;
-    padding: 0 $paddingMain;
-    justify-content: space-between;
-    caret-color: transparent;
+section {
     margin-bottom: 20px;
-    
-    a {
-        text-decoration: none;
-        list-style: none;
-        color: #e0d1d1;
-    }
 
-    > ul {
-        > li {
-            background-color: transparent;
-            border: none;
-            padding: 10px;
-            width: 350px;
-            font-size: 25px;
-            list-style: none;
-
-            .active {
-                color: #c6d133;
-            }
-    
-            :hover {
-                color: #d6c799;
-                cursor:pointer;
-            }
-        }
-
-        @media (max-width: 699px) {
-            > li {
-                width: 50%;
-            }
-        }
-    }
-
-    > .right-group {
-        width: 250px;
+    .navbar {
+        user-select: none;
+        background-color: #123852;
         display: flex;
+        padding: 0 $paddingMain;
         justify-content: space-between;
+        caret-color: transparent;
+        
+        a {
+            text-decoration: none;
+            list-style: none;
+            color: #e0d1d1;
+        }
 
-        @media (max-width: 699px) {
-            width: 50px;
-            margin-right: 40px;
+        > ul {
+            > li {
+                background-color: transparent;
+                border: none;
+                padding: 10px;
+                width: 350px;
+                font-size: 25px;
+                list-style: none;
+
+                .active {
+                    color: #c6d133;
+                }
+        
+                :hover {
+                    color: #d6c799;
+                    cursor:pointer;
+                }
+            }
+
+            @media (max-width: 699px) {
+                > li {
+                    width: 50%;
+                }
+            }
+        }
+
+        > .right-group {
+            width: 250px;
+            display: flex;
+            justify-content: space-between;
+
+            @media (max-width: 699px) {
+                width: 50px;
+                margin-right: 40px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            padding: 0 $paddingMainNarrowScreen;
         }
     }
 
-    @media (max-width: 900px) {
-        padding: 0 $paddingMainNarrowScreen;
+    .mobile-menu {
+        position: absolute;
+        background-color: #8dbd86;
+        margin: 0;
+        padding: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
     }
 }
