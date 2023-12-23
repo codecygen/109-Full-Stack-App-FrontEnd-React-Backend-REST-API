@@ -91,18 +91,23 @@
         }
 
         .image-preview {
-            background-color: rgba(52, 36, 172, 0.1);
+            background-color: #eaeaea;
             border-radius: $borderRadius;
             text-align: center;
-            width: 15rem;
+            width: 14rem;
             height: 7rem;
 
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
 
             > p {
                 margin: 0;
+            }
+
+            > img {
+                height: 100%;
+                border-radius: 10px;
             }
         }
     }

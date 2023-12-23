@@ -1,6 +1,31 @@
+import { useState } from "react";
+
 import classes from "./NewPostOverlay.module.scss";
 
 const NewPostOverlay = (props) => {
+  // show-image-preview
+  const [imageSrc, setImgSrc] = useState("");
+
+  const [imagePreviewMessage, setImagePreviewMessage] = useState(
+    "Please choose an image!"
+  );
+
+  // show-image-preview
+  const imageChangeHandler = (e) => {
+    const file = e.target.files[0];
+
+    const fileExtension = file.name.split(".").pop();
+    const validFileExtensions = ["jpg", "jpeg", "png", "gif"];
+    const isImageFile = validFileExtensions.includes(fileExtension);
+
+    if (isImageFile) {
+      const fileUrl = URL.createObjectURL(file);
+      return setImgSrc(fileUrl);
+    }
+
+    setImgSrc("");
+    setImagePreviewMessage("Not an image file!");
+  };
 
   return (
     <section className={classes.form}>
@@ -15,10 +40,12 @@ const NewPostOverlay = (props) => {
         </div>
         <div className={classes.input}>
           <label htmlFor="image">Image</label>
-          <input id="image" type="file" />
+          <input id="image" type="file" onChange={imageChangeHandler} />
         </div>
+        {/* show-image-preview */}
         <div className={classes["image-preview"]}>
-          <p>Please choose an image!</p>
+          {!imageSrc && <p>{imagePreviewMessage}</p>}
+          {imageSrc && <img src={imageSrc} alt="Wrong file type!" />}
         </div>
         <div className={classes.input}>
           <label htmlFor="message">Message</label>
