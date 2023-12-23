@@ -32,12 +32,23 @@
                 cursor:pointer;
             }
         }
+
+        @media (max-width: 699px) {
+            > li {
+                width: 50%;
+            }
+        }
     }
 
     > .right-group {
         width: 250px;
         display: flex;
         justify-content: space-between;
+
+        @media (max-width: 699px) {
+            width: 50px;
+            margin-right: 40px;
+        }
     }
 
     @media (max-width: 900px) {

@@ -3,14 +3,12 @@ import classes from "./MenuIcon.module.scss";
 const MenuIcon = () => {
   return (
     <svg
-      class="hb"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 10 10"
       stroke="#eee"
-      stroke-width=".6"
+      strokeWidth=".6"
       fill="rgba(0,0,0,0)"
-      stroke-linecap="round"
-      // style="cursor: pointer"
+      strokeLinecap="round"
       className= {classes.burger}
     >
       <path d="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7">
