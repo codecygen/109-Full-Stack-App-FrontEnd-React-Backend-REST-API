@@ -1,6 +1,15 @@
 $paddingMain: 100px;
 $paddingMainNarrowScreen: 10px;
 
+// Navbar height management
+$paddingMenuTopBottom: 15px;
+$heightMenuWriting: 50px;
+$lineHeightMenuWriting: $heightMenuWriting - 5px;
+$mobileMenuTopPosition: 2 * $paddingMenuTopBottom + $heightMenuWriting;
+$menuRelativePositionedDivHeight: $mobileMenuTopPosition + 20px;
+
+
+
 $borderRadius: 10px;
 
 /* Colors */

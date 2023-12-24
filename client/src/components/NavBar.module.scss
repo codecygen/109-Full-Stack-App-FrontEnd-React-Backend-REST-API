@@ -5,7 +5,7 @@ section {
     caret-color: transparent;
 
     .top-padding {
-        height: 100px;
+        height: $menuRelativePositionedDivHeight;
     }
 
     .navbar {
@@ -17,7 +17,7 @@ section {
 
         background-color: #123852;
         display: flex;
-        padding: 15px $paddingMain;
+        padding: $paddingMenuTopBottom $paddingMain;
         justify-content: space-between;
         
         a {
@@ -30,8 +30,9 @@ section {
             padding: 0;
             margin: 0;
 
-            height: 50px;
-            line-height: 45px;
+            height: $heightMenuWriting;
+            line-height: $lineHeightMenuWriting;
+
             > li {
                 background-color: transparent;
                 border: none;
@@ -74,15 +75,15 @@ section {
     }
 
     .mobile-menu {
-        display: none;
-        position: absolute;
+        position: fixed;
+        top: $mobileMenuTopPosition;
         left: 0;
         right: 0;
         padding: 0 $paddingMain;
 
         background-color: #3e6076;
 
-        // display: flex;
+        display: flex;
         align-items: flex-start;
         justify-content: flex-start;
 
