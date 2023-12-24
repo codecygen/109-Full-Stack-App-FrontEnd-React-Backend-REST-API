@@ -61,6 +61,7 @@ const NavBar = () => {
 
   return (
     <section>
+      <div className={classes["top-padding"]}></div>
       <main className={`${classes.navbar}`}>
         <ul>
           <li>
