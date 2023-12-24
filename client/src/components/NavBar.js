@@ -79,7 +79,7 @@ const NavBar = () => {
         <ul className={classes["right-group"]}>{rightSideNavBarContent}</ul>
       </main>
 
-      <div className={classes["mobile-menu"]}>
+      <div className={`${classes["mobile-menu"]} ${classes["mobile-menu-open"]}`}>
         <ul>
           <li>
             <NavLink
