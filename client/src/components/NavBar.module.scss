@@ -8,7 +8,7 @@ section {
     .navbar {
         background-color: #123852;
         display: flex;
-        padding: 0 $paddingMain;
+        padding: 15px $paddingMain;
         justify-content: space-between;
         
         a {
@@ -20,6 +20,9 @@ section {
         > ul {
             padding: 0;
             margin: 0;
+
+            height: 50px;
+            line-height: 45px;
             > li {
                 background-color: transparent;
                 border: none;
@@ -46,7 +49,6 @@ section {
         > .right-group {
             display: flex;
             justify-content: space-between;
-            height: 50px;
 
             > li {
                 padding-left: 30px;
@@ -58,7 +60,7 @@ section {
         }
 
         @media (max-width: 900px) {
-            padding: 0 $paddingMainNarrowScreen;
+            padding: 15px $paddingMainNarrowScreen;
         }
     }
 
