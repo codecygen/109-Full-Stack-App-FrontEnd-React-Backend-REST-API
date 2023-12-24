@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import MenuIcon from "./MenuIcon";
@@ -14,25 +15,31 @@ import {
 import classes from "./NavBar.module.scss";
 
 const NavBar = () => {
+  const [mobileMenuState, setMobileMenuState] = useState(false);
+
   const windowSize = useWindowSize();
 
   const menuClickHandler = (isMenuOpen) => {
-    console.log(isMenuOpen);
+    setMobileMenuState(isMenuOpen);
   };
 
   const highlightButton = (linkState) =>
     linkState.isActive ? classes.active : "";
 
+  const mobileMenuClasses = mobileMenuState
+    ? `${classes["mobile-menu"]} ${classes["mobile-menu-open"]}`
+    : classes["mobile-menu"];
+
   let leftSideAppName;
   let rightSideNavBarContent;
 
   if (windowSize.width < 700) {
-    leftSideAppName = (<span></span>);
+    leftSideAppName = <span></span>;
     rightSideNavBarContent = (
       <MenuIcon menuIconStateHandler={menuClickHandler} />
     );
   } else {
-    leftSideAppName = (<span>Message App</span>);
+    leftSideAppName = <span>Message App</span>;
 
     rightSideNavBarContent = (
       <>
@@ -79,7 +86,9 @@ const NavBar = () => {
         <ul className={classes["right-group"]}>{rightSideNavBarContent}</ul>
       </main>
 
-      <div className={`${classes["mobile-menu"]} ${classes["mobile-menu-open"]}`}>
+      <div
+        className={mobileMenuClasses}
+      >
         <ul>
           <li>
             <NavLink
