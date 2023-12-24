@@ -3,6 +3,8 @@
 .main {
     padding: 20px $paddingMain;
 
+    height: 2000px;
+
     .button5 {
         @include buttonStyle(120px, 50px, 5);
         margin: auto;

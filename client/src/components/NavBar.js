@@ -5,7 +5,11 @@ import MenuIcon from "./MenuIcon";
 import useWindowSize from "../hooks/use-windowSize";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpa } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSpa,
+  faCommentDots,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./NavBar.module.scss";
 
@@ -23,12 +27,12 @@ const NavBar = () => {
   let rightSideNavBarContent;
 
   if (windowSize.width < 700) {
-    leftSideAppName = "";
+    leftSideAppName = (<span></span>);
     rightSideNavBarContent = (
       <MenuIcon menuIconStateHandler={menuClickHandler} />
     );
   } else {
-    leftSideAppName = "Message App";
+    leftSideAppName = (<span>Message App</span>);
 
     rightSideNavBarContent = (
       <>
@@ -64,7 +68,7 @@ const NavBar = () => {
               <FontAwesomeIcon
                 icon={faSpa}
                 size="xl"
-                style={{ verticalAlign: "middle", marginRight: "10px" }}
+                style={{ verticalAlign: "middle" }}
               />
               {leftSideAppName}
             </NavLink>
@@ -73,7 +77,31 @@ const NavBar = () => {
 
         <ul className={classes["right-group"]}>{rightSideNavBarContent}</ul>
       </main>
-      <div className={classes["mobile-menu"]}>Aras</div>
+
+      <div className={classes["mobile-menu"]}>
+        <ul>
+          <li>
+            <NavLink
+              className={highlightButton}
+              to="/"
+              style={{ lineHeight: "1" }}
+            >
+              <FontAwesomeIcon icon={faCommentDots} />
+              <span>Feed</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={highlightButton}
+              to="/login"
+              style={{ lineHeight: "1" }}
+            >
+              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+              <span>Logout</span>
+            </NavLink>
+          </li>
+        </ul>
+      </div>
     </section>
   );
 };
