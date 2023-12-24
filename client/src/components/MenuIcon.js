@@ -6,10 +6,9 @@ const MenuIcon = (props) => {
   const [clickState, setClickState] = useState(false);
 
   const menuClickHandler = () => {
+    props.menuIconStateHandler(!clickState);
     setClickState((prevValue) => !prevValue);
   };
-
-  props.menuIconStateHandler(clickState);
 
   return (
     <svg
