@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import classes from "./MenuIcon.module.scss";
 
@@ -6,9 +6,12 @@ const MenuIcon = (props) => {
   const [clickState, setClickState] = useState(false);
 
   const menuClickHandler = () => {
-    props.menuIconStateHandler(!clickState);
     setClickState((prevValue) => !prevValue);
   };
+
+  useEffect(() => {
+    props.menuIconStateHandler(clickState);
+  }, [clickState, props]);
 
   return (
     <svg
