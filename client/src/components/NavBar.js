@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import MenuIcon from "./MenuIcon";
+
+import MobileMenuContext from "../store/mobile-menu-context";
 
 import useWindowSize from "../hooks/use-windowSize";
 
@@ -15,29 +17,26 @@ import {
 import classes from "./NavBar.module.scss";
 
 const NavBar = () => {
-  const [mobileMenuState, setMobileMenuState] = useState(false);
-
+  const mobileMenuCtx = useContext(MobileMenuContext);
   const windowSize = useWindowSize();
-
-  const menuClickHandler = (isMenuOpen) => {
-    setMobileMenuState(isMenuOpen);
-  };
 
   const highlightButton = (linkState) =>
     linkState.isActive ? classes.active : "";
 
-  const mobileMenuClasses = mobileMenuState
+  const mobileMenuClasses = mobileMenuCtx.menuState
     ? `${classes["mobile-menu"]} ${classes["mobile-menu-open"]}`
     : classes["mobile-menu"];
+
+  const menuLinkClickHandler = () => {
+    mobileMenuCtx.changeMenuState();
+  };
 
   let leftSideAppName;
   let rightSideNavBarContent;
 
   if (windowSize.width < 700) {
     leftSideAppName = <span className={classes["app-name"]}></span>;
-    rightSideNavBarContent = (
-      <MenuIcon menuIconStateHandler={menuClickHandler} />
-    );
+    rightSideNavBarContent = <MenuIcon />;
   } else {
     leftSideAppName = <span className={classes["app-name"]}>Message App</span>;
 
@@ -69,7 +68,7 @@ const NavBar = () => {
   const mobileMenuContent = (
     <div className={mobileMenuClasses}>
       <ul>
-        <li>
+        <li onClick={menuLinkClickHandler}>
           <NavLink
             className={highlightButton}
             to="/"
@@ -79,7 +78,7 @@ const NavBar = () => {
             <span>Feed</span>
           </NavLink>
         </li>
-        <li>
+        <li onClick={menuLinkClickHandler}>
           <NavLink
             className={highlightButton}
             to="/login"

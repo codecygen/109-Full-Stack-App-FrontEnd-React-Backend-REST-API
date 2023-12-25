@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+
+import MobileMenuContext from "../store/mobile-menu-context";
 
 import classes from "./MenuIcon.module.scss";
 
-const MenuIcon = (props) => {
-  const [clickState, setClickState] = useState(false);
+const MenuIcon = () => {
+  const mobileMenuCtx = useContext(MobileMenuContext);
 
   const menuClickHandler = () => {
-    setClickState((prevValue) => !prevValue);
+    mobileMenuCtx.changeMenuState();
   };
-
-  useEffect(() => {
-    props.menuIconStateHandler(clickState);
-  }, [clickState, props]);
 
   return (
     <svg
