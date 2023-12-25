@@ -34,12 +34,12 @@ const NavBar = () => {
   let rightSideNavBarContent;
 
   if (windowSize.width < 700) {
-    leftSideAppName = <span></span>;
+    leftSideAppName = <span className={classes["app-name"]}></span>;
     rightSideNavBarContent = (
       <MenuIcon menuIconStateHandler={menuClickHandler} />
     );
   } else {
-    leftSideAppName = <span>Message App</span>;
+    leftSideAppName = <span className={classes["app-name"]}>Message App</span>;
 
     rightSideNavBarContent = (
       <>
@@ -66,6 +66,33 @@ const NavBar = () => {
     );
   }
 
+  const mobileMenuContent = (
+    <div className={mobileMenuClasses}>
+      <ul>
+        <li>
+          <NavLink
+            className={highlightButton}
+            to="/"
+            style={{ lineHeight: "1" }}
+          >
+            <FontAwesomeIcon icon={faCommentDots} />
+            <span>Feed</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={highlightButton}
+            to="/login"
+            style={{ lineHeight: "1" }}
+          >
+            <FontAwesomeIcon icon={faArrowRightFromBracket} />
+            <span>Logout</span>
+          </NavLink>
+        </li>
+      </ul>
+    </div>
+  );
+
   return (
     <section>
       <div className={classes["top-padding"]}></div>
@@ -86,32 +113,7 @@ const NavBar = () => {
         <ul className={classes["right-group"]}>{rightSideNavBarContent}</ul>
       </main>
 
-      <div
-        className={mobileMenuClasses}
-      >
-        <ul>
-          <li>
-            <NavLink
-              className={highlightButton}
-              to="/"
-              style={{ lineHeight: "1" }}
-            >
-              <FontAwesomeIcon icon={faCommentDots} />
-              <span>Feed</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={highlightButton}
-              to="/login"
-              style={{ lineHeight: "1" }}
-            >
-              <FontAwesomeIcon icon={faArrowRightFromBracket} />
-              <span>Logout</span>
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+      {windowSize.width < 700 && mobileMenuContent}
     </section>
   );
 };
