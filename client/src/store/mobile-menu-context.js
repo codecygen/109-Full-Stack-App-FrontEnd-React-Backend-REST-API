@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const MobileMenuContext = React.createContext({
   menuState: false,
-  changeMenuState: () => {},
+  toggleMenuState: () => {},
 });
 
 export const MobileMenuContextProvider = (props) => {
@@ -14,7 +14,7 @@ export const MobileMenuContextProvider = (props) => {
 
   const outputValues = {
     menuState: menuState,
-    changeMenuState: changeState,
+    toggleMenuState: changeState,
   };
 
   return (

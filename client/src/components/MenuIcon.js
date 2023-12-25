@@ -8,7 +8,7 @@ const MenuIcon = () => {
   const mobileMenuCtx = useContext(MobileMenuContext);
 
   const menuClickHandler = () => {
-    mobileMenuCtx.changeMenuState();
+    mobileMenuCtx.toggleMenuState();
   };
 
   return (
@@ -30,6 +30,7 @@ const MenuIcon = () => {
           fill="freeze"
           begin="start.begin"
         />
+
         <animate
           dur="0.2s"
           attributeName="d"

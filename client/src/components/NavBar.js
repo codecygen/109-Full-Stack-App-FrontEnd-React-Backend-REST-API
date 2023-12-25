@@ -28,7 +28,7 @@ const NavBar = () => {
     : classes["mobile-menu"];
 
   const menuLinkClickHandler = () => {
-    mobileMenuCtx.changeMenuState();
+    mobileMenuCtx.toggleMenuState();
   };
 
   let leftSideAppName;
