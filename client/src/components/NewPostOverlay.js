@@ -1,8 +1,14 @@
 import { useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { formValidityActions } from "../store/redux/form-validity-slice";
+
 import classes from "./NewPostOverlay.module.scss";
 
 const NewPostOverlay = (props) => {
+  const dispatch = useDispatch();
+
   // show-image-preview
   const [imageSrc, setImgSrc] = useState("");
 
@@ -26,6 +32,13 @@ const NewPostOverlay = (props) => {
     setImgSrc("");
     setImagePreviewMessage("Not an image file!");
   };
+
+  const sendDataHandler = () => {
+    dispatch(formValidityActions.testHandler());
+  };
+
+  const isValid = useSelector(state => state.formValidity.isFormValid);
+  console.log(isValid);
 
   return (
     <section className={classes.form}>
@@ -57,7 +70,9 @@ const NewPostOverlay = (props) => {
         <button className={classes.button3} onClick={props.cancelFunc}>
           Cancel
         </button>
-        <button className={classes.button2}>Send</button>
+        <button className={classes.button2} onClick={sendDataHandler}>
+          Send
+        </button>
       </div>
     </section>
   );
