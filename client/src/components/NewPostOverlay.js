@@ -7,6 +7,17 @@ import classes from "./NewPostOverlay.module.scss";
 const NewPostOverlay = (props) => {
   const dispatch = useDispatch();
 
+  const isTitleValid = useSelector(
+    (state) => state.postFormValidity.titleCheckResult.isValid
+  );
+
+  const isMessageValid = useSelector(
+    (state) => state.postFormValidity.messageCheckResult.isValid
+  );
+
+  console.log("title: ", isTitleValid);
+  console.log("message: ", isMessageValid);
+
   const imageSrc = useSelector(
     (state) => state.postFormValidity.imageCheckResult.fileUrl
   );
@@ -15,10 +26,22 @@ const NewPostOverlay = (props) => {
     (state) => state.postFormValidity.imageCheckResult.previewMessage
   );
 
+  const titleChangeHandler = (e) => {
+    const enteredTitle = e.target.value;
+    const inputField = e.target.name;
+
+    dispatch(
+      postFormValidityActions.titleValidityChecker({
+        enteredInput: enteredTitle,
+        inputField,
+      })
+    );
+  };
+
   const imageChangeHandler = (e) => {
     const file = e.target.files[0];
 
-    // file varaible is a File object which is nonserializable. 
+    // file varaible is a File object which is nonserializable.
     // We have to make it serializable
     const fileData = {
       name: file.name,
@@ -33,6 +56,18 @@ const NewPostOverlay = (props) => {
     );
   };
 
+  const messageChangeHandler = (e) => {
+    const enteredMessage = e.target.value;
+    const inputField = e.target.name;
+
+    dispatch(
+      postFormValidityActions.titleValidityChecker({
+        enteredInput: enteredMessage,
+        inputField,
+      })
+    );
+  };
+
   return (
     <section className={classes.form}>
       <header>
@@ -42,7 +77,13 @@ const NewPostOverlay = (props) => {
       <form>
         <div className={classes.input}>
           <label htmlFor="title">Title</label>
-          <input id="title" placeholder="Title..." type="text" />
+          <input
+            id="title"
+            name="title-input"
+            placeholder="Title..."
+            type="text"
+            onChange={titleChangeHandler}
+          />
         </div>
         <div className={classes.input}>
           <label htmlFor="image">Image</label>
@@ -55,7 +96,13 @@ const NewPostOverlay = (props) => {
         </div>
         <div className={classes.input}>
           <label htmlFor="message">Message</label>
-          <textarea id="message" placeholder="Message..." type="text" />
+          <textarea
+            id="message"
+            name="message-input"
+            placeholder="Message..."
+            type="text"
+            onChange={messageChangeHandler}
+          />
         </div>
       </form>
 
