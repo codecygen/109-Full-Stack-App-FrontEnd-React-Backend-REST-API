@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../store/redux/post-form-validity-slice";
@@ -9,39 +7,31 @@ import classes from "./NewPostOverlay.module.scss";
 const NewPostOverlay = (props) => {
   const dispatch = useDispatch();
 
-  // show-image-preview
-  const [imageSrc, setImgSrc] = useState("");
-
-  const [imagePreviewMessage, setImagePreviewMessage] = useState(
-    "Please choose an image!"
+  const imageSrc = useSelector(
+    (state) => state.postFormValidity.imageCheckResult.fileUrl
   );
 
-  // show-image-preview
+  const imagePreviewMessage = useSelector(
+    (state) => state.postFormValidity.imageCheckResult.previewMessage
+  );
+
   const imageChangeHandler = (e) => {
     const file = e.target.files[0];
 
-    const fileExtension = file.name.split(".").pop();
-    const validFileExtensions = ["jpg", "jpeg", "png", "gif"];
-    const isImageFile = validFileExtensions.includes(fileExtension);
+    // file varaible is a File object which is nonserializable. 
+    // We have to make it serializable
+    const fileData = {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    };
 
-    if (isImageFile) {
-      dispatch(postFormValidityActions.imageValidityChecker(true));
+    const fileUrl = URL.createObjectURL(file);
 
-      const fileUrl = URL.createObjectURL(file);
-      return setImgSrc(fileUrl);
-    }
-
-    dispatch(postFormValidityActions.imageValidityChecker(false));
-    setImgSrc("");
-    setImagePreviewMessage("Not an image file!");
+    dispatch(
+      postFormValidityActions.imageValidityChecker({ fileData, fileUrl })
+    );
   };
-
-  const sendDataHandler = () => {
-    dispatch(postFormValidityActions.testHandler());
-  };
-
-  const isPictureValid = useSelector((state) => state.postFormValidity.isImageValid);
-  console.log(isPictureValid);
 
   return (
     <section className={classes.form}>
@@ -73,9 +63,7 @@ const NewPostOverlay = (props) => {
         <button className={classes.button3} onClick={props.cancelFunc}>
           Cancel
         </button>
-        <button className={classes.button2} onClick={sendDataHandler}>
-          Send
-        </button>
+        <button className={classes.button2}>Send</button>
       </div>
     </section>
   );

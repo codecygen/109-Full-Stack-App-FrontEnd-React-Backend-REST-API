@@ -24,6 +24,8 @@
 
     z-index: 10;
 
+    caret-color: #592f0d;
+
     > header, > form, > div {
         margin: auto;
         width: 95%;
@@ -74,6 +76,10 @@
         }
 
         .input {
+            ::selection {
+                background-color: #92aab5;
+            }
+
             ::placeholder {
                 font-size: 18px;
             }

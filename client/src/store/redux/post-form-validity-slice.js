@@ -4,14 +4,32 @@ const postFormValiditySlice = createSlice({
   name: "postFormValidity",
   initialState: {
     isTitleValid: null,
-    isImageValid: null,
+
+    imageCheckResult: {
+      isValid: null,
+      fileUrl: "",
+      previewMessage: "Please choose an image!",
+    },
+
     isMessageValid: null,
     isFormValid: null,
   },
   reducers: {
     imageValidityChecker(state, action) {
-      const validityState = action.payload;
-      state.isImageValid = validityState;
+      const { fileData, fileUrl } = action.payload;
+
+      const fileExtension = fileData.name.split(".").pop();
+      const validFileExtensions = ["jpg", "jpeg", "png", "gif"];
+      const isImageFile = validFileExtensions.includes(fileExtension);
+
+      if (isImageFile) {
+        state.imageCheckResult.isValid = true;
+        state.imageCheckResult.fileUrl = fileUrl;
+      } else {
+        state.imageCheckResult.isValid = false;
+        state.imageCheckResult.fileUrl = "";
+        state.imageCheckResult.previewMessage = "Not an image file!";
+      }
     },
 
     // testHandler(state, action) {
