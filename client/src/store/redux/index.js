@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import formValiditySlice from "./form-validity-slice";
+import postFormValiditySlice from "./post-form-validity-slice";
 
 const store = configureStore({
-  reducer: { formValidity: formValiditySlice.reducer },
+  reducer: { postFormValidity: postFormValiditySlice.reducer },
 });
 
 export default store;

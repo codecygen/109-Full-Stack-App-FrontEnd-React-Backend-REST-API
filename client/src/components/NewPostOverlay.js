@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { formValidityActions } from "../store/redux/form-validity-slice";
+import { postFormValidityActions } from "../store/redux/post-form-validity-slice";
 
 import classes from "./NewPostOverlay.module.scss";
 
@@ -25,20 +25,23 @@ const NewPostOverlay = (props) => {
     const isImageFile = validFileExtensions.includes(fileExtension);
 
     if (isImageFile) {
+      dispatch(postFormValidityActions.imageValidityChecker(true));
+
       const fileUrl = URL.createObjectURL(file);
       return setImgSrc(fileUrl);
     }
 
+    dispatch(postFormValidityActions.imageValidityChecker(false));
     setImgSrc("");
     setImagePreviewMessage("Not an image file!");
   };
 
   const sendDataHandler = () => {
-    dispatch(formValidityActions.testHandler());
+    dispatch(postFormValidityActions.testHandler());
   };
 
-  const isValid = useSelector(state => state.formValidity.isFormValid);
-  console.log(isValid);
+  const isPictureValid = useSelector((state) => state.postFormValidity.isImageValid);
+  console.log(isPictureValid);
 
   return (
     <section className={classes.form}>
