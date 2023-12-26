@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import MobileMenuContext from "../store/mobile-menu-context";
+import MobileMenuContext from "../store/context-api/mobile-menu-context";
 
 import classes from "./MenuIcon.module.scss";
 

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import MenuIcon from "./MenuIcon";
 
-import MobileMenuContext from "../store/mobile-menu-context";
+import MobileMenuContext from "../store/context-api/mobile-menu-context";
 
 import useWindowSize from "../hooks/use-windowSize";
 

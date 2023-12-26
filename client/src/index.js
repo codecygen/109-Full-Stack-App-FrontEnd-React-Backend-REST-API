@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import { BrowserRouter } from "react-router-dom";
 
-import { MobileMenuContextProvider } from "./store/mobile-menu-context";
+import { MobileMenuContextProvider } from "./store/context-api/mobile-menu-context";
 
 import "./index.scss";
 import App from "./App";
