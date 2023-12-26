@@ -3,10 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const postFormValiditySlice = createSlice({
   name: "postFormValidity",
   initialState: {
-    isTitleValid: false,
-    isImageValid: false,
-    isMessageValid: false,
-    isFormValid: false,
+    isTitleValid: null,
+    isImageValid: null,
+    isMessageValid: null,
+    isFormValid: null,
   },
   reducers: {
     imageValidityChecker(state, action) {
