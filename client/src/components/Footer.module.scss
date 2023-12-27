@@ -1,11 +1,15 @@
 @import "../variables.scss";
 
 footer {
-    padding: 0 $paddingMain;
+    padding: 20px $paddingMain;
     height: $footerHeight;
-    background-color: red;
-
+    box-sizing: border-box;
+    background-color: #796791;
+    margin: auto;
+    color: #eed9d9;
+    font-size: 22px;
+    
     @media (max-width: 900px) {
-        padding: 0 $paddingMainNarrowScreen;
+        padding: 20px $paddingMainNarrowScreen;
     }
 }

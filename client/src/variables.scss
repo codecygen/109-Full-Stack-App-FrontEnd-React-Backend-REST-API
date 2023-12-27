@@ -13,8 +13,8 @@ $navbarHeight: 2 * $paddingMenuTopBottom + $heightMenuWriting;
 $menuRelativePositionedDivHeight: $navbarHeight + 20px;
 
 // Footer height to estimate min page heights.
-$footerHeight: 100px;
-$minPageHeight: calc(100vh - 2 * $footerHeight);
+$footerHeight: 200px;
+$minPageHeight: calc(100vh);
 
 
 $borderRadius: 10px;
