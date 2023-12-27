@@ -1,24 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  titleCheckResult: {
+    isValid: null,
+  },
+
+  imageCheckResult: {
+    isValid: null,
+    fileUrl: "",
+    previewMessage: "Please choose an image!",
+  },
+
+  messageCheckResult: {
+    isValid: null,
+  },
+
+  isFormValid: null,
+};
+
 const postFormValiditySlice = createSlice({
   name: "postFormValidity",
-  initialState: {
-    titleCheckResult: {
-      isValid: null,
-    },
-
-    imageCheckResult: {
-      isValid: null,
-      fileUrl: "",
-      previewMessage: "Please choose an image!",
-    },
-
-    messageCheckResult: {
-      isValid: null,
-    },
-
-    isFormValid: null,
-  },
+  initialState,
   reducers: {
     titleValidityChecker(state, action) {
       const { enteredInput, inputField } = action.payload;
@@ -51,6 +53,10 @@ const postFormValiditySlice = createSlice({
         state.imageCheckResult.fileUrl = "";
         state.imageCheckResult.previewMessage = "Not an image file!";
       }
+    },
+
+    resetFormValidity(state) {
+      return initialState;
     },
   },
 });
