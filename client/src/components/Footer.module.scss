@@ -1,0 +1,11 @@
+@import "../variables.scss";
+
+footer {
+    padding: 0 $paddingMain;
+    height: 30px;
+    background-color: red;
+
+    @media (max-width: 900px) {
+        padding: 0 $paddingMainNarrowScreen;
+    }
+}
