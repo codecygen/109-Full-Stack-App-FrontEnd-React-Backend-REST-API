@@ -7,24 +7,21 @@ import classes from "./NewPostOverlay.module.scss";
 const NewPostOverlay = (props) => {
   const dispatch = useDispatch();
 
-  const isTitleValid = useSelector(
-    (state) => state.postFormValidity.titleCheckResult.isValid
+  const titleResult = useSelector(
+    (state) => state.postFormValidity.titleCheckResult
   );
 
-  const isMessageValid = useSelector(
-    (state) => state.postFormValidity.messageCheckResult.isValid
+  const messageResult = useSelector(
+    (state) => state.postFormValidity.messageCheckResult
   );
 
-  console.log("title: ", isTitleValid);
-  console.log("message: ", isMessageValid);
-
-  const imageSrc = useSelector(
-    (state) => state.postFormValidity.imageCheckResult.fileUrl
+  const imageResult = useSelector(
+    (state) => state.postFormValidity.imageCheckResult
   );
 
-  const imagePreviewMessage = useSelector(
-    (state) => state.postFormValidity.imageCheckResult.previewMessage
-  );
+  console.log("title: ", titleResult.isValid);
+  console.log("image :", imageResult.isValid);
+  console.log("message: ", messageResult.isValid);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
@@ -91,8 +88,10 @@ const NewPostOverlay = (props) => {
         </div>
         {/* show-image-preview */}
         <div className={classes["image-preview"]}>
-          {!imageSrc && <p>{imagePreviewMessage}</p>}
-          {imageSrc && <img src={imageSrc} alt="Wrong file type!" />}
+          {!imageResult.fileUrl && <p>{imageResult.previewMessage}</p>}
+          {imageResult.fileUrl && (
+            <img src={imageResult.fileUrl} alt="Wrong file type!" />
+          )}
         </div>
         <div className={classes.input}>
           <label htmlFor="message">Message</label>
