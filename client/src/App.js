@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 
 import NewPostModal from "./components/NewPostModal";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 import FeedPage from "./pages/root/FeedPage";
 import LoginPage from "./pages/login/LoginPage";
@@ -41,6 +42,8 @@ const App = () => {
 
       {/* Message Posting Window */}
       {isPostWindowOpen && <NewPostModal cancelWindow={quitPostWindow} />}
+
+      <Footer />
     </>
   );
 };
