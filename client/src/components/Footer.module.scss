@@ -1,6 +1,7 @@
 @import "../variables.scss";
 
-footer {
+.footer {
+    position: relative;
     padding: 20px $paddingMain;
     height: $footerHeight;
     box-sizing: border-box;
@@ -8,6 +9,7 @@ footer {
     margin: auto;
     color: #eed9d9;
     font-size: 22px;
+    text-align: center;
     
     @media (max-width: 900px) {
         padding: 20px $paddingMainNarrowScreen;
