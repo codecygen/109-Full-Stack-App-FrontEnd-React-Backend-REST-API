@@ -9,7 +9,7 @@ import useWindowSize from "../hooks/use-windowSize";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faSpa,
+  faFutbol,
   faCommentDots,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
@@ -38,7 +38,7 @@ const NavBar = () => {
     leftSideAppName = <span className={classes["app-name"]}></span>;
     rightSideNavBarContent = <MenuIcon />;
   } else {
-    leftSideAppName = <span className={classes["app-name"]}>Message App</span>;
+    leftSideAppName = <span className={classes["app-name"]}>Soccer Club</span>;
 
     rightSideNavBarContent = (
       <>
@@ -100,7 +100,7 @@ const NavBar = () => {
           <li>
             <NavLink to="/">
               <FontAwesomeIcon
-                icon={faSpa}
+                icon={faFutbol}
                 size="xl"
                 style={{ verticalAlign: "middle" }}
               />
