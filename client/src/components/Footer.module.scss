@@ -2,7 +2,7 @@
 
 footer {
     padding: 0 $paddingMain;
-    height: 30px;
+    height: $footerHeight;
     background-color: red;
 
     @media (max-width: 900px) {

@@ -5,9 +5,16 @@ $paddingMainNarrowScreen: 10px;
 $paddingMenuTopBottom: 15px;
 $heightMenuWriting: 50px;
 $lineHeightMenuWriting: $heightMenuWriting - 5px;
-$mobileMenuTopPosition: 2 * $paddingMenuTopBottom + $heightMenuWriting;
-$menuRelativePositionedDivHeight: $mobileMenuTopPosition + 20px;
+$navbarHeight: 2 * $paddingMenuTopBottom + $heightMenuWriting;
+// This is necessary since the menu has fixed position. So in order to push
+// the actual page content down, there has to be a relatively positioned empty
+// div element in navbar to push to page content down from the fixed positioned
+// navbar element
+$menuRelativePositionedDivHeight: $navbarHeight + 20px;
 
+// Footer height to estimate min page heights.
+$footerHeight: 100px;
+$minPageHeight: calc(100vh - 2 * $footerHeight);
 
 
 $borderRadius: 10px;

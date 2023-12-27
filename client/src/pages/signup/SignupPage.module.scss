@@ -5,7 +5,7 @@
     margin: 0 auto;
     text-align: center;
 
-    // height: 2000px;
+    min-height: $minPageHeight;
 
     > * {
         margin: auto;
