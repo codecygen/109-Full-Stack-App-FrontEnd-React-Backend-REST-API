@@ -48,7 +48,7 @@ const NavBar = () => {
             to="/"
             style={{ lineHeight: "1" }}
           >
-            Feed
+            Events
           </NavLink>
         </li>
 
@@ -75,7 +75,7 @@ const NavBar = () => {
             style={{ lineHeight: "1" }}
           >
             <FontAwesomeIcon icon={faCommentDots} />
-            <span>Feed</span>
+            <span>Events</span>
           </NavLink>
         </li>
         <li onClick={menuLinkClickHandler}>
