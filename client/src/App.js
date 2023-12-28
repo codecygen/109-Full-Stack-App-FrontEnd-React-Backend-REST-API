@@ -8,7 +8,7 @@ import NewPostModal from "./components/NewPostModal";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
-import FeedPage from "./pages/root/FeedPage";
+import EventsPage from "./pages/root/EventsPage";
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/signup/SignupPage";
 
@@ -34,7 +34,7 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<FeedPage openMessageWindow={openPostWindow} />}
+          element={<EventsPage openMessageWindow={openPostWindow} />}
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />

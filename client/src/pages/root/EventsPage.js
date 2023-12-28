@@ -1,4 +1,4 @@
-import classes from "./FeedPage.module.scss";
+import classes from "./EventsPage.module.scss";
 
 const FeedPage = (props) => {
   const dummyPostData = [
