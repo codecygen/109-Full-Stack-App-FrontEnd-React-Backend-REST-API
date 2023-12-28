@@ -2,16 +2,38 @@
 
 .footer {
     position: relative;
-    padding: 20px $paddingMain;
+    padding: 0;
     height: $footerHeight;
     box-sizing: border-box;
-    background-color: #796791;
     margin: auto;
     color: #eed9d9;
-    font-size: 22px;
-    text-align: center;
+    font-size: 1.1rem;
+
+    display: flex;
+    flex-direction: column;
+
+    > .column1, .column2 {
+        padding: 0 $paddingMain;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        > h1, h2, h3, h4, h5, h6, p {
+            margin: 5px auto;
+        }
+
+        @media (max-width: 900px) {
+            padding: 0 $paddingMainNarrowScreen;
+        }
+    }
+
+    > .column1 {
+        flex-basis: 70%;
+        background-color: #232535;
+    }
     
-    @media (max-width: 900px) {
-        padding: 20px $paddingMainNarrowScreen;
+    > .column2 {
+        flex-basis: 30%;
+        background-color: #651d1d;
     }
 }
