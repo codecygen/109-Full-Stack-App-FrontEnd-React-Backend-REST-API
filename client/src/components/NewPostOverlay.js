@@ -12,7 +12,7 @@ const NewPostOverlay = (props) => {
   );
 
   const messageResult = useSelector(
-    (state) => state.postFormValidity.messageCheckResult
+    (state) => state.postFormValidity.detailsCheckResult
   );
 
   const imageResult = useSelector(
@@ -21,14 +21,14 @@ const NewPostOverlay = (props) => {
 
   console.log("title: ", titleResult.isValid);
   console.log("image :", imageResult.isValid);
-  console.log("message: ", messageResult.isValid);
+  console.log("details: ", messageResult.isValid);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
     const inputField = e.target.name;
 
     dispatch(
-      postFormValidityActions.titleValidityChecker({
+      postFormValidityActions.textValidityChecker({
         enteredInput: enteredTitle,
         inputField,
       })
@@ -53,13 +53,13 @@ const NewPostOverlay = (props) => {
     );
   };
 
-  const messageChangeHandler = (e) => {
-    const enteredMessage = e.target.value;
+  const detailChangeHandler = (e) => {
+    const detailMessage = e.target.value;
     const inputField = e.target.name;
 
     dispatch(
-      postFormValidityActions.titleValidityChecker({
-        enteredInput: enteredMessage,
+      postFormValidityActions.textValidityChecker({
+        enteredInput: detailMessage,
         inputField,
       })
     );
@@ -68,7 +68,7 @@ const NewPostOverlay = (props) => {
   return (
     <section className={classes.form}>
       <header>
-        <h1>Create a Post</h1>
+        <h1>Create an Event</h1>
       </header>
 
       <form>
@@ -94,13 +94,13 @@ const NewPostOverlay = (props) => {
           )}
         </div>
         <div className={classes.input}>
-          <label htmlFor="message">Message</label>
+          <label htmlFor="details">Details</label>
           <textarea
-            id="message"
-            name="message-input"
-            placeholder="Message..."
+            id="details"
+            name="details-input"
+            placeholder="Details..."
             type="text"
-            onChange={messageChangeHandler}
+            onChange={detailChangeHandler}
           />
         </div>
       </form>

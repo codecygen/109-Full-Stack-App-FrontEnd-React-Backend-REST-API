@@ -11,7 +11,7 @@ const initialState = {
     previewMessage: "Please choose an image!",
   },
 
-  messageCheckResult: {
+  detailsCheckResult: {
     isValid: null,
   },
 
@@ -22,7 +22,7 @@ const postFormValiditySlice = createSlice({
   name: "postFormValidity",
   initialState,
   reducers: {
-    titleValidityChecker(state, action) {
+    textValidityChecker(state, action) {
       const { enteredInput, inputField } = action.payload;
 
       const isInputValid = enteredInput.trim().length >= 5;
@@ -31,10 +31,10 @@ const postFormValiditySlice = createSlice({
         isInputValid
           ? (state.titleCheckResult.isValid = true)
           : (state.titleCheckResult.isValid = false);
-      } else if (inputField === "message-input") {
+      } else if (inputField === "details-input") {
         isInputValid
-          ? (state.messageCheckResult.isValid = true)
-          : (state.messageCheckResult.isValid = false);
+          ? (state.detailsCheckResult.isValid = true)
+          : (state.detailsCheckResult.isValid = false);
       }
     },
 

@@ -49,7 +49,7 @@ const FeedPage = (props) => {
   return (
     <main className={classes.main}>
       <button className={classes.button5} onClick={props.openMessageWindow}>
-        New Post
+        New Event
       </button>
       <section className={classes.posts}>
         {dummyPostData && dummyPostData.length > 0 ? (
