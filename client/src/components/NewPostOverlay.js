@@ -81,21 +81,29 @@ const NewPostOverlay = (props) => {
   if (titleResult.isValid === null) {
     titleClass = "";
   } else if (titleResult.isValid === true) {
-    titleClass = classes["input-valid"];;
+    titleClass = classes["input-valid"];
   } else if (titleResult.isValid === false) {
-    titleClass = classes["input-invalid"];;
+    titleClass = classes["input-invalid"];
   }
 
-  const imageClass = imageResult.isValid ? classes["img-valid"] : classes["img-invalid"];
+  let imageClass;
+
+  if (imageResult.isValid === null) {
+    imageClass = "";
+  } else if (imageResult.isValid === true) {
+    imageClass = classes["img-valid"];
+  } else if (imageResult.isValid === false) {
+    imageClass = classes["img-invalid"];
+  }
 
   let detailsClass;
 
   if (detailsResult.isValid === null) {
     detailsClass = "";
   } else if (detailsResult.isValid === true) {
-    detailsClass = classes["input-valid"];;
+    detailsClass = classes["input-valid"];
   } else if (detailsResult.isValid === false) {
-    detailsClass = classes["input-invalid"];;
+    detailsClass = classes["input-invalid"];
   }
 
   return (
@@ -111,14 +119,19 @@ const NewPostOverlay = (props) => {
             id="title"
             name="title-input"
             placeholder="Title..."
-            type="text" 
+            type="text"
             className={titleClass}
             onChange={titleChangeHandler}
           />
         </div>
         <div className={classes.input}>
           <label htmlFor="image">Image</label>
-          <input id="image" type="file" onChange={imageChangeHandler} className={imageClass} />
+          <input
+            id="image"
+            type="file"
+            onChange={imageChangeHandler}
+            className={imageClass}
+          />
         </div>
         {/* show-image-preview */}
         <div className={classes["image-preview"]}>
@@ -133,7 +146,7 @@ const NewPostOverlay = (props) => {
             id="details"
             name="details-input"
             placeholder="Details..."
-            type="text" 
+            type="text"
             className={detailsClass}
             onChange={detailChangeHandler}
           />
