@@ -15,7 +15,7 @@ const Footer = () => {
           {" "} Soccer Club
         </p>
         <p>
-          <a href="https://www.google.com">Latest Events</a>
+          <a href="/">Latest Events</a>
         </p>
       </div>
       <div className={classes.column2}>
