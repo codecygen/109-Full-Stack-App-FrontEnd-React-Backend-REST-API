@@ -13,7 +13,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 640px;
 
     max-width: 627px;
     width: 90%;
@@ -26,8 +25,12 @@
 
     caret-color: #592f0d;
 
+    max-height: 699px;
+    min-height: 200px;
+    height: 90%;
+
     > header, > form, > div {
-        margin: auto;
+        margin: 0 auto;
         width: 95%;
         padding-left: 10px;
         padding-right: 10px;
@@ -36,18 +39,18 @@
     > header {
         text-align: center;
         border-bottom: 1px solid black;
-        width: 90%
+        width: 90%;
+
+        > h1 {
+            margin: 10px;
+        }
     }
 
     > form {
-        height: 75%;
-
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        max-height: 477px;
         overflow-y: scroll;
-
         font-size: 20px;
 
         > div {
@@ -71,12 +74,21 @@
         }
 
         .input {
+            margin-bottom: 20px;
+
             ::selection {
                 background-color: #92aab5;
             }
 
             ::placeholder {
                 font-size: 18px;
+            }
+
+            .caveat {
+                margin: 0 0 0 10px;
+                font-size: 1.1rem;
+                color: #c2434e;
+                min-height: 26px;
             }
 
             > input {
@@ -127,11 +139,14 @@
         }
 
         .image-preview {
+            margin-bottom: 20px;
+
             background-color: #eaeaea;
             border-radius: $borderRadius;
             text-align: center;
             width: 14rem;
             height: 7rem;
+            min-height: 7rem;
 
             display: flex;
             align-items: flex-start;
@@ -153,6 +168,10 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+        align-items: center;
+        height: 50px;
+
+        margin-bottom: 8px;
 
         > .button2 {
             @include buttonStyle(120px, 50px, 2);

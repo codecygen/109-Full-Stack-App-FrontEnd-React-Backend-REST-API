@@ -112,7 +112,8 @@ const NewPostOverlay = (props) => {
 
       <form>
         <div className={classes.input}>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">Title:</label>
+          <p className={classes.caveat}>asda</p>
           <input
             id="title"
             name="title-input"
@@ -123,7 +124,8 @@ const NewPostOverlay = (props) => {
           />
         </div>
         <div className={classes.input}>
-          <label htmlFor="image">Image</label>
+          <label htmlFor="image">Image:</label>
+          <p className={classes.caveat}>Nice One!</p>
           <input
             id="image"
             type="file"
@@ -139,7 +141,8 @@ const NewPostOverlay = (props) => {
           )}
         </div>
         <div className={classes.input}>
-          <label htmlFor="details">Details</label>
+          <label htmlFor="details">Details:</label>
+          <p className={classes.caveat}>Nice One!</p>
           <textarea
             id="details"
             name="details-input"
