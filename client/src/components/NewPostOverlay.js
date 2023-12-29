@@ -61,9 +61,7 @@ const NewPostOverlay = (props) => {
     );
   };
 
-  const postEventHandler = (e) => {
-    e.preventDefault();
-
+  const postEventHandler = () => {
     const isTitleValid = titleResult.isValid;
     const isImageValid = imageResult.isValid;
     const isDetailsValid = detailsResult.isValid;
