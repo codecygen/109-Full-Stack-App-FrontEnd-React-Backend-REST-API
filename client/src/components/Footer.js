@@ -17,9 +17,6 @@ const Footer = () => {
         <p>
           <a href="https://www.google.com">Latest Events</a>
         </p>
-        <p>
-          <a href="https://www.google.com">Attendees</a>
-        </p>
       </div>
       <div className={classes.column2}>
         <p>

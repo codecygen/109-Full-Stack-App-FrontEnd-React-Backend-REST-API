@@ -11,17 +11,13 @@ const NewPostOverlay = (props) => {
     (state) => state.postFormValidity.titleCheckResult
   );
 
-  const messageResult = useSelector(
+  const detailsResult = useSelector(
     (state) => state.postFormValidity.detailsCheckResult
   );
 
   const imageResult = useSelector(
     (state) => state.postFormValidity.imageCheckResult
   );
-
-  console.log("title: ", titleResult.isValid);
-  console.log("image :", imageResult.isValid);
-  console.log("details: ", messageResult.isValid);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
@@ -63,6 +59,21 @@ const NewPostOverlay = (props) => {
         inputField,
       })
     );
+  };
+
+  const postEventHandler = (e) => {
+    e.preventDefault();
+
+    const isTitleValid = titleResult.isValid;
+    const isImageValid = imageResult.isValid;
+    const isDetailsValid = detailsResult.isValid;
+
+    if (!isTitleValid || !isImageValid || !isDetailsValid) {
+      console.error("Form is not valid!");
+      return;
+    }
+
+    console.log("Form submitted!");
   };
 
   return (
@@ -109,7 +120,9 @@ const NewPostOverlay = (props) => {
         <button className={classes.button3} onClick={props.cancelFunc}>
           Cancel
         </button>
-        <button className={classes.button2}>Send</button>
+        <button className={classes.button2} onClick={postEventHandler}>
+          Send
+        </button>
       </div>
     </section>
   );
