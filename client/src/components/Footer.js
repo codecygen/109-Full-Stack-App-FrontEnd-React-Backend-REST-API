@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,14 +10,10 @@ const Footer = () => {
     <footer className={classes.footer}>
       <div className={classes.column1}>
         <p>
-          <FontAwesomeIcon
-            icon={faFutbol}
-            size="xl"
-          />
-          {" "} Soccer Club
+          <FontAwesomeIcon icon={faFutbol} size="xl" /> Soccer Club
         </p>
         <p>
-          <a href="/">Latest Events</a>
+          <NavLink to="/">Latest Events</NavLink>
         </p>
       </div>
       <div className={classes.column2}>
