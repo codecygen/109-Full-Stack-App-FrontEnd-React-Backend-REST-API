@@ -22,10 +22,16 @@ const App = () => {
   const quitPostWindow = () => {
     dispatch(postFormValidityActions.resetFormValidity());
     setIsPostWindowOpen(false);
+
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
   };
 
   const openPostWindow = () => {
     setIsPostWindowOpen(true);
+
+    document.body.style.overflow = "hidden";
+    document.body.style.height = "100vh";
   };
 
   return (

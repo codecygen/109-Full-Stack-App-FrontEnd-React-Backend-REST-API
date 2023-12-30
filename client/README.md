@@ -38,3 +38,25 @@ const imageChangeHandler = (e) => {
 </div>
 
 ```
+
+## prevent-scrolling-on-modal-open
+The overflow and height property restricts a person to stop scrolling when modal window opens.
+
+```javascript
+  const quitPostWindow = () => {
+    dispatch(postFormValidityActions.resetFormValidity());
+    setIsPostWindowOpen(false);
+
+    // prevent-scrolling-on-modal-open
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
+  };
+
+  const openPostWindow = () => {
+    setIsPostWindowOpen(true);
+
+    // prevent-scrolling-on-modal-open
+    document.body.style.overflow = "hidden";
+    document.body.style.height = "100vh";
+  };
+```
