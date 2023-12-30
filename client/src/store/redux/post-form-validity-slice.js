@@ -3,16 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   titleCheckResult: {
     isValid: null,
+    warningMessage: "",
   },
 
   imageCheckResult: {
     isValid: null,
     fileUrl: "",
-    previewMessage: "Please choose an image!",
+    warningMessage: "",
   },
 
   detailsCheckResult: {
     isValid: null,
+    warningMessage: "",
   },
 
   isFormValid: null,
@@ -28,13 +30,11 @@ const postFormValiditySlice = createSlice({
       const isInputValid = enteredInput.trim().length >= 5;
 
       if (inputField === "title-input") {
-        isInputValid
-          ? (state.titleCheckResult.isValid = true)
-          : (state.titleCheckResult.isValid = false);
+        state.titleCheckResult.isValid = isInputValid ? true : false;
+        state.titleCheckResult.warningMessage = isInputValid ? "" : "Min 5 characters!";
       } else if (inputField === "details-input") {
-        isInputValid
-          ? (state.detailsCheckResult.isValid = true)
-          : (state.detailsCheckResult.isValid = false);
+        state.detailsCheckResult.isValid = isInputValid ? true : false;
+        state.detailsCheckResult.warningMessage = isInputValid ? "" : "Min 5 characters!";
       }
     },
 
@@ -48,10 +48,11 @@ const postFormValiditySlice = createSlice({
       if (isImageFile) {
         state.imageCheckResult.isValid = true;
         state.imageCheckResult.fileUrl = fileUrl;
+        state.imageCheckResult.warningMessage = ""
       } else {
         state.imageCheckResult.isValid = false;
         state.imageCheckResult.fileUrl = "";
-        state.imageCheckResult.previewMessage = "Not an image file!";
+        state.imageCheckResult.warningMessage = "Not an image file!"
       }
     },
 
