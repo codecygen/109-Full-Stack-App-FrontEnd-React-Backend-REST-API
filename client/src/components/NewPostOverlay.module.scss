@@ -25,7 +25,7 @@
 
     caret-color: #592f0d;
 
-    max-height: 699px;
+    max-height: 650px;
     min-height: 200px;
     height: 90%;
 
@@ -42,6 +42,7 @@
         width: 90%;
 
         > h1 {
+            font-size: 1.3rem;
             margin: 10px;
         }
     }
@@ -51,7 +52,6 @@
         flex-direction: column;
         justify-content: space-between;
         overflow-y: scroll;
-        font-size: 20px;
 
         > div {
             display: flex;
@@ -64,8 +64,7 @@
             > textarea {
                 height: 100px;
                 padding: 8px 20px;
-                font-size: 18px;
-                
+                font-size: 1.1rem;
                 border: 1px solid black;
                 outline: 0;
                 border-radius: 10px;
@@ -81,19 +80,23 @@
             }
 
             ::placeholder {
-                font-size: 18px;
+                font-size: 1rem;
             }
 
             .caveat {
                 margin: 0 0 0 10px;
-                font-size: 1.1rem;
+                font-size: 1rem;
                 color: #c2434e;
                 min-height: 26px;
             }
 
+            > label {
+                font-size: 1.1rem;
+            }
+
             > input {
                 padding: 2px 20px;
-                font-size: 18px;
+                font-size: 1.1rem;
                 line-height: 30px;
 
                 border: 1px solid black;
@@ -139,14 +142,13 @@
         }
 
         .image-preview {
-            margin-bottom: 20px;
-
+            margin-bottom: 5px;
             background-color: #eaeaea;
             border-radius: $borderRadius;
             text-align: center;
-            width: 14rem;
-            height: 7rem;
-            min-height: 7rem;
+            width: 15rem;
+            height: 5rem;
+            min-height: 5rem;
 
             display: flex;
             align-items: flex-start;
