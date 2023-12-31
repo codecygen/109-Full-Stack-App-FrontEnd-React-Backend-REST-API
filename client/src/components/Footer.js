@@ -5,9 +5,9 @@ import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./Footer.module.scss";
 
-const Footer = () => {
+const Footer = (props) => {
   return (
-    <footer className={classes.footer}>
+    <footer className={classes.footer} onClick={props.onClick}>
       <div className={classes.column1}>
         <p>
           <FontAwesomeIcon icon={faFutbol} size="xl" /> Soccer Club

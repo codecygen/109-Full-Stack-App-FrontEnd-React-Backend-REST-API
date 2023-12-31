@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useRef, useEffect, useContext, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 
 import MenuIcon from "./MenuIcon";
@@ -20,6 +20,8 @@ const NavBar = () => {
   const mobileMenuCtx = useContext(MobileMenuContext);
   const windowSize = useWindowSize();
 
+  const clickRef = useRef(null);
+
   const highlightButton = (linkState) =>
     linkState.isActive ? classes.active : "";
 
@@ -27,9 +29,15 @@ const NavBar = () => {
     ? `${classes["mobile-menu"]} ${classes["mobile-menu-open"]}`
     : classes["mobile-menu"];
 
-  const menuLinkClickHandler = () => {
+  const menuCloseHandler = () => {
     mobileMenuCtx.toggleMenuState();
   };
+
+  const outsideNavbarClickHandler = useCallback((e) => {
+    if (clickRef.current && !clickRef.current.contains(e.target)) {
+      mobileMenuCtx.closeMenuState();
+    }
+  }, [mobileMenuCtx]);
 
   let leftSideAppName;
   let rightSideNavBarContent;
@@ -68,32 +76,39 @@ const NavBar = () => {
   const mobileMenuContent = (
     <div className={mobileMenuClasses}>
       <ul>
-        <li onClick={menuLinkClickHandler}>
+        <li onClick={menuCloseHandler}>
           <NavLink
             className={highlightButton}
             to="/"
             style={{ lineHeight: "1" }}
           >
             <FontAwesomeIcon icon={faMedal} />
-            <span>{" "}Events</span>
+            <span> Events</span>
           </NavLink>
         </li>
-        <li onClick={menuLinkClickHandler}>
+        <li onClick={menuCloseHandler}>
           <NavLink
             className={highlightButton}
             to="/login"
             style={{ lineHeight: "1" }}
           >
             <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            <span>{" "}Logout</span>
+            <span> Logout</span>
           </NavLink>
         </li>
       </ul>
     </div>
   );
 
+  useEffect(() => {
+    document.addEventListener("click", outsideNavbarClickHandler);
+
+    return () =>
+      document.removeEventListener("click", outsideNavbarClickHandler);
+  }, [outsideNavbarClickHandler]);
+
   return (
-    <section>
+    <section ref={clickRef}>
       <div className={classes["top-padding"]}></div>
       <main className={`${classes.navbar}`}>
         <ul>

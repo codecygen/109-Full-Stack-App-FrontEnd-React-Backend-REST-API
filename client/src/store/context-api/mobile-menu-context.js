@@ -3,18 +3,28 @@ import React, { useState } from "react";
 const MobileMenuContext = React.createContext({
   menuState: false,
   toggleMenuState: () => {},
+  closeMenuState: () => {},
 });
 
 export const MobileMenuContextProvider = (props) => {
   const [menuState, setMenuState] = useState(false);
 
-  const changeState = () => {
-    setMenuState(prevValue => !prevValue);
+  const toggleState = () => {
+    setMenuState((prevValue) => !prevValue);
+  };
+
+  const closeState = () => {
+    setMenuState((prevValue) => {
+      if (!prevValue) {
+        return false;
+      }
+    });
   };
 
   const outputValues = {
     menuState: menuState,
-    toggleMenuState: changeState,
+    toggleMenuState: toggleState,
+    closeMenuState: closeState,
   };
 
   return (
