@@ -40,23 +40,53 @@ const imageChangeHandler = (e) => {
 ```
 
 ## prevent-scrolling-on-modal-open
+
 The overflow and height property restricts a person to stop scrolling when modal window opens.
 
 ```javascript
-  const quitPostWindow = () => {
-    dispatch(postFormValidityActions.resetFormValidity());
-    setIsPostWindowOpen(false);
+const quitPostWindow = () => {
+  dispatch(postFormValidityActions.resetFormValidity());
+  setIsPostWindowOpen(false);
 
-    // prevent-scrolling-on-modal-open
-    document.body.style.overflow = "auto";
-    document.body.style.height = "auto";
-  };
+  // prevent-scrolling-on-modal-open
+  document.body.style.overflow = "auto";
+  document.body.style.height = "auto";
+};
 
-  const openPostWindow = () => {
-    setIsPostWindowOpen(true);
+const openPostWindow = () => {
+  setIsPostWindowOpen(true);
 
-    // prevent-scrolling-on-modal-open
-    document.body.style.overflow = "hidden";
-    document.body.style.height = "100vh";
-  };
+  // prevent-scrolling-on-modal-open
+  document.body.style.overflow = "hidden";
+  document.body.style.height = "100vh";
+};
+```
+
+## close-mobile-window-if-clicked-outside-navbar
+
+```javascript
+const clickRef = useRef(null);
+
+.................
+
+const outsideNavbarClickHandler = useCallback((e) => {
+    if (clickRef.current && !clickRef.current.contains(e.target)) {
+      mobileMenuCtx.closeMenuState(); // close menu with Context api or other state management tool
+    }
+}, [mobileMenuCtx]);
+
+.................
+
+useEffect(() => {
+    document.addEventListener("click", outsideNavbarClickHandler);
+
+    return () =>
+      document.removeEventListener("click", outsideNavbarClickHandler);
+  }, [outsideNavbarClickHandler]);
+
+return (
+  <section ref={clickRef}>
+    .................
+  </section>
+
 ```
