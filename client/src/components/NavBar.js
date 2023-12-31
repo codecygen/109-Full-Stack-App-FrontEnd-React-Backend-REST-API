@@ -10,7 +10,7 @@ import useWindowSize from "../hooks/use-windowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFutbol,
-  faCommentDots,
+  faMedal,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -74,8 +74,8 @@ const NavBar = () => {
             to="/"
             style={{ lineHeight: "1" }}
           >
-            <FontAwesomeIcon icon={faCommentDots} />
-            <span>Events</span>
+            <FontAwesomeIcon icon={faMedal} />
+            <span>{" "}Events</span>
           </NavLink>
         </li>
         <li onClick={menuLinkClickHandler}>
@@ -85,7 +85,7 @@ const NavBar = () => {
             style={{ lineHeight: "1" }}
           >
             <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            <span>Logout</span>
+            <span>{" "}Logout</span>
           </NavLink>
         </li>
       </ul>

@@ -1,6 +1,17 @@
+import { useState } from "react";
+
+import { useDispatch } from "react-redux";
+
+import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
+
+import NewPostModal from "../../components/NewPostModal";
+
 import classes from "./EventsPage.module.scss";
 
 const FeedPage = (props) => {
+  const dispatch = useDispatch();
+  const [isPostWindowOpen, setIsPostWindowOpen] = useState(false);
+
   const dummyPostData = [
     {
       _id: 1,
@@ -20,7 +31,20 @@ const FeedPage = (props) => {
     },
   ];
 
-  // const dummyPostData = [];
+  const quitPostWindow = () => {
+    dispatch(postFormValidityActions.resetFormValidity());
+    setIsPostWindowOpen(false);
+
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
+  };
+
+  const openPostWindow = () => {
+    setIsPostWindowOpen(true);
+
+    document.body.style.overflow = "hidden";
+    document.body.style.height = "100vh";
+  };
 
   const postContent = dummyPostData.map((post) => {
     const options = {
@@ -31,6 +55,10 @@ const FeedPage = (props) => {
     };
     const formattedDate = post.createdAt.toLocaleDateString("en-US", options);
 
+    const deleteButtonHandler = (postData) => {
+      console.log(post);
+    };
+
     return (
       <div className={classes.post} key={post._id}>
         <p>
@@ -40,7 +68,12 @@ const FeedPage = (props) => {
         <div className={classes.buttons}>
           <button className={classes.button1}>View</button>
           <button className={classes.button1}>Edit</button>
-          <button className={classes.button4}>Delete</button>
+          <button
+            className={classes.button4}
+            onClick={deleteButtonHandler.bind(null, post)}
+          >
+            Delete
+          </button>
         </div>
       </div>
     );
@@ -48,7 +81,7 @@ const FeedPage = (props) => {
 
   return (
     <main className={classes.main}>
-      <button className={classes.button5} onClick={props.openMessageWindow}>
+      <button className={classes.button5} onClick={openPostWindow}>
         New Event
       </button>
       <section className={classes.posts}>
@@ -58,6 +91,9 @@ const FeedPage = (props) => {
           <div>No Post Yet</div>
         )}
       </section>
+
+      {/* Message Posting Window */}
+      {isPostWindowOpen && <NewPostModal cancelWindow={quitPostWindow} />}
     </main>
   );
 };
