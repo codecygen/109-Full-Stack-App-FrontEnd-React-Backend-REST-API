@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  isPostFormOpen: false,
+
   titleCheckResult: {
     isValid: null,
     warningMessage: "",
@@ -24,6 +26,10 @@ const postFormValiditySlice = createSlice({
   name: "postFormValidity",
   initialState,
   reducers: {
+    postFormToggleHandler(state, action) {
+      state.isPostFormOpen = !state.isPostFormOpen;
+    },
+
     textValidityChecker(state, action) {
       const { enteredInput, inputField } = action.payload;
 

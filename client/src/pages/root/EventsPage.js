@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 
@@ -10,7 +8,9 @@ import classes from "./EventsPage.module.scss";
 
 const FeedPage = (props) => {
   const dispatch = useDispatch();
-  const [isPostWindowOpen, setIsPostWindowOpen] = useState(false);
+  const isPostWindowOpen = useSelector(
+    (state) => state.postFormValidity.isPostFormOpen
+  );
 
   const dummyPostData = [
     {
@@ -31,16 +31,16 @@ const FeedPage = (props) => {
     },
   ];
 
-  const quitPostWindow = () => {
+  const closePostWindow = () => {
+    dispatch(postFormValidityActions.postFormToggleHandler());
     dispatch(postFormValidityActions.resetFormValidity());
-    setIsPostWindowOpen(false);
 
     document.body.style.overflow = "auto";
     document.body.style.height = "auto";
   };
 
   const openPostWindow = () => {
-    setIsPostWindowOpen(true);
+    dispatch(postFormValidityActions.postFormToggleHandler());
 
     document.body.style.overflow = "hidden";
     document.body.style.height = "100vh";
@@ -93,7 +93,7 @@ const FeedPage = (props) => {
       </section>
 
       {/* Message Posting Window */}
-      {isPostWindowOpen && <NewPostModal cancelWindow={quitPostWindow} />}
+      {isPostWindowOpen && <NewPostModal cancelWindow={closePostWindow} />}
     </main>
   );
 };
