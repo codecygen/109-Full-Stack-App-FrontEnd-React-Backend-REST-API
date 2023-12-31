@@ -30,6 +30,10 @@ const postFormValiditySlice = createSlice({
       state.isPostFormOpen = !state.isPostFormOpen;
     },
 
+    resetFormValidity(state, action) {
+      return initialState;
+    },
+
     textValidityChecker(state, action) {
       const { enteredInput, inputField } = action.payload;
 
@@ -37,10 +41,14 @@ const postFormValiditySlice = createSlice({
 
       if (inputField === "title-input") {
         state.titleCheckResult.isValid = isInputValid ? true : false;
-        state.titleCheckResult.warningMessage = isInputValid ? "" : "Min 5 characters!";
+        state.titleCheckResult.warningMessage = isInputValid
+          ? ""
+          : "Min 5 characters!";
       } else if (inputField === "details-input") {
         state.detailsCheckResult.isValid = isInputValid ? true : false;
-        state.detailsCheckResult.warningMessage = isInputValid ? "" : "Min 5 characters!";
+        state.detailsCheckResult.warningMessage = isInputValid
+          ? ""
+          : "Min 5 characters!";
       }
     },
 
@@ -54,16 +62,12 @@ const postFormValiditySlice = createSlice({
       if (isImageFile) {
         state.imageCheckResult.isValid = true;
         state.imageCheckResult.fileUrl = fileUrl;
-        state.imageCheckResult.warningMessage = ""
+        state.imageCheckResult.warningMessage = "";
       } else {
         state.imageCheckResult.isValid = false;
         state.imageCheckResult.fileUrl = "";
-        state.imageCheckResult.warningMessage = "Not an image file!"
+        state.imageCheckResult.warningMessage = "Not an image file!";
       }
-    },
-
-    resetFormValidity(state) {
-      return initialState;
     },
   },
 });
