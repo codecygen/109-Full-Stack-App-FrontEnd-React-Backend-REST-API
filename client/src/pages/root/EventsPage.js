@@ -1,8 +1,7 @@
-import { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
+import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
 
 import NewPostModal from "../../components/modals/post-modal/NewPostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
@@ -12,11 +11,13 @@ import classes from "./EventsPage.module.scss";
 import postData from "../../database/posts.json";
 
 const FeedPage = (props) => {
-  const [isDeletePostWindowOpen, setIsDeletePostWindowOpen] = useState(false);
-
   const dispatch = useDispatch();
   const isPostWindowOpen = useSelector(
     (state) => state.postFormValidity.isPostFormOpen
+  );
+
+  const isDeletePostWindowOpen = useSelector(
+    (state) => state.deleteWindowState.isDeletePostWindowOpen
   );
 
   const closePostWindow = () => {
@@ -35,12 +36,12 @@ const FeedPage = (props) => {
   };
 
   const closeDeletePostWindow = () => {
-    setIsDeletePostWindowOpen(false);
+    dispatch(deleteWindowStateActions.toggleWindowHandler());
     console.log("Delete window closed!");
   };
 
   const openDeletePostWindow = (postData) => {
-    setIsDeletePostWindowOpen(true);
+    dispatch(deleteWindowStateActions.toggleWindowHandler());
     console.log(postData);
     console.log("Delete window opened!");
   };
