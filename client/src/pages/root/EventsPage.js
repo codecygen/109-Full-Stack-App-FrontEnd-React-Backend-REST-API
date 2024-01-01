@@ -1,35 +1,23 @@
+import { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 
-import NewPostModal from "../../components/NewPostModal";
+import NewPostModal from "../../components/modals/post-modal/NewPostModal";
+import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
 
 import classes from "./EventsPage.module.scss";
 
+import postData from "../../database/posts.json";
+
 const FeedPage = (props) => {
+  const [isDeletePostWindowOpen, setIsDeletePostWindowOpen] = useState(false);
+
   const dispatch = useDispatch();
   const isPostWindowOpen = useSelector(
     (state) => state.postFormValidity.isPostFormOpen
   );
-
-  const dummyPostData = [
-    {
-      _id: 1,
-      title: "Title 1",
-      creator: {
-        name: "Aras",
-      },
-      createdAt: new Date("2023-12-19T15:00:13.206+00:00"),
-    },
-    {
-      _id: 2,
-      title: "Title 2",
-      creator: {
-        name: "Vahit",
-      },
-      createdAt: new Date("2023-12-11T15:08:29.560+00:00"),
-    },
-  ];
 
   const closePostWindow = () => {
     dispatch(postFormValidityActions.postFormToggleHandler());
@@ -46,18 +34,28 @@ const FeedPage = (props) => {
     document.body.style.height = "100vh";
   };
 
-  const postContent = dummyPostData.map((post) => {
+  const closeDeletePostWindow = () => {
+    setIsDeletePostWindowOpen(false);
+    console.log("Delete window closed!");
+  };
+
+  const openDeletePostWindow = (postData) => {
+    setIsDeletePostWindowOpen(true);
+    console.log(postData);
+    console.log("Delete window opened!");
+  };
+
+  const postContent = postData.map((post) => {
     const options = {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
       timeZoneName: "short",
     };
-    const formattedDate = post.createdAt.toLocaleDateString("en-US", options);
-
-    const deleteButtonHandler = (postData) => {
-      console.log(post);
-    };
+    const formattedDate = new Date(post.createdAt).toLocaleDateString(
+      "en-US",
+      options
+    );
 
     return (
       <div className={classes.post} key={post._id}>
@@ -70,7 +68,7 @@ const FeedPage = (props) => {
           <button className={classes.button1}>Edit</button>
           <button
             className={classes.button4}
-            onClick={deleteButtonHandler.bind(null, post)}
+            onClick={openDeletePostWindow.bind(null, post)}
           >
             Delete
           </button>
@@ -85,15 +83,15 @@ const FeedPage = (props) => {
         New Event
       </button>
       <section className={classes.posts}>
-        {dummyPostData && dummyPostData.length > 0 ? (
-          postContent
-        ) : (
-          <div>No Post Yet</div>
-        )}
+        {postData && postData.length > 0 ? postContent : <div>No Post Yet</div>}
       </section>
 
       {/* Message Posting Window */}
       {isPostWindowOpen && <NewPostModal cancelWindow={closePostWindow} />}
+
+      {isDeletePostWindowOpen && (
+        <DeletePostModal cancelWindow={closeDeletePostWindow} />
+      )}
     </main>
   );
 };

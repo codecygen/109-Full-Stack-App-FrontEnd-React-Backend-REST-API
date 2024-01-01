@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { postFormValidityActions } from "../store/redux/post-form-validity-slice";
+import { postFormValidityActions } from "../../../store/redux/post-form-validity-slice";
 
 import classes from "./NewPostOverlay.module.scss";
 

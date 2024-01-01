@@ -1,0 +1,40 @@
+[
+    {
+      "_id": 1,
+      "title": "Title 1",
+      "details": "This is the detail for title 1.",
+      "creator": {
+        "name": "Aras"
+      },
+      "createdAt": "2023-12-19T15:00:13.206+00:00"
+    },
+    {
+      "_id": 2,
+      "title": "Title 2",
+      "details": "This is the detail for title 2.",
+      "creator": {
+        "name": "Vahit"
+      },
+      "createdAt": "2023-12-11T15:08:29.560+00:00"
+    },
+    {
+        "_id": 3,
+        "title": "Title 1",
+        "details": "This is the detail for title 1.",
+        "creator": {
+          "name": "Aras"
+        },
+        "createdAt": "2023-12-19T15:00:13.206+00:00"
+    },
+
+    {
+        "_id": 4,
+        "title": "Title 1",
+        "details": "This is the detail for title 1.",
+        "creator": {
+          "name": "Aras"
+        },
+        "createdAt": "2023-12-19T15:00:13.206+00:00"
+    }
+]
+  
