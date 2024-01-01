@@ -37,13 +37,11 @@ const FeedPage = (props) => {
 
   const closeDeletePostWindow = () => {
     dispatch(deleteWindowStateActions.toggleWindowHandler());
-    console.log("Delete window closed!");
   };
 
   const openDeletePostWindow = (postData) => {
     dispatch(deleteWindowStateActions.toggleWindowHandler());
-    console.log(postData);
-    console.log("Delete window opened!");
+    dispatch(deleteWindowStateActions.setData(postData));
   };
 
   const postContent = postData.map((post) => {
@@ -91,7 +89,9 @@ const FeedPage = (props) => {
       {isPostWindowOpen && <NewPostModal cancelWindow={closePostWindow} />}
 
       {isDeletePostWindowOpen && (
-        <DeletePostModal cancelWindow={closeDeletePostWindow} />
+        <DeletePostModal
+          cancelWindow={closeDeletePostWindow}
+        />
       )}
     </main>
   );

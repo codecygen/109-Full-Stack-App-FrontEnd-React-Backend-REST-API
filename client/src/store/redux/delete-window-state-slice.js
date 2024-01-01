@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isDeletePostWindowOpen: false,
-
-  deletePostData: {},
+  postData: {},
 };
 
 const deleteWindowStateSlice = createSlice({
@@ -12,6 +11,11 @@ const deleteWindowStateSlice = createSlice({
   reducers: {
     toggleWindowHandler(state, action) {
       state.isDeletePostWindowOpen = !state.isDeletePostWindowOpen;
+    },
+
+    setData(state, action) {
+        const postData = action.payload;
+        state.postData = postData;
     },
   },
 });
