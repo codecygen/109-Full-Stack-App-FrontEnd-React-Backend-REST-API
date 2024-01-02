@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
 
-import NewPostModal from "../../components/modals/post-modal/NewPostModal";
+import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
 
 import classes from "./EventsPage.module.scss";
@@ -92,7 +92,7 @@ const FeedPage = () => {
       </section>
 
       {/* Message Posting Window */}
-      {isPostWindowOpen && <NewPostModal cancelWindow={closePostWindow} />}
+      {isPostWindowOpen && <PostModal cancelWindow={closePostWindow} />}
 
       {isDeletePostWindowOpen && (
         <DeletePostModal cancelWindow={closeDeletePostWindow} />

@@ -1,18 +1,18 @@
 import ReactDOM from "react-dom";
 
-import NewPostBackdrop from "./NewPostBackdrop";
-import NewPostOverlay from "./NewPostOverlay";
+import PostBackdrop from "./PostBackdrop";
+import PostOverlay from "./PostOverlay";
 
 const NewPostModal = (props) => {
 
   return (
     <>
       {ReactDOM.createPortal(
-        <NewPostBackdrop cancelFunc={props.cancelWindow} />,
+        <PostBackdrop cancelFunc={props.cancelWindow} />,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <NewPostOverlay cancelFunc={props.cancelWindow} />,
+        <PostOverlay cancelFunc={props.cancelWindow} />,
         document.getElementById("overlay-root")
       )}
     </>

@@ -2,9 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../../store/redux/post-form-validity-slice";
 
-import classes from "./NewPostOverlay.module.scss";
+import classes from "./PostOverlay.module.scss";
 
-const NewPostOverlay = (props) => {
+const PostOverlay = (props) => {
   const dispatch = useDispatch();
 
   const titleResult = useSelector(
@@ -172,4 +172,4 @@ const NewPostOverlay = (props) => {
   );
 };
 
-export default NewPostOverlay;
+export default PostOverlay;
