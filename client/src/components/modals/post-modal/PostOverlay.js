@@ -7,17 +7,11 @@ import classes from "./PostOverlay.module.scss";
 const PostOverlay = (props) => {
   const dispatch = useDispatch();
 
-  const titleResult = useSelector(
-    (state) => state.postFormValidity.titleCheckResult
-  );
-
-  const detailsResult = useSelector(
-    (state) => state.postFormValidity.detailsCheckResult
-  );
-
-  const imageResult = useSelector(
-    (state) => state.postFormValidity.imageCheckResult
-  );
+  const {
+    titleCheckResult: titleResult,
+    imageCheckResult: imageResult,
+    detailsCheckResult: detailsResult,
+  } = useSelector((state) => state.postFormValidity);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;

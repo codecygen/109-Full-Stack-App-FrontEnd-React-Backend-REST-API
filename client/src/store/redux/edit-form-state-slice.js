@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isEditFormOpen: false,
   postID: null,
-  titleDB: "",
-  detailsDB: "",
+  editedTitle: "",
+  editedDetails: "",
 };
 
 const editFormSlice = createSlice({
@@ -16,8 +16,8 @@ const editFormSlice = createSlice({
 
       state.isEditFormOpen = true;
       state.postID = postData._id;
-      state.titleDB = postData.title;
-      state.detailsDB = postData.details;
+      state.editedTitle = postData.title;
+      state.editedDetails = postData.details;
     },
 
     editFormCloseHandler(state, action) {
