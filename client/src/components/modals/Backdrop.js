@@ -1,6 +1,6 @@
-import classes from "./PostBackdrop.module.scss";
+import classes from "./Backdrop.module.scss";
 
-const PostBackdrop = (props) => {
+const Backdrop = (props) => {
 
   return (
     <section
@@ -10,4 +10,4 @@ const PostBackdrop = (props) => {
   );
 };
 
-export default PostBackdrop;
+export default Backdrop;

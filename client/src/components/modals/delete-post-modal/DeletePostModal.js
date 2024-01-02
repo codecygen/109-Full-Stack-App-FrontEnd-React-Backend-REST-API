@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 
-import DeletePostBackdrop from "./DeletePostBackdrop";
+import Backdrop from "../Backdrop";
 import DeletePostOverlay from "./DeletePostOverlay";
 
 const NewPostModal = (props) => {
@@ -8,7 +8,7 @@ const NewPostModal = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <DeletePostBackdrop cancelFunc={props.cancelWindow} />,
+        <Backdrop cancelFunc={props.cancelWindow} />,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
