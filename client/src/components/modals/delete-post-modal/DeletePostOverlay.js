@@ -7,18 +7,23 @@ const NewPostOverlay = (props) => {
     (state) => state.deleteWindowState.postData
   );
 
+  const deleteButtonHandler = () => {
+    console.log(`${deletePostData._id} is deleted!`);
+  };
+
   return (
     <section className={classes.box}>
       <header>
         <h1>Are you sure to delete?</h1>
       </header>
-      <p>{deletePostData._id}</p>
       <p>{deletePostData.title}</p>
       <div>
         <button className={classes.button2} onClick={props.cancelFunc}>
           Cancel
         </button>
-        <button className={classes.button3}>Delete</button>
+        <button className={classes.button3} onClick={deleteButtonHandler}>
+          Delete
+        </button>
       </div>
     </section>
   );

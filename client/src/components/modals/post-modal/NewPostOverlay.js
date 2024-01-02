@@ -71,7 +71,13 @@ const NewPostOverlay = (props) => {
       return;
     }
 
-    console.log("Form submitted!");
+    const enteredTitle = titleResult.enteredTitle;
+    const enteredImage = imageResult.fileUrl;
+    const enteredDetails = detailsResult.enteredDetails;
+
+    console.log("title: ", enteredTitle);
+    console.log("image: ", enteredImage);
+    console.log("title: ", enteredDetails);
   };
 
   let titleClass;

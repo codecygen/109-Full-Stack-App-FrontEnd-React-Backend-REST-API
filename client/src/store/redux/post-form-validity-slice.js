@@ -5,6 +5,7 @@ const initialState = {
 
   titleCheckResult: {
     isValid: null,
+    enteredTitle: "",
     warningMessage: "",
   },
 
@@ -16,6 +17,7 @@ const initialState = {
 
   detailsCheckResult: {
     isValid: null,
+    enteredDetails: "",
     warningMessage: "",
   },
 
@@ -37,18 +39,27 @@ const postFormValiditySlice = createSlice({
     textValidityChecker(state, action) {
       const { enteredInput, inputField } = action.payload;
 
-      const isInputValid = enteredInput.trim().length >= 5;
+      const enteredInputTrimmed = enteredInput.trim();
+      const isInputValid = enteredInputTrimmed.length >= 5;
 
       if (inputField === "title-input") {
         state.titleCheckResult.isValid = isInputValid ? true : false;
         state.titleCheckResult.warningMessage = isInputValid
           ? ""
           : "Min 5 characters!";
+
+        state.titleCheckResult.enteredTitle = isInputValid
+          ? enteredInputTrimmed
+          : "";
       } else if (inputField === "details-input") {
         state.detailsCheckResult.isValid = isInputValid ? true : false;
         state.detailsCheckResult.warningMessage = isInputValid
           ? ""
           : "Min 5 characters!";
+
+        state.detailsCheckResult.enteredDetails = isInputValid
+          ? enteredInputTrimmed
+          : "";
       }
     },
 
