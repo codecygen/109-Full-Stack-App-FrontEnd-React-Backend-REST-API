@@ -10,7 +10,7 @@ import classes from "./EventsPage.module.scss";
 
 import postData from "../../database/posts.json";
 
-const FeedPage = (props) => {
+const FeedPage = () => {
   const dispatch = useDispatch();
   const isPostWindowOpen = useSelector(
     (state) => state.postFormValidity.isPostFormOpen
@@ -44,6 +44,10 @@ const FeedPage = (props) => {
     dispatch(deleteWindowStateActions.setData(postData));
   };
 
+  const editButtonHandler = (postId) => {
+    console.log(`Editing ${postId}!`);
+  };
+
   const postContent = postData.map((post) => {
     const options = {
       hour: "2-digit",
@@ -64,7 +68,9 @@ const FeedPage = (props) => {
         <h1>{post.title}</h1>
         <div className={classes.buttons}>
           <button className={classes.button1}>View</button>
-          <button className={classes.button1}>Edit</button>
+          <button className={classes.button1} onClick={editButtonHandler.bind(null, post._id)}>
+            Edit
+          </button>
           <button
             className={classes.button4}
             onClick={openDeletePostWindow.bind(null, post)}
@@ -89,9 +95,7 @@ const FeedPage = (props) => {
       {isPostWindowOpen && <NewPostModal cancelWindow={closePostWindow} />}
 
       {isDeletePostWindowOpen && (
-        <DeletePostModal
-          cancelWindow={closeDeletePostWindow}
-        />
+        <DeletePostModal cancelWindow={closeDeletePostWindow} />
       )}
     </main>
   );
