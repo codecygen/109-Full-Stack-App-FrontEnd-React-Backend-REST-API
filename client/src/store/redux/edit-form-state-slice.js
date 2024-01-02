@@ -19,6 +19,14 @@ const editFormSlice = createSlice({
       state.titleDB = postData.title;
       state.detailsDB = postData.details;
     },
+
+    editFormCloseHandler(state, action) {
+      state.isEditFormOpen = false;
+    },
+
+    editFormOpenHandler(state, action) {
+      state.isEditFormOpen = true;
+    },
   },
 });
 

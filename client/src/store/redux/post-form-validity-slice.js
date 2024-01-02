@@ -28,8 +28,12 @@ const postFormValiditySlice = createSlice({
   name: "postFormValidity",
   initialState,
   reducers: {
-    postFormToggleHandler(state, action) {
-      state.isPostFormOpen = !state.isPostFormOpen;
+    postFormCloseHandler(state, action) {
+      state.isPostFormOpen = false;
+    },
+
+    postFormOpenHandler(state, action) {
+      state.isPostFormOpen = true;
     },
 
     resetFormValidity(state, action) {

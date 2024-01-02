@@ -21,20 +21,23 @@ const FeedPage = () => {
     (state) => state.deleteWindowState.isDeletePostWindowOpen
   );
 
-  const editFormState = useSelector((state) => state.editFormSlice);
-
-  console.log(editFormState);
+  const isEditFormOpen = useSelector(
+    (state) => state.editFormSlice.isEditFormOpen
+  );
 
   const closePostWindow = () => {
-    dispatch(postFormValidityActions.postFormToggleHandler());
+    dispatch(postFormValidityActions.postFormCloseHandler());
     dispatch(postFormValidityActions.resetFormValidity());
+
+    dispatch(editFormSliceActions.editFormCloseHandler());
 
     document.body.style.overflow = "auto";
     document.body.style.height = "auto";
   };
 
   const openPostWindow = () => {
-    dispatch(postFormValidityActions.postFormToggleHandler());
+    dispatch(postFormValidityActions.postFormOpenHandler());
+    dispatch(editFormSliceActions.editFormOpenHandler());
 
     document.body.style.overflow = "hidden";
     document.body.style.height = "100vh";
@@ -102,7 +105,7 @@ const FeedPage = () => {
       </section>
 
       {/* Message Posting Window */}
-      {isPostWindowOpen && <PostModal cancelWindow={closePostWindow} />}
+      {(isPostWindowOpen || isEditFormOpen) && <PostModal cancelWindow={closePostWindow} />}
 
       {isDeletePostWindowOpen && (
         <DeletePostModal cancelWindow={closeDeletePostWindow} />
