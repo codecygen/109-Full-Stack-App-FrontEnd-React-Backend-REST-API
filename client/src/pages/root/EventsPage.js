@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
+import { editFormSliceActions } from "../../store/redux/edit-form-state-slice";
 
 import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
@@ -19,6 +20,10 @@ const FeedPage = () => {
   const isDeletePostWindowOpen = useSelector(
     (state) => state.deleteWindowState.isDeletePostWindowOpen
   );
+
+  const editFormState = useSelector((state) => state.editFormSlice);
+
+  console.log(editFormState);
 
   const closePostWindow = () => {
     dispatch(postFormValidityActions.postFormToggleHandler());
@@ -45,7 +50,9 @@ const FeedPage = () => {
   };
 
   const editButtonHandler = (postId) => {
-    console.log(`Editing ${postId}!`);
+    const foundPost = postData.find((post) => post._id === postId);
+
+    dispatch(editFormSliceActions.openAndPopulateWindow(foundPost));
   };
 
   const postContent = postData.map((post) => {
@@ -68,7 +75,10 @@ const FeedPage = () => {
         <h1>{post.title}</h1>
         <div className={classes.buttons}>
           <button className={classes.button1}>View</button>
-          <button className={classes.button1} onClick={editButtonHandler.bind(null, post._id)}>
+          <button
+            className={classes.button1}
+            onClick={editButtonHandler.bind(null, post._id)}
+          >
             Edit
           </button>
           <button
