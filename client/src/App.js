@@ -4,8 +4,12 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 import EventsPage from "./pages/root/EventsPage";
+import EventDetailsPage from "./pages/details/:eventName:eventId/EventDetailsPage";
+
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/signup/SignupPage";
+
+import NotFoundPage from "./pages/404/404";
 
 const App = () => {
   return (
@@ -13,8 +17,12 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<EventsPage />} />
+        <Route path="/details/:eventName/:eventId" element={<EventDetailsPage />} />
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <Footer />
