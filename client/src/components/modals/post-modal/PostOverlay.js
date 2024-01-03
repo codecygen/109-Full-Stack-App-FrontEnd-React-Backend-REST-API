@@ -22,12 +22,21 @@ const PostOverlay = (props) => {
 
   useEffect(() => {
     if (editedPostId) {
-      console.log("it is edited!");
-
       dispatch(
         postFormValidityActions.textValidityChecker({
           enteredInput: editedTitle,
           inputField: "title-input",
+        })
+      );
+
+      dispatch(
+        postFormValidityActions.imageValidityChecker({
+          fileData: {
+            name: "",
+            size: "",
+            type: "",
+          },
+          fileUrl: "",
         })
       );
 
@@ -96,6 +105,16 @@ const PostOverlay = (props) => {
     const enteredImage = imageResult.fileUrl;
     const enteredDetails = detailsResult.enteredDetails;
 
+    if (editedPostId) {
+      console.log(`Post ${editedPostId} is edited!`);
+      console.log("title: ", enteredTitle);
+      console.log("image: ", enteredImage);
+      console.log("title: ", enteredDetails);   
+
+      return;
+    }
+
+    console.log("New post created!");
     console.log("title: ", enteredTitle);
     console.log("image: ", enteredImage);
     console.log("title: ", enteredDetails);

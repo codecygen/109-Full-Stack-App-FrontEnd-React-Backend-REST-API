@@ -81,7 +81,7 @@ const postFormValiditySlice = createSlice({
       } else {
         state.imageCheckResult.isValid = false;
         state.imageCheckResult.fileUrl = "";
-        state.imageCheckResult.warningMessage = "Not an image file!";
+        state.imageCheckResult.warningMessage = "Invalid file!";
       }
     },
   },
