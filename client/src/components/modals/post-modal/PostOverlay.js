@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../../store/redux/post-form-validity-slice";
@@ -14,10 +15,30 @@ const PostOverlay = (props) => {
   } = useSelector((state) => state.postFormValidity);
 
   const {
-    postID,
+    postID: editedPostId,
     editedTitle,
     editedDetails,
   } = useSelector((state) => state.editFormSlice);
+
+  useEffect(() => {
+    if (editedPostId) {
+      console.log("it is edited!");
+
+      dispatch(
+        postFormValidityActions.textValidityChecker({
+          enteredInput: editedTitle,
+          inputField: "title-input",
+        })
+      );
+
+      dispatch(
+        postFormValidityActions.textValidityChecker({
+          enteredInput: editedDetails,
+          inputField: "details-input",
+        })
+      );
+    }
+  }, [editedPostId, editedTitle, editedDetails, dispatch]);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
@@ -113,7 +134,7 @@ const PostOverlay = (props) => {
   return (
     <section className={classes.form}>
       <header>
-        <h1>{!postID ? "Create an Event" : "Edit the Event"}</h1>
+        <h1>{!editedPostId ? "Create an Event" : "Edit the Event"}</h1>
       </header>
 
       <form>
