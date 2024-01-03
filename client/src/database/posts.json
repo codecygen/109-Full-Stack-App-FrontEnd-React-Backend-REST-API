@@ -19,8 +19,8 @@
     },
     {
         "_id": 33,
-        "title": "Title 1",
-        "details": "This is the detail for title 1.",
+        "title": "Title 3",
+        "details": "This is the detail for title 3.",
         "creator": {
           "name": "Aras"
         },
@@ -29,8 +29,8 @@
 
     {
         "_id": 44,
-        "title": "Title 1",
-        "details": "This is the detail for title 1.",
+        "title": "Title 4",
+        "details": "This is the detail for title 4.",
         "creator": {
           "name": "Aras"
         },

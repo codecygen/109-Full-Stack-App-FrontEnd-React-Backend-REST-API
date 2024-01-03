@@ -127,6 +127,7 @@ const PostOverlay = (props) => {
             type="text"
             className={titleClass}
             onChange={titleChangeHandler}
+            defaultValue={editedTitle}
           />
         </div>
         <div className={classes.input}>
@@ -156,6 +157,7 @@ const PostOverlay = (props) => {
             type="text"
             className={detailsClass}
             onChange={detailChangeHandler}
+            defaultValue={editedDetails}
           />
         </div>
       </form>
