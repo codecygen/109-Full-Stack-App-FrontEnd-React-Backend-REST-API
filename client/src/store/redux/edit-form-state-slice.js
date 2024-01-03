@@ -27,6 +27,10 @@ const editFormSlice = createSlice({
     editFormOpenHandler(state, action) {
       state.isEditFormOpen = true;
     },
+
+    resetStates(state, action) {
+      return initialState;
+    },
   },
 });
 

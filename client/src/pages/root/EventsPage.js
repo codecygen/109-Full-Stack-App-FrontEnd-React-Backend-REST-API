@@ -30,6 +30,7 @@ const FeedPage = () => {
     dispatch(postFormValidityActions.resetFormValidity());
 
     dispatch(editFormSliceActions.editFormCloseHandler());
+    dispatch(editFormSliceActions.resetStates());
 
     document.body.style.overflow = "auto";
     document.body.style.height = "auto";
@@ -105,7 +106,9 @@ const FeedPage = () => {
       </section>
 
       {/* Message Posting Window */}
-      {(isPostWindowOpen || isEditFormOpen) && <PostModal cancelWindow={closePostWindow} />}
+      {(isPostWindowOpen || isEditFormOpen) && (
+        <PostModal cancelWindow={closePostWindow} />
+      )}
 
       {isDeletePostWindowOpen && (
         <DeletePostModal cancelWindow={closeDeletePostWindow} />
