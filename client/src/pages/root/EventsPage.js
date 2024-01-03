@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
@@ -78,7 +80,9 @@ const FeedPage = () => {
         </p>
         <h1>{post.title}</h1>
         <div className={classes.buttons}>
-          <button className={classes.button1}>View</button>
+          <button className={classes.button1}>
+            <NavLink to={`/details/${post.title}/${post._id}`}>View</NavLink>
+          </button>
           <button
             className={classes.button1}
             onClick={editButtonHandler.bind(null, post._id)}

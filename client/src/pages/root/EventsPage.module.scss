@@ -49,6 +49,18 @@
 
                > .button1 {
                 @include buttonStyle(75px, 25px, 1);
+
+                > a {
+                    text-decoration: none;
+
+                    &:hover {
+                        color: #046a84 !important;
+                    }
+
+                    &:visited {
+                        color: $writingBlue;
+                    }
+                }
                }
 
                > .button4 {

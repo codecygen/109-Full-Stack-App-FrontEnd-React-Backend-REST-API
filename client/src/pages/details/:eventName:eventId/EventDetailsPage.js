@@ -5,8 +5,8 @@ const EventIdPage = () => {
 
   return (
     <div>
-      <p>{params.eventName}</p>
-      <p>{params.eventId}</p>
+      <p>{params.name}</p>
+      <p>{params.id}</p>
     </div>
   );
 };

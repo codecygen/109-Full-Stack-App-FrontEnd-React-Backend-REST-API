@@ -17,7 +17,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<EventsPage />} />
-        <Route path="/details/:eventName/:eventId" element={<EventDetailsPage />} />
+        <Route path="/details/:name/:id" element={<EventDetailsPage />} />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
