@@ -1,10 +1,15 @@
+// import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../../store/redux/post-form-validity-slice";
+// import { editFormSliceActions } from "../../../store/redux/edit-form-state-slice";
 
 import classes from "./PostOverlay.module.scss";
 
 const PostOverlay = (props) => {
+  // const titleRef = useRef("");
+  // const detailsRef = useRef("");
+
   const dispatch = useDispatch();
 
   const {
@@ -13,11 +18,13 @@ const PostOverlay = (props) => {
     detailsCheckResult: detailsResult,
   } = useSelector((state) => state.postFormValidity);
 
-  const {
-    postID,
-    editedTitle,
-    editedDetails,
-  } = useSelector((state) => state.editFormSlice);
+  // const {
+  //   postID: editedPostId,
+  //   editedTitle,
+  //   editedDetails,
+  // } = useSelector((state) => state.editFormSlice);
+
+  // console.log(editedPostId, editedTitle, editedDetails);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
@@ -30,6 +37,11 @@ const PostOverlay = (props) => {
       })
     );
   };
+
+  // useEffect(() => {
+  //   titleRef.current.value = editedPostId ? editedTitle : "";
+  //   detailsRef.current.value = editedPostId ? editedTitle : "";
+  // }, [titleRef, editedPostId, editedTitle, editedDetails]);
 
   const imageChangeHandler = (e) => {
     const file = e.target.files[0];
@@ -113,7 +125,8 @@ const PostOverlay = (props) => {
   return (
     <section className={classes.form}>
       <header>
-        <h1>{!postID ? "Create an Event" : "Edit the Event"}</h1>
+        {/* <h1>{!editedPostId ? "Create an Event" : "Edit the Event"}</h1> */}
+        <h1>{"Create an Event"}</h1>
       </header>
 
       <form>
@@ -137,6 +150,7 @@ const PostOverlay = (props) => {
             type="file"
             onChange={imageChangeHandler}
             className={imageClass}
+            defaultValue="lol"
           />
         </div>
         {/* show-image-preview */}
@@ -156,6 +170,7 @@ const PostOverlay = (props) => {
             type="text"
             className={detailsClass}
             onChange={detailChangeHandler}
+            // ref={detailsRef}
           />
         </div>
       </form>
