@@ -1,0 +1,19 @@
+@import "../../../variables.scss";
+
+.details {
+    padding: 0 $paddingMain;
+    margin: 0 auto;
+
+    min-height: $minPageHeight;
+
+    text-align: justify;
+
+    :first-child {
+        padding: 0;
+        margin: 0;
+    }
+
+    @media (max-width: 900px) {
+        padding: 0 $paddingMainNarrowScreen;
+    }
+}
