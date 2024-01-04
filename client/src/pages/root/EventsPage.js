@@ -1,6 +1,10 @@
+import { useEffect } from "react";
+
 import { NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
+
+import useConnectApi from "../../hooks/use-connectAPI";
 
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
@@ -14,6 +18,14 @@ import classes from "./EventsPage.module.scss";
 import DB from "../../database/posts.json";
 
 const FeedPage = () => {
+  const { data, isLoading, error, getAll, getOne } = useConnectApi();
+
+  console.log(data);
+
+  useEffect(() => {
+    getAll();
+  }, [getAll]);
+
   const dispatch = useDispatch();
   const isPostWindowOpen = useSelector(
     (state) => state.postFormValidity.isPostFormOpen
@@ -83,7 +95,9 @@ const FeedPage = () => {
         <h1>{post.title}</h1>
         <div className={classes.buttons}>
           <button className={classes.button1}>
-            <NavLink to={`/details/${linkTitleConverted}/${post._id}`}>View</NavLink>
+            <NavLink to={`/details/${linkTitleConverted}/${post._id}`}>
+              View
+            </NavLink>
           </button>
           <button
             className={classes.button1}

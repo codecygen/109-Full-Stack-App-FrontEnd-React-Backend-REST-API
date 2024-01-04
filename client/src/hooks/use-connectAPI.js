@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 const useConnectApi = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getAll = async () => {
+  const getAll = useCallback(async () => {
     setIsLoading(true);
 
     try {
@@ -22,7 +22,7 @@ const useConnectApi = () => {
       setError(err.message);
       setIsLoading(false);
     }
-  };
+  }, []);
 
   const getOne = () => {};
 
