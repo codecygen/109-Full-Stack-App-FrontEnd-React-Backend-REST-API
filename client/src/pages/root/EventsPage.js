@@ -11,7 +11,7 @@ import DeletePostModal from "../../components/modals/delete-post-modal/DeletePos
 
 import classes from "./EventsPage.module.scss";
 
-import postData from "../../database/posts.json";
+import DB from "../../database/posts.json";
 
 const FeedPage = () => {
   const dispatch = useDispatch();
@@ -50,18 +50,18 @@ const FeedPage = () => {
     dispatch(deleteWindowStateActions.toggleWindowHandler());
   };
 
-  const openDeletePostWindow = (postData) => {
+  const openDeletePostWindow = (DB) => {
     dispatch(deleteWindowStateActions.toggleWindowHandler());
-    dispatch(deleteWindowStateActions.setData(postData));
+    dispatch(deleteWindowStateActions.setData(DB));
   };
 
   const editButtonHandler = (postId) => {
-    const foundPost = postData.find((post) => post._id === postId);
+    const foundPost = DB.find((post) => post._id === postId);
 
     dispatch(editFormSliceActions.openAndPopulateWindow(foundPost));
   };
 
-  const postContent = postData.map((post) => {
+  const postContent = DB.map((post) => {
     const options = {
       hour: "2-digit",
       minute: "2-digit",
@@ -108,7 +108,7 @@ const FeedPage = () => {
         New Event
       </button>
       <section className={classes.posts}>
-        {postData && postData.length > 0 ? postContent : <div>No Post Yet</div>}
+        {DB && DB.length > 0 ? postContent : <div>No Post Yet</div>}
       </section>
 
       {/* Message Posting Window */}
