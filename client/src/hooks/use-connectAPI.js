@@ -1,9 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const useConnectApi = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetched, setIsFetched] = useState(false);
 
   const getAll = useCallback(async () => {
     setIsLoading(true);
@@ -18,6 +19,7 @@ const useConnectApi = () => {
       setData(data);
       setIsLoading(false);
       setError(null);
+      setIsFetched(true);
     } catch (err) {
       setError(err.message);
       setIsLoading(false);
@@ -26,10 +28,15 @@ const useConnectApi = () => {
 
   const getOne = () => {};
 
+  useEffect(() => {
+    getAll();
+  }, [getAll]);
+
   return {
     data,
     isLoading,
     error,
+    isFetched,
     getAll,
     getOne,
   };

@@ -18,13 +18,9 @@ import classes from "./EventsPage.module.scss";
 import DB from "../../database/posts.json";
 
 const FeedPage = () => {
-  const { data, isLoading, error, getAll, getOne } = useConnectApi();
+  const { data, isLoading, error, isFetched, getAll, getOne } = useConnectApi();
 
   console.log(data);
-
-  useEffect(() => {
-    getAll();
-  }, [getAll]);
 
   const dispatch = useDispatch();
   const isPostWindowOpen = useSelector(
@@ -73,48 +69,52 @@ const FeedPage = () => {
     dispatch(editFormSliceActions.openAndPopulateWindow(foundPost));
   };
 
-  const postContent = DB.map((post) => {
-    const options = {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      timeZoneName: "short",
-    };
-    const formattedDate = new Date(post.createdAt).toLocaleDateString(
-      "en-US",
-      options
-    );
+  let postContent;
 
-    const linkTitleConverted = post.title.toLowerCase().split(" ").join("-");
+  if (data) {
+    postContent = data.map((post) => {
+      const options = {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "short",
+      };
+      const formattedDate = new Date(post.createdAt).toLocaleDateString(
+        "en-US",
+        options
+      );
 
-    return (
-      <div className={classes.post} key={post._id}>
-        <p>
-          Posted by {post.creator.name} on {formattedDate}
-        </p>
-        <h1>{post.title}</h1>
-        <div className={classes.buttons}>
-          <button className={classes.button1}>
-            <NavLink to={`/details/${linkTitleConverted}/${post._id}`}>
-              View
-            </NavLink>
-          </button>
-          <button
-            className={classes.button1}
-            onClick={editButtonHandler.bind(null, post._id)}
-          >
-            Edit
-          </button>
-          <button
-            className={classes.button4}
-            onClick={openDeletePostWindow.bind(null, post)}
-          >
-            Delete
-          </button>
+      const linkTitleConverted = post.title.toLowerCase().split(" ").join("-");
+
+      return (
+        <div className={classes.post} key={post._id}>
+          <p>
+            Posted by {post.creator.name} on {formattedDate}
+          </p>
+          <h1>{post.title}</h1>
+          <div className={classes.buttons}>
+            <button className={classes.button1}>
+              <NavLink to={`/details/${linkTitleConverted}/${post._id}`}>
+                View
+              </NavLink>
+            </button>
+            <button
+              className={classes.button1}
+              onClick={editButtonHandler.bind(null, post._id)}
+            >
+              Edit
+            </button>
+            <button
+              className={classes.button4}
+              onClick={openDeletePostWindow.bind(null, post)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
-      </div>
-    );
-  });
+      );
+    });
+  }
 
   return (
     <main className={classes.main}>
@@ -122,7 +122,7 @@ const FeedPage = () => {
         New Event
       </button>
       <section className={classes.posts}>
-        {DB && DB.length > 0 ? postContent : <div>No Post Yet</div>}
+        {isLoading ? <div>Loading</div> : postContent}
       </section>
 
       {/* Message Posting Window */}
