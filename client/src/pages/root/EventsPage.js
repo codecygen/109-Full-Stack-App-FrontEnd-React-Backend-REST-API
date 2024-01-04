@@ -73,6 +73,8 @@ const FeedPage = () => {
       options
     );
 
+    const linkTitleConverted = post.title.toLowerCase().split(" ").join("-");
+
     return (
       <div className={classes.post} key={post._id}>
         <p>
@@ -81,7 +83,7 @@ const FeedPage = () => {
         <h1>{post.title}</h1>
         <div className={classes.buttons}>
           <button className={classes.button1}>
-            <NavLink to={`/details/${post.title}/${post._id}`}>View</NavLink>
+            <NavLink to={`/details/${linkTitleConverted}/${post._id}`}>View</NavLink>
           </button>
           <button
             className={classes.button1}

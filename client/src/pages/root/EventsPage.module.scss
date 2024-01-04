@@ -53,6 +53,10 @@
                 > a {
                     text-decoration: none;
 
+                    &:link {
+                        color: $writingBlue;
+                    }
+
                     &:hover {
                         color: #046a84 !important;
                     }

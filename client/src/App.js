@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 import EventsPage from "./pages/root/EventsPage";
-import EventDetailsPage from "./pages/details/:eventName:eventId/EventDetailsPage";
+import EventDetailsPage from "./pages/details/:title:details/EventDetailsPage";
 
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/signup/SignupPage";
@@ -17,7 +17,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<EventsPage />} />
-        <Route path="/details/:name/:id" element={<EventDetailsPage />} />
+        <Route path="/details/:title/:id" element={<EventDetailsPage />} />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
