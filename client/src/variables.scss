@@ -103,3 +103,21 @@ $buttonColorHOver3: #7f4052;
         
     }
 }
+
+@mixin alignFooterBottomInMinPageHeight() {
+    padding: 0 $paddingMain;
+    margin: 0 auto;
+    min-height: $minPageHeight;
+
+    :first-child {
+        margin: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 50px;
+    }
+
+    @media (max-width: 900px) {
+        padding: 0 $paddingMainNarrowScreen;
+    }
+}

@@ -1,10 +1,7 @@
 @import "../../variables.scss";
 
 .main {
-    padding: 0 $paddingMain;
-    margin: 0 auto;
-
-    min-height: $minPageHeight;
+    @include alignFooterBottomInMinPageHeight();
 
     .button5 {
         @include buttonStyle(120px, 50px, 5);
@@ -80,9 +77,5 @@
         @media (max-width: 260px) {
             width: 90%;
         }
-    }
-
-    @media (max-width: 900px) {
-        padding: 0 $paddingMainNarrowScreen;
     }
 }

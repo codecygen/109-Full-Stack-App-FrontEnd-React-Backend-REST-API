@@ -1,18 +1,11 @@
 @import "../../variables.scss";
 
 .main {
-    padding: 0 $paddingMain;
-    margin: 0 auto;
+    @include alignFooterBottomInMinPageHeight();
     text-align: center;
-
-    min-height: $minPageHeight;
 
     > * {
         margin: auto;
         text-align: center;
-    }
-
-    @media (max-width: 900px) {
-        padding: 0 $paddingMainNarrowScreen;
     }
 }
