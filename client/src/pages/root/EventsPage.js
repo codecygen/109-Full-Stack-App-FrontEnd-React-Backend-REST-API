@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
 import { editFormSliceActions } from "../../store/redux/edit-form-state-slice";
-import { getAll, getOne } from "../../store/redux/utils/connectApi";
+import { getPostsPagePosts, getOne } from "../../store/redux/utils/connectApi";
 
 import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
@@ -19,7 +19,7 @@ const FeedPage = () => {
   const { dataState } = useSelector((state) => state.connectApi);
 
   useEffect(() => {
-    dispatch(getAll());
+    dispatch(getPostsPagePosts());
   }, [dispatch]);
 
   const isPostWindowOpen = useSelector(
