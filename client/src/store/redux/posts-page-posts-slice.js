@@ -12,15 +12,15 @@ const postsPagePostsSlice = createSlice({
   name: "postsPagePosts",
   initialState,
   reducers: {
-    getAllSuccess(state, action) {
+    success(state, action) {
       state.dataState.data = action.payload;
     },
 
-    getAllFail(state, action) {
+    fail(state, action) {
       state.dataState.error = action.payload;
     },
 
-    getAllLoading(state, action) {
+    loading(state, action) {
       state.dataState.isLoading = action.payload;
     },
   },

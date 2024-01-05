@@ -8,9 +8,9 @@ export const getPostsPagePosts = () => {
   return async (dispatch) => {
     await getAllPosts(
       dispatch,
-      postsPagePostsActions.getAllSuccess,
-      postsPagePostsActions.getAllLoading,
-      postsPagePostsActions.getAllFail
+      postsPagePostsActions.success,
+      postsPagePostsActions.loading,
+      postsPagePostsActions.fail
     );
   };
 };
@@ -21,9 +21,9 @@ export const getEditWindowPost = (id) => {
     await getOnePost(
       dispatch,
       id,
-      editFormSliceActions.getOneSuccess,
-      editFormSliceActions.getOneLoading,
-      editFormSliceActions.getOneFail
+      editFormSliceActions.success,
+      editFormSliceActions.loading,
+      editFormSliceActions.fail
     );
   };
 };

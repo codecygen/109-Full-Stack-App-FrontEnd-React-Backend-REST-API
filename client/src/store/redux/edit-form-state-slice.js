@@ -11,15 +11,6 @@ const editFormSlice = createSlice({
   name: "editFormSlice",
   initialState,
   reducers: {
-    openAndPopulateWindow(state, action) {
-      const postData = action.payload;
-
-      state.isEditFormOpen = true;
-      state.postID = postData._id;
-      state.editedTitle = postData.title;
-      state.editedDetails = postData.details;
-    },
-
     openWindow(state, action) {
       state.isEditFormOpen = true;
     },
@@ -36,15 +27,15 @@ const editFormSlice = createSlice({
       return initialState;
     },
 
-    getOneSuccess(state, action) {
+    success(state, action) {
       state.editData = action.payload;
     },
 
-    getOneFail(state, action) {
+    fail(state, action) {
       state.editError = action.payload;
     },
 
-    getOneLoading(state, action) {
+    loading(state, action) {
       state.isEditLoading = action.payload;
     },
   },
