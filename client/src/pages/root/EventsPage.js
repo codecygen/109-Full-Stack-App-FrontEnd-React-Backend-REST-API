@@ -123,7 +123,10 @@ const FeedPage = () => {
         New Event
       </button>
       <section className={classes.posts}>
-        {isLoading ? <div>Loading</div> : postContent}
+
+        {isLoading && <div>Loading</div>}
+        {error && <div>{error}</div>}
+        {!isLoading && !error && postContent}
       </section>
 
       {/* Message Posting Window */}

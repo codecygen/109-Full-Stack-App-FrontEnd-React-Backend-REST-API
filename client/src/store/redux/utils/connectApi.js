@@ -3,6 +3,7 @@ import { connectApiSliceActions } from "../connect-api-slice";
 export const fetchAll = () => {
   return async (dispatch) => {
         dispatch(connectApiSliceActions.fetchDataLoading(true));
+        dispatch(connectApiSliceActions.fetchDataFail(false));
 
       try {
         const res = await fetch("/database/posts.json");

@@ -11,17 +11,14 @@ const connectApiSlice = createSlice({
   initialState,
   reducers: {
     fetchDataSuccess(state, action) {
-        console.log(action.payload);
         state.data = action.payload;
     },
 
     fetchDataFail(state, action) {
-        console.log(action.payload);
         state.error = action.payload;
     },
 
     fetchDataLoading(state, action) {
-        console.log(action.payload);
         state.isLoading = action.payload;
     },
   },
