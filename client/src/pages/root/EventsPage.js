@@ -47,7 +47,7 @@ const FeedPage = () => {
 
   const openPostWindow = () => {
     dispatch(postFormValidityActions.postFormOpenHandler());
-    dispatch(editFormSliceActions.editFormOpenHandler());
+    dispatch(editFormSliceActions.openWindow());
 
     document.body.style.overflow = "hidden";
     document.body.style.height = "100vh";
