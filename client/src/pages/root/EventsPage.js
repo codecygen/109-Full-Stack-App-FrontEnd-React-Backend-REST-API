@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
 import { editFormSliceActions } from "../../store/redux/edit-form-state-slice";
-import { fetchAll } from "../../store/redux/utils/connectApi";
+import { getAll, getOne } from "../../store/redux/utils/connectApi";
 
 import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
@@ -18,10 +18,10 @@ import DB from "../../database/posts.json";
 const FeedPage = () => {
   const dispatch = useDispatch();
 
-  const { data, error, isLoading } = useSelector((state) => state.connectApi);
+  const { dataState } = useSelector((state) => state.connectApi);
 
   useEffect(() => {
-    dispatch(fetchAll());
+    dispatch(getAll());
   }, [dispatch]);
 
   const isPostWindowOpen = useSelector(
@@ -66,14 +66,15 @@ const FeedPage = () => {
 
   const editButtonHandler = (postId) => {
     const foundPost = DB.find((post) => post._id === postId);
+    
 
     dispatch(editFormSliceActions.openAndPopulateWindow(foundPost));
   };
 
   let postContent;
 
-  if (data) {
-    postContent = data.map((post) => {
+  if (dataState.data) {
+    postContent = dataState.data.map((post) => {
       const options = {
         hour: "2-digit",
         minute: "2-digit",
@@ -124,9 +125,9 @@ const FeedPage = () => {
       </button>
       <section className={classes.posts}>
 
-        {isLoading && <div>Loading</div>}
-        {error && <div>{error}</div>}
-        {!isLoading && !error && postContent}
+        {dataState.isLoading && <div>Loading</div>}
+        {dataState.error && <div>{dataState.error}</div>}
+        {!dataState.isLoading && !dataState.error && postContent}
       </section>
 
       {/* Message Posting Window */}

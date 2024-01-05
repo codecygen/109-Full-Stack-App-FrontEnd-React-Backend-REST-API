@@ -1,25 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: null,
-  error: null,
-  isLoading: null,
+  dataState: {
+    data: null,
+    error: null,
+    isLoading: null,
+  },
 };
 
 const connectApiSlice = createSlice({
   name: "connectApi",
   initialState,
   reducers: {
-    fetchDataSuccess(state, action) {
-        state.data = action.payload;
+    getAllSuccess(state, action) {
+      state.dataState.data = action.payload;
     },
 
-    fetchDataFail(state, action) {
-        state.error = action.payload;
+    getAllFail(state, action) {
+      state.dataState.error = action.payload;
     },
 
-    fetchDataLoading(state, action) {
-        state.isLoading = action.payload;
+    getAllLoading(state, action) {
+      state.dataState.isLoading = action.payload;
     },
   },
 });
