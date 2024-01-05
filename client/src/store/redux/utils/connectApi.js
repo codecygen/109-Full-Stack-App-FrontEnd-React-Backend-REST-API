@@ -1,25 +1,34 @@
 import { connectApiSliceActions } from "../connect-api-slice";
 import { editFormSliceActions } from "../edit-form-state-slice";
 
+const getAllPosts = async (dispatch, successHandler, loadingHandler, failHandler) => {
+  dispatch(loadingHandler(true));
+  dispatch(failHandler(false));
+
+  try {
+    const res = await fetch("/database/posts.json");
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status Code: ${res.status}`);
+    }
+
+    const data = await res.json();
+    dispatch(successHandler(data));
+    dispatch(loadingHandler(false));
+    return data;
+  } catch (err) {
+    dispatch(failHandler(err.message));
+    dispatch(loadingHandler(false));
+  }
+};
+
 export const getAll = () => {
   return async (dispatch) => {
-    dispatch(connectApiSliceActions.getAllLoading(true));
-    dispatch(connectApiSliceActions.getAllFail(false));
-
-    try {
-      const res = await fetch("/database/posts.json");
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status Code: ${res.status}`);
-      }
-
-      const data = await res.json();
-      dispatch(connectApiSliceActions.getAllSuccess(data));
-      dispatch(connectApiSliceActions.getAllLoading(false));
-      return data;
-    } catch (err) {
-      dispatch(connectApiSliceActions.getAllFail(err.message));
-      dispatch(connectApiSliceActions.getAllLoading(false));
-    }
+    getAllPosts(
+      dispatch,
+      connectApiSliceActions.getAllSuccess,
+      connectApiSliceActions.getAllLoading,
+      connectApiSliceActions.getAllFail,
+    );
   };
 };
 
