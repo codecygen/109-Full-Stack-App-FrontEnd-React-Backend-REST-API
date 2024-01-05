@@ -25,8 +25,9 @@ export const getAll = () => {
 
 export const getOne = (id) => {
   return async (dispatch) => {
-    dispatch(connectApiSliceActions.getOneLoading(true));
-    dispatch(connectApiSliceActions.getOneFail(false));
+    dispatch(editFormSliceActions.getOneLoading(true));
+    dispatch(editFormSliceActions.getOneFail(false));
+    dispatch(editFormSliceActions.openWindow())
 
     try {
       const res = await fetch("/database/posts.json");
@@ -36,12 +37,12 @@ export const getOne = (id) => {
 
       const result = await res.json();
       const data = result.find(entry => entry._id === id)
-      dispatch(connectApiSliceActions.getOneSuccess(data));
-      dispatch(connectApiSliceActions.getOneLoading(false));
+      dispatch(editFormSliceActions.getOneSuccess(data));
+      dispatch(editFormSliceActions.getOneLoading(false));
       return data;
     } catch (err) {
-        dispatch(connectApiSliceActions.getOneFail(err.message));
-        dispatch(connectApiSliceActions.getOneLoading(false));
+        dispatch(editFormSliceActions.getOneFail(err.message));
+        dispatch(editFormSliceActions.getOneLoading(false));
     }
   };
 };

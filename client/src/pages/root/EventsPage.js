@@ -13,8 +13,6 @@ import DeletePostModal from "../../components/modals/delete-post-modal/DeletePos
 
 import classes from "./EventsPage.module.scss";
 
-import DB from "../../database/posts.json";
-
 const FeedPage = () => {
   const dispatch = useDispatch();
 
@@ -64,11 +62,8 @@ const FeedPage = () => {
     dispatch(deleteWindowStateActions.setData(DB));
   };
 
-  const editButtonHandler = (postId) => {
-    const foundPost = DB.find((post) => post._id === postId);
-    
-
-    dispatch(editFormSliceActions.openAndPopulateWindow(foundPost));
+  const editButtonHandler = (postId) => {;
+    dispatch(getOne(postId));
   };
 
   let postContent;

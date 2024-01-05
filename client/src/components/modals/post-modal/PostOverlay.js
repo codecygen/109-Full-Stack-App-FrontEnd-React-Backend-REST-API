@@ -15,16 +15,17 @@ const PostOverlay = (props) => {
   } = useSelector((state) => state.postFormValidity);
 
   const {
-    postID: editedPostId,
-    editedTitle,
-    editedDetails,
+    editError,
+    isEditLoading,
+    editData,
   } = useSelector((state) => state.editFormSlice);
 
   useEffect(() => {
-    if (editedPostId) {
+    if (editData) {
+      console.log(editData);
       dispatch(
         postFormValidityActions.textValidityChecker({
-          enteredInput: editedTitle,
+          enteredInput: editData.title,
           inputField: "title-input",
         })
       );
@@ -42,12 +43,12 @@ const PostOverlay = (props) => {
 
       dispatch(
         postFormValidityActions.textValidityChecker({
-          enteredInput: editedDetails,
+          enteredInput: editData.details,
           inputField: "details-input",
         })
       );
     }
-  }, [editedPostId, editedTitle, editedDetails, dispatch]);
+  }, [dispatch, editData]);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
@@ -105,11 +106,11 @@ const PostOverlay = (props) => {
     const enteredImage = imageResult.fileUrl;
     const enteredDetails = detailsResult.enteredDetails;
 
-    if (editedPostId) {
-      console.log(`Post ${editedPostId} is edited!`);
+    if (editData) {
+      console.log(`Post ${editData._id} is edited!`);
       console.log("title: ", enteredTitle);
       console.log("image: ", enteredImage);
-      console.log("title: ", enteredDetails);   
+      console.log("title: ", enteredDetails);
 
       return;
     }
@@ -153,7 +154,7 @@ const PostOverlay = (props) => {
   return (
     <section className={classes.form}>
       <header>
-        <h1>{!editedPostId ? "Create an Event" : "Edit the Event"}</h1>
+        <h1>{!editData ? "Create an Event" : "Edit the Event"}</h1>
       </header>
 
       <form>
@@ -167,7 +168,7 @@ const PostOverlay = (props) => {
             type="text"
             className={titleClass}
             onChange={titleChangeHandler}
-            defaultValue={editedTitle}
+            defaultValue={editData ? editData.title : ""}
           />
         </div>
         <div className={classes.input}>
@@ -197,7 +198,7 @@ const PostOverlay = (props) => {
             type="text"
             className={detailsClass}
             onChange={detailChangeHandler}
-            defaultValue={editedDetails}
+            defaultValue={editData ? editData.details : ""}
           />
         </div>
       </form>

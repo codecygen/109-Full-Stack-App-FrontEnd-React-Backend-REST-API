@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isEditFormOpen: false,
-  postID: null,
-  editedTitle: "",
-  editedDetails: "",
+  editError: null,
+  isEditLoading: null,
+  editData: null,
 };
 
 const editFormSlice = createSlice({
@@ -20,6 +20,10 @@ const editFormSlice = createSlice({
       state.editedDetails = postData.details;
     },
 
+    openWindow(state, action) {
+      state.isEditFormOpen = true;
+    },
+
     editFormCloseHandler(state, action) {
       state.isEditFormOpen = false;
     },
@@ -30,6 +34,21 @@ const editFormSlice = createSlice({
 
     resetStates(state, action) {
       return initialState;
+    },
+
+    getOneSuccess(state, action) {
+      console.log(action.payload);
+      state.editData = action.payload;
+    },
+
+    getOneFail(state, action) {
+      console.log(action.payload);
+      state.editError = action.payload;
+    },
+
+    getOneLoading(state, action) {
+      console.log(action.payload);
+      state.isEditLoading = action.payload;
     },
   },
 });
