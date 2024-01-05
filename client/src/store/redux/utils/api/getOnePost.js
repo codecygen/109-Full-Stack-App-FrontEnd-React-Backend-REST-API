@@ -1,8 +1,8 @@
 const apiEndpoint = "/database/posts.json";
 
 const getOnePost = async (
-  dispatch,
   id,
+  dispatch,
   successHandler,
   loadingHandler,
   failHandler

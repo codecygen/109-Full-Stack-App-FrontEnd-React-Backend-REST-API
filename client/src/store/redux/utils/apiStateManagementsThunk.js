@@ -19,8 +19,8 @@ export const getEditWindowPost = (id) => {
   return async (dispatch) => {
     dispatch(editFormSliceActions.openWindow());
     await getOnePost(
-      dispatch,
       id,
+      dispatch,
       editFormSliceActions.success,
       editFormSliceActions.loading,
       editFormSliceActions.fail
