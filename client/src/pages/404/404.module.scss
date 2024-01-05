@@ -1,0 +1,10 @@
+@import "../../variables.scss";
+
+.error {
+    @include alignFooterBottomInMinPageHeight();
+    text-align: center;
+
+    > h1 {
+        padding-top: 5rem;
+    }
+}
