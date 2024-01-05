@@ -1,14 +1,12 @@
 import { useEffect } from "react";
-
 import { NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import useConnectApi from "../../hooks/use-connectAPI";
-
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
 import { editFormSliceActions } from "../../store/redux/edit-form-state-slice";
+import { fetchAll } from "../../store/redux/utils/connectApi";
 
 import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
@@ -18,11 +16,14 @@ import classes from "./EventsPage.module.scss";
 import DB from "../../database/posts.json";
 
 const FeedPage = () => {
-  const { data, isLoading, error, isFetched, getAll, getOne } = useConnectApi();
-
-  console.log(data);
-
   const dispatch = useDispatch();
+
+  const { data, error, isLoading } = useSelector((state) => state.connectApi);
+
+  useEffect(() => {
+    dispatch(fetchAll());
+  }, [dispatch]);
+
   const isPostWindowOpen = useSelector(
     (state) => state.postFormValidity.isPostFormOpen
   );
