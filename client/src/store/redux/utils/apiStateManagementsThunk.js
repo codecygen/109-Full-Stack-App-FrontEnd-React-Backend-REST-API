@@ -1,4 +1,4 @@
-import { connectApiSliceActions } from "../connect-api-slice";
+import { postsPagePostsActions } from "../posts-page-posts-slice";
 import { editFormSliceActions } from "../edit-form-state-slice";
 
 import getAllPosts from "./api/getAllPosts";
@@ -8,9 +8,9 @@ export const getPostsPagePosts = () => {
   return async (dispatch) => {
     await getAllPosts(
       dispatch,
-      connectApiSliceActions.getAllSuccess,
-      connectApiSliceActions.getAllLoading,
-      connectApiSliceActions.getAllFail
+      postsPagePostsActions.getAllSuccess,
+      postsPagePostsActions.getAllLoading,
+      postsPagePostsActions.getAllFail
     );
   };
 };

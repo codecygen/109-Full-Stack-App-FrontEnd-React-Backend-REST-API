@@ -8,8 +8,8 @@ const initialState = {
   },
 };
 
-const connectApiSlice = createSlice({
-  name: "connectApi",
+const postsPagePostsSlice = createSlice({
+  name: "postsPagePosts",
   initialState,
   reducers: {
     getAllSuccess(state, action) {
@@ -26,5 +26,5 @@ const connectApiSlice = createSlice({
   },
 });
 
-export const connectApiSliceActions = connectApiSlice.actions;
-export default connectApiSlice;
+export const postsPagePostsActions = postsPagePostsSlice.actions;
+export default postsPagePostsSlice;

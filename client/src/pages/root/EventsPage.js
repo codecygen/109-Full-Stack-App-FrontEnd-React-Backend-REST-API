@@ -16,7 +16,7 @@ import classes from "./EventsPage.module.scss";
 const FeedPage = () => {
   const dispatch = useDispatch();
 
-  const { dataState } = useSelector((state) => state.connectApi);
+  const { dataState } = useSelector((state) => state.postsPagePosts);
 
   useEffect(() => {
     dispatch(getPostsPagePosts());
