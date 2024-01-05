@@ -37,17 +37,14 @@ const editFormSlice = createSlice({
     },
 
     getOneSuccess(state, action) {
-      console.log(action.payload);
       state.editData = action.payload;
     },
 
     getOneFail(state, action) {
-      console.log(action.payload);
       state.editError = action.payload;
     },
 
     getOneLoading(state, action) {
-      console.log(action.payload);
       state.isEditLoading = action.payload;
     },
   },

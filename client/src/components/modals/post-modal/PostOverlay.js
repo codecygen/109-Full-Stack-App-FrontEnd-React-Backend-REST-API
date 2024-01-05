@@ -22,7 +22,6 @@ const PostOverlay = (props) => {
 
   useEffect(() => {
     if (editData) {
-      console.log(editData);
       dispatch(
         postFormValidityActions.textValidityChecker({
           enteredInput: editData.title,
