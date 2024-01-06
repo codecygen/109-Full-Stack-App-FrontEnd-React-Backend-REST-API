@@ -24,7 +24,7 @@ const initialState = {
   isFormValid: null,
 };
 
-const postFormValiditySlice = createSlice({
+const newPostSlice = createSlice({
   name: "postFormValidity",
   initialState,
   reducers: {
@@ -87,5 +87,5 @@ const postFormValiditySlice = createSlice({
   },
 });
 
-export const postFormValidityActions = postFormValiditySlice.actions;
-export default postFormValiditySlice;
+export const postFormValidityActions = newPostSlice.actions;
+export default newPostSlice;

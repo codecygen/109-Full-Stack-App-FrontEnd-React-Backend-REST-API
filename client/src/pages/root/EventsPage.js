@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
+import { postFormValidityActions } from "../../store/redux/new-post-slice";
 import { deletePostActions } from "../../store/redux/delete-post-slice";
 import { editPostActions } from "../../store/redux/edit-post-slice";
 import {
