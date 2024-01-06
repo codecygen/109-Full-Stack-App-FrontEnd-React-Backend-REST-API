@@ -17,7 +17,7 @@ export const getPostsPagePosts = () => {
 
 export const getEditWindowPost = (id) => {
   return async (dispatch) => {
-    dispatch(editPostActions.openWindow());
+    dispatch(editPostActions.toggleWindow());
     await getOnePost(
       id,
       dispatch,

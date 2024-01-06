@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isPostFormOpen: false,
+  isWindowOpenNewPost: false,
 
   titleCheckResult: {
     isValid: null,
@@ -28,15 +28,11 @@ const newPostSlice = createSlice({
   name: "newPost",
   initialState,
   reducers: {
-    closeWindow(state, action) {
-      state.isPostFormOpen = false;
+    toggleWindow(state, action) {
+      state.isWindowOpenNewPost = !state.isWindowOpenNewPost;
     },
 
-    openWindow(state, action) {
-      state.isPostFormOpen = true;
-    },
-
-    resetForm(state, action) {
+    reset(state, action) {
       return initialState;
     },
 

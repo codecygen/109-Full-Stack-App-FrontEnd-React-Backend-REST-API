@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isWindowOpenEditForm: false,
+  isWindowOpenEditPost: false,
   dataEditForm: null,
   errorEditForm: null,
   isLoadingEditForm: null,
@@ -11,15 +11,12 @@ const editPostSlice = createSlice({
   name: "editPost",
   initialState,
   reducers: {
-    openWindow(state, action) {
-      state.isWindowOpenEditForm = true;
+
+    toggleWindow(state, action) {
+      state.isWindowOpenEditPost = !state.isWindowOpenEditPost;
     },
 
-    closeWindow(state, action) {
-      state.isWindowOpenEditForm = false;
-    },
-
-    resetStates(state, action) {
+    reset(state, action) {
       return initialState;
     },
 

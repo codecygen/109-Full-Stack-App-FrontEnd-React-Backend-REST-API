@@ -28,7 +28,7 @@ const FeedPage = () => {
   }, [dispatch]);
 
   const isPostWindowOpen = useSelector(
-    (state) => state.newPost.isPostFormOpen
+    (state) => state.newPost.isWindowOpenNewPost
   );
 
   const isWindowOpenDeletePost = useSelector(
@@ -36,23 +36,23 @@ const FeedPage = () => {
   );
 
   const isEditFormOpen = useSelector(
-    (state) => state.editPost.isWindowOpenEditForm
+    (state) => state.editPost.isWindowOpenEditPost
   );
 
   const closePostWindow = () => {
-    dispatch(newPostActions.closeWindow());
-    dispatch(newPostActions.resetForm());
+    dispatch(newPostActions.toggleWindow());
+    dispatch(newPostActions.reset());
 
-    dispatch(editPostActions.closeWindow());
-    dispatch(editPostActions.resetStates());
+    dispatch(editPostActions.toggleWindow());
+    dispatch(editPostActions.reset());
 
     document.body.style.overflow = "auto";
     document.body.style.height = "auto";
   };
 
   const openPostWindow = () => {
-    dispatch(newPostActions.openWindow());
-    dispatch(editPostActions.openWindow());
+    dispatch(newPostActions.toggleWindow());
+    dispatch(editPostActions.toggleWindow());
 
     document.body.style.overflow = "hidden";
     document.body.style.height = "100vh";
