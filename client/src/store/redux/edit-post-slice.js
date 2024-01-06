@@ -14,6 +14,14 @@ const editPostSlice = createSlice({
 
     toggleWindow(state, action) {
       state.isWindowOpenEditPost = !state.isWindowOpenEditPost;
+
+      if (state.isWindowOpenEditPost === true) {
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100vh";
+      } else {
+        document.body.style.overflow = "scroll";
+        document.body.style.height = "auto";
+      }
     },
 
     reset(state, action) {

@@ -45,17 +45,11 @@ const FeedPage = () => {
 
     dispatch(editPostActions.toggleWindow());
     dispatch(editPostActions.reset());
-
-    document.body.style.overflow = "auto";
-    document.body.style.height = "auto";
   };
 
   const openPostWindow = () => {
     dispatch(newPostActions.toggleWindow());
     dispatch(editPostActions.toggleWindow());
-
-    document.body.style.overflow = "hidden";
-    document.body.style.height = "100vh";
   };
 
   const closeDeletePostWindow = () => {

@@ -11,6 +11,14 @@ const deletePostSlice = createSlice({
   reducers: {
     toggleWindow(state, action) {
       state.isWindowOpenDeletePost = !state.isWindowOpenDeletePost;
+
+      if (state.isWindowOpenDeletePost === true) {
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100vh";
+      } else {
+        document.body.style.overflow = "scroll";
+        document.body.style.height = "auto";
+      }
     },
 
     setData(state, action) {

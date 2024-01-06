@@ -30,6 +30,14 @@ const newPostSlice = createSlice({
   reducers: {
     toggleWindow(state, action) {
       state.isWindowOpenNewPost = !state.isWindowOpenNewPost;
+
+      if (state.isWindowOpenNewPost === true) {
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100vh";
+      } else {
+        document.body.style.overflow = "scroll";
+        document.body.style.height = "auto";
+      }
     },
 
     reset(state, action) {
