@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { postFormValidityActions } from "../../../store/redux/new-post-slice";
+import { newPostActions } from "../../../store/redux/new-post-slice";
 
 import classes from "./PostOverlay.module.scss";
 
@@ -12,7 +12,7 @@ const PostOverlay = (props) => {
     titleCheckResult: titleResult,
     imageCheckResult: imageResult,
     detailsCheckResult: detailsResult,
-  } = useSelector((state) => state.postFormValidity);
+  } = useSelector((state) => state.newPost);
 
   const {
     dataEditForm,
@@ -23,14 +23,14 @@ const PostOverlay = (props) => {
   useEffect(() => {
     if (dataEditForm) {
       dispatch(
-        postFormValidityActions.checkText({
+        newPostActions.checkText({
           enteredInput: dataEditForm.title,
           inputField: "title-input",
         })
       );
 
       dispatch(
-        postFormValidityActions.checkImage({
+        newPostActions.checkImage({
           fileData: {
             name: "",
             size: "",
@@ -41,7 +41,7 @@ const PostOverlay = (props) => {
       );
 
       dispatch(
-        postFormValidityActions.checkText({
+        newPostActions.checkText({
           enteredInput: dataEditForm.details,
           inputField: "details-input",
         })
@@ -54,7 +54,7 @@ const PostOverlay = (props) => {
     const inputField = e.target.name;
 
     dispatch(
-      postFormValidityActions.checkText({
+      newPostActions.checkText({
         enteredInput: enteredTitle,
         inputField,
       })
@@ -75,7 +75,7 @@ const PostOverlay = (props) => {
     const fileUrl = URL.createObjectURL(file);
 
     dispatch(
-      postFormValidityActions.checkImage({ fileData, fileUrl })
+      newPostActions.checkImage({ fileData, fileUrl })
     );
   };
 
@@ -84,7 +84,7 @@ const PostOverlay = (props) => {
     const inputField = e.target.name;
 
     dispatch(
-      postFormValidityActions.checkText({
+      newPostActions.checkText({
         enteredInput: detailMessage,
         inputField,
       })

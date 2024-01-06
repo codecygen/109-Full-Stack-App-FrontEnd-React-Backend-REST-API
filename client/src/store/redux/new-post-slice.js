@@ -25,7 +25,7 @@ const initialState = {
 };
 
 const newPostSlice = createSlice({
-  name: "postFormValidity",
+  name: "newPost",
   initialState,
   reducers: {
     closeWindow(state, action) {
@@ -87,5 +87,5 @@ const newPostSlice = createSlice({
   },
 });
 
-export const postFormValidityActions = newPostSlice.actions;
+export const newPostActions = newPostSlice.actions;
 export default newPostSlice;

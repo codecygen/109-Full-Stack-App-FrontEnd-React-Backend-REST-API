@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { postFormValidityActions } from "../../store/redux/new-post-slice";
+import { newPostActions } from "../../store/redux/new-post-slice";
 import { deletePostActions } from "../../store/redux/delete-post-slice";
 import { editPostActions } from "../../store/redux/edit-post-slice";
 import {
@@ -28,7 +28,7 @@ const FeedPage = () => {
   }, [dispatch]);
 
   const isPostWindowOpen = useSelector(
-    (state) => state.postFormValidity.isPostFormOpen
+    (state) => state.newPost.isPostFormOpen
   );
 
   const isWindowOpenDeletePost = useSelector(
@@ -40,8 +40,8 @@ const FeedPage = () => {
   );
 
   const closePostWindow = () => {
-    dispatch(postFormValidityActions.closeWindow());
-    dispatch(postFormValidityActions.resetForm());
+    dispatch(newPostActions.closeWindow());
+    dispatch(newPostActions.resetForm());
 
     dispatch(editPostActions.closeWindow());
     dispatch(editPostActions.resetStates());
@@ -51,7 +51,7 @@ const FeedPage = () => {
   };
 
   const openPostWindow = () => {
-    dispatch(postFormValidityActions.openWindow());
+    dispatch(newPostActions.openWindow());
     dispatch(editPostActions.openWindow());
 
     document.body.style.overflow = "hidden";

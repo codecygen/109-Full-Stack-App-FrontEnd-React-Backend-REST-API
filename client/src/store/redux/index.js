@@ -8,7 +8,7 @@ import deletePostSlice from "./delete-post-slice";
 const store = configureStore({
   reducer: {
     allPosts: allPostsSlice.reducer,
-    postFormValidity: newPostSlice.reducer,
+    newPost: newPostSlice.reducer,
     editPost: editPostSlice.reducer,
     deletePost: deletePostSlice.reducer,
   },
