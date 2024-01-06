@@ -1,5 +1,5 @@
 import { allPostsActions } from "../all-posts.slice";
-import { editFormSliceActions } from "../edit-form-state-slice";
+import { editPostActions } from "../edit-post-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
@@ -17,13 +17,13 @@ export const getPostsPagePosts = () => {
 
 export const getEditWindowPost = (id) => {
   return async (dispatch) => {
-    dispatch(editFormSliceActions.openWindow());
+    dispatch(editPostActions.openWindow());
     await getOnePost(
       id,
       dispatch,
-      editFormSliceActions.success,
-      editFormSliceActions.loading,
-      editFormSliceActions.fail
+      editPostActions.success,
+      editPostActions.loading,
+      editPostActions.fail
     );
   };
 };

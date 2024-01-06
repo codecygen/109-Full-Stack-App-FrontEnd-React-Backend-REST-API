@@ -18,7 +18,7 @@ const PostOverlay = (props) => {
     dataEditForm,
     errorEditForm,
     isLoadingEditForm,
-  } = useSelector((state) => state.editFormSlice);
+  } = useSelector((state) => state.editPost);
 
   useEffect(() => {
     if (dataEditForm) {

@@ -7,8 +7,8 @@ const initialState = {
   isLoadingEditForm: null,
 };
 
-const editFormSlice = createSlice({
-  name: "editFormSlice",
+const editPostSlice = createSlice({
+  name: "editPost",
   initialState,
   reducers: {
     openWindow(state, action) {
@@ -37,5 +37,5 @@ const editFormSlice = createSlice({
   },
 });
 
-export const editFormSliceActions = editFormSlice.actions;
-export default editFormSlice;
+export const editPostActions = editPostSlice.actions;
+export default editPostSlice;

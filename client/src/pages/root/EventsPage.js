@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 import { deletePostActions } from "../../store/redux/delete-post-slice";
-import { editFormSliceActions } from "../../store/redux/edit-form-state-slice";
+import { editPostActions } from "../../store/redux/edit-post-slice";
 import {
   getPostsPagePosts,
   getEditWindowPost,
@@ -36,15 +36,15 @@ const FeedPage = () => {
   );
 
   const isEditFormOpen = useSelector(
-    (state) => state.editFormSlice.isWindowOpenEditForm
+    (state) => state.editPost.isWindowOpenEditForm
   );
 
   const closePostWindow = () => {
     dispatch(postFormValidityActions.closeWindow());
     dispatch(postFormValidityActions.resetForm());
 
-    dispatch(editFormSliceActions.closeWindow());
-    dispatch(editFormSliceActions.resetStates());
+    dispatch(editPostActions.closeWindow());
+    dispatch(editPostActions.resetStates());
 
     document.body.style.overflow = "auto";
     document.body.style.height = "auto";
@@ -52,7 +52,7 @@ const FeedPage = () => {
 
   const openPostWindow = () => {
     dispatch(postFormValidityActions.openWindow());
-    dispatch(editFormSliceActions.openWindow());
+    dispatch(editPostActions.openWindow());
 
     document.body.style.overflow = "hidden";
     document.body.style.height = "100vh";
