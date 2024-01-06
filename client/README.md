@@ -41,7 +41,7 @@ const imageChangeHandler = (e) => {
 
 ## prevent-scrolling-on-modal-open
 
-The overflow and height property restricts a person to stop scrolling when modal window opens.
+The overflow and height property restricts a person to stop scrolling when modal window opens. This is now moved inside redux reducer sections (each window toggle reducer).
 
 ```javascript
 const quitPostWindow = () => {
