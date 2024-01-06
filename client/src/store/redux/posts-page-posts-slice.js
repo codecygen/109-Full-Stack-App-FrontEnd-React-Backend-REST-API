@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  postsData: null,
-  postsError: null,
-  postsIsLoading: null,
+  dataAllPosts: null,
+  errorAllPosts: null,
+  isLoadingAllPosts: null,
 };
 
 const postsPagePostsSlice = createSlice({
@@ -11,15 +11,15 @@ const postsPagePostsSlice = createSlice({
   initialState,
   reducers: {
     success(state, action) {
-      state.postsData = action.payload;
+      state.dataAllPosts = action.payload;
     },
 
     fail(state, action) {
-      state.postsError = action.payload;
+      state.errorAllPosts = action.payload;
     },
 
     loading(state, action) {
-      state.postsIsLoading = action.payload;
+      state.isLoadingAllPosts = action.payload;
     },
   },
 });

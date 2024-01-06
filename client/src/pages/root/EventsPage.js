@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
 import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
 import { editFormSliceActions } from "../../store/redux/edit-form-state-slice";
-import { getPostsPagePosts, getEditWindowPost } from "../../store/redux/utils/apiStateManagementsThunk";
+import {
+  getPostsPagePosts,
+  getEditWindowPost,
+} from "../../store/redux/utils/apiStateManagementsThunk";
 
 import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
@@ -16,7 +19,9 @@ import classes from "./EventsPage.module.scss";
 const FeedPage = () => {
   const dispatch = useDispatch();
 
-  const { postsData, postsError, postsIsLoading } = useSelector((state) => state.postsPagePosts);
+  const { dataAllPosts, errorAllPosts, isLoadingAllPosts } = useSelector(
+    (state) => state.postsPagePosts
+  );
 
   useEffect(() => {
     dispatch(getPostsPagePosts());
@@ -26,19 +31,19 @@ const FeedPage = () => {
     (state) => state.postFormValidity.isPostFormOpen
   );
 
-  const isDeletePostWindowOpen = useSelector(
-    (state) => state.deleteWindowState.isDeletePostWindowOpen
+  const isWindowOpenDeletePost = useSelector(
+    (state) => state.deleteWindowState.isWindowOpenDeletePost
   );
 
   const isEditFormOpen = useSelector(
-    (state) => state.editFormSlice.isEditFormOpen
+    (state) => state.editFormSlice.isWindowOpenEditForm
   );
 
   const closePostWindow = () => {
-    dispatch(postFormValidityActions.postFormCloseHandler());
-    dispatch(postFormValidityActions.resetFormValidity());
+    dispatch(postFormValidityActions.closeWindow());
+    dispatch(postFormValidityActions.resetForm());
 
-    dispatch(editFormSliceActions.editFormCloseHandler());
+    dispatch(editFormSliceActions.closeWindow());
     dispatch(editFormSliceActions.resetStates());
 
     document.body.style.overflow = "auto";
@@ -46,7 +51,7 @@ const FeedPage = () => {
   };
 
   const openPostWindow = () => {
-    dispatch(postFormValidityActions.postFormOpenHandler());
+    dispatch(postFormValidityActions.openWindow());
     dispatch(editFormSliceActions.openWindow());
 
     document.body.style.overflow = "hidden";
@@ -54,22 +59,22 @@ const FeedPage = () => {
   };
 
   const closeDeletePostWindow = () => {
-    dispatch(deleteWindowStateActions.toggleWindowHandler());
+    dispatch(deleteWindowStateActions.toggleWindow());
   };
 
   const openDeletePostWindow = (DB) => {
-    dispatch(deleteWindowStateActions.toggleWindowHandler());
+    dispatch(deleteWindowStateActions.toggleWindow());
     dispatch(deleteWindowStateActions.setData(DB));
   };
 
-  const editButtonHandler = (postId) => {;
+  const editButtonHandler = (postId) => {
     dispatch(getEditWindowPost(postId));
   };
 
   let postContent;
 
-  if (postsData) {
-    postContent = postsData.map((post) => {
+  if (dataAllPosts) {
+    postContent = dataAllPosts.map((post) => {
       const options = {
         hour: "2-digit",
         minute: "2-digit",
@@ -119,10 +124,9 @@ const FeedPage = () => {
         New Event
       </button>
       <section className={classes.posts}>
-
-        {postsIsLoading && <div>Loading</div>}
-        {postsError && <div>{postsError}</div>}
-        {!postsIsLoading && !postsError && postContent}
+        {isLoadingAllPosts && <div>Loading</div>}
+        {errorAllPosts && <div>{errorAllPosts}</div>}
+        {!isLoadingAllPosts && !errorAllPosts && postContent}
       </section>
 
       {/* Message Posting Window */}
@@ -130,7 +134,7 @@ const FeedPage = () => {
         <PostModal cancelWindow={closePostWindow} />
       )}
 
-      {isDeletePostWindowOpen && (
+      {isWindowOpenDeletePost && (
         <DeletePostModal cancelWindow={closeDeletePostWindow} />
       )}
     </main>

@@ -28,19 +28,19 @@ const postFormValiditySlice = createSlice({
   name: "postFormValidity",
   initialState,
   reducers: {
-    postFormCloseHandler(state, action) {
+    closeWindow(state, action) {
       state.isPostFormOpen = false;
     },
 
-    postFormOpenHandler(state, action) {
+    openWindow(state, action) {
       state.isPostFormOpen = true;
     },
 
-    resetFormValidity(state, action) {
+    resetForm(state, action) {
       return initialState;
     },
 
-    textValidityChecker(state, action) {
+    checkText(state, action) {
       const { enteredInput, inputField } = action.payload;
 
       const enteredInputTrimmed = enteredInput.trim();
@@ -67,7 +67,7 @@ const postFormValiditySlice = createSlice({
       }
     },
 
-    imageValidityChecker(state, action) {
+    checkImage(state, action) {
       const { fileData, fileUrl } = action.payload;
 
       const fileExtension = fileData.name.split(".").pop();

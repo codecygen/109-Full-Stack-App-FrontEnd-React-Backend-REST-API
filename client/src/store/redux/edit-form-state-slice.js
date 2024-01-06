@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isEditFormOpen: false,
-  editError: null,
-  isEditLoading: null,
-  editData: null,
+  isWindowOpenEditForm: false,
+  dataEditForm: null,
+  errorEditForm: null,
+  isLoadingEditForm: null,
 };
 
 const editFormSlice = createSlice({
@@ -12,11 +12,11 @@ const editFormSlice = createSlice({
   initialState,
   reducers: {
     openWindow(state, action) {
-      state.isEditFormOpen = true;
+      state.isWindowOpenEditForm = true;
     },
 
-    editFormCloseHandler(state, action) {
-      state.isEditFormOpen = false;
+    closeWindow(state, action) {
+      state.isWindowOpenEditForm = false;
     },
 
     resetStates(state, action) {
@@ -24,15 +24,15 @@ const editFormSlice = createSlice({
     },
 
     success(state, action) {
-      state.editData = action.payload;
+      state.dataEditForm = action.payload;
     },
 
     fail(state, action) {
-      state.editError = action.payload;
+      state.errorEditForm = action.payload;
     },
 
     loading(state, action) {
-      state.isEditLoading = action.payload;
+      state.isLoadingEditForm = action.payload;
     },
   },
 });

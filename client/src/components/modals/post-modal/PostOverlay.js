@@ -15,22 +15,22 @@ const PostOverlay = (props) => {
   } = useSelector((state) => state.postFormValidity);
 
   const {
-    editError,
-    isEditLoading,
-    editData,
+    dataEditForm,
+    errorEditForm,
+    isLoadingEditForm,
   } = useSelector((state) => state.editFormSlice);
 
   useEffect(() => {
-    if (editData) {
+    if (dataEditForm) {
       dispatch(
-        postFormValidityActions.textValidityChecker({
-          enteredInput: editData.title,
+        postFormValidityActions.checkText({
+          enteredInput: dataEditForm.title,
           inputField: "title-input",
         })
       );
 
       dispatch(
-        postFormValidityActions.imageValidityChecker({
+        postFormValidityActions.checkImage({
           fileData: {
             name: "",
             size: "",
@@ -41,20 +41,20 @@ const PostOverlay = (props) => {
       );
 
       dispatch(
-        postFormValidityActions.textValidityChecker({
-          enteredInput: editData.details,
+        postFormValidityActions.checkText({
+          enteredInput: dataEditForm.details,
           inputField: "details-input",
         })
       );
     }
-  }, [dispatch, editData]);
+  }, [dispatch, dataEditForm]);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
     const inputField = e.target.name;
 
     dispatch(
-      postFormValidityActions.textValidityChecker({
+      postFormValidityActions.checkText({
         enteredInput: enteredTitle,
         inputField,
       })
@@ -75,7 +75,7 @@ const PostOverlay = (props) => {
     const fileUrl = URL.createObjectURL(file);
 
     dispatch(
-      postFormValidityActions.imageValidityChecker({ fileData, fileUrl })
+      postFormValidityActions.checkImage({ fileData, fileUrl })
     );
   };
 
@@ -84,7 +84,7 @@ const PostOverlay = (props) => {
     const inputField = e.target.name;
 
     dispatch(
-      postFormValidityActions.textValidityChecker({
+      postFormValidityActions.checkText({
         enteredInput: detailMessage,
         inputField,
       })
@@ -105,8 +105,8 @@ const PostOverlay = (props) => {
     const enteredImage = imageResult.fileUrl;
     const enteredDetails = detailsResult.enteredDetails;
 
-    if (editData) {
-      console.log(`Post ${editData._id} is edited!`);
+    if (dataEditForm) {
+      console.log(`Post ${dataEditForm._id} is edited!`);
       console.log("title: ", enteredTitle);
       console.log("image: ", enteredImage);
       console.log("title: ", enteredDetails);
@@ -153,7 +153,7 @@ const PostOverlay = (props) => {
   return (
     <section className={classes.form}>
       <header>
-        <h1>{!editData ? "Create an Event" : "Edit the Event"}</h1>
+        <h1>{!dataEditForm ? "Create an Event" : "Edit the Event"}</h1>
       </header>
 
       <form>
@@ -167,7 +167,7 @@ const PostOverlay = (props) => {
             type="text"
             className={titleClass}
             onChange={titleChangeHandler}
-            defaultValue={editData ? editData.title : ""}
+            defaultValue={dataEditForm ? dataEditForm.title : ""}
           />
         </div>
         <div className={classes.input}>
@@ -197,7 +197,7 @@ const PostOverlay = (props) => {
             type="text"
             className={detailsClass}
             onChange={detailChangeHandler}
-            defaultValue={editData ? editData.details : ""}
+            defaultValue={dataEditForm ? dataEditForm.details : ""}
           />
         </div>
       </form>

@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isDeletePostWindowOpen: false,
-  postData: {},
+  isWindowOpenDeletePost: false,
+  dataDeletePost: {},
 };
 
 const deleteWindowStateSlice = createSlice({
   name: "deleteWindowState",
   initialState,
   reducers: {
-    toggleWindowHandler(state, action) {
-      state.isDeletePostWindowOpen = !state.isDeletePostWindowOpen;
+    toggleWindow(state, action) {
+      state.isWindowOpenDeletePost = !state.isWindowOpenDeletePost;
     },
 
     setData(state, action) {
         const postData = action.payload;
-        state.postData = postData;
+        state.dataDeletePost = postData;
     },
   },
 });
