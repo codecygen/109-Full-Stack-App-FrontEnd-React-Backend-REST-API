@@ -16,7 +16,7 @@ import classes from "./EventsPage.module.scss";
 const FeedPage = () => {
   const dispatch = useDispatch();
 
-  const { dataState } = useSelector((state) => state.postsPagePosts);
+  const { postsData, postsError, postsIsLoading } = useSelector((state) => state.postsPagePosts);
 
   useEffect(() => {
     dispatch(getPostsPagePosts());
@@ -68,8 +68,8 @@ const FeedPage = () => {
 
   let postContent;
 
-  if (dataState.data) {
-    postContent = dataState.data.map((post) => {
+  if (postsData) {
+    postContent = postsData.map((post) => {
       const options = {
         hour: "2-digit",
         minute: "2-digit",
@@ -120,9 +120,9 @@ const FeedPage = () => {
       </button>
       <section className={classes.posts}>
 
-        {dataState.isLoading && <div>Loading</div>}
-        {dataState.error && <div>{dataState.error}</div>}
-        {!dataState.isLoading && !dataState.error && postContent}
+        {postsIsLoading && <div>Loading</div>}
+        {postsError && <div>{postsError}</div>}
+        {!postsIsLoading && !postsError && postContent}
       </section>
 
       {/* Message Posting Window */}
