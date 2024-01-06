@@ -1,4 +1,4 @@
-import { postsPagePostsActions } from "../posts-page-posts-slice";
+import { allPostsActions } from "../all-posts.slice";
 import { editFormSliceActions } from "../edit-form-state-slice";
 
 import getAllPosts from "./api/getAllPosts";
@@ -8,9 +8,9 @@ export const getPostsPagePosts = () => {
   return async (dispatch) => {
     await getAllPosts(
       dispatch,
-      postsPagePostsActions.success,
-      postsPagePostsActions.loading,
-      postsPagePostsActions.fail
+      allPostsActions.success,
+      allPostsActions.loading,
+      allPostsActions.fail
     );
   };
 };

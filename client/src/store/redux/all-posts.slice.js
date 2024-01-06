@@ -6,8 +6,8 @@ const initialState = {
   isLoadingAllPosts: null,
 };
 
-const postsPagePostsSlice = createSlice({
-  name: "postsPagePosts",
+const allPostsSlice = createSlice({
+  name: "allPosts",
   initialState,
   reducers: {
     success(state, action) {
@@ -24,5 +24,5 @@ const postsPagePostsSlice = createSlice({
   },
 });
 
-export const postsPagePostsActions = postsPagePostsSlice.actions;
-export default postsPagePostsSlice;
+export const allPostsActions = allPostsSlice.actions;
+export default allPostsSlice;

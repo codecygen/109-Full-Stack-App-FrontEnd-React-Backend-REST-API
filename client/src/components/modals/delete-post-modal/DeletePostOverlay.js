@@ -4,7 +4,7 @@ import classes from "./DeletePostOverlay.module.scss";
 
 const NewPostOverlay = (props) => {
   const deletePostData = useSelector(
-    (state) => state.deleteWindowState.dataDeletePost
+    (state) => state.deletePost.dataDeletePost
   );
 
   const deleteButtonHandler = () => {

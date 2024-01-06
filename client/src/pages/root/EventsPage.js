@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { postFormValidityActions } from "../../store/redux/post-form-validity-slice";
-import { deleteWindowStateActions } from "../../store/redux/delete-window-state-slice";
+import { deletePostActions } from "../../store/redux/delete-post-slice";
 import { editFormSliceActions } from "../../store/redux/edit-form-state-slice";
 import {
   getPostsPagePosts,
@@ -20,7 +20,7 @@ const FeedPage = () => {
   const dispatch = useDispatch();
 
   const { dataAllPosts, errorAllPosts, isLoadingAllPosts } = useSelector(
-    (state) => state.postsPagePosts
+    (state) => state.allPosts
   );
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const FeedPage = () => {
   );
 
   const isWindowOpenDeletePost = useSelector(
-    (state) => state.deleteWindowState.isWindowOpenDeletePost
+    (state) => state.deletePost.isWindowOpenDeletePost
   );
 
   const isEditFormOpen = useSelector(
@@ -59,12 +59,12 @@ const FeedPage = () => {
   };
 
   const closeDeletePostWindow = () => {
-    dispatch(deleteWindowStateActions.toggleWindow());
+    dispatch(deletePostActions.toggleWindow());
   };
 
   const openDeletePostWindow = (DB) => {
-    dispatch(deleteWindowStateActions.toggleWindow());
-    dispatch(deleteWindowStateActions.setData(DB));
+    dispatch(deletePostActions.toggleWindow());
+    dispatch(deletePostActions.setData(DB));
   };
 
   const editButtonHandler = (postId) => {

@@ -5,8 +5,8 @@ const initialState = {
   dataDeletePost: {},
 };
 
-const deleteWindowStateSlice = createSlice({
-  name: "deleteWindowState",
+const deletePostSlice = createSlice({
+  name: "deletePost",
   initialState,
   reducers: {
     toggleWindow(state, action) {
@@ -20,5 +20,5 @@ const deleteWindowStateSlice = createSlice({
   },
 });
 
-export const deleteWindowStateActions = deleteWindowStateSlice.actions;
-export default deleteWindowStateSlice;
+export const deletePostActions = deletePostSlice.actions;
+export default deletePostSlice;

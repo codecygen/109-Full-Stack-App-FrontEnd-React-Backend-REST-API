@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import postFormValiditySlice from "./post-form-validity-slice";
-import deleteWindowStateSlice from "./delete-window-state-slice";
+import deletePostSlice from "./delete-post-slice";
 import editFormStateSlice from "./edit-form-state-slice";
-import postsPagePostsSlice from "./posts-page-posts-slice";
+import allPostsSlice from "./all-posts.slice";
 
 const store = configureStore({
   reducer: {
     postFormValidity: postFormValiditySlice.reducer,
-    deleteWindowState: deleteWindowStateSlice.reducer,
+    deletePost: deletePostSlice.reducer,
     editFormSlice: editFormStateSlice.reducer,
-    postsPagePosts: postsPagePostsSlice.reducer,
+    allPosts: allPostsSlice.reducer,
   },
 });
 
