@@ -1,5 +1,5 @@
 // Taken from this codepen
-// https://codepen.io/bassetts/pen/RqrPWG
+// https://codepen.io/designcouch/pen/ExvwPY
 
 $rippleColor: #102541;
 $size: 4rem;
@@ -14,7 +14,7 @@ $size: 4rem;
     width: $size;
     height: $size;
     border-radius: 50%;
-    border: 0.3rem solid $rippleColor;
+    border: 0.3rem solid transparent;
     animation: 1.5s ripple infinite;
 
     &:nth-child(2) {
@@ -27,10 +27,12 @@ $size: 4rem;
     from {
       transform: scale(0);
       opacity: 1;
+      border-color: transparent;
     }
   
     to {
       transform: scale(1);
       opacity: 0;
+      border-color: $rippleColor;
     }
 }

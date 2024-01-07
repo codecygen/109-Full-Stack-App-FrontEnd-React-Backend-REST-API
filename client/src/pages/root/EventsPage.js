@@ -120,10 +120,6 @@ const FeedPage = () => {
         New Event
       </button>
 
-      <div className={classes.center}>
-        <Loader />
-      </div>
-
       <section className={classes.posts}>
         {isLoadingAllPosts && (
           <div className={classes.center}>
