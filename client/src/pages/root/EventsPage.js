@@ -14,6 +14,8 @@ import {
 import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
 
+import Loader from "../../components/Loader";
+
 import classes from "./EventsPage.module.scss";
 
 const FeedPage = () => {
@@ -117,6 +119,8 @@ const FeedPage = () => {
       <button className={classes.button5} onClick={openPostWindow}>
         New Event
       </button>
+      <Loader />
+
       <section className={classes.posts}>
         {isLoadingAllPosts && <div>Loading</div>}
         {errorAllPosts && <div>{errorAllPosts}</div>}
