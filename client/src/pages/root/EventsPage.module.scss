@@ -10,6 +10,12 @@
         margin-bottom: 20px;
     }
 
+    .center {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
     .posts {
         display: flex;
         flex-direction: column;

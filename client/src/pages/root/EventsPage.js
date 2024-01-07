@@ -119,10 +119,18 @@ const FeedPage = () => {
       <button className={classes.button5} onClick={openPostWindow}>
         New Event
       </button>
-      <Loader />
+
+      <div className={classes.center}>
+        <Loader />
+      </div>
 
       <section className={classes.posts}>
-        {isLoadingAllPosts && <div>Loading</div>}
+        {isLoadingAllPosts && (
+          <div className={classes.center}>
+            <Loader />
+          </div>
+        )}
+
         {errorAllPosts && <div>{errorAllPosts}</div>}
         {!isLoadingAllPosts && !errorAllPosts && postContent}
       </section>
