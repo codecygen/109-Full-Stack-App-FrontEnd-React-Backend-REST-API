@@ -195,7 +195,7 @@ const PostOverlay = (props) => {
     <section className={classes.form}>
       <header>
         <h1>{!dataEditForm ? "Create an Event" : "Edit the Event"}</h1>
-        <p>Contact Admin: Fetch Error: {errorEditForm}</p>
+        <p>{errorEditForm && `Contact Admin: Fetch Error: ${errorEditForm}`}</p>
       </header>
 
       <form>
