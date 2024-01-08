@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { newPostActions } from "../../../store/redux/new-post-slice";
+import { editPostActions } from "../../../store/redux/edit-post-slice";
 
 import classes from "./PostOverlay.module.scss";
 
@@ -14,11 +15,9 @@ const PostOverlay = (props) => {
     detailsCheckResult: detailsResult,
   } = useSelector((state) => state.newPost);
 
-  const {
-    dataEditForm,
-    errorEditForm,
-    isLoadingEditForm,
-  } = useSelector((state) => state.editPost);
+  const { dataEditForm, errorEditForm, isLoadingEditForm } = useSelector(
+    (state) => state.editPost
+  );
 
   useEffect(() => {
     if (dataEditForm) {
@@ -74,9 +73,7 @@ const PostOverlay = (props) => {
 
     const fileUrl = URL.createObjectURL(file);
 
-    dispatch(
-      newPostActions.checkImage({ fileData, fileUrl })
-    );
+    dispatch(newPostActions.checkImage({ fileData, fileUrl }));
   };
 
   const detailChangeHandler = (e) => {
@@ -98,31 +95,31 @@ const PostOverlay = (props) => {
 
     if (!isTitleValid || !isImageValid || !isDetailsValid) {
       console.error("Form is not valid!");
-    
-        dispatch(
-          newPostActions.checkText({
-            enteredInput: titleResult.enteredTitle,
-            inputField: "title-input",
-          })
-        );
-  
-        dispatch(
-          newPostActions.checkImage({
-            fileData: {
-              name: "",
-              size: "",
-              type: "",
-            },
-            fileUrl: "",
-          })
-        );
-  
-        dispatch(
-          newPostActions.checkText({
-            enteredInput: detailsResult.enteredDetails,
-            inputField: "details-input",
-          })
-        );
+
+      dispatch(
+        newPostActions.checkText({
+          enteredInput: titleResult.enteredTitle,
+          inputField: "title-input",
+        })
+      );
+
+      dispatch(
+        newPostActions.checkImage({
+          fileData: {
+            name: "",
+            size: "",
+            type: "",
+          },
+          fileUrl: "",
+        })
+      );
+
+      dispatch(
+        newPostActions.checkText({
+          enteredInput: detailsResult.enteredDetails,
+          inputField: "details-input",
+        })
+      );
 
       return;
     }
@@ -135,7 +132,13 @@ const PostOverlay = (props) => {
       console.log(`Post ${dataEditForm._id} is edited!`);
       console.log("title: ", enteredTitle);
       console.log("image: ", enteredImage);
-      console.log("title: ", enteredDetails);
+      console.log("details: ", enteredDetails);
+
+      dispatch(editPostActions.toggleWindow());
+      dispatch(editPostActions.reset());
+
+      dispatch(newPostActions.toggleWindow());
+      dispatch(newPostActions.reset());
 
       return;
     }
@@ -143,7 +146,13 @@ const PostOverlay = (props) => {
     console.log("New post created!");
     console.log("title: ", enteredTitle);
     console.log("image: ", enteredImage);
-    console.log("title: ", enteredDetails);
+    console.log("details: ", enteredDetails);
+
+    dispatch(editPostActions.toggleWindow());
+    dispatch(editPostActions.reset());
+
+    dispatch(newPostActions.toggleWindow());
+    dispatch(newPostActions.reset());
   };
 
   let titleClass;
