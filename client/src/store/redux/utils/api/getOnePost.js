@@ -1,4 +1,4 @@
-const apiEndpoint = "/database/posts.json";
+const apiEndpoint = "/database/aras/posts.json";
 
 const getOnePost = async (
   id,

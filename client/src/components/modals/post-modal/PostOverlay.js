@@ -157,38 +157,45 @@ const PostOverlay = (props) => {
 
   let titleClass;
 
-  if (titleResult.isValid === null) {
+  if (titleResult.isValid === null && !errorEditForm) {
     titleClass = "";
   } else if (titleResult.isValid === true) {
     titleClass = classes["input-valid"];
   } else if (titleResult.isValid === false) {
     titleClass = classes["input-invalid"];
+  } else if (errorEditForm) {
+    titleClass = classes["input-disabled"];
   }
 
   let imageClass;
 
-  if (imageResult.isValid === null) {
+  if (imageResult.isValid === null && !errorEditForm) {
     imageClass = "";
   } else if (imageResult.isValid === true) {
     imageClass = classes["img-valid"];
   } else if (imageResult.isValid === false) {
     imageClass = classes["img-invalid"];
+  } else if (errorEditForm) {
+    imageClass = classes["img-disabled"];
   }
 
   let detailsClass;
 
-  if (detailsResult.isValid === null) {
+  if (detailsResult.isValid === null && !errorEditForm) {
     detailsClass = "";
   } else if (detailsResult.isValid === true) {
     detailsClass = classes["input-valid"];
   } else if (detailsResult.isValid === false) {
     detailsClass = classes["input-invalid"];
+  } else if (errorEditForm) {
+    detailsClass = classes["input-disabled"];
   }
 
   return (
     <section className={classes.form}>
       <header>
         <h1>{!dataEditForm ? "Create an Event" : "Edit the Event"}</h1>
+        <p>Contact Admin: Fetch Error: {errorEditForm}</p>
       </header>
 
       <form>
@@ -204,6 +211,8 @@ const PostOverlay = (props) => {
             onChange={titleChangeHandler}
             onInput={titleChangeHandler}
             defaultValue={dataEditForm ? dataEditForm.title : ""}
+            disabled={errorEditForm}
+            readOnly={errorEditForm}
           />
         </div>
         <div className={classes.input}>
@@ -215,6 +224,8 @@ const PostOverlay = (props) => {
             onChange={imageChangeHandler}
             onInput={imageChangeHandler}
             className={imageClass}
+            disabled={errorEditForm}
+            readOnly={errorEditForm}
           />
         </div>
         {/* show-image-preview */}
@@ -236,6 +247,8 @@ const PostOverlay = (props) => {
             onChange={detailChangeHandler}
             onInput={detailChangeHandler}
             defaultValue={dataEditForm ? dataEditForm.details : ""}
+            disabled={errorEditForm}
+            readOnly={errorEditForm}
           />
         </div>
       </form>
