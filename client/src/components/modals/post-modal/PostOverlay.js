@@ -257,7 +257,11 @@ const PostOverlay = (props) => {
         <button className={classes.button3} onClick={props.cancelFunc}>
           Cancel
         </button>
-        <button className={classes.button2} onClick={postEventHandler}>
+        <button
+          className={errorEditForm ? classes.button6 : classes.button2}
+          onClick={postEventHandler}
+          disabled={errorEditForm}
+        >
           Send
         </button>
       </div>

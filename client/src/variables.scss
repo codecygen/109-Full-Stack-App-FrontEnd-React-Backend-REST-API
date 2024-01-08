@@ -81,6 +81,12 @@ $buttonColorHOver3: #7f4052;
         border-radius: 50px;
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
         margin: 0 10px;
+    } @else if $buttonType == 6 {
+        // passive button
+        background-color: #a1a2a4;
+        color: $white;
+        border-radius: 10px;
+        margin: 0 10px;
     } @else {
         background-color: $buttonColor1;
         color: $black;

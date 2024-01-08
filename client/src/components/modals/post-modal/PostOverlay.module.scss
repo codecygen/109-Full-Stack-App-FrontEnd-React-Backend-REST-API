@@ -197,5 +197,10 @@
         > .button3 {
             @include buttonStyle(120px, 50px, 3);
         }
+
+        // Style when fetching data fails for edit form window
+        > .button6 {
+            @include buttonStyle(120px, 50px, 6);
+        }
     }
 }
