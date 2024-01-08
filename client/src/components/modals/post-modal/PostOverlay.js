@@ -98,6 +98,32 @@ const PostOverlay = (props) => {
 
     if (!isTitleValid || !isImageValid || !isDetailsValid) {
       console.error("Form is not valid!");
+    
+        dispatch(
+          newPostActions.checkText({
+            enteredInput: titleResult.enteredTitle,
+            inputField: "title-input",
+          })
+        );
+  
+        dispatch(
+          newPostActions.checkImage({
+            fileData: {
+              name: "",
+              size: "",
+              type: "",
+            },
+            fileUrl: "",
+          })
+        );
+  
+        dispatch(
+          newPostActions.checkText({
+            enteredInput: detailsResult.enteredDetails,
+            inputField: "details-input",
+          })
+        );
+
       return;
     }
 
@@ -167,6 +193,7 @@ const PostOverlay = (props) => {
             type="text"
             className={titleClass}
             onChange={titleChangeHandler}
+            onInput={titleChangeHandler}
             defaultValue={dataEditForm ? dataEditForm.title : ""}
           />
         </div>
@@ -177,6 +204,7 @@ const PostOverlay = (props) => {
             id="image"
             type="file"
             onChange={imageChangeHandler}
+            onInput={imageChangeHandler}
             className={imageClass}
           />
         </div>
@@ -197,6 +225,7 @@ const PostOverlay = (props) => {
             type="text"
             className={detailsClass}
             onChange={detailChangeHandler}
+            onInput={detailChangeHandler}
             defaultValue={dataEditForm ? dataEditForm.details : ""}
           />
         </div>
