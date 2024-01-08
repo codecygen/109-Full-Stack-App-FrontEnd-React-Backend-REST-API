@@ -98,32 +98,6 @@ const PostOverlay = (props) => {
 
     if (!isTitleValid || !isImageValid || !isDetailsValid) {
       console.error("Form is not valid!");
-    
-        dispatch(
-          newPostActions.checkText({
-            enteredInput: titleResult.enteredTitle,
-            inputField: "title-input",
-          })
-        );
-  
-        dispatch(
-          newPostActions.checkImage({
-            fileData: {
-              name: "",
-              size: "",
-              type: "",
-            },
-            fileUrl: "",
-          })
-        );
-  
-        dispatch(
-          newPostActions.checkText({
-            enteredInput: detailsResult.enteredDetails,
-            inputField: "details-input",
-          })
-        );
-
       return;
     }
 
