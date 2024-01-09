@@ -13,11 +13,7 @@ const postOnePost = async (
   try {
     const res = await fetch(`${API_ENDPOINT}/feed/posts`, {
       method: "POST",
-      body: JSON.stringify({
-        title: postDetails.title,
-        imgUrl: postDetails.image,
-        content: postDetails.details,
-    }),
+      body: JSON.stringify(postDetails),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

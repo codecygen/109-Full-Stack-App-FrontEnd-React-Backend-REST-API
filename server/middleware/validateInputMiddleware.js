@@ -9,11 +9,11 @@ const validateInputMiddleware = async (req, res, next) => {
         .isLength({ min: 6 })
         .escape()
         .withMessage("Not the correct title!"),
-      check("content")
+      check("details")
         .trim()
         .isLength({ min: 6 })
         .escape()
-        .withMessage("Not the correct content!"),
+        .withMessage("Not the correct details!"),
     ];
 
     await Promise.all(inputs.map((input) => input.run(req)));

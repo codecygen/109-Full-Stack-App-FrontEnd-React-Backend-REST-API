@@ -7,12 +7,12 @@ const messageSchema = new mongoose.Schema(
       required: true,
     },
 
-    imgUrl: {
+    image: {
       type: String,
       required: true,
     },
 
-    content: {
+    details: {
       type: String,
       required: true,
     },

@@ -9,39 +9,42 @@ const getPosts = async (req, res, next) => {
 };
 
 const postPost = async (req, res, next) => {
+  console.log(req.body);
   const title = req.body.title;
-  const imgUrl = req.body.imgUrl;
-  const content = req.body.content;
+  const image = req.body.image;
+  const details = req.body.details;
 
   console.log(title);
-  console.log(imgUrl)
-  console.log(content);
+  console.log(image)
+  console.log(details);
 
-  // const newMessage = new DB.Message({
-  //   title: title,
-  //   imgUrl: "duck.webp",
-  //   content: content,
-  //   creator: {
-  //     name: "Aras",
-  //   },
-  // });
+  const newMessage = new DB.Message({
+    title,
+    image,
+    details,
+    creator: {
+      name: "Aras",
+    },
+  });
 
-  // try {
-  //   const createdMessage = await newMessage.createMessage();
+  try {
+    const createdMessage = await newMessage.createMessage();
 
-  //   res.status(201).json({
-  //     message: "Post created!",
-  //     post: {
-  //       _id: createdMessage._id,
-  //       title: createdMessage.messageTitle,
-  //       content: createdMessage.messageContent,
-  //       creator: createdMessage.messageCreator,
-  //       createdAt: createdMessage.createdAt,
-  //     },
-  //   });
-  // } catch (err) {
-  //   next(err);
-  // }
+    console.log(createdMessage);
+
+    res.status(201).json({
+      message: "Post created!",
+      post: {
+        _id: createdMessage._id,
+        title: createdMessage.title,
+        image: createdMessage.image,
+        creator: createdMessage.creator.name,
+        createdAt: createdMessage.createdAt,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = { getPosts, postPost };
