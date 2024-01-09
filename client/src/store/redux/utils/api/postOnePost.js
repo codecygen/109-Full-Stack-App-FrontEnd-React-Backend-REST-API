@@ -1,4 +1,4 @@
-const apiEndPoint = "/database/posts.json";
+import API_ENDPOINT from "../config/config";
 
 const postOnePost = async (
   postDetails,
@@ -11,9 +11,13 @@ const postOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(apiEndPoint, {
+    const res = await fetch(`${API_ENDPOINT}/feed/posts`, {
       method: "POST",
-      body: JSON.stringify(postDetails),
+      body: JSON.stringify({
+        title: postDetails.title,
+        imgUrl: postDetails.image,
+        content: postDetails.details,
+    }),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

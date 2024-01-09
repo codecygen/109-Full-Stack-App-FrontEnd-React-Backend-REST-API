@@ -10,33 +10,38 @@ const getPosts = async (req, res, next) => {
 
 const postPost = async (req, res, next) => {
   const title = req.body.title;
+  const imgUrl = req.body.imgUrl;
   const content = req.body.content;
 
-  const newMessage = new DB.Message({
-    title: title,
-    imgUrl: "duck.webp",
-    content: content,
-    creator: {
-      name: "Aras",
-    },
-  });
+  console.log(title);
+  console.log(imgUrl)
+  console.log(content);
 
-  try {
-    const createdMessage = await newMessage.createMessage();
+  // const newMessage = new DB.Message({
+  //   title: title,
+  //   imgUrl: "duck.webp",
+  //   content: content,
+  //   creator: {
+  //     name: "Aras",
+  //   },
+  // });
 
-    res.status(201).json({
-      message: "Post created!",
-      post: {
-        _id: createdMessage._id,
-        title: createdMessage.messageTitle,
-        content: createdMessage.messageContent,
-        creator: createdMessage.messageCreator,
-        createdAt: createdMessage.createdAt,
-      },
-    });
-  } catch (err) {
-    next(err);
-  }
+  // try {
+  //   const createdMessage = await newMessage.createMessage();
+
+  //   res.status(201).json({
+  //     message: "Post created!",
+  //     post: {
+  //       _id: createdMessage._id,
+  //       title: createdMessage.messageTitle,
+  //       content: createdMessage.messageContent,
+  //       creator: createdMessage.messageCreator,
+  //       createdAt: createdMessage.createdAt,
+  //     },
+  //   });
+  // } catch (err) {
+  //   next(err);
+  // }
 };
 
 module.exports = { getPosts, postPost };
