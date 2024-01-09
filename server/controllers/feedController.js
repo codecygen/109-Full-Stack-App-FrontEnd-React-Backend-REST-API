@@ -9,7 +9,6 @@ const getPosts = async (req, res, next) => {
 };
 
 const postPost = async (req, res, next) => {
-  console.log(req.body);
   const title = req.body.title;
   const image = req.body.image;
   const details = req.body.details;
