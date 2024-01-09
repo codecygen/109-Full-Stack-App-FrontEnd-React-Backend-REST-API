@@ -1,6 +1,7 @@
 const apiEndPoint = "/database/posts.json";
 
 const postOnePost = async (
+  postDetails,
   dispatch,
   successHandler,
   loadingHandler,
@@ -12,7 +13,7 @@ const postOnePost = async (
   try {
     const res = await fetch(apiEndPoint, {
       method: "POST",
-      body: JSON.stringify({}),
+      body: JSON.stringify(postDetails),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -20,10 +21,10 @@ const postOnePost = async (
     });
 
     if (!res.ok) {
-        throw new Error(`HTTP error! Status Code: ${res.status}`)
+      throw new Error(`HTTP error! Status Code: ${res.status}`);
     }
 
-    const data = res.json();
+    const data = await res.json();
     dispatch(successHandler(true));
     dispatch(loadingHandler(false));
     return data;

@@ -1,8 +1,10 @@
+import { newPostActions } from "../new-post-slice";
 import { allPostsActions } from "../all-posts.slice";
 import { editPostActions } from "../edit-post-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
+import postOnePost from "./api/postOnePost";
 
 export const getPostsPagePosts = () => {
   return async (dispatch) => {
@@ -24,6 +26,18 @@ export const getEditWindowPost = (id) => {
       editPostActions.success,
       editPostActions.loading,
       editPostActions.fail
+    );
+  };
+};
+
+export const createNewPost = (postData) => {
+  return async (dispatch) => {
+    await postOnePost(
+      postData,
+      dispatch,
+      newPostActions.success,
+      newPostActions.loading,
+      newPostActions.fail
     );
   };
 };

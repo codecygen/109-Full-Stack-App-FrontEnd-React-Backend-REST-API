@@ -21,7 +21,9 @@ const initialState = {
     warningMessage: "",
   },
 
-  isFormValid: null,
+  dataNewPost: null,
+  errorNewPost: null,
+  isLoadingNewPost: null,
 };
 
 const newPostSlice = createSlice({
@@ -87,6 +89,18 @@ const newPostSlice = createSlice({
         state.imageCheckResult.fileUrl = "";
         state.imageCheckResult.warningMessage = "Invalid file!";
       }
+    },
+
+    success(state, action) {
+      state.dataNewPost = action.payload;
+    },
+
+    fail(state, action) {
+      state.errorNewPost = action.payload;
+    },
+
+    loading(state, action) {
+      state.isLoadingNewPost = action.payload;
     },
   },
 });

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { newPostActions } from "../../../store/redux/new-post-slice";
 import { editPostActions } from "../../../store/redux/edit-post-slice";
 
+import { createNewPost } from "../../../store/redux/utils/apiStateManagementsThunk";
+
 import classes from "./PostOverlay.module.scss";
 
 const PostOverlay = (props) => {
@@ -144,9 +146,14 @@ const PostOverlay = (props) => {
     }
 
     console.log("New post created!");
-    console.log("title: ", enteredTitle);
-    console.log("image: ", enteredImage);
-    console.log("details: ", enteredDetails);
+
+    const postData = {
+      title: enteredTitle,
+      image: enteredImage,
+      details: enteredDetails,
+    };
+
+    dispatch(createNewPost(postData));
 
     dispatch(editPostActions.toggleWindow());
     dispatch(editPostActions.reset());
