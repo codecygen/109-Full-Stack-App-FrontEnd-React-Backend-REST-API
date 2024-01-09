@@ -1,4 +1,4 @@
-const apiEndpoint = "/database/posts.json";
+const apiEndPoint = "/database/posts.json";
 
 const getAllPosts = async (
   dispatch,
@@ -10,7 +10,7 @@ const getAllPosts = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(apiEndpoint);
+    const res = await fetch(apiEndPoint);
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
     }
