@@ -30,8 +30,6 @@ const postPost = async (req, res, next) => {
   try {
     const createdMessage = await newMessage.createMessage();
 
-    console.log(createdMessage);
-
     res.status(201).json({
       message: "Post created!",
       post: {
