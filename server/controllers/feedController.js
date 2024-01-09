@@ -14,10 +14,6 @@ const postPost = async (req, res, next) => {
   const image = req.body.image;
   const details = req.body.details;
 
-  console.log(title);
-  console.log(image)
-  console.log(details);
-
   const newMessage = new DB.Message({
     title,
     image,
