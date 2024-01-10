@@ -3,6 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isWindowOpenDeletePost: false,
   dataDeletePost: {},
+  responseDeletePost: null,
+  errorDeletePost: null,
+  isLoadingDeletePost: null,
 };
 
 const deletePostSlice = createSlice({
@@ -24,6 +27,18 @@ const deletePostSlice = createSlice({
     setData(state, action) {
         const postData = action.payload;
         state.dataDeletePost = postData;
+    },
+
+    success(state, action) {
+      state.responseDeletePost = action.payload;
+    },
+
+    fail(state, action) {
+      state.errorDeletePost = action.payload;
+    },
+
+    loading(state, action) {
+      state.isLoadingDeletePost = action.payload;
     },
   },
 });

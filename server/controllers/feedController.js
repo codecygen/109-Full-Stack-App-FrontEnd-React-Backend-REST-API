@@ -59,4 +59,9 @@ const getPost = async (req, res, next) => {
   }
 };
 
-module.exports = { getPosts, postPost, getPost };
+const deletePost = async (req, res, next) => {
+  const postId = req.params.postId;
+  console.log(postId);
+};
+
+module.exports = { getPosts, postPost, getPost, deletePost };

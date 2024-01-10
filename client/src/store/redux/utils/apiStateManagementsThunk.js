@@ -1,10 +1,12 @@
 import { newPostActions } from "../new-post-slice";
 import { allPostsActions } from "../all-posts.slice";
 import { editPostActions } from "../edit-post-slice";
+import { deletePostActions } from "../delete-post-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
 import postOnePost from "./api/postOnePost";
+import deleteOnePost from "./api/deleteOnePost";
 
 export const getPostsPagePosts = () => {
   return async (dispatch) => {
@@ -38,6 +40,18 @@ export const createNewPost = (postData) => {
       newPostActions.success,
       newPostActions.loading,
       newPostActions.fail
+    );
+  };
+};
+
+export const deletePost = (postId) => {
+  return async (dispatch) => {
+    await deleteOnePost(
+      postId,
+      dispatch,
+      deletePostActions.success,
+      deletePostActions.loading,
+      deletePostActions.fail
     );
   };
 };

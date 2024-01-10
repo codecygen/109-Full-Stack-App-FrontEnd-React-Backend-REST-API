@@ -1,15 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { deletePost } from "../../../store/redux/utils/apiStateManagementsThunk";
 
 import classes from "./DeletePostOverlay.module.scss";
 
 const NewPostOverlay = (props) => {
+  const dispatch = useDispatch();
+
   const deletePostData = useSelector(
     (state) => state.deletePost.dataDeletePost
   );
 
   const deleteButtonHandler = () => {
-    console.log(deletePostData);
-    console.log(`${deletePostData._id} is deleted!`);
+    dispatch(deletePost(deletePostData._id));
   };
 
   return (
