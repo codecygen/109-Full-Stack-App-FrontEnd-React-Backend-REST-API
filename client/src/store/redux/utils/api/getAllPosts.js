@@ -1,4 +1,4 @@
-const apiEndPoint = "/database/posts.json";
+import API_ENDPOINT from "../config/config";
 
 const getAllPosts = async (
   dispatch,
@@ -10,15 +10,15 @@ const getAllPosts = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(apiEndPoint);
+    const res = await fetch(`${API_ENDPOINT}/feed/posts`);
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
     }
 
     const data = await res.json();
-    dispatch(successHandler(data));
+
+    dispatch(successHandler(data.posts));
     dispatch(loadingHandler(false));
-    return data;
   } catch (err) {
     dispatch(failHandler(err.message));
     dispatch(loadingHandler(false));
