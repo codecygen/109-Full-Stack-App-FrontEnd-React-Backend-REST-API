@@ -21,10 +21,6 @@ const PostOverlay = (props) => {
     (state) => state.editPost
   );
 
-  console.log(dataEditForm, "LOL");
-  console.log(errorEditForm);
-  console.log(isLoadingEditForm);
-
   useEffect(() => {
     if (dataEditForm) {
       dispatch(
@@ -209,6 +205,8 @@ const PostOverlay = (props) => {
         {errorEditForm && (
           <p>{`Contact Admin: Fetch Error: ${errorEditForm}`}</p>
         )}
+
+        {isLoadingEditForm && <p>Loading</p>}
       </header>
 
       <form>

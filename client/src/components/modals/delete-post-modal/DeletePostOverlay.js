@@ -8,6 +8,7 @@ const NewPostOverlay = (props) => {
   );
 
   const deleteButtonHandler = () => {
+    console.log(deletePostData);
     console.log(`${deletePostData._id} is deleted!`);
   };
 

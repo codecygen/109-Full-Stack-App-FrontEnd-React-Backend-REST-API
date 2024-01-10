@@ -20,7 +20,6 @@ const getOnePost = async (
     const data = await res.json();
     dispatch(successHandler(data.post));
     dispatch(loadingHandler(false));
-    return data;
   } catch (err) {
     dispatch(failHandler(err.message));
     dispatch(loadingHandler(false));

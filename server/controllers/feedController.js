@@ -45,14 +45,18 @@ const postPost = async (req, res, next) => {
 };
 
 const getPost = async (req, res, next) => {
-  const postId = req.params.postId;
+  try {
+    const postId = req.params.postId;
 
-  const foundPost = await DB.Message.getMessage(postId);
+    const foundPost = await DB.Message.getMessage(postId);
 
-  res.json({
-    message: "Post found!",
-    post: foundPost,
-  });
+    res.json({
+      message: "Post found!",
+      post: foundPost,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = { getPosts, postPost, getPost };
