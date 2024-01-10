@@ -1,4 +1,4 @@
-import API_ENDPOINT from "../config/config";
+import getConfig from "../config/getConfig";
 
 const postOnePost = async (
   postDetails,
@@ -11,7 +11,7 @@ const postOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(`${API_ENDPOINT}/feed/posts`, {
+    const res = await fetch(getConfig().postOnePostEndpoint(), {
       method: "POST",
       body: JSON.stringify(postDetails),
       headers: {

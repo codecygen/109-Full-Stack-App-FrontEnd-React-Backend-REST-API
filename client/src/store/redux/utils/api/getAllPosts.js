@@ -1,4 +1,4 @@
-import API_ENDPOINT from "../config/config";
+import getConfig from "../config/getConfig";
 
 const getAllPosts = async (
   dispatch,
@@ -10,7 +10,7 @@ const getAllPosts = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(`${API_ENDPOINT}/feed/posts`);
+    const res = await fetch(getConfig().getAllPostsEndpoint());
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
     }

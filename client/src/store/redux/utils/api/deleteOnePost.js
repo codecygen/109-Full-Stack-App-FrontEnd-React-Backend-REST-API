@@ -1,4 +1,4 @@
-import API_ENDPOINT from "../config/config";
+import getConfig from "../config/getConfig";
 
 const deleteOnePost = async (
   id,
@@ -11,7 +11,7 @@ const deleteOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(`${API_ENDPOINT}/feed/delete/${id}`);
+    const res = await fetch(getConfig(id).deleteOnePostEndpoint());
 
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
