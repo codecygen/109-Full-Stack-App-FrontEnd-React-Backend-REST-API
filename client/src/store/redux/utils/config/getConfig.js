@@ -1,11 +1,11 @@
-const getConfig = (id) => {
+const getConfig = () => {
   const API_ENDPOINT = "http://localhost:4000";
 
   const getAllPostsEndpoint = () => {
     return `${API_ENDPOINT}/feed/posts`;
   };
 
-  const getOnePostEndpoint = () => {
+  const getOnePostEndpoint = (id) => {
     return `${API_ENDPOINT}/feed/post/${id}`;
   };
 
@@ -13,7 +13,7 @@ const getConfig = (id) => {
     return `${API_ENDPOINT}/feed/posts`;
   };
 
-  const deleteOnePostEndpoint = () => {
+  const deleteOnePostEndpoint = (id) => {
     return `${API_ENDPOINT}/feed/delete/${id}`;
   };
 

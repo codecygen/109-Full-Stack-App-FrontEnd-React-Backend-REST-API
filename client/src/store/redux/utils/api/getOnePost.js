@@ -11,7 +11,7 @@ const getOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(getConfig(id).getOnePostEndpoint());
+    const res = await fetch(getConfig().getOnePostEndpoint(id));
 
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
