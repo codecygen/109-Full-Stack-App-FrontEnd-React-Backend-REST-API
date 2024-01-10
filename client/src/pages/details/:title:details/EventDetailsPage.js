@@ -14,9 +14,7 @@ const EventIdPage = () => {
     const foundData = DB.find(post => post._id === params.id);
     setPostData(foundData);
   }, [params.id]);
-
-  console.log(postData);
-
+  
   return (
     <main className={classes.details}>
       <div>

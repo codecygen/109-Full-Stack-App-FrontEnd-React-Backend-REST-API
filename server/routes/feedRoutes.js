@@ -8,4 +8,6 @@ const feedController = require("../controllers/feedController");
 router.get("/posts", feedController.getPosts);
 router.post("/posts", validateInputMiddleware, feedController.postPost);
 
+router.get("/post/:postId", feedController.getPost);
+
 module.exports = router;

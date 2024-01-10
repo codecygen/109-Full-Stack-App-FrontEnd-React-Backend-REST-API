@@ -1,4 +1,4 @@
-const apiEndPoint = "/database/posts.json";
+import API_ENDPOINT from "../config/config";
 
 const getOnePost = async (
   id,
@@ -11,14 +11,14 @@ const getOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(apiEndPoint);
+    const res = await fetch(`${API_ENDPOINT}/feed/post/${id}`);
+
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
     }
 
-    const result = await res.json();
-    const data = result.find((entry) => entry._id === id);
-    dispatch(successHandler(data));
+    const data = await res.json();
+    dispatch(successHandler(data.post));
     dispatch(loadingHandler(false));
     return data;
   } catch (err) {

@@ -33,7 +33,7 @@ messageSchema.methods.createMessage = async function () {
     const createdPost = await this.save();
 
     if (!createdPost) {
-      const creationError = new Error("Database failed to save data!");
+      const creationError = new Error("Database failed to save post!");
       creationError.statusCode = 500;
       throw creationError;
     }
@@ -45,12 +45,31 @@ messageSchema.methods.createMessage = async function () {
   }
 };
 
-messageSchema.statics.getMessages = async function (postId) {
+messageSchema.statics.getMessages = async function () {
   try {
     const allPosts = this.find();
+    if (!allPosts) {
+      const allPostError = new Error("Could not get all posts!");
+      allPostError.statusCode = 500;
+      throw allPostError;
+    }
     return allPosts;
   } catch (err) {
-    console.error(err);
+    throw err;
+  }
+};
+
+messageSchema.statics.getMessage = async function (postId) {
+  try {
+    const foundPost = await this.findById(postId);
+    if (!foundPost) {
+      const foundPostError = new Error("Could not get single post!");
+      foundPostError.statusCode = 500;
+      throw foundPostError
+    }
+    return foundPost;
+  } catch (err) {
+    throw err;
   }
 };
 

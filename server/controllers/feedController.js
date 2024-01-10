@@ -1,31 +1,35 @@
 const DB = require("../models/DB");
 
 const getPosts = async (req, res, next) => {
-  const allMessages = await DB.Message.getMessages();
+  try {
+    const allMessages = await DB.Message.getMessages();
 
-  res.status(200).json({
-    posts: allMessages,
-  });
+    res.json({
+      posts: allMessages,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 const postPost = async (req, res, next) => {
-  const title = req.body.title;
-  const image = req.body.image;
-  const details = req.body.details;
-
-  const newMessage = new DB.Message({
-    title,
-    image,
-    details,
-    creator: {
-      name: "Aras",
-    },
-  });
-
   try {
+    const title = req.body.title;
+    const image = req.body.image;
+    const details = req.body.details;
+
+    const newMessage = new DB.Message({
+      title,
+      image,
+      details,
+      creator: {
+        name: "Aras",
+      },
+    });
+
     const createdMessage = await newMessage.createMessage();
 
-    res.status(201).json({
+    res.json({
       message: "Post created!",
       post: {
         _id: createdMessage._id,
@@ -40,4 +44,15 @@ const postPost = async (req, res, next) => {
   }
 };
 
-module.exports = { getPosts, postPost };
+const getPost = async (req, res, next) => {
+  const postId = req.params.postId;
+
+  const foundPost = await DB.Message.getMessage(postId);
+
+  res.json({
+    message: "Post found!",
+    post: foundPost,
+  });
+};
+
+module.exports = { getPosts, postPost, getPost };
