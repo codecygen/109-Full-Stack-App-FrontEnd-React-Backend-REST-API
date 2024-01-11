@@ -15,6 +15,8 @@ const PostOverlay = (props) => {
     titleCheckResult: titleResult,
     imageCheckResult: imageResult,
     detailsCheckResult: detailsResult,
+    errorNewPost,
+    isLoadingNewPost,
   } = useSelector((state) => state.newPost);
 
   const { dataEditForm, errorEditForm, isLoadingEditForm } = useSelector(
@@ -49,6 +51,17 @@ const PostOverlay = (props) => {
       );
     }
   }, [dispatch, dataEditForm]);
+
+  useEffect(() => {
+    // Only close newpost window if the data is successfully sent to backend
+    if (errorNewPost === false && isLoadingNewPost === false) {
+      dispatch(editPostActions.toggleWindow());
+      dispatch(editPostActions.reset());
+
+      dispatch(newPostActions.toggleWindow());
+      dispatch(newPostActions.reset());
+    }
+  }, [dispatch, errorNewPost, isLoadingNewPost]);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
@@ -152,12 +165,6 @@ const PostOverlay = (props) => {
     };
 
     dispatch(createNewPost(postData));
-
-    dispatch(editPostActions.toggleWindow());
-    dispatch(editPostActions.reset());
-
-    dispatch(newPostActions.toggleWindow());
-    dispatch(newPostActions.reset());
   };
 
   let titleClass;
@@ -200,11 +207,12 @@ const PostOverlay = (props) => {
     <section className={classes.form}>
       <header>
         <h1>{!dataEditForm ? "Create an Event" : "Edit the Event"}</h1>
-        {errorEditForm && (
-          <p>{`Contact Admin: Fetch Error: ${errorEditForm}`}</p>
-        )}
-
-        {isLoadingEditForm && <p>Loading</p>}
+        <p>
+          {errorEditForm && `Contact Admin: Fetch Error: ${errorEditForm}`}
+          {isLoadingEditForm && "Loading Post Info"}
+          {errorNewPost && `Contact Admin: Posting Error: ${errorNewPost}`}
+          {isLoadingNewPost && "Sendin post, please wait!"}
+        </p>
       </header>
 
       <form>
