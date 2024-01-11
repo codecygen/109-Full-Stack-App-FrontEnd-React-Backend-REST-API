@@ -11,7 +11,9 @@ const deleteOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(getConfig().deleteOnePostEndpoint(id));
+    const res = await fetch(getConfig().deleteOnePostEndpoint(id), {
+      method: "DELETE",
+    });
 
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);

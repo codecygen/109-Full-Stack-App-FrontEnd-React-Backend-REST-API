@@ -51,11 +51,11 @@
             margin: 2px;
             font-weight: bold;
 
-            .loading {
+            &.loading {
                 color: #1f5796; 
             }
 
-            .error {
+            &.error {
                 color: #961f1f;
             }
         }
