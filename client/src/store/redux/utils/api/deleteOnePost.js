@@ -17,7 +17,7 @@ const deleteOnePost = async (
       throw new Error(`HTTP error! Status Code: ${res.status}`);
     }
 
-    const data = res.json();
+    const data = await res.json();
     dispatch(successHandler(data.message));
     dispatch(loadingHandler(false));
   } catch (err) {

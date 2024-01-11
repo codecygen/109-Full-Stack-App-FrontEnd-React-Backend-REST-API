@@ -64,8 +64,6 @@ const deletePost = async (req, res, next) => {
     const postId = req.params.postId;
     const deletedPost = await DB.Message.deleteMessage(postId);
 
-    console.log(deletedPost);
-
     res.json({
       message: "Post deleted successfully!",
       post: deletedPost,

@@ -20,20 +20,43 @@ const NewPostOverlay = (props) => {
   useEffect(() => {
     // Only close errorpost window if the data deletion request
     // successfully sent to backend
-    if (errorDeletePost === false && isLoadingDeletePost === false) {
-      dispatch(deletePostActions.toggleWindow());
-    }
+
+    const timeout = setTimeout(() => {
+      if (errorDeletePost === false && isLoadingDeletePost === false) {
+        dispatch(deletePostActions.toggleWindow());
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [dispatch, errorDeletePost, isLoadingDeletePost]);
 
   const deleteButtonHandler = () => {
     dispatch(deletePost(dataDeletePost._id));
   };
 
+  let warningClasses;
+
+  if (errorDeletePost) {
+    warningClasses = classes.error;
+  } else {
+    warningClasses = classes.loading;
+  }
+
   return (
     <section className={classes.box}>
       <header>
-        <h1>Are you sure to delete?</h1>
-        <p>Problem</p>
+        <h1 className={responseDeletePost && classes["delete-result"]}>
+          {responseDeletePost
+            ? "Successfully Deleted"
+            : "Are you sure to delete?"}
+        </h1>
+        <p className={warningClasses}>
+          {errorDeletePost &&
+            `Contact Admin: Deletion Error: ${errorDeletePost}`}
+          {isLoadingDeletePost && "Waiting to Delete Post!"}
+        </p>
       </header>
       <p>{dataDeletePost.title}</p>
       <div>

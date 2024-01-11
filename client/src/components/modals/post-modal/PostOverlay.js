@@ -209,9 +209,9 @@ const PostOverlay = (props) => {
         <h1>{!dataEditForm ? "Create an Event" : "Edit the Event"}</h1>
         <p>
           {errorEditForm && `Contact Admin: Fetch Error: ${errorEditForm}`}
-          {isLoadingEditForm && "Loading Post Info"}
+          {isLoadingEditForm && "Waiting to Get Post Info!"}
           {errorNewPost && `Contact Admin: Posting Error: ${errorNewPost}`}
-          {isLoadingNewPost && "Sendin post, please wait!"}
+          {isLoadingNewPost && "Waiting to Send Post!"}
         </p>
       </header>
 
