@@ -63,11 +63,25 @@ messageSchema.statics.getMessage = async function (postId) {
   try {
     const foundPost = await this.findById(postId);
     if (!foundPost) {
-      const foundPostError = new Error("Could not get single post!");
+      const foundPostError = new Error("Could not get the post!");
       foundPostError.statusCode = 500;
-      throw foundPostError
+      throw foundPostError;
     }
     return foundPost;
+  } catch (err) {
+    throw err;
+  }
+};
+
+messageSchema.statics.deleteMessage = async function (postId) {
+  try {
+    const deletedPost = await this.deleteOne({ _id: postId });
+    if (!deletedPost) {
+      const deletedPostError = new Error("Coould not delete the post!");
+      deletedPostError.statusCode = 500;
+      throw deletedPostError;
+    }
+    return deletedPost;
   } catch (err) {
     throw err;
   }

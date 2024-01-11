@@ -145,8 +145,6 @@ const PostOverlay = (props) => {
       return;
     }
 
-    console.log("New post created!");
-
     const postData = {
       title: enteredTitle,
       image: enteredImage,
