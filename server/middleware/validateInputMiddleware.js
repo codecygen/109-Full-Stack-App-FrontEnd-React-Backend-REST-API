@@ -6,12 +6,12 @@ const validateInputMiddleware = async (req, res, next) => {
     const inputs = [
       check("title")
         .trim()
-        .isLength({ min: 6 })
+        .isLength({ min: 5 })
         .escape()
         .withMessage("Not the correct title!"),
       check("details")
         .trim()
-        .isLength({ min: 6 })
+        .isLength({ min: 5 })
         .escape()
         .withMessage("Not the correct details!"),
     ];
