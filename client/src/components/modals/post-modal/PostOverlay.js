@@ -17,6 +17,7 @@ const PostOverlay = (props) => {
     titleCheckResult: titleResult,
     imageCheckResult: imageResult,
     detailsCheckResult: detailsResult,
+    dataNewPost,
     errorNewPost,
     isLoadingNewPost,
   } = useSelector((state) => state.newPost);
@@ -229,6 +230,8 @@ const PostOverlay = (props) => {
   } else if (errorEditForm) {
     detailsClass = classes["input-disabled"];
   }
+
+  console.log(dataNewPost);
 
   return (
     <section className={classes.form}>

@@ -25,7 +25,7 @@ const postOnePost = async (
     }
 
     const data = await res.json();
-    dispatch(successHandler(true));
+    dispatch(successHandler(data));
     dispatch(loadingHandler(false));
     return data;
   } catch (err) {
