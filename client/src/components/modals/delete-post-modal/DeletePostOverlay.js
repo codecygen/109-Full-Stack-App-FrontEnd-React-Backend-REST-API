@@ -24,6 +24,7 @@ const NewPostOverlay = (props) => {
     const timeout = setTimeout(() => {
       if (errorDeletePost === false && isLoadingDeletePost === false) {
         dispatch(deletePostActions.toggleWindow());
+        dispatch(deletePostActions.reset());
       }
     }, 1000);
 

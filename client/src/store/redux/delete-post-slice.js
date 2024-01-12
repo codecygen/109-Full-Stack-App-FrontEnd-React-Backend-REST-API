@@ -29,6 +29,10 @@ const deletePostSlice = createSlice({
         state.dataDeletePost = postData;
     },
 
+    reset(state, action) {
+      return initialState;
+    },
+
     success(state, action) {
       state.responseDeletePost = action.payload;
     },
