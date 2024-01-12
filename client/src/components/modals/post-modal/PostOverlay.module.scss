@@ -44,12 +44,23 @@
         > h1 {
             font-size: 1.3rem;
             margin: 10px;
+
+            &.delete-result {
+                color: #116c15; 
+            }
         }
 
         > p {
             color: #961f1f;
             font-weight: bold;
-            font-size: 2px;
+
+            &.loading {
+                color: #1f5796; 
+            }
+
+            &.error {
+                color: #961f1f;
+            }
         }
     }
 

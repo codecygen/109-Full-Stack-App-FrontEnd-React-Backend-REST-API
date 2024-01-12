@@ -58,10 +58,7 @@ const PostOverlay = (props) => {
   useEffect(() => {
     // Only close newpost window if the data is successfully sent to backend
     if (errorNewPost === false && isLoadingNewPost === false) {
-      dispatch(editPostActions.toggleWindow());
       dispatch(editPostActions.reset());
-
-      dispatch(newPostActions.toggleWindow());
       dispatch(newPostActions.reset());
     }
   }, [dispatch, errorNewPost, isLoadingNewPost]);
@@ -177,10 +174,7 @@ const PostOverlay = (props) => {
       console.log("image: ", enteredImage);
       console.log("details: ", enteredDetails);
 
-      dispatch(editPostActions.toggleWindow());
       dispatch(editPostActions.reset());
-
-      dispatch(newPostActions.toggleWindow());
       dispatch(newPostActions.reset());
 
       return;
@@ -231,13 +225,22 @@ const PostOverlay = (props) => {
     detailsClass = classes["input-disabled"];
   }
 
-  console.log(dataNewPost);
+  let warningClasses;
+
+  if (errorNewPost) {
+    warningClasses = classes.error;
+  } else {
+    warningClasses = classes.loading;
+  }
 
   return (
     <section className={classes.form}>
       <header>
-        <h1>{!dataEditForm ? "Create an Event" : "Edit the Event"}</h1>
-        <p>
+        <h1 className={dataNewPost && classes["delete-result"]}>
+          {(dataNewPost && "New Post Created!") || 
+          (!dataEditForm ? "Create an Event" : "Edit the Event")}
+        </h1>
+        <p className={warningClasses}>
           {errorEditForm && `Contact Admin: Fetch Error: ${errorEditForm}`}
           {isLoadingEditForm && "Waiting to Get Post Info!"}
           {errorNewPost && `Contact Admin: Posting Error: ${errorNewPost}`}
