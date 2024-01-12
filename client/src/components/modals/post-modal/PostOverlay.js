@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { newPostActions } from "../../../store/redux/new-post-slice";
@@ -9,6 +9,8 @@ import { createNewPost } from "../../../store/redux/utils/apiStateManagementsThu
 import classes from "./PostOverlay.module.scss";
 
 const PostOverlay = (props) => {
+  const imageInputRef = useRef(null);
+
   const dispatch = useDispatch();
 
   const {
@@ -77,16 +79,28 @@ const PostOverlay = (props) => {
 
   const imageChangeHandler = (e) => {
     const file = e.target.files[0];
+    let fileData;
+    let fileUrl;
 
-    // file varaible is a File object which is nonserializable.
-    // We have to make it serializable
-    const fileData = {
-      name: file.name,
-      size: file.size,
-      type: file.type,
-    };
+    if (file) {
+      // file varaible is a File object which is nonserializable.
+      // We have to make it serializable
+      fileData = {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+      };
 
-    const fileUrl = URL.createObjectURL(file);
+      fileUrl = URL.createObjectURL(file);
+    } else {
+      fileData = {
+        name: "",
+        size: "",
+        type: "",
+      };
+
+      fileUrl = "";
+    }
 
     dispatch(newPostActions.checkImage({ fileData, fileUrl }));
   };
@@ -118,14 +132,27 @@ const PostOverlay = (props) => {
         })
       );
 
+      const fileDetails = imageInputRef.current.files[0];
+      let fileData;
+
+      if (fileDetails) {
+        fileData = {
+          name: fileDetails.name,
+          size: fileDetails.size,
+          type: fileDetails.type,
+        };
+      } else {
+        fileData = {
+          name: "",
+          size: "",
+          type: "",
+        };
+      }
+
       dispatch(
         newPostActions.checkImage({
-          fileData: {
-            name: "",
-            size: "",
-            type: "",
-          },
-          fileUrl: "",
+          fileData,
+          fileUrl: imageResult.fileUrl,
         })
       );
 
@@ -243,6 +270,7 @@ const PostOverlay = (props) => {
             className={imageClass}
             disabled={errorEditForm}
             readOnly={errorEditForm}
+            ref={imageInputRef}
           />
         </div>
         {/* show-image-preview */}
