@@ -127,7 +127,7 @@ const FeedPage = () => {
           </div>
         )}
 
-        {errorAllPosts && <div>{errorAllPosts}</div>}
+        {errorAllPosts && <div className={classes.center}>{errorAllPosts}</div>}
         {!isLoadingAllPosts && !errorAllPosts && postContent}
       </section>
 
