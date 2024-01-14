@@ -115,7 +115,7 @@ $buttonColorHOver3: #7f4052;
     margin: 0 auto;
     min-height: $minPageHeight;
 
-    :first-child {
+    & > :first-child {
         margin: 0;
     }
 
