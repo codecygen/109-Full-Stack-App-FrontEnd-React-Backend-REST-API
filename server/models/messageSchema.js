@@ -47,7 +47,7 @@ messageSchema.methods.createMessage = async function () {
 
 messageSchema.statics.getMessages = async function () {
   try {
-    const allPosts = this.find();
+    const allPosts = this.find().sort({ createdAt: -1 }).exec();
     if (!allPosts) {
       const allPostError = new Error("Could not get all posts!");
       allPostError.statusCode = 500;
