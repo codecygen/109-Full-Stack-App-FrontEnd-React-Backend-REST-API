@@ -21,16 +21,10 @@ const NewPostOverlay = (props) => {
     // Only close errorpost window if the data deletion request
     // successfully sent to backend
 
-    const timeout = setTimeout(() => {
-      if (errorDeletePost === false && isLoadingDeletePost === false) {
-        dispatch(deletePostActions.toggleWindow());
-        dispatch(deletePostActions.reset());
-      }
-    }, 1000);
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    if (errorDeletePost === false && isLoadingDeletePost === false) {
+      dispatch(deletePostActions.toggleWindow());
+      dispatch(deletePostActions.reset());
+    }
   }, [dispatch, errorDeletePost, isLoadingDeletePost]);
 
   const deleteButtonHandler = () => {
@@ -49,9 +43,7 @@ const NewPostOverlay = (props) => {
     <section className={classes.box}>
       <header>
         <h1 className={responseDeletePost && classes["delete-result"]}>
-          {responseDeletePost
-            ? "Successfully Deleted"
-            : "Are you sure to delete?"}
+          Are you sure to delete?
         </h1>
         <p className={warningClasses}>
           {errorDeletePost &&
