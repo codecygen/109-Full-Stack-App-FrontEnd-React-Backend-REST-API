@@ -9,11 +9,17 @@ import { deletePostActions } from "../store/redux/delete-post-slice";
 import Post from "./Post";
 
 const AllPosts = () => {
+  // This is used to assess if the remove box and refresh animations to be played
+  // or if add new item animation to be played.
+  const [isOnMount, setIsOnMount] = useState(true);
+
   // This postList is created to update the list live on delete or create new post actions
   // without the need of refreshing the page.
   const [postList, setPostList] = useState(null);
   const dispatch = useDispatch();
   const { dataAllPosts } = useSelector((state) => state.allPosts);
+
+  const { dataNewPost } = useSelector((state) => state.newPost);
 
   const {
     dataDeletePost,
@@ -40,8 +46,19 @@ const AllPosts = () => {
       setPostList((prevValues) =>
         prevValues.filter((value) => value._id !== dataDeletePost._id)
       );
+
+      setIsOnMount(true);
     }
   }, [dataDeletePost._id, responseDeletePost]);
+
+  // When a new post is added, update the state of postList
+  useEffect(() => {
+    if (dataNewPost) {
+      setPostList((prevPostList) => [dataNewPost.post, ...prevPostList]);
+
+      setIsOnMount(false);
+    }
+  }, [dataNewPost]);
 
   const openDeletePostWindow = (DB) => {
     dispatch(deletePostActions.toggleWindow());
@@ -71,13 +88,14 @@ const AllPosts = () => {
 
       return (
         <motion.div
-          key={post._id} // Ensure each box has a unique key
-          layout // Add this prop to enable layout animation
-          layoutTransition={{ duration: 0.05 }} // Optionally, customize the layout transition
-          initial={{ opacity: 1, x: 0 }}
+          key={post._id}
+          layout
+          layoutTransition={{ duration: 1 }}
+          initial={
+            isOnMount ? { opacity: 1, x: 0 } : { opacity: 0, x: "-100%" }
+          }
+          animate={isOnMount ? { y: 10 } : { opacity: 1, x: 0, y: 10 }}
           exit={{ opacity: 0, x: "-100%" }}
-          // Slide upward Animation on Page Load
-          animate={{ y: 10 * index }} // Adjust the value based on your preference
           transition={{ duration: 0.3 }}
         >
           <Post

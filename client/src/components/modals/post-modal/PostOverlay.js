@@ -57,16 +57,10 @@ const PostOverlay = (props) => {
 
   useEffect(() => {
     // Only close newpost window if the data is successfully sent to backend
-    const timeout = setTimeout(() => {
-      if (errorNewPost === false && isLoadingNewPost === false) {
-        dispatch(editPostActions.reset());
-        dispatch(newPostActions.reset());
-      }
-    }, 1000);
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    if (errorNewPost === false && isLoadingNewPost === false) {
+      dispatch(editPostActions.reset());
+      dispatch(newPostActions.reset());
+    }
   }, [dispatch, errorNewPost, isLoadingNewPost]);
 
   const titleChangeHandler = (e) => {
@@ -243,8 +237,7 @@ const PostOverlay = (props) => {
     <section className={classes.form}>
       <header>
         <h1 className={dataNewPost && classes["delete-result"]}>
-          {(dataNewPost && "New Post Created!") ||
-            (!dataEditForm ? "Create an Event" : "Edit the Event")}
+          {!dataEditForm ? "Create an Event" : "Edit the Event"}
         </h1>
         <p className={warningClasses}>
           {errorEditForm && `Contact Admin: Fetch Error: ${errorEditForm}`}
