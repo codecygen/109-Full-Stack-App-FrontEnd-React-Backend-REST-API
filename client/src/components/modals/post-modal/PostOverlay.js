@@ -58,6 +58,9 @@ const PostOverlay = (props) => {
   useEffect(() => {
     // Only close newpost window if the data is successfully sent to backend
     if (errorNewPost === false && isLoadingNewPost === false) {
+      dispatch(editPostActions.toggleWindow());
+      dispatch(newPostActions.toggleWindow());
+      
       dispatch(editPostActions.reset());
       dispatch(newPostActions.reset());
     }
