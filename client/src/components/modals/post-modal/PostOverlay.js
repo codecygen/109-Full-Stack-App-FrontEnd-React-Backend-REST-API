@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { newPostActions } from "../../../store/redux/new-post-slice";
 import { editPostActions } from "../../../store/redux/edit-post-slice";
 
-import { createNewPost } from "../../../store/redux/utils/apiStateManagementsThunk";
+import {
+  createNewPost,
+  updatePost,
+} from "../../../store/redux/utils/apiStateManagementsThunk";
 
 import classes from "./PostOverlay.module.scss";
 
@@ -60,7 +63,7 @@ const PostOverlay = (props) => {
     if (errorNewPost === false && isLoadingNewPost === false) {
       dispatch(editPostActions.toggleWindow());
       dispatch(newPostActions.toggleWindow());
-      
+
       dispatch(editPostActions.reset());
       dispatch(newPostActions.reset());
     }
@@ -177,8 +180,21 @@ const PostOverlay = (props) => {
       console.log("image: ", enteredImage);
       console.log("details: ", enteredDetails);
 
+      const updatedPostId = dataEditForm._id;
+      
+      const updatedPostData = {
+        title: enteredTitle,
+        image: enteredImage,
+        details: enteredDetails,
+      };
+
+      dispatch(editPostActions.toggleWindow());
+      dispatch(newPostActions.toggleWindow());
+
       dispatch(editPostActions.reset());
       dispatch(newPostActions.reset());
+
+      dispatch(updatePost(updatedPostId, updatedPostData));
 
       return;
     }

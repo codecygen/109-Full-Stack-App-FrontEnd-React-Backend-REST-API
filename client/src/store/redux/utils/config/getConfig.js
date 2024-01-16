@@ -13,6 +13,10 @@ const getConfig = () => {
     return `${API_ENDPOINT}/feed/posts`;
   };
 
+  const updateOnePostEndpoint = (id) => {
+    return `${API_ENDPOINT}/feed/update/${id}`
+  }
+
   const deleteOnePostEndpoint = (id) => {
     return `${API_ENDPOINT}/feed/delete/${id}`;
   };
@@ -21,6 +25,7 @@ const getConfig = () => {
     getAllPostsEndpoint,
     getOnePostEndpoint,
     postOnePostEndpoint,
+    updateOnePostEndpoint,
     deleteOnePostEndpoint,
   };
 };

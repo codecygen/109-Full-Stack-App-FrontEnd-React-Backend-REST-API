@@ -6,6 +6,7 @@ import { deletePostActions } from "../delete-post-slice";
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
 import postOnePost from "./api/postOnePost";
+import updateOnePost from "./api/updateOnePost";
 import deleteOnePost from "./api/deleteOnePost";
 
 export const getPostsPagePosts = () => {
@@ -40,6 +41,19 @@ export const createNewPost = (postData) => {
       newPostActions.success,
       newPostActions.loading,
       newPostActions.fail
+    );
+  };
+};
+
+export const updatePost = (postId, postData) => {
+  return async (dispatch) => {
+    await updateOnePost(
+      postId,
+      postData,
+      dispatch,
+      editPostActions.success,
+      editPostActions.loading,
+      editPostActions.fail
     );
   };
 };

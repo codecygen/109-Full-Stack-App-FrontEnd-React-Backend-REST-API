@@ -59,6 +59,21 @@ const getPost = async (req, res, next) => {
   }
 };
 
+const updatePost = async (req, res, next) => {
+  try {
+    const postId = req.params.postId;
+    const updatedData = req.body;
+    const updatedPost = await DB.Message.updateMessage(postId, updatedData);
+
+    res.json({
+      message: "Post updated successfully!",
+      post: updatedPost,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const deletePost = async (req, res, next) => {
   try {
     const postId = req.params.postId;
@@ -73,4 +88,4 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-module.exports = { getPosts, postPost, getPost, deletePost };
+module.exports = { getPosts, postPost, getPost, updatePost, deletePost };

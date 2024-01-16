@@ -73,6 +73,22 @@ messageSchema.statics.getMessage = async function (postId) {
   }
 };
 
+messageSchema.statics.updateMessage = async function (postId, postData) {
+try {
+    const updatedPost = await this.findOneAndUpdate({ _id: postId }, postData, {
+      new: true,
+    });
+    if (!updatedPost) {
+      const updatedPostError = new Error("Could not update the post!");
+      updatedPostError.statusCode = 500;
+      throw updatedPostError;
+    }
+    return updatedPost;
+  } catch (err) {
+    throw err;
+  }
+};
+
 messageSchema.statics.deleteMessage = async function (postId) {
   try {
     const deletedPost = await this.deleteOne({ _id: postId });
