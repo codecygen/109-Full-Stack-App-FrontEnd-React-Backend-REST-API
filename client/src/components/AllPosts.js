@@ -21,12 +21,11 @@ const AllPosts = () => {
 
   const { dataNewPost } = useSelector((state) => state.newPost);
 
-  const {
-    dataDeletePost,
-    responseDeletePost,
-    // errorDeletePost,
-    // isLoadingDeletePost,
-  } = useSelector((state) => state.deletePost);
+  const { dataEditResult } = useSelector((state) => state.editPost);
+
+  const { dataDeletePost, responseDeletePost } = useSelector(
+    (state) => state.deletePost
+  );
 
   // Only update postList from the database data on page reload
   const setPostMemoized = useCallback(() => {
@@ -52,6 +51,7 @@ const AllPosts = () => {
   }, [dataDeletePost._id, responseDeletePost]);
 
   // When a new post is added, update the state of postList
+  // so that the list can be updated live instead of refreshing the page.
   useEffect(() => {
     if (dataNewPost) {
       setPostList((prevPostList) => [dataNewPost.post, ...prevPostList]);
@@ -59,6 +59,25 @@ const AllPosts = () => {
       setIsOnMount(false);
     }
   }, [dataNewPost]);
+
+  // When a post is updated, update the state of postList
+  // so that the list can be updated live instead of refreshing the page.
+  useEffect(() => {
+    let updatedPostList;
+
+    if (postList && dataEditResult) {
+      updatedPostList = postList.map((post) => {
+        if (post._id === dataEditResult._id) {
+          return dataEditResult;
+        }
+
+        return post;
+      });
+
+      setPostList(updatedPostList);
+    }
+    
+  }, [dataEditResult, postList]);
 
   const openDeletePostWindow = (DB) => {
     dispatch(deletePostActions.toggleWindow());

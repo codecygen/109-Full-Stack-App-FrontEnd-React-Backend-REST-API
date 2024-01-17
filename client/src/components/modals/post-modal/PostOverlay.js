@@ -29,7 +29,6 @@ const PostOverlay = (props) => {
     dataEditForm,
     errorEditForm,
     isLoadingEditForm,
-    dataEditResult,
     errorEditResult,
     isLoadingEditResult,
   } = useSelector((state) => state.editPost);
