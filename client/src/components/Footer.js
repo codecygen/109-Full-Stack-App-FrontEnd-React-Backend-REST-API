@@ -20,7 +20,7 @@ const Footer = (props) => {
         <p>
           Created by{" "}
           <strong>
-            <a href="https://aras-portfolio.web.app/">Vahit Aras Sen</a>
+            <a href="https://aras-portfolio.web.app/">Vahit Sen</a>
           </strong>
           , ©{new Date().getFullYear()}
         </p>
