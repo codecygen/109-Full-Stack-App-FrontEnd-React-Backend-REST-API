@@ -51,9 +51,9 @@ export const updatePost = (postId, postData) => {
       postId,
       postData,
       dispatch,
-      editPostActions.success,
-      editPostActions.loading,
-      editPostActions.fail
+      editPostActions.successSendingUpdatePost,
+      editPostActions.loadingSendingUpdatePost,
+      editPostActions.failSendingUpdatePost
     );
   };
 };

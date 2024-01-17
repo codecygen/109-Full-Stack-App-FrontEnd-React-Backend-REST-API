@@ -25,9 +25,14 @@ const PostOverlay = (props) => {
     isLoadingNewPost,
   } = useSelector((state) => state.newPost);
 
-  const { dataEditForm, errorEditForm, isLoadingEditForm } = useSelector(
-    (state) => state.editPost
-  );
+  const {
+    dataEditForm,
+    errorEditForm,
+    isLoadingEditForm,
+    dataEditResult,
+    errorEditResult,
+    isLoadingEditResult,
+  } = useSelector((state) => state.editPost);
 
   useEffect(() => {
     if (dataEditForm) {
@@ -60,14 +65,23 @@ const PostOverlay = (props) => {
 
   useEffect(() => {
     // Only close newpost window if the data is successfully sent to backend
+    // for creating a new post
     if (errorNewPost === false && isLoadingNewPost === false) {
-      dispatch(editPostActions.toggleWindow());
       dispatch(newPostActions.toggleWindow());
 
-      dispatch(editPostActions.reset());
       dispatch(newPostActions.reset());
     }
   }, [dispatch, errorNewPost, isLoadingNewPost]);
+
+  useEffect(() => {
+    // Only close edit post window if the data is successfully sent to backend
+    // for editing a post
+    if (errorEditResult === false && isLoadingEditResult === false) {
+      dispatch(editPostActions.toggleWindow());
+
+      dispatch(editPostActions.reset());
+    }
+  }, [dispatch, errorEditResult, isLoadingEditResult]);
 
   const titleChangeHandler = (e) => {
     const enteredTitle = e.target.value;
@@ -175,24 +189,13 @@ const PostOverlay = (props) => {
     const enteredDetails = detailsResult.enteredDetails;
 
     if (dataEditForm) {
-      console.log(`Post ${dataEditForm._id} is edited!`);
-      console.log("title: ", enteredTitle);
-      console.log("image: ", enteredImage);
-      console.log("details: ", enteredDetails);
-
       const updatedPostId = dataEditForm._id;
-      
+
       const updatedPostData = {
         title: enteredTitle,
         image: enteredImage,
         details: enteredDetails,
       };
-
-      dispatch(editPostActions.toggleWindow());
-      dispatch(newPostActions.toggleWindow());
-
-      dispatch(editPostActions.reset());
-      dispatch(newPostActions.reset());
 
       dispatch(updatePost(updatedPostId, updatedPostData));
 

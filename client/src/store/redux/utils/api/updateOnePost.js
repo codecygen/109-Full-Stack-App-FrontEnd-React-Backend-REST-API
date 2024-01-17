@@ -9,7 +9,7 @@ const updateOnePost = async (
   failHandler
 ) => {
   dispatch(loadingHandler(true));
-  dispatch(failHandler(true));
+  dispatch(failHandler(false));
 
   try {
     const res = await fetch(getConfig().updateOnePostEndpoint(postId), {
@@ -26,10 +26,10 @@ const updateOnePost = async (
     }
 
     const data = await res.json();
-    dispatch(successHandler(data));
+    dispatch(successHandler(data.post));
     dispatch(loadingHandler(false));
   } catch (err) {
-    dispatch(failHandler(true));
+    dispatch(failHandler(err.message));
     dispatch(loadingHandler(false));
   }
 };

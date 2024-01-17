@@ -5,6 +5,10 @@ const initialState = {
   dataEditForm: null,
   errorEditForm: null,
   isLoadingEditForm: null,
+
+  dataEditResult: null,
+  errorEditResult: null,
+  isLoadingEditResult: null,
 };
 
 const editPostSlice = createSlice({
@@ -38,6 +42,18 @@ const editPostSlice = createSlice({
 
     loading(state, action) {
       state.isLoadingEditForm = action.payload;
+    },
+
+    successSendingUpdatePost(state, action) {
+      state.dataEditResult = action.payload;
+    },
+
+    failSendingUpdatePost(state, action) {
+      state.errorEditResult = action.payload;
+    },
+
+    loadingSendingUpdatePost(state, action) {
+      state.isLoadingEditResult = action.payload;
     },
   },
 });
