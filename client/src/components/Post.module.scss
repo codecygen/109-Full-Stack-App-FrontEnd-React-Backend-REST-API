@@ -59,3 +59,21 @@
         }
     }
 }
+
+.post-edited {
+    animation: color-change 0.5s ease-in-out;
+  }
+  
+  @keyframes color-change {
+    0% {
+        background-color: yellow;
+    }
+  
+    50% {
+        background-color: green;
+    }
+  
+    100% {
+        background-color: #cfd5e7;
+    }
+}

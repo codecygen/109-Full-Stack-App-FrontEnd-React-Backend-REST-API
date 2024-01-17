@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+
+import { useSelector } from "react-redux";
+
 import { NavLink } from "react-router-dom";
+
+import useBlink from "../hooks/use-blink";
 
 import classes from "./Post.module.scss";
 
@@ -9,8 +15,23 @@ const Post = ({
   editButtonClick,
   deleteButtonClick,
 }) => {
+  const { dataEditResult } = useSelector((state) => state.editPost);
+
+  const { currentStyle, blinkHandler } = useBlink(
+    classes.post,
+    classes["post-edited"]
+  );
+
+  useEffect(() => {
+    if (dataEditResult && post._id) {
+      if (dataEditResult._id === post._id) {
+        blinkHandler();
+      }
+    }
+  }, [dataEditResult, blinkHandler, post._id]);
+
   return (
-    <div className={classes.post} key={post._id}>
+    <div className={currentStyle} key={post._id}>
       <p>
         Posted by {post.creator.name || "Aras"} on {formattedDate}
       </p>
