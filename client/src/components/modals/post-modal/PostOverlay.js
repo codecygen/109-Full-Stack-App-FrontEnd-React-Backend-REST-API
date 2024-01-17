@@ -67,8 +67,10 @@ const PostOverlay = (props) => {
     // for creating a new post
     if (errorNewPost === false && isLoadingNewPost === false) {
       dispatch(newPostActions.toggleWindow());
+      dispatch(editPostActions.toggleWindow());
 
       dispatch(newPostActions.reset());
+      dispatch(editPostActions.reset());
     }
   }, [dispatch, errorNewPost, isLoadingNewPost]);
 
@@ -76,8 +78,10 @@ const PostOverlay = (props) => {
     // Only close edit post window if the data is successfully sent to backend
     // for editing a post
     if (errorEditResult === false && isLoadingEditResult === false) {
+      dispatch(newPostActions.toggleWindow());
       dispatch(editPostActions.toggleWindow());
 
+      dispatch(newPostActions.reset());
       dispatch(editPostActions.reset());
     }
   }, [dispatch, errorEditResult, isLoadingEditResult]);
