@@ -17,6 +17,8 @@ const getAllPosts = async (
 
     const data = await res.json();
 
+    console.log(data);
+
     dispatch(successHandler(data.posts));
     dispatch(loadingHandler(false));
   } catch (err) {
