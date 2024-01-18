@@ -18,6 +18,11 @@ const EventIdPage = () => {
     dispatch(getDetailsPagePost(params.id));
   }, [dispatch, params.id]);
 
+  console.log("State");
+  console.log(isLoadingDetailedPost);
+  console.log(errorDetailedPost);
+  console.log(responseDetailedPost);
+
   if (errorDetailedPost) {
     return (
       <main className={classes.details}>
