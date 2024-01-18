@@ -1,27 +1,59 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import DB from "../../../database/posts.json";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getDetailsPagePost } from "../../../store/redux/utils/apiStateManagementsThunk";
 
 import classes from "./eventDetailsPage.module.scss";
 
 const EventIdPage = () => {
   const params = useParams();
+  const dispatch = useDispatch();
 
-  const [postData, setPostData] = useState(null);
+  const { responseDetailedPost, errorDetailedPost, isLoadingDetailedPost } =
+    useSelector((state) => state.detailedPost);
 
   useEffect(() => {
-    const foundData = DB.find(post => post._id === params.id);
-    setPostData(foundData);
-  }, [params.id]);
+    dispatch(getDetailsPagePost(params.id));
+  }, [dispatch, params.id]);
 
-  console.log(postData);
+  if (errorDetailedPost) {
+    return (
+      <main className={classes.details}>
+        <div>
+          <p>Error!</p>
+        </div>
+      </main>
+    );
+  } else if (isLoadingDetailedPost || !responseDetailedPost) {
+    return (
+      <main className={classes.details}>
+        <div>
+          <p>Loading</p>
+        </div>
+      </main>
+    );
+  }
+
+  const {
+    title,
+    image,
+    details,
+    creator: { name: creatorName },
+    createdAt,
+    updatedAt,
+  } = responseDetailedPost;
 
   return (
     <main className={classes.details}>
       <div>
-        <p>{params.title}</p>
-        <p>{params.id}</p>
+        <h1>{title}</h1>
+        <p>{createdAt}</p>
+        <p>{updatedAt}</p>
+        <img src={image} alt="error-showing" />
+        <p>{details}</p>
+        <p>{creatorName}</p>
       </div>
     </main>
   );

@@ -2,6 +2,7 @@ import { newPostActions } from "../new-post-slice";
 import { allPostsActions } from "../all-posts.slice";
 import { editPostActions } from "../edit-post-slice";
 import { deletePostActions } from "../delete-post-slice";
+import { detailedPostActions } from "../detailed-post-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
@@ -29,6 +30,18 @@ export const getEditWindowPost = (id) => {
       editPostActions.success,
       editPostActions.loading,
       editPostActions.fail
+    );
+  };
+};
+
+export const getDetailsPagePost = (id) => {
+  return async (dispatch) => {
+    await getOnePost(
+      id,
+      dispatch,
+      detailedPostActions.success,
+      detailedPostActions.loading,
+      detailedPostActions.fail
     );
   };
 };
