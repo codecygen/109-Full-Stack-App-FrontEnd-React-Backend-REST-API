@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getDetailsPagePost } from "../../../store/redux/utils/apiStateManagementsThunk";
 
+import Loader from "../../../components/Loader";
+
+import convertDate from "../../../utils/convertDate";
+
 import classes from "./eventDetailsPage.module.scss";
 
 const EventIdPage = () => {
@@ -18,29 +22,6 @@ const EventIdPage = () => {
     dispatch(getDetailsPagePost(params.id));
   }, [dispatch, params.id]);
 
-  console.log("State");
-  console.log(isLoadingDetailedPost);
-  console.log(errorDetailedPost);
-  console.log(responseDetailedPost);
-
-  if (errorDetailedPost) {
-    return (
-      <main className={classes.details}>
-        <div>
-          <p>Error!</p>
-        </div>
-      </main>
-    );
-  } else if (isLoadingDetailedPost || !responseDetailedPost) {
-    return (
-      <main className={classes.details}>
-        <div>
-          <p>Loading</p>
-        </div>
-      </main>
-    );
-  }
-
   const {
     title,
     image,
@@ -48,17 +29,48 @@ const EventIdPage = () => {
     creator: { name: creatorName },
     createdAt,
     updatedAt,
-  } = responseDetailedPost;
+  } = responseDetailedPost ?? {
+    title: null,
+    image: null,
+    details: null,
+    creator: { name: null },
+    createdAt: null,
+    updatedAt: null,
+  };
 
   return (
     <main className={classes.details}>
+      {errorDetailedPost && (
+        <section className={classes.center}>
+          <p>{errorDetailedPost}</p>
+        </section>
+      )}
+
+      {isLoadingDetailedPost && (
+        <section className={classes.center}>
+          <Loader />
+        </section>
+      )}
+
       <div>
-        <h1>{title}</h1>
-        <p>{createdAt}</p>
-        <p>{updatedAt}</p>
-        <img src={image} alt="error-showing" />
+        <div>
+          <p>
+            <strong>Created: </strong>
+            {convertDate(createdAt)}
+          </p>
+          <p>
+            <strong>Last updated: </strong>
+            {convertDate(updatedAt)}
+          </p>
+          <p className={classes.author}>
+            <strong>Written by: </strong>
+            {creatorName}
+          </p>
+        </div>
+
+        <h1>{title}:</h1>
+        <img src={image} alt="no-img" />
         <p>{details}</p>
-        <p>{creatorName}</p>
       </div>
     </main>
   );

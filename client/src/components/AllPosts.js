@@ -8,6 +8,8 @@ import { deletePostActions } from "../store/redux/delete-post-slice";
 
 import Post from "./Post";
 
+import convertDate from "../utils/convertDate";
+
 const AllPosts = () => {
   // This is used to assess if the remove box and refresh animations to be played
   // or if add new item animation to be played.
@@ -92,16 +94,7 @@ const AllPosts = () => {
 
   if (postList) {
     postContent = postList.map((post, index) => {
-      const options = {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZoneName: "short",
-      };
-      const formattedDate = new Date(post.createdAt).toLocaleDateString(
-        "en-US",
-        options
-      );
+      const formattedDate = convertDate(post.createdAt);
 
       const linkTitleConverted = post.title.toLowerCase().split(" ").join("-");
 
