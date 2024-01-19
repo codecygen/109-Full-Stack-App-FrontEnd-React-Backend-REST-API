@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+
 import { getDetailsPagePost } from "../../../store/redux/utils/apiStateManagementsThunk";
 
 import Loader from "../../../components/Loader";
@@ -70,7 +73,7 @@ const EventIdPage = () => {
 
         <h1>{title}:</h1>
         <img src={image} alt="no-img" />
-        <p>{details}</p>
+        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{details}</ReactMarkdown>
       </div>
     </main>
   );

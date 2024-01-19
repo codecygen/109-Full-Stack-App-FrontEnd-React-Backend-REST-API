@@ -4,6 +4,8 @@
     @include alignFooterBottomInMinPageHeight();
     text-align: justify;
 
+    font-family: 'Roboto', Arial, sans-serif;
+
     > .center {
         display: flex;
         flex-direction: row;
@@ -16,6 +18,22 @@
         margin: 0;
         padding-top: 16px;
     }
+
+    pre {
+        background-color: #595151;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+
+        width: 500px;
+    }
+      
+    code {
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        color: #fff8f8;
+    }
+      
 }
 
 
