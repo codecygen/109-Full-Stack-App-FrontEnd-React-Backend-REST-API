@@ -11,6 +11,6 @@ router.post("/posts", validateInputMiddleware, feedController.postPost);
 router.get("/post/:postId", feedController.getPost);
 router.delete("/delete/:postId", feedController.deletePost);
 
-router.put("/update/:postId", feedController.updatePost);
+router.put("/update/:postId", validateInputMiddleware, feedController.updatePost);
 
 module.exports = router;
