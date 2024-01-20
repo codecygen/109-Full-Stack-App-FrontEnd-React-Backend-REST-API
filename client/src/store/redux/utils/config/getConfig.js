@@ -10,7 +10,7 @@ const getConfig = () => {
   };
 
   const postOnePostEndpoint = () => {
-    return `${API_ENDPOINT}/feed/posts`;
+    return `${API_ENDPOINT}/feed/post`;
   };
 
   const updateOnePostEndpoint = (id) => {
