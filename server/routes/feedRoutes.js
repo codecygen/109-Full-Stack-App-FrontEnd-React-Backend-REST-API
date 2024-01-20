@@ -10,7 +10,7 @@ const fileUploadConfig = require("../config/fileUploadConfig");
 router.get("/posts", feedController.getPosts);
 router.post(
   "/post",
-//   fileUploadConfig.single("image"),
+  fileUploadConfig.single("image"),
   validateInputMiddleware,
   feedController.postPost
 );

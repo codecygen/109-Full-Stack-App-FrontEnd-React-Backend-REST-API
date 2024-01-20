@@ -18,9 +18,17 @@ const postPost = async (req, res, next) => {
     const image = req.body.image;
     const details = req.body.details;
 
+    // File uploaded?
+    if (!req.file || !req.file.path) {
+      console.log("HERE!");
+      const fileUploadError = new Error("Could not get the uploaded file!");
+      fileUploadError.statusCode = 422;
+      throw fileUploadError;
+    }
+
     const newMessage = new DB.Message({
       title,
-      image,
+      image: image,
       details,
       creator: {
         name: "Aras",
