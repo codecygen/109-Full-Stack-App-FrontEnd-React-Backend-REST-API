@@ -76,6 +76,8 @@ const newPostSlice = createSlice({
     checkImage(state, action) {
       const { fileData, fileUrl } = action.payload;
 
+      console.log(fileData);
+
       const fileExtension = fileData.name.split(".").pop();
       const validFileExtensions = ["jpg", "jpeg", "png", "gif"];
       const isImageFile = validFileExtensions.includes(fileExtension);

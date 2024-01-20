@@ -153,29 +153,16 @@ const PostOverlay = (props) => {
         })
       );
 
-      const fileDetails = imageInputRef.current.files[0];
-      let fileData;
+      const fileData = imageInputRef.current.files[0];
 
-      if (fileDetails) {
-        fileData = {
-          name: fileDetails.name,
-          size: fileDetails.size,
-          type: fileDetails.type,
-        };
-      } else {
-        fileData = {
-          name: "",
-          size: "",
-          type: "",
-        };
+      if (fileData) {
+        dispatch(
+          newPostActions.checkImage({
+            fileData,
+            fileUrl: imageResult.fileUrl,
+          })
+        );
       }
-
-      dispatch(
-        newPostActions.checkImage({
-          fileData,
-          fileUrl: imageResult.fileUrl,
-        })
-      );
 
       dispatch(
         newPostActions.checkText({
@@ -200,7 +187,9 @@ const PostOverlay = (props) => {
         details: enteredDetails,
       };
 
-      dispatch(updatePost(updatedPostId, updatedPostData));
+      console.log(updatedPostData);
+
+      // dispatch(updatePost(updatedPostId, updatedPostData));
 
       return;
     }
@@ -211,7 +200,9 @@ const PostOverlay = (props) => {
       details: enteredDetails,
     };
 
-    dispatch(createNewPost(postData));
+    console.log(postData);
+
+    // dispatch(createNewPost(postData));
   };
 
   let titleClass;
