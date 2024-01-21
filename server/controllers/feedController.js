@@ -18,35 +18,39 @@ const postPost = async (req, res, next) => {
     const image = req.body.image;
     const details = req.body.details;
 
-    // File uploaded?
-    if (!req.file || !req.file.path) {
-      console.log("HERE!");
-      const fileUploadError = new Error("Could not get the uploaded file!");
-      fileUploadError.statusCode = 422;
-      throw fileUploadError;
-    }
+    console.log(title);
+    console.log(image);
+    console.log(details);
 
-    const newMessage = new DB.Message({
-      title,
-      image: image,
-      details,
-      creator: {
-        name: "Aras",
-      },
-    });
+    // // File uploaded?
+    // if (!req.file || !req.file.path) {
+    //   console.log("HERE!");
+    //   const fileUploadError = new Error("Could not get the uploaded file!");
+    //   fileUploadError.statusCode = 422;
+    //   throw fileUploadError;
+    // }
 
-    const createdMessage = await newMessage.createMessage();
+    // const newMessage = new DB.Message({
+    //   title,
+    //   image: image,
+    //   details,
+    //   creator: {
+    //     name: "Aras",
+    //   },
+    // });
 
-    res.json({
-      message: "Post created!",
-      post: {
-        _id: createdMessage._id,
-        title: createdMessage.title,
-        image: createdMessage.image,
-        creator: createdMessage.creator.name,
-        createdAt: createdMessage.createdAt,
-      },
-    });
+    // const createdMessage = await newMessage.createMessage();
+
+    // res.json({
+    //   message: "Post created!",
+    //   post: {
+    //     _id: createdMessage._id,
+    //     title: createdMessage.title,
+    //     image: createdMessage.image,
+    //     creator: createdMessage.creator.name,
+    //     createdAt: createdMessage.createdAt,
+    //   },
+    // });
   } catch (err) {
     next(err);
   }
@@ -71,12 +75,14 @@ const updatePost = async (req, res, next) => {
   try {
     const postId = req.params.postId;
     const updatedData = req.body;
-    const updatedPost = await DB.Message.updateMessage(postId, updatedData);
+    console.log(postId, updatedData);
 
-    res.json({
-      message: "Post updated successfully!",
-      post: updatedPost,
-    });
+    // const updatedPost = await DB.Message.updateMessage(postId, updatedData);
+
+    // res.json({
+    //   message: "Post updated successfully!",
+    //   post: updatedPost,
+    // });
   } catch (err) {
     next(err);
   }

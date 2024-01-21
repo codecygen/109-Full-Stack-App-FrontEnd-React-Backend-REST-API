@@ -14,11 +14,7 @@ const updateOnePost = async (
   try {
     const res = await fetch(getConfig().updateOnePostEndpoint(postId), {
       method: "PUT",
-      body: JSON.stringify(postData),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      body: postData,
     });
 
     if (!res.ok) {

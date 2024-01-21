@@ -20,6 +20,7 @@ router.delete("/delete/:postId", feedController.deletePost);
 
 router.put(
   "/update/:postId",
+  fileUploadConfig.single("image"),
   validateInputMiddleware,
   feedController.updatePost
 );

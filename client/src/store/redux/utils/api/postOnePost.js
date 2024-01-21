@@ -13,11 +13,7 @@ const postOnePost = async (
   try {
     const res = await fetch(getConfig().postOnePostEndpoint(), {
       method: "POST",
-      body: JSON.stringify(postDetails),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      body: postDetails,
     });
 
     if (!res.ok) {

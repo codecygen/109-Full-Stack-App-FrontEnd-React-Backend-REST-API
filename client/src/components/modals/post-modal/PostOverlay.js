@@ -187,10 +187,10 @@ const PostOverlay = (props) => {
       updatedPostData.append("image", enteredImage);
       updatedPostData.append("details", enteredDetails);
 
-      console.log(updatedPostId, updatedPostData);
-      console.log(enteredImage);
+      // console.log(updatedPostId, updatedPostData);
+      // console.log(enteredImage);
 
-      // dispatch(updatePost(updatedPostId, updatedPostData));
+      dispatch(updatePost(updatedPostId, updatedPostData));
 
       return;
     }
@@ -201,10 +201,10 @@ const PostOverlay = (props) => {
     postData.append("image", enteredImage);
     postData.append("details", enteredDetails);
 
-    console.log(postData);
-    console.log(enteredImage);
+    // console.log(postData);
+    // console.log(enteredImage);
 
-    // dispatch(createNewPost(postData));
+    dispatch(createNewPost(postData));
   };
 
   let titleClass;
