@@ -11,7 +11,8 @@ const initialState = {
 
   imageCheckResult: {
     isValid: null,
-    fileUrl: "",
+    fileObject: null,
+    fileUrl: null,
     warningMessage: "",
   },
 
@@ -76,19 +77,19 @@ const newPostSlice = createSlice({
     checkImage(state, action) {
       const { fileData, fileUrl } = action.payload;
 
-      console.log(fileData);
-
       const fileExtension = fileData.name.split(".").pop();
       const validFileExtensions = ["jpg", "jpeg", "png", "gif"];
       const isImageFile = validFileExtensions.includes(fileExtension);
 
       if (isImageFile) {
         state.imageCheckResult.isValid = true;
+        state.imageCheckResult.fileObject = fileData;
         state.imageCheckResult.fileUrl = fileUrl;
         state.imageCheckResult.warningMessage = "";
       } else {
         state.imageCheckResult.isValid = false;
-        state.imageCheckResult.fileUrl = "";
+        state.imageCheckResult.fileObject = null;
+        state.imageCheckResult.fileUrl = null;
         state.imageCheckResult.warningMessage = "Invalid file!";
       }
     },

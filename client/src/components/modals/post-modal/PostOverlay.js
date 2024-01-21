@@ -175,32 +175,34 @@ const PostOverlay = (props) => {
     }
 
     const enteredTitle = titleResult.enteredTitle;
-    const enteredImage = imageResult.fileUrl;
+    const enteredImage = imageResult.fileObject;
     const enteredDetails = detailsResult.enteredDetails;
 
     if (dataEditForm) {
       const updatedPostId = dataEditForm._id;
 
-      const updatedPostData = {
-        title: enteredTitle,
-        image: enteredImage,
-        details: enteredDetails,
-      };
+      const updatedPostData = new FormData();
 
-      console.log(updatedPostData);
+      updatedPostData.append("title", enteredTitle);
+      updatedPostData.append("image", enteredImage);
+      updatedPostData.append("details", enteredDetails);
+
+      console.log(updatedPostId, updatedPostData);
+      console.log(enteredImage);
 
       // dispatch(updatePost(updatedPostId, updatedPostData));
 
       return;
     }
 
-    const postData = {
-      title: enteredTitle,
-      image: enteredImage,
-      details: enteredDetails,
-    };
+    const postData = new FormData();
+
+    postData.append("title", enteredTitle);
+    postData.append("image", enteredImage);
+    postData.append("details", enteredDetails);
 
     console.log(postData);
+    console.log(enteredImage);
 
     // dispatch(createNewPost(postData));
   };
