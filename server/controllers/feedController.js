@@ -77,7 +77,10 @@ const updatePost = async (req, res, next) => {
   try {
     const postId = req.params.postId;
     const updatedData = req.body;
+
     console.log(postId, updatedData);
+    console.log(req.body.image);
+    console.log(req.file);
 
     // const updatedPost = await DB.Message.updateMessage(postId, updatedData);
 
