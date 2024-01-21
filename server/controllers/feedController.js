@@ -18,17 +18,19 @@ const postPost = async (req, res, next) => {
     const image = req.body.image;
     const details = req.body.details;
 
-    console.log(title);
-    console.log(image);
-    console.log(details);
+    // console.log(title);
+    // console.log(image);
+    // console.log(details);
 
-    // // File uploaded?
-    // if (!req.file || !req.file.path) {
-    //   console.log("HERE!");
-    //   const fileUploadError = new Error("Could not get the uploaded file!");
-    //   fileUploadError.statusCode = 422;
-    //   throw fileUploadError;
-    // }
+    console.log(image);
+    console.log(req.file);
+
+    // File uploaded?
+    if (!req.file || !req.file.path) {
+      const fileUploadError = new Error("Could not get the uploaded file!");
+      fileUploadError.statusCode = 422;
+      throw fileUploadError;
+    }
 
     // const newMessage = new DB.Message({
     //   title,

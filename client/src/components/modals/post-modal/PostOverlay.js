@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { newPostActions } from "../../../store/redux/new-post-slice";
@@ -12,6 +12,8 @@ import {
 import classes from "./PostOverlay.module.scss";
 
 const PostOverlay = (props) => {
+  const [test, setTest] = useState(null);
+
   const imageInputRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -103,6 +105,8 @@ const PostOverlay = (props) => {
     let fileData;
     let fileUrl;
 
+    console.log(file);
+
     if (file) {
       // file varaible is a File object which is nonserializable.
       // We have to make it serializable
@@ -124,6 +128,8 @@ const PostOverlay = (props) => {
     }
 
     dispatch(newPostActions.checkImage({ fileData, fileUrl }));
+
+    setTest(file);
   };
 
   const detailChangeHandler = (e) => {
@@ -184,11 +190,11 @@ const PostOverlay = (props) => {
       const updatedPostData = new FormData();
 
       updatedPostData.append("title", enteredTitle);
-      updatedPostData.append("image", enteredImage);
+      updatedPostData.append("image", test);
       updatedPostData.append("details", enteredDetails);
 
-      // console.log(updatedPostId, updatedPostData);
-      // console.log(enteredImage);
+      console.log(updatedPostId, updatedPostData);
+      console.log(enteredImage);
 
       dispatch(updatePost(updatedPostId, updatedPostData));
 
@@ -198,11 +204,11 @@ const PostOverlay = (props) => {
     const postData = new FormData();
 
     postData.append("title", enteredTitle);
-    postData.append("image", enteredImage);
+    postData.append("image", test);
     postData.append("details", enteredDetails);
 
-    // console.log(postData);
-    // console.log(enteredImage);
+    console.log(postData);
+    console.log(enteredImage);
 
     dispatch(createNewPost(postData));
   };
