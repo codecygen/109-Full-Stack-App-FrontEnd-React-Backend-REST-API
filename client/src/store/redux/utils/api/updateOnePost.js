@@ -1,4 +1,4 @@
-import getConfig from "../config/getConfig";
+import getAPI from "../config/getAPI";
 
 const updateOnePost = async (
   postId,
@@ -12,7 +12,7 @@ const updateOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(getConfig().updateOnePostEndpoint(postId), {
+    const res = await fetch(getAPI.updateOnePost(postId), {
       method: "PUT",
       body: postData,
     });

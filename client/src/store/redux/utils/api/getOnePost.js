@@ -1,4 +1,4 @@
-import getConfig from "../config/getConfig";
+import getAPI from "../config/getAPI";
 
 const getOnePost = async (
   id,
@@ -11,7 +11,7 @@ const getOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(getConfig().getOnePostEndpoint(id));
+    const res = await fetch(getAPI.getOnePost(id));
 
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);

@@ -41,6 +41,8 @@ const EventIdPage = () => {
     updatedAt: null,
   };
 
+  console.log(image);
+
   return (
     <main className={classes.details}>
       {errorDetailedPost && (

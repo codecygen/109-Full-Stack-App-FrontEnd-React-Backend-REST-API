@@ -1,4 +1,4 @@
-import getConfig from "../config/getConfig";
+import getAPI from "../config/getAPI";
 
 const postOnePost = async (
   postDetails,
@@ -11,7 +11,7 @@ const postOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(getConfig().postOnePostEndpoint(), {
+    const res = await fetch(getAPI.postOnePost, {
       method: "POST",
       body: postDetails,
     });

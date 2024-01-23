@@ -1,4 +1,4 @@
-import getConfig from "../config/getConfig";
+import getAPI from "../config/getAPI";
 
 const deleteOnePost = async (
   id,
@@ -11,7 +11,7 @@ const deleteOnePost = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(getConfig().deleteOnePostEndpoint(id), {
+    const res = await fetch(getAPI.deleteOnePost(id), {
       method: "DELETE",
     });
 

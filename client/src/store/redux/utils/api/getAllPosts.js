@@ -1,4 +1,4 @@
-import getConfig from "../config/getConfig";
+import getAPI from "../config/getAPI";
 
 const getAllPosts = async (
   dispatch,
@@ -9,8 +9,10 @@ const getAllPosts = async (
   dispatch(loadingHandler(true));
   dispatch(failHandler(false));
 
+  console.log(getAPI.getAllPosts);
+
   try {
-    const res = await fetch(getConfig().getAllPostsEndpoint());
+    const res = await fetch(getAPI.getAllPosts);
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
     }
