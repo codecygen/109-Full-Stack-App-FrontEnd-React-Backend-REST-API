@@ -1,3 +1,4 @@
+const fs = require("fs");
 const DB = require("../models/DB");
 
 const getPosts = async (req, res, next) => {
@@ -69,6 +70,33 @@ const updatePost = async (req, res, next) => {
   try {
     const postId = req.params.postId;
     const sentData = req.body;
+
+    const existingPost = await DB.Message.getMessage(postId);
+
+    // Check if post exists in database
+    if (!existingPost) {
+      const existingPostError = new Error(
+        `Post ID ${postId} does not exist in database!`
+      );
+      existingPostError.statusCode = 500;
+      throw existingPostError;
+    }
+
+    // File uploaded?
+    if (!req.file || !req.file.path) {
+      const fileUploadError = new Error("Could not get the uploaded file!");
+      fileUploadError.statusCode = 422;
+      throw fileUploadError;
+    }
+
+    // delete the old image
+    const oldImage = existingPost.image;
+
+    fs.unlink(oldImage, (err) => {
+      if (err) {
+        throw new Error("Image could not be deleted!");
+      }
+    });
 
     const updatedData = {
       title: sentData.title,
