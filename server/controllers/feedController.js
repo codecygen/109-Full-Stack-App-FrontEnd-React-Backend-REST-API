@@ -20,7 +20,9 @@ const postPost = async (req, res, next) => {
 
     // File uploaded?
     if (!req.file || !req.file.path) {
-      const fileUploadError = new Error("Could not get the uploaded file!");
+      const fileUploadError = new Error(
+        "Could not get the uploaded file for new post creation!"
+      );
       fileUploadError.statusCode = 422;
       throw fileUploadError;
     }
@@ -76,7 +78,7 @@ const updatePost = async (req, res, next) => {
     // Check if post exists in database
     if (!existingPost) {
       const existingPostError = new Error(
-        `Post ID ${postId} does not exist in database!`
+        `Post ID ${postId} does not exist in database for updating!`
       );
       existingPostError.statusCode = 500;
       throw existingPostError;
@@ -84,7 +86,9 @@ const updatePost = async (req, res, next) => {
 
     // File uploaded?
     if (!req.file || !req.file.path) {
-      const fileUploadError = new Error("Could not get the uploaded file!");
+      const fileUploadError = new Error(
+        "Could not get the uploaded file for post updating!"
+      );
       fileUploadError.statusCode = 422;
       throw fileUploadError;
     }
@@ -94,7 +98,7 @@ const updatePost = async (req, res, next) => {
 
     fs.unlink(oldImage, (err) => {
       if (err) {
-        throw new Error("Image could not be deleted!");
+        throw new Error("Image could not be deleted for post update request!");
       }
     });
 
@@ -121,6 +125,29 @@ const updatePost = async (req, res, next) => {
 const deletePost = async (req, res, next) => {
   try {
     const postId = req.params.postId;
+
+    const existingPost = await DB.Message.getMessage(postId);
+
+    // Check if post exists in database
+    if (!existingPost) {
+      const existingPostError = new Error(
+        `Post ID ${postId} does not exist in database for deletion!`
+      );
+      existingPostError.statusCode = 500;
+      throw existingPostError;
+    }
+
+    // delete the old image
+    const oldImage = existingPost.image;
+
+    fs.unlink(oldImage, (err) => {
+      if (err) {
+        throw new Error(
+          "Image could not be deleted for post deletion request!"
+        );
+      }
+    });
+
     const deletedPost = await DB.Message.deleteMessage(postId);
 
     res.json({

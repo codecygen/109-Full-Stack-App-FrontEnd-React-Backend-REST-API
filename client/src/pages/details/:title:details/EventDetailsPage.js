@@ -12,6 +12,8 @@ import Loader from "../../../components/Loader";
 
 import convertDate from "../../../utils/convertDate";
 
+import getAPI from "../../../store/redux/utils/config/getAPI";
+
 import classes from "./eventDetailsPage.module.scss";
 
 const EventIdPage = () => {
@@ -74,7 +76,7 @@ const EventIdPage = () => {
         </div>
 
         <h1>{title}:</h1>
-        <img src={image} alt="no-img" />
+        <img src={`${getAPI.link}/${image}`} alt="no-img" />
         <ReactMarkdown remarkPlugins={[remarkBreaks]}>{details}</ReactMarkdown>
       </div>
     </main>
