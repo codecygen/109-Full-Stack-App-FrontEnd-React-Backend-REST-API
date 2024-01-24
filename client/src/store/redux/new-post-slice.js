@@ -11,7 +11,7 @@ const initialState = {
 
   imageCheckResult: {
     isValid: null,
-    fileObject: null,
+    referenceFileObj: null,
     fileUrl: null,
     warningMessage: "",
   },
@@ -83,12 +83,12 @@ const newPostSlice = createSlice({
 
       if (isImageFile) {
         state.imageCheckResult.isValid = true;
-        state.imageCheckResult.fileObject = fileData;
+        state.imageCheckResult.referenceFileObj = fileData;
         state.imageCheckResult.fileUrl = fileUrl;
         state.imageCheckResult.warningMessage = "";
       } else {
         state.imageCheckResult.isValid = false;
-        state.imageCheckResult.fileObject = null;
+        state.imageCheckResult.referenceFileObj = null;
         state.imageCheckResult.fileUrl = null;
         state.imageCheckResult.warningMessage = "Invalid file!";
       }
