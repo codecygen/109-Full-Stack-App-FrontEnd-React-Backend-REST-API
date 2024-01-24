@@ -9,8 +9,6 @@ const getAllPosts = async (
   dispatch(loadingHandler(true));
   dispatch(failHandler(false));
 
-  console.log(getAPI.getAllPosts);
-
   try {
     const res = await fetch(getAPI.getAllPosts);
     if (!res.ok) {
