@@ -12,7 +12,7 @@ import {
 import classes from "./PostOverlay.module.scss";
 
 const PostOverlay = (props) => {
-  const [test, setTest] = useState(null);
+  const [actualImageObj, setActualImageObj] = useState(null);
 
   const imageInputRef = useRef(null);
 
@@ -101,24 +101,22 @@ const PostOverlay = (props) => {
   };
 
   const imageChangeHandler = (e) => {
-    const file = e.target.files[0];
-    let fileData;
+    const actualFileData = e.target.files[0];
+    let referenceFileData;
     let fileUrl;
 
-    console.log(file);
-
-    if (file) {
+    if (actualFileData) {
       // file varaible is a File object which is nonserializable.
       // We have to make it serializable
-      fileData = {
-        name: file.name,
-        size: file.size,
-        type: file.type,
+      referenceFileData = {
+        name: actualFileData.name,
+        size: actualFileData.size,
+        type: actualFileData.type,
       };
 
-      fileUrl = URL.createObjectURL(file);
+      fileUrl = URL.createObjectURL(actualFileData);
     } else {
-      fileData = {
+      referenceFileData = {
         name: "",
         size: "",
         type: "",
@@ -127,9 +125,13 @@ const PostOverlay = (props) => {
       fileUrl = "";
     }
 
-    dispatch(newPostActions.checkImage({ fileData, fileUrl }));
+    // Only passing referenceFileData to Redux for image extension assessment
+    dispatch(newPostActions.checkImage({ fileData: referenceFileData, fileUrl }));
 
-    setTest(file);
+    // setting actual data in local state because it is a bad practice that
+    // storing the entire file object inside the Redux store is generally not 
+    // recommended because file objects are complex and may contain non-serializable data.
+    setActualImageObj(actualFileData);
   };
 
   const detailChangeHandler = (e) => {
@@ -181,7 +183,6 @@ const PostOverlay = (props) => {
     }
 
     const enteredTitle = titleResult.enteredTitle;
-    const enteredImage = imageResult.fileObject;
     const enteredDetails = detailsResult.enteredDetails;
 
     if (dataEditForm) {
@@ -190,11 +191,8 @@ const PostOverlay = (props) => {
       const updatedPostData = new FormData();
 
       updatedPostData.append("title", enteredTitle);
-      updatedPostData.append("image", test);
+      updatedPostData.append("image", actualImageObj);
       updatedPostData.append("details", enteredDetails);
-
-      console.log(updatedPostId, updatedPostData);
-      console.log(enteredImage);
 
       dispatch(updatePost(updatedPostId, updatedPostData));
 
@@ -204,11 +202,8 @@ const PostOverlay = (props) => {
     const postData = new FormData();
 
     postData.append("title", enteredTitle);
-    postData.append("image", test);
+    postData.append("image", actualImageObj);
     postData.append("details", enteredDetails);
-
-    console.log(postData);
-    console.log(enteredImage);
 
     dispatch(createNewPost(postData));
   };
