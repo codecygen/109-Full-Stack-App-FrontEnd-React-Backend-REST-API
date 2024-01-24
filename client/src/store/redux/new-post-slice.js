@@ -81,11 +81,19 @@ const newPostSlice = createSlice({
       const validFileExtensions = ["jpg", "jpeg", "png", "gif"];
       const isImageFile = validFileExtensions.includes(fileExtension);
 
-      if (isImageFile) {
+      const fileSize = +(fileData.size / 1000000).toFixed(1);
+      const isExcessFileSize = fileSize > 3 ? true : false;
+
+      if (isImageFile && !isExcessFileSize) {
         state.imageCheckResult.isValid = true;
         state.imageCheckResult.referenceFileObj = fileData;
         state.imageCheckResult.fileUrl = fileUrl;
         state.imageCheckResult.warningMessage = "";
+      } else if (isImageFile && isExcessFileSize) {
+        state.imageCheckResult.isValid = false;
+        state.imageCheckResult.referenceFileObj = null;
+        state.imageCheckResult.fileUrl = null;
+        state.imageCheckResult.warningMessage = `File size ${fileSize}MB. Max 3MB Allowed`;
       } else {
         state.imageCheckResult.isValid = false;
         state.imageCheckResult.referenceFileObj = null;
