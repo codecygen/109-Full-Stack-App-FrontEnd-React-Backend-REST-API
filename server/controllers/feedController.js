@@ -71,7 +71,8 @@ const getPost = async (req, res, next) => {
 const updatePost = async (req, res, next) => {
   try {
     const postId = req.params.postId;
-    const sentData = req.body;
+    const title = req.body.title;
+    const details = req.body.details;
 
     const existingPost = await DB.Message.getMessage(postId);
 
@@ -103,9 +104,9 @@ const updatePost = async (req, res, next) => {
     });
 
     const updatedData = {
-      title: sentData.title,
+      title,
       image: req.file.path,
-      details: sentData.details,
+      details,
       creator: {
         name: "Aras",
       },

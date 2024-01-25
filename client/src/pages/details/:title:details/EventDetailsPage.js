@@ -57,26 +57,30 @@ const EventIdPage = () => {
         </section>
       )}
 
-      <div>
+      {isLoadingDetailedPost === false && errorDetailedPost === false && (
         <div>
-          <p>
-            <strong>Created: </strong>
-            {convertDate(createdAt)}
-          </p>
-          <p>
-            <strong>Last updated: </strong>
-            {convertDate(updatedAt)}
-          </p>
-          <p className={classes.author}>
-            <strong>Written by: </strong>
-            {creatorName}
-          </p>
-        </div>
+          <div>
+            <p>
+              <strong>Created: </strong>
+              {convertDate(createdAt)}
+            </p>
+            <p>
+              <strong>Last updated: </strong>
+              {convertDate(updatedAt)}
+            </p>
+            <p className={classes.author}>
+              <strong>Written by: </strong>
+              {creatorName}
+            </p>
+          </div>
 
-        <h1>{title}:</h1>
-        <img src={`${getAPI.link}/${image}`} alt="no-img" />
-        <ReactMarkdown remarkPlugins={[remarkBreaks]}>{details}</ReactMarkdown>
-      </div>
+          <h1>{title}:</h1>
+          <img src={`${getAPI.link}/${image}`} alt="no-img" />
+          <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+            {details}
+          </ReactMarkdown>
+        </div>
+      )}
     </main>
   );
 };
