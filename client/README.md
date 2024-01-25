@@ -95,7 +95,7 @@ return (
 
 Here, we upload file to backend. In the backend (REST API), multer package is used and it is exactly same as using NodeJS backend and EJS front end. Check that project for more info to set up the backend with multer.
 
-For the ReactJS front end, details are posted to PostOverlay.js. Alternatively search the keyword **sending-file-to-backend** inside the file.
+For the ReactJS front end, details are posted to PostOverlay.js. Alternatively search the keyword inside the file.
 
 Entire idea is to construct the form as **new FormData()**
 
