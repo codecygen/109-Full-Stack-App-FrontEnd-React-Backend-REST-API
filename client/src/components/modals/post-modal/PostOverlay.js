@@ -12,6 +12,7 @@ import {
 import classes from "./PostOverlay.module.scss";
 
 const PostOverlay = (props) => {
+  // sending-file-to-backend
   const [actualImageObj, setActualImageObj] = useState(null);
 
   const imageInputRef = useRef(null);
@@ -100,6 +101,7 @@ const PostOverlay = (props) => {
     );
   };
 
+  // sending-file-to-backend
   const imageChangeHandler = (e) => {
     const actualFileData = e.target.files[0];
     let referenceFileData;
@@ -125,9 +127,11 @@ const PostOverlay = (props) => {
       fileUrl = "";
     }
 
+    // sending-file-to-backend
     // Only passing referenceFileData to Redux for image extension assessment
     dispatch(newPostActions.checkImage({ fileData: referenceFileData, fileUrl }));
 
+    // sending-file-to-backend
     // setting actual data in local state because it is a bad practice that
     // storing the entire file object inside the Redux store is generally not 
     // recommended because file objects are complex and may contain non-serializable data.
@@ -146,6 +150,7 @@ const PostOverlay = (props) => {
     );
   };
 
+  // sending-file-to-backend
   const postEventHandler = () => {
     const isTitleValid = titleResult.isValid;
     const isImageValid = imageResult.isValid;
@@ -162,6 +167,28 @@ const PostOverlay = (props) => {
       );
 
       const fileData = imageInputRef.current.files[0];
+
+      console.log(fileData);
+
+      // if (actualFileData) {
+      //   // file varaible is a File object which is nonserializable.
+      //   // We have to make it serializable
+      //   referenceFileData = {
+      //     name: actualFileData.name,
+      //     size: actualFileData.size,
+      //     type: actualFileData.type,
+      //   };
+  
+      //   fileUrl = URL.createObjectURL(actualFileData);
+      // } else {
+      //   referenceFileData = {
+      //     name: "",
+      //     size: "",
+      //     type: "",
+      //   };
+  
+      //   fileUrl = "";
+      // }
 
       if (fileData) {
         dispatch(
@@ -328,6 +355,7 @@ const PostOverlay = (props) => {
         </button>
         <button
           className={errorEditForm ? classes.button6 : classes.button2}
+          // sending-file-to-backend
           onClick={postEventHandler}
           disabled={errorEditForm}
         >
