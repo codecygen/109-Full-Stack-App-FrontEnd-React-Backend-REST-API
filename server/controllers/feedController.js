@@ -2,6 +2,13 @@ const fs = require("fs");
 const DB = require("../models/DB");
 
 const getPosts = async (req, res, next) => {
+  // const currentPage = parseInt(req.query.page);
+  // const dataCount = await this.countDocuments();
+  // pagination snippet i will work on later
+  // const result = await this.find()
+  //     .skip((currentPage - 1) * itemsPerPage)
+  //     .limit(itemsPerPage);
+
   try {
     const allMessages = await DB.Message.getMessages();
 
