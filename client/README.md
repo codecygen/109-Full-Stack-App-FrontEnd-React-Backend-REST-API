@@ -95,9 +95,9 @@ return (
 
 Here, we upload file to backend. In the backend (REST API), multer package is used and it is exactly same as using NodeJS backend and EJS front end. Check that project for more info to set up the backend with multer.
 
-For the ReactJS front end, details are posted to PostOverlay.js. Alternatively search the keyword inside the file.
+For the ReactJS front end, details are written to **PostOverlay.js**, **updateOnePost.js** and **postOnePost.js**. Alternatively search the keyword inside the file.
 
-Entire idea is to construct the form as **new FormData()**
+Entire idea is to construct the form as **new FormData()**.
 
 ```javascript
 // sending-file-to-backend
@@ -114,4 +114,33 @@ postData.append("details", enteredDetails);
 
 // sending-file-to-backend
 dispatch(createNewPost(postData));
+```
+
+```javascript
+try {
+  const res = await fetch(getAPI.postOnePost, {
+    method: "POST",
+    // sending-file-from-reactjs-to-nodejs-for-upload
+    body: postDetails,
+
+    // Normally like this but here, we upload file to backend.
+    // we use a different scenario
+    // body: JSON.stringify(postDetails),
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
+  });
+
+  if (!res.ok) {
+    throw new Error(`HTTP error! Status Code: ${res.status}`);
+  }
+
+  const data = await res.json();
+  dispatch(successHandler(data));
+  dispatch(loadingHandler(false));
+  return data;
+} catch (err) {
+  dispatch(failHandler(err.message));
+  dispatch(loadingHandler(false));
+}
 ```

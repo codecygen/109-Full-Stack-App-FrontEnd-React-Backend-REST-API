@@ -14,7 +14,15 @@ const updateOnePost = async (
   try {
     const res = await fetch(getAPI.updateOnePost(postId), {
       method: "PUT",
+      // sending-file-from-reactjs-to-nodejs-for-upload
       body: postData,
+
+      // Normally like this but here, we upload file to backend.
+      // we use a different scenario
+      // body: JSON.stringify(postData),
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
     });
 
     if (!res.ok) {
