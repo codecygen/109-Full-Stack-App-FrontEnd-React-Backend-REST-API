@@ -12,7 +12,7 @@ import {
 import classes from "./PostOverlay.module.scss";
 
 const PostOverlay = (props) => {
-  // sending-file-to-backend
+  // sending-file-from-reactjs-to-nodejs-for-upload
   const [actualImageObj, setActualImageObj] = useState(null);
 
   const imageInputRef = useRef(null);
@@ -101,7 +101,7 @@ const PostOverlay = (props) => {
     );
   };
 
-  // sending-file-to-backend
+  // sending-file-from-reactjs-to-nodejs-for-upload
   const imageChangeHandler = (e) => {
     const actualFileData = e.target.files[0];
     let referenceFileData;
@@ -127,13 +127,15 @@ const PostOverlay = (props) => {
       fileUrl = "";
     }
 
-    // sending-file-to-backend
+    // sending-file-from-reactjs-to-nodejs-for-upload
     // Only passing referenceFileData to Redux for image extension assessment
-    dispatch(newPostActions.checkImage({ fileData: referenceFileData, fileUrl }));
+    dispatch(
+      newPostActions.checkImage({ fileData: referenceFileData, fileUrl })
+    );
 
-    // sending-file-to-backend
+    // sending-file-from-reactjs-to-nodejs-for-upload
     // setting actual data in local state because it is a bad practice that
-    // storing the entire file object inside the Redux store is generally not 
+    // storing the entire file object inside the Redux store is generally not
     // recommended because file objects are complex and may contain non-serializable data.
     setActualImageObj(actualFileData);
   };
@@ -150,12 +152,13 @@ const PostOverlay = (props) => {
     );
   };
 
-  // sending-file-to-backend
+  // sending-file-from-reactjs-to-nodejs-for-upload
   const postEventHandler = () => {
     const isTitleValid = titleResult.isValid;
     const isImageValid = imageResult.isValid;
     const isDetailsValid = detailsResult.isValid;
 
+    // Pre-post input check
     if (!isTitleValid || !isImageValid || !isDetailsValid) {
       console.error("Form is not valid!");
 
@@ -166,38 +169,35 @@ const PostOverlay = (props) => {
         })
       );
 
-      const fileData = imageInputRef.current.files[0];
+      let referenceFileData;
+      let fileUrl;
 
-      console.log(fileData);
+      if (actualImageObj) {
+        // file varaible is a File object which is nonserializable.
+        // We have to make it serializable
+        referenceFileData = {
+          name: actualImageObj.name,
+          size: actualImageObj.size,
+          type: actualImageObj.type,
+        };
 
-      // if (actualFileData) {
-      //   // file varaible is a File object which is nonserializable.
-      //   // We have to make it serializable
-      //   referenceFileData = {
-      //     name: actualFileData.name,
-      //     size: actualFileData.size,
-      //     type: actualFileData.type,
-      //   };
-  
-      //   fileUrl = URL.createObjectURL(actualFileData);
-      // } else {
-      //   referenceFileData = {
-      //     name: "",
-      //     size: "",
-      //     type: "",
-      //   };
-  
-      //   fileUrl = "";
-      // }
+        fileUrl = URL.createObjectURL(actualImageObj);
+      } else {
+        referenceFileData = {
+          name: "",
+          size: "",
+          type: "",
+        };
 
-      if (fileData) {
-        dispatch(
-          newPostActions.checkImage({
-            fileData,
-            fileUrl: imageResult.fileUrl,
-          })
-        );
+        fileUrl = "";
       }
+
+      dispatch(
+        newPostActions.checkImage({
+          fileData: referenceFileData,
+          fileUrl,
+        })
+      );
 
       dispatch(
         newPostActions.checkText({
@@ -215,23 +215,36 @@ const PostOverlay = (props) => {
     if (dataEditForm) {
       const updatedPostId = dataEditForm._id;
 
+      // sending-file-from-reactjs-to-nodejs-for-upload
+      // which is often used to send data to a server via XMLHttpRequest or the Fetch API,
+      // especially when dealing with file uploads.
       const updatedPostData = new FormData();
 
+      // sending-file-from-reactjs-to-nodejs-for-upload
       updatedPostData.append("title", enteredTitle);
+      // Keep in mind that actual image object is used here.
       updatedPostData.append("image", actualImageObj);
       updatedPostData.append("details", enteredDetails);
 
+      // sending-file-from-reactjs-to-nodejs-for-upload
       dispatch(updatePost(updatedPostId, updatedPostData));
 
       return;
     }
 
+    // sending-file-from-reactjs-to-nodejs-for-upload
+    // this is a built-in Javascript object
+    // which is often used to send data to a server via XMLHttpRequest or the Fetch API,
+    // especially when dealing with file uploads.
     const postData = new FormData();
 
+    // sending-file-from-reactjs-to-nodejs-for-upload
     postData.append("title", enteredTitle);
+    // Keep in mind that actual image object is used here.
     postData.append("image", actualImageObj);
     postData.append("details", enteredDetails);
 
+    // sending-file-from-reactjs-to-nodejs-for-upload
     dispatch(createNewPost(postData));
   };
 
@@ -355,7 +368,7 @@ const PostOverlay = (props) => {
         </button>
         <button
           className={errorEditForm ? classes.button6 : classes.button2}
-          // sending-file-to-backend
+          // sending-file-from-reactjs-to-nodejs-for-upload
           onClick={postEventHandler}
           disabled={errorEditForm}
         >

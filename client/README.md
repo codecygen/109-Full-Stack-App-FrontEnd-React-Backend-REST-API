@@ -91,7 +91,27 @@ return (
 
 ```
 
-## sending-file-to-backend
+## sending-file-from-reactjs-to-nodejs-for-upload
+
 Here, we upload file to backend. In the backend (REST API), multer package is used and it is exactly same as using NodeJS backend and EJS front end. Check that project for more info to set up the backend with multer.
 
 For the ReactJS front end, details are posted to PostOverlay.js. Alternatively search the keyword **sending-file-to-backend** inside the file.
+
+Entire idea is to construct the form as **new FormData()**
+
+```javascript
+// sending-file-to-backend
+// this is a built-in Javascript object
+// which is often used to send data to a server via XMLHttpRequest or the Fetch API,
+// especially when dealing with file uploads.
+const postData = new FormData();
+
+// sending-file-to-backend
+postData.append("title", enteredTitle);
+// Keep in mind that actual image object is used here.
+postData.append("image", actualImageObj);
+postData.append("details", enteredDetails);
+
+// sending-file-to-backend
+dispatch(createNewPost(postData));
+```
