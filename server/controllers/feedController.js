@@ -2,21 +2,20 @@ const fs = require("fs");
 const DB = require("../models/DB");
 
 const getPosts = async (req, res, next) => {
-  // const currentPage = parseInt(req.query.page);
-  // const dataCount = await this.countDocuments();
-  // pagination snippet i will work on later
-  // const result = await this.find()
-  //     .skip((currentPage - 1) * itemsPerPage)
-  //     .limit(itemsPerPage);
-
-  const currentPage = +req.query.page;
-  const totalPosts = await DB.Message.countMessages();
-
   try {
-    const allMessages = await DB.Message.getMessages();
+    const currentPage = +req.query.page;
+    const totalPosts = await DB.Message.countMessages();
+    const itemsPerPage = 3;
+
+    const totalPages = Math.ceil(+(totalPosts / itemsPerPage));
+
+    const pagePosts = await DB.Message.getMessages(currentPage, itemsPerPage);
 
     res.json({
-      posts: allMessages,
+      posts: pagePosts,
+      currentPage,
+      totalPages,
+      totalPosts,
     });
   } catch (err) {
     next(err);

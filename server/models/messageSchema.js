@@ -45,9 +45,12 @@ messageSchema.methods.createMessage = async function () {
   }
 };
 
-messageSchema.statics.getMessages = async function () {
+messageSchema.statics.getMessages = async function (currentPage, itemsPerPage) {
   try {
-    const allPosts = this.find().sort({ createdAt: -1 }).exec();
+    const allPosts = await this.find()
+      .sort({ createdAt: -1 })
+      .skip((currentPage - 1) * itemsPerPage)
+      .limit(itemsPerPage);
     if (!allPosts) {
       const allPostError = new Error("Could not get all posts!");
       allPostError.statusCode = 500;
