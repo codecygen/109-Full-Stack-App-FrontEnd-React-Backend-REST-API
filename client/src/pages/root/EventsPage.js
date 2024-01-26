@@ -23,9 +23,15 @@ const FeedPage = () => {
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(null);
 
-  const { errorAllPosts, isLoadingAllPosts } = useSelector(
-    (state) => state.allPosts
-  );
+  const {
+    currentPageAllPosts,
+    totalPagesAllPosts,
+    totalPostsAllPosts,
+    errorAllPosts,
+    isLoadingAllPosts,
+  } = useSelector((state) => state.allPosts);
+
+  console.log(currentPageAllPosts, totalPagesAllPosts, totalPostsAllPosts);
 
   // Get "p" query parameter
   // request all page posts based on the

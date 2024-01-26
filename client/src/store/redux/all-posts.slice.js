@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   dataAllPosts: null,
+  currentPageAllPosts: null,
+  totalPagesAllPosts: null,
+  totalPostsAllPosts: null,
   errorAllPosts: null,
   isLoadingAllPosts: null,
 };
@@ -11,7 +14,12 @@ const allPostsSlice = createSlice({
   initialState,
   reducers: {
     success(state, action) {
-      state.dataAllPosts = action.payload;
+      const data = action.payload;
+
+      state.dataAllPosts = data.posts;
+      state.currentPageAllPosts = data.currentPage;
+      state.totalPagesAllPosts = data.totalPages;
+      state.totalPostsAllPosts = data.totalPosts
     },
 
     fail(state, action) {
