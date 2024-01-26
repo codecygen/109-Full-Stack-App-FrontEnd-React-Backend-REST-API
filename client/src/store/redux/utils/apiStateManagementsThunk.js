@@ -10,9 +10,10 @@ import postOnePost from "./api/postOnePost";
 import updateOnePost from "./api/updateOnePost";
 import deleteOnePost from "./api/deleteOnePost";
 
-export const getPostsPagePosts = () => {
+export const getPostsPagePosts = (currentPage) => {
   return async (dispatch) => {
     await getAllPosts(
+      currentPage,
       dispatch,
       allPostsActions.success,
       allPostsActions.loading,

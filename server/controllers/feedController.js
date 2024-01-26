@@ -9,6 +9,9 @@ const getPosts = async (req, res, next) => {
   //     .skip((currentPage - 1) * itemsPerPage)
   //     .limit(itemsPerPage);
 
+  const currentPage = +req.query.page;
+  const totalPosts = await DB.Message.countMessages();
+
   try {
     const allMessages = await DB.Message.getMessages();
 

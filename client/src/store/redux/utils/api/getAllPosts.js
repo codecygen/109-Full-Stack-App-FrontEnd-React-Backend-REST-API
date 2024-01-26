@@ -1,6 +1,7 @@
 import getAPI from "../config/getAPI";
 
 const getAllPosts = async (
+  currentPage,
   dispatch,
   successHandler,
   loadingHandler,
@@ -10,7 +11,7 @@ const getAllPosts = async (
   dispatch(failHandler(false));
 
   try {
-    const res = await fetch(getAPI.getAllPosts);
+    const res = await fetch(getAPI.getAllPosts(currentPage));
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
     }

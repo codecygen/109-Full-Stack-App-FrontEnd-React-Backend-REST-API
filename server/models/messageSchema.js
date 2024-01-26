@@ -74,7 +74,7 @@ messageSchema.statics.getMessage = async function (postId) {
 };
 
 messageSchema.statics.updateMessage = async function (postId, postData) {
-try {
+  try {
     const updatedPost = await this.findOneAndUpdate({ _id: postId }, postData, {
       new: true,
     });
@@ -93,11 +93,25 @@ messageSchema.statics.deleteMessage = async function (postId) {
   try {
     const deletedPost = await this.deleteOne({ _id: postId });
     if (!deletedPost) {
-      const deletedPostError = new Error("Coould not delete the post!");
+      const deletedPostError = new Error("Could not delete the post!");
       deletedPostError.statusCode = 500;
       throw deletedPostError;
     }
     return deletedPost;
+  } catch (err) {
+    throw err;
+  }
+};
+
+messageSchema.statics.countMessages = async function () {
+  try {
+    const totalPosts = await this.countDocuments();
+    if (!totalPosts || !totalPosts === 0) {
+      const totalPostError = new Error("Could not count the posts!");
+      totalPostError.statusCode = 500;
+      throw totalPostError;
+    }
+    return totalPosts;
   } catch (err) {
     throw err;
   }

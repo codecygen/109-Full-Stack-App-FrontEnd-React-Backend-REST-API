@@ -32,11 +32,11 @@ const FeedPage = () => {
   // current page value
   useEffect(() => {
     setCurrentPage((prevValue) => {
-      return prevValue ? 1 : searchParams.get("p");
+      return searchParams.get("p") ? +searchParams.get("p") : 1;
     });
 
     if (currentPage) {
-      dispatch(getPostsPagePosts());
+      dispatch(getPostsPagePosts(currentPage));
     }
   }, [dispatch, searchParams, currentPage]);
 
