@@ -161,5 +161,5 @@ For **localhost:3000/?p=2** link where you need to get the **p** parameter
 import { useSearchParams } from "react-router-dom";
 
 const [searchParams] = useSearchParams();
-console.log(searchParams);
+console.log(searchParams.get("p"));
 ```

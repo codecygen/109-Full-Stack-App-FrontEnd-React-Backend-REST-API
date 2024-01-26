@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -18,16 +18,27 @@ import classes from "./EventsPage.module.scss";
 
 const FeedPage = () => {
   const dispatch = useDispatch();
+
+  // Get "p" query parameter
   const [searchParams] = useSearchParams();
-  console.log(searchParams);
+  const [currentPage, setCurrentPage] = useState(null);
 
   const { errorAllPosts, isLoadingAllPosts } = useSelector(
     (state) => state.allPosts
   );
 
+  // Get "p" query parameter
+  // request all page posts based on the
+  // current page value
   useEffect(() => {
-    dispatch(getPostsPagePosts());
-  }, [dispatch]);
+    setCurrentPage((prevValue) => {
+      return prevValue ? 1 : searchParams.get("p");
+    });
+
+    if (currentPage) {
+      dispatch(getPostsPagePosts());
+    }
+  }, [dispatch, searchParams, currentPage]);
 
   const isPostWindowOpen = useSelector(
     (state) => state.newPost.isWindowOpenNewPost
