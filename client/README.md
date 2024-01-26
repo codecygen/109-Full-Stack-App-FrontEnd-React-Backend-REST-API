@@ -144,3 +144,22 @@ try {
   dispatch(loadingHandler(false));
 }
 ```
+
+## get-link-params-and-queries
+In NodeJS, req.params and req.query are used for link parameters and queries. In React, we use useParams and useSearchParams for this type of requests.
+
+For **localhost:3000/:id** or **localhost:3000/65b3987308526049af2c1b9d** link where you need to get the **id** parameter
+```javascript
+import { useParams } from "react-router-dom";
+const params = useParams();
+
+console.log(params.id);
+```
+
+For **localhost:3000/?p=2** link where you need to get the **p** parameter
+```javascript
+import { useSearchParams } from "react-router-dom";
+
+const [searchParams] = useSearchParams();
+console.log(searchParams);
+```

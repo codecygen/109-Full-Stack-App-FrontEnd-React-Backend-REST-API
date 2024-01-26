@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,6 +18,8 @@ import classes from "./EventsPage.module.scss";
 
 const FeedPage = () => {
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  console.log(searchParams);
 
   const { errorAllPosts, isLoadingAllPosts } = useSelector(
     (state) => state.allPosts
