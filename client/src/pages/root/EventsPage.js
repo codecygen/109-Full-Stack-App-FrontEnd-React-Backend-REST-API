@@ -8,7 +8,7 @@ import { deletePostActions } from "../../store/redux/delete-post-slice";
 import { editPostActions } from "../../store/redux/edit-post-slice";
 import { getPostsPagePosts } from "../../store/redux/utils/apiStateManagementsThunk";
 
-import Pagination from "../../components/Pagination";
+import Paginate from "../../components/Paginate";
 import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
 
@@ -76,7 +76,7 @@ const FeedPage = () => {
         New Event
       </button>
 
-      {!isLoadingAllPosts && !errorAllPosts && <Pagination />}
+      {!isLoadingAllPosts && !errorAllPosts && <Paginate />}
 
       <section className={classes.posts}>
         {isLoadingAllPosts && (
