@@ -24,10 +24,9 @@ const FeedPage = () => {
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(null);
 
-  const {
-    errorAllPosts,
-    isLoadingAllPosts,
-  } = useSelector((state) => state.allPosts);
+  const { errorAllPosts, isLoadingAllPosts } = useSelector(
+    (state) => state.allPosts
+  );
 
   // Get "p" query parameter
   // request all page posts based on the
@@ -73,11 +72,11 @@ const FeedPage = () => {
 
   return (
     <main className={classes.main}>
-      {!isLoadingAllPosts && !errorAllPosts && <Pagination />}
-
       <button className={classes.button5} onClick={openPostWindow}>
         New Event
       </button>
+
+      {!isLoadingAllPosts && !errorAllPosts && <Pagination />}
 
       <section className={classes.posts}>
         {isLoadingAllPosts && (
