@@ -8,6 +8,7 @@ import { deletePostActions } from "../../store/redux/delete-post-slice";
 import { editPostActions } from "../../store/redux/edit-post-slice";
 import { getPostsPagePosts } from "../../store/redux/utils/apiStateManagementsThunk";
 
+import Pagination from "../../components/Pagination";
 import PostModal from "../../components/modals/post-modal/PostModal";
 import DeletePostModal from "../../components/modals/delete-post-modal/DeletePostModal";
 
@@ -24,14 +25,9 @@ const FeedPage = () => {
   const [currentPage, setCurrentPage] = useState(null);
 
   const {
-    currentPageAllPosts,
-    totalPagesAllPosts,
-    totalPostsAllPosts,
     errorAllPosts,
     isLoadingAllPosts,
   } = useSelector((state) => state.allPosts);
-
-  console.log(currentPageAllPosts, totalPagesAllPosts, totalPostsAllPosts);
 
   // Get "p" query parameter
   // request all page posts based on the
@@ -77,6 +73,8 @@ const FeedPage = () => {
 
   return (
     <main className={classes.main}>
+      {!isLoadingAllPosts && !errorAllPosts && <Pagination />}
+
       <button className={classes.button5} onClick={openPostWindow}>
         New Event
       </button>
