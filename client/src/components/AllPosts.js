@@ -134,7 +134,7 @@ const AllPosts = (props) => {
           layoutTransition={{ duration: 1 }}
           initial={initialAnimationState}
           animate={finalAnimationState}
-          exit={{ opacity: 0, x: "-100%" }}
+          // exit={animationState === "onDelete" && { opacity: 0, x: "-100%" }}
           transition={{ duration: 0.3 }}
         >
           <Post
