@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 import classes from "./Paginate.module.scss";
 
-const Paginate = () => {
+const Paginate = (props) => {
   const navigate = useNavigate();
 
   const {
@@ -17,6 +17,7 @@ const Paginate = () => {
 
   const handlePageChange = (event, page) => {
     navigate(`/?p=${page}`);
+    props.upliftClickState();
   };
 
   return (

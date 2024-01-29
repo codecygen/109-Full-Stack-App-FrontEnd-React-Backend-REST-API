@@ -18,6 +18,8 @@ import Loader from "../../components/Loader";
 import classes from "./EventsPage.module.scss";
 
 const FeedPage = () => {
+  const [isAllPostsAnimationReset, setIsAllPostsAnimationReset] =
+    useState(null);
   const dispatch = useDispatch();
 
   // Get "p" query parameter
@@ -70,13 +72,19 @@ const FeedPage = () => {
     dispatch(deletePostActions.toggleWindow());
   };
 
+  const paginateClickHandler = () => {
+    setIsAllPostsAnimationReset(true);
+  };
+
   return (
     <main className={classes.main}>
       <button className={classes.button5} onClick={openPostWindow}>
         New Event
       </button>
 
-      {!isLoadingAllPosts && !errorAllPosts && <Paginate />}
+      {!isLoadingAllPosts && !errorAllPosts && (
+        <Paginate upliftClickState={paginateClickHandler} />
+      )}
 
       <section className={classes.posts}>
         {isLoadingAllPosts && (
@@ -86,7 +94,9 @@ const FeedPage = () => {
         )}
 
         {errorAllPosts && <div className={classes.center}>{errorAllPosts}</div>}
-        {!isLoadingAllPosts && !errorAllPosts && <AllPosts />}
+        {!isLoadingAllPosts && !errorAllPosts && (
+          <AllPosts isAnimationReset={isAllPostsAnimationReset} />
+        )}
       </section>
 
       {/* Message Posting Window */}

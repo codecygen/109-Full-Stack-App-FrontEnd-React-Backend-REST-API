@@ -10,10 +10,10 @@ import Post from "./Post";
 
 import convertDate from "../utils/convertDate";
 
-const AllPosts = () => {
+const AllPosts = (props) => {
   // This is used to assess if the remove box and refresh animations to be played
   // or if add new item animation to be played.
-  const [isOnMount, setIsOnMount] = useState(true);
+  const [animationState, setAnimationState] = useState("onLoad");
 
   // This postList is created to update the list live on delete or create new post actions
   // without the need of refreshing the page.
@@ -48,9 +48,15 @@ const AllPosts = () => {
         prevValues.filter((value) => value._id !== dataDeletePost._id)
       );
 
-      setIsOnMount(true);
+      setAnimationState("onDelete");
     }
   }, [dataDeletePost._id, responseDeletePost]);
+
+  useEffect(() => {
+    if (props.isAnimationReset) {
+      setAnimationState("onPageChange");
+    }
+  }, [props.isAnimationReset]);
 
   // When a new post is added, update the state of postList
   // so that the list can be updated live instead of refreshing the page.
@@ -58,7 +64,7 @@ const AllPosts = () => {
     if (dataNewPost) {
       setPostList((prevPostList) => [dataNewPost.post, ...prevPostList]);
 
-      setIsOnMount(false);
+      setAnimationState("onAdd");
     }
   }, [dataNewPost]);
 
@@ -78,7 +84,6 @@ const AllPosts = () => {
 
       setPostList(updatedPostList);
     }
-    
   }, [dataEditResult, postList]);
 
   const openDeletePostWindow = (DB) => {
@@ -98,15 +103,37 @@ const AllPosts = () => {
 
       const linkTitleConverted = post.title.toLowerCase().split(" ").join("-");
 
+      let initialAnimationState;
+
+      if (animationState === "onLoad") {
+        initialAnimationState = { opacity: 1, x: 0 };
+      } else if (animationState === "onAdd") {
+        initialAnimationState = { opacity: 0, x: "-100%" };
+      } else if (animationState === "onPageChange") {
+        initialAnimationState = { opacity: 1, x: 0 };
+      } else if (animationState === "onDelete") {
+        initialAnimationState = { opacity: 1, x: 0 };
+      }
+
+      let finalAnimationState;
+
+      if (animationState === "onLoad") {
+        finalAnimationState = { y: 10 };
+      } else if (animationState === "onAdd") {
+        finalAnimationState = { opacity: 1, x: 0, y: 10 };
+      } else if (animationState === "onPageChange") {
+        finalAnimationState = { y: 10 };
+      } else if (animationState === "onDelete") {
+        finalAnimationState = { y: 10 };
+      }
+
       return (
         <motion.div
           key={post._id}
           layout
           layoutTransition={{ duration: 1 }}
-          initial={
-            isOnMount ? { opacity: 1, x: 0 } : { opacity: 0, x: "-100%" }
-          }
-          animate={isOnMount ? { y: 10 } : { opacity: 1, x: 0, y: 10 }}
+          initial={initialAnimationState}
+          animate={finalAnimationState}
           exit={{ opacity: 0, x: "-100%" }}
           transition={{ duration: 0.3 }}
         >
