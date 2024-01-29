@@ -65,6 +65,10 @@ const AllPosts = (props) => {
       setPostList((prevPostList) => [dataNewPost.post, ...prevPostList]);
 
       setAnimationState("onAdd");
+
+      setTimeout(() => {
+        window.location.href = "/?p=1";
+      }, 1000);
     }
   }, [dataNewPost]);
 
@@ -85,6 +89,8 @@ const AllPosts = (props) => {
       setPostList(updatedPostList);
     }
   }, [dataEditResult, postList]);
+
+  useEffect(() => {}, []);
 
   const openDeletePostWindow = (DB) => {
     dispatch(deletePostActions.toggleWindow());
@@ -134,7 +140,7 @@ const AllPosts = (props) => {
           layoutTransition={{ duration: 1 }}
           initial={initialAnimationState}
           animate={finalAnimationState}
-          // exit={animationState === "onDelete" && { opacity: 0, x: "-100%" }}
+          // exit={{ opacity: 0, x: "-100%" }}
           transition={{ duration: 0.3 }}
         >
           <Post

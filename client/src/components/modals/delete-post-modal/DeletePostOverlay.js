@@ -29,6 +29,10 @@ const NewPostOverlay = (props) => {
 
   const deleteButtonHandler = () => {
     dispatch(deletePost(dataDeletePost._id));
+
+    setTimeout(() => {
+      window.location.href = "/?p=1";
+    }, 1000);
   };
 
   let warningClasses;
