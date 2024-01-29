@@ -18,8 +18,7 @@ import Loader from "../../components/Loader";
 import classes from "./EventsPage.module.scss";
 
 const FeedPage = () => {
-  const [isPageChanged, setIsPageChanged] =
-    useState(null);
+  const [isPageChanged, setIsPageChanged] = useState(null);
   const dispatch = useDispatch();
 
   // Get "p" query parameter
@@ -82,10 +81,6 @@ const FeedPage = () => {
         New Event
       </button>
 
-      {!isLoadingAllPosts && !errorAllPosts && (
-        <Paginate upliftClickState={paginateClickHandler} />
-      )}
-
       <section className={classes.posts}>
         {isLoadingAllPosts && (
           <div className={classes.center}>
@@ -95,7 +90,10 @@ const FeedPage = () => {
 
         {errorAllPosts && <div className={classes.center}>{errorAllPosts}</div>}
         {!isLoadingAllPosts && !errorAllPosts && (
-          <AllPosts isPageChanged={isPageChanged} />
+          <>
+            <Paginate upliftClickState={paginateClickHandler} />
+            <AllPosts isPageChanged={isPageChanged} />
+          </>
         )}
       </section>
 
