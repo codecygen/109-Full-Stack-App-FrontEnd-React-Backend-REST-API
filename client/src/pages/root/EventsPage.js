@@ -18,7 +18,7 @@ import Loader from "../../components/Loader";
 import classes from "./EventsPage.module.scss";
 
 const FeedPage = () => {
-  const [isAllPostsAnimationReset, setIsAllPostsAnimationReset] =
+  const [isPageChanged, setIsPageChanged] =
     useState(null);
   const dispatch = useDispatch();
 
@@ -73,7 +73,7 @@ const FeedPage = () => {
   };
 
   const paginateClickHandler = () => {
-    setIsAllPostsAnimationReset(true);
+    setIsPageChanged(true);
   };
 
   return (
@@ -95,7 +95,7 @@ const FeedPage = () => {
 
         {errorAllPosts && <div className={classes.center}>{errorAllPosts}</div>}
         {!isLoadingAllPosts && !errorAllPosts && (
-          <AllPosts isAnimationReset={isAllPostsAnimationReset} />
+          <AllPosts isPageChanged={isPageChanged} />
         )}
       </section>
 

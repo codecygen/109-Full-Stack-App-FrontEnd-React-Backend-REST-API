@@ -53,10 +53,10 @@ const AllPosts = (props) => {
   }, [dataDeletePost._id, responseDeletePost]);
 
   useEffect(() => {
-    if (props.isAnimationReset) {
+    if (props.isPageChanged) {
       setAnimationState("onPageChange");
     }
-  }, [props.isAnimationReset]);
+  }, [props.isPageChanged]);
 
   // When a new post is added, update the state of postList
   // so that the list can be updated live instead of refreshing the page.
