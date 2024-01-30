@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useNavigate, useLocation } from "react-router-dom";
+
 import { deletePost } from "../../../store/redux/utils/apiStateManagementsThunk";
 
 import { deletePostActions } from "../../../store/redux/delete-post-slice";
@@ -8,6 +10,8 @@ import { deletePostActions } from "../../../store/redux/delete-post-slice";
 import classes from "./DeletePostOverlay.module.scss";
 
 const NewPostOverlay = (props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const {
@@ -30,9 +34,18 @@ const NewPostOverlay = (props) => {
   const deleteButtonHandler = () => {
     dispatch(deletePost(dataDeletePost._id));
 
-    setTimeout(() => {
-      window.location.href = "/?p=1";
+    const queryParams = new URLSearchParams(location.search);
+    const pageQueryParam = queryParams.get("p");
+
+    const timeOut = setTimeout(() => {
+      if (pageQueryParam === null || pageQueryParam === "1") {
+        window.location.reload();
+      } else {
+        navigate("/");
+      }
     }, 1000);
+
+    return () => clearTimeout(timeOut);
   };
 
   let warningClasses;

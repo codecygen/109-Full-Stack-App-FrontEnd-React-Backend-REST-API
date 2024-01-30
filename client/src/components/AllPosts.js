@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useNavigate, useLocation } from "react-router-dom";
+
 import { AnimatePresence, motion } from "framer-motion";
 
 import { getEditWindowPost } from "../store/redux/utils/apiStateManagementsThunk";
@@ -18,6 +20,9 @@ const AllPosts = (props) => {
   // This postList is created to update the list live on delete or create new post actions
   // without the need of refreshing the page.
   const [postList, setPostList] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const dispatch = useDispatch();
   const { dataAllPosts } = useSelector((state) => state.allPosts);
 
@@ -66,11 +71,23 @@ const AllPosts = (props) => {
 
       setAnimationState("onAdd");
 
+      const queryParams = new URLSearchParams(location.search);
+      const pageQueryParam = queryParams.get("p");
+
+      console.log("dataNewPost:", dataNewPost);
+      console.log("pageQueryParam:", pageQueryParam);
+
       setTimeout(() => {
-        window.location.href = "/?p=1";
+        if (pageQueryParam === null || pageQueryParam === "1") {
+          window.location.reload();
+        } else {
+          navigate("/");
+        }
       }, 1000);
+
+      // return () => clearTimeout(timeOut);
     }
-  }, [dataNewPost]);
+  }, [dataNewPost, location.search, navigate]);
 
   // When a post is updated, update the state of postList
   // so that the list can be updated live instead of refreshing the page.
