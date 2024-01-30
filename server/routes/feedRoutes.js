@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const validateInputMiddleware = require("../middleware/validateInputMiddleware");
-
 const feedController = require("../controllers/feedController");
+const validateMessageInput = require("../middleware/validateMessageInput");
 
 const fileUploadConfig = require("../config/fileUploadConfig");
 
@@ -11,7 +10,7 @@ router.get("/posts", feedController.getPosts);
 router.post(
   "/post",
   fileUploadConfig.single("image"),
-  validateInputMiddleware,
+  validateMessageInput,
   feedController.postPost
 );
 
@@ -21,7 +20,7 @@ router.delete("/delete/:postId", feedController.deletePost);
 router.put(
   "/update/:postId",
   fileUploadConfig.single("image"),
-  validateInputMiddleware,
+  validateMessageInput,
   feedController.updatePost
 );
 

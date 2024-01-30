@@ -1,7 +1,6 @@
-const { validationResult } = require("express-validator");
-const { check } = require("express-validator");
+const { validationResult, check } = require("express-validator");
 
-const validateInputMiddleware = async (req, res, next) => {
+const validateMessageInput = async (req, res, next) => {
   try {
     const inputs = [
       check("title")
@@ -32,4 +31,4 @@ const validateInputMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = validateInputMiddleware;
+module.exports = validateMessageInput;

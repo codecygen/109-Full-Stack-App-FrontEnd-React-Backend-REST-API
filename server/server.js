@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const feedRoutes = require("./routes/feedRoutes");
+const userRoutes = require("./routes/userRoutes");
+
 const corsMiddleware = require("./middleware/corsMiddleware");
 const errorMiddleware = require("./middleware/errorMiddleware");
 
@@ -20,6 +22,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/feed", feedRoutes);
+app.use("/auth", userRoutes);
 
 // Always keep error middleware in the end of the app
 app.use(errorMiddleware);
