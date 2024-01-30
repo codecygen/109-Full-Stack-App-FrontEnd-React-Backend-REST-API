@@ -74,18 +74,13 @@ const AllPosts = (props) => {
       const queryParams = new URLSearchParams(location.search);
       const pageQueryParam = queryParams.get("p");
 
-      console.log("dataNewPost:", dataNewPost);
-      console.log("pageQueryParam:", pageQueryParam);
-
       setTimeout(() => {
         if (pageQueryParam === null || pageQueryParam === "1") {
           window.location.reload();
         } else {
           navigate("/");
         }
-      }, 1000);
-
-      // return () => clearTimeout(timeOut);
+      }, 750);
     }
   }, [dataNewPost, location.search, navigate]);
 
@@ -127,27 +122,20 @@ const AllPosts = (props) => {
       const linkTitleConverted = post.title.toLowerCase().split(" ").join("-");
 
       let initialAnimationState;
-
-      if (animationState === "onLoad") {
-        initialAnimationState = { opacity: 1, x: 0 };
-      } else if (animationState === "onAdd") {
-        initialAnimationState = { opacity: 0, x: "-100%" };
-      } else if (animationState === "onPageChange") {
-        initialAnimationState = { opacity: 1, x: 0 };
-      } else if (animationState === "onDelete") {
-        initialAnimationState = { opacity: 1, x: 0 };
-      }
-
       let finalAnimationState;
 
       if (animationState === "onLoad") {
         finalAnimationState = { y: 10 };
+        initialAnimationState = { opacity: 1, x: 0 };
       } else if (animationState === "onAdd") {
         finalAnimationState = { opacity: 1, x: 0, y: 10 };
+        initialAnimationState = { opacity: 0, x: "-100%" };
       } else if (animationState === "onPageChange") {
         finalAnimationState = { y: 10 };
+        initialAnimationState = { opacity: 1, x: 0 };
       } else if (animationState === "onDelete") {
         finalAnimationState = { y: 10 };
+        initialAnimationState = { opacity: 1, x: 0 };
       }
 
       return (
@@ -157,7 +145,7 @@ const AllPosts = (props) => {
           layoutTransition={{ duration: 1 }}
           initial={initialAnimationState}
           animate={finalAnimationState}
-          // exit={{ opacity: 0, x: "-100%" }}
+          exit={{ opacity: 0, x: "-100%" }}
           transition={{ duration: 0.3 }}
         >
           <Post

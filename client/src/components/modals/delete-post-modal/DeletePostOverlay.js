@@ -43,7 +43,7 @@ const NewPostOverlay = (props) => {
       } else {
         navigate("/");
       }
-    }, 1000);
+    }, 750);
 
     return () => clearTimeout(timeOut);
   };
