@@ -13,7 +13,7 @@ const validateSignupInput = async (req, res, next) => {
         .bail()
         .custom(async (value, { req }) => {
           const email = value;
-          const foundUser = await DB.User.findUser(email);
+          const foundUser = await DB.User.findUserWithEmail(email);
 
           if (foundUser) {
             throw new Error("Email already exists in database!");
@@ -26,7 +26,18 @@ const validateSignupInput = async (req, res, next) => {
         .isString()
         .trim()
         .escape()
-        .withMessage("Not the correct name format!"),
+        .withMessage("Not the correct name format!")
+        .bail()
+        .custom(async (value, { req }) => {
+          const name = value;
+          const foundUser = await DB.User.findUserWithName(name);
+
+          if (foundUser) {
+            throw new Error("Name already exists in database!");
+          }
+
+          return true;
+        }),
       check("password")
         .isLength({ min: 8 })
         .isString()
