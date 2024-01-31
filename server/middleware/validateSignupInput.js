@@ -2,32 +2,34 @@ const { validationResult, check } = require("express-validator");
 
 const validateSignupInput = async (req, res, next) => {
   try {
-    const inputs = [
+    const inputList = [
       check("email")
-        .not()
-        .isEmpty()
-        .trim()
+        .notEmpty()
+        .isEmail()
+        .normalizeEmail()
         .escape()
-        .withMessage("Not the correct email!"),
+        .withMessage("Not the correct email format!"),
       check("name")
-        .not()
-        .isEmpty()
+        .notEmpty()
+        .isString()
         .trim()
         .escape()
-        .withMessage("Not the correct name!"),
+        .withMessage("Not the correct name format!"),
       check("password")
-        .not()
-        .isEmpty()
+        .isLength({ min: 8 })
+        .isString()
         .trim()
         .escape()
-        .withMessage("Not the correct password!"),
+        .withMessage("Not the correct password format!"),
     ];
 
-    await Promise.all(inputs.map((input) => input.run(req)));
+    await Promise.all(inputList.map((input) => input.run(req)));
 
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
-      const validationError = new Error("Input validation error!");
+      const validationError = new Error("Signup input validation error!");;
+      validationError.inputErrors = errors.array();
       validationError.statusCode = 422;
       throw validationError;
     }

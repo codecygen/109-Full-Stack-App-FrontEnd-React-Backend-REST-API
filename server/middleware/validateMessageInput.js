@@ -19,7 +19,7 @@ const validateMessageInput = async (req, res, next) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const validationError = new Error("Input validation error!");;
+      const validationError = new Error("New Message Input validation error!");;
       validationError.inputErrors = errors.array();
       validationError.statusCode = 422;
       throw validationError;
