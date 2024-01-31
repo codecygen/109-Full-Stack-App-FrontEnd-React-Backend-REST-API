@@ -1,9 +1,20 @@
+const { promisify } = require("util");
+const bcrypt = require("bcrypt");
+const hashPass = promisify(bcrypt.hash);
+
 const DB = require("../models/DB");
 
 const signup = async (req, res, next) => {
-  const { email, name, password } = req.body;
+  try {
+    const { email, name, password } = req.body;
 
-  console.log(email, name, password);
+    const saltRounds = 12;
+    const hashedPassword = await hashPass(password, saltRounds);
+    
+    console.log(email, name, hashedPassword);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = { signup };
