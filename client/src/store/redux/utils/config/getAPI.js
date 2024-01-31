@@ -2,7 +2,8 @@ const API_LINK = "http://localhost:4000";
 
 class getAPI {
   static link = API_LINK;
-  // static getAllPosts = `${this.link}/feed/posts`;
+
+  // Post related endpoints
   static postOnePost = `${this.link}/feed/post`;
 
   static getAllPosts(currentPage) {
@@ -20,6 +21,9 @@ class getAPI {
   static deleteOnePost(id) {
     return `${this.link}/feed/delete/${id}`;
   }
+
+  // User related endpoints
+  static postNewUser = `${this.link}/auth/signup`;
 }
 
 export default getAPI;
