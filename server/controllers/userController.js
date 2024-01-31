@@ -10,8 +10,22 @@ const signup = async (req, res, next) => {
 
     const saltRounds = 12;
     const hashedPassword = await hashPass(password, saltRounds);
-    
-    console.log(email, name, hashedPassword);
+
+    const newUser = new DB.User({
+      email,
+      password: hashedPassword,
+      name,
+    });
+
+    const createdUser = await newUser.createUser();
+
+    res.json({
+      message: "User successfully created!",
+      user: {
+        email: createdUser.email,
+        name: createdUser.name,
+      },
+    });
   } catch (err) {
     next(err);
   }

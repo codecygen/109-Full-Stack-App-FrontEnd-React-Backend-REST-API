@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      required: true,
+      default: "I am a new user!",
     },
 
     posts: [
@@ -32,6 +32,15 @@ const userSchema = new mongoose.Schema(
   },
   { collection: "UserSchema", timestamps: true }
 );
+
+userSchema.methods.createUser = async function () {
+  try {
+    const createdUser = await this.save();
+    return createdUser;
+  } catch (err) {
+    throw err;
+  }
+};
 
 userSchema.statics.findUserWithEmail = async function (email) {
   try {
