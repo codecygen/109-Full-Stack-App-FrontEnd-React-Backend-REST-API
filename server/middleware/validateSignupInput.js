@@ -1,4 +1,5 @@
 const { validationResult, check } = require("express-validator");
+const DB = require("../models/DB");
 
 const validateSignupInput = async (req, res, next) => {
   try {
@@ -8,7 +9,18 @@ const validateSignupInput = async (req, res, next) => {
         .isEmail()
         .normalizeEmail()
         .escape()
-        .withMessage("Not the correct email format!"),
+        .withMessage("Not the correct email format!")
+        .bail()
+        .custom(async (value, { req }) => {
+          const email = value;
+          const foundUser = await DB.User.findUser(email);
+
+          if (foundUser) {
+            throw new Error("Email already exists in database!");
+          }
+
+          return true;
+        }),
       check("name")
         .notEmpty()
         .isString()
@@ -28,7 +40,7 @@ const validateSignupInput = async (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      const validationError = new Error("Signup input validation error!");;
+      const validationError = new Error("Signup input validation error!");
       validationError.inputErrors = errors.array();
       validationError.statusCode = 422;
       throw validationError;
