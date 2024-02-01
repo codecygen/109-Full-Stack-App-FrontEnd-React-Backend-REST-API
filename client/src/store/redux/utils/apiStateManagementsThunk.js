@@ -9,6 +9,7 @@ import getOnePost from "./api/getOnePost";
 import postOnePost from "./api/postOnePost";
 import updateOnePost from "./api/updateOnePost";
 import deleteOnePost from "./api/deleteOnePost";
+import signupOneUser from "./api/signupOneUser";
 
 export const getPostsPagePosts = (currentPage) => {
   return async (dispatch) => {
@@ -81,5 +82,14 @@ export const deletePost = (postId) => {
       deletePostActions.loading,
       deletePostActions.fail
     );
+  };
+};
+
+export const signup = (signupData) => {
+  return async (dispatch) => {
+    await signupOneUser(
+      signupData,
+      dispatch,
+    )
   };
 };
