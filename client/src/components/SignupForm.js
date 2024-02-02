@@ -60,7 +60,6 @@ const SignupForm = () => {
             component="form"
             onSubmit={submitHandler}
             noValidate
-            sx={{ mt: 1 }}
           >
             <TextField
               margin="normal"
@@ -115,7 +114,6 @@ const SignupForm = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
             >
               Sign Up
             </Button>

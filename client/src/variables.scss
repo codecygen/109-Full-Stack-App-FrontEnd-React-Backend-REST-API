@@ -4,7 +4,6 @@ $paddingMainNarrowScreen: 5px;
 // Navbar height management
 $paddingMenuTopBottom: 15px;
 $heightMenuWriting: 50px;
-$lineHeightMenuWriting: $heightMenuWriting - 5px;
 $navbarHeight: 2 * $paddingMenuTopBottom + $heightMenuWriting;
 // This is necessary since the menu has fixed position. So in order to push
 // the actual page content down, there has to be a relatively positioned empty
