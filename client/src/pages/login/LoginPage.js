@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import Signup from "../../components/SignupForm";
+import SignupForm from "../../components/SignupForm";
+import LoginForm from "../../components/LoginForm";
 import { Box, Switch } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -38,9 +39,9 @@ const LoginPage = () => {
           alignItems: "center",
         }}
       >
-        {!isChecked && <p>Login</p>}
+        {!isChecked && <LoginForm />}
 
-        {isChecked && <Signup />}
+        {isChecked && <SignupForm />}
 
         <ThemeProvider theme={customTheme}>
           <Box

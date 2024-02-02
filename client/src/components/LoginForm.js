@@ -9,19 +9,17 @@ import TextField from "@mui/material/TextField";
 // import Link from "@mui/material/Link";
 // import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import LockIcon from '@material-ui/icons/Lock';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const defaultTheme = createTheme();
 
-const SignupForm = () => {
+const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
-    username: "",
     password: "",
-    repeatPass: "",
   });
 
   const changeHandler = (e) => {
@@ -33,9 +31,7 @@ const SignupForm = () => {
     e.preventDefault();
     console.log({
       email: formData.email,
-      username: formData.username,
       password: formData.password,
-      repeatPass: formData.repeatPass,
     });
   };
 
@@ -51,10 +47,10 @@ const SignupForm = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <AccountBoxIcon />
+            <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign Up
+            Login
           </Typography>
           <Box
             component="form"
@@ -78,33 +74,11 @@ const SignupForm = () => {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              type="text"
-              // autoFocus
-              onChange={changeHandler}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
               id="password"
               label="Password"
               name="password"
               type="password"
-              // autoFocus
-              onChange={changeHandler}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="repeatpass"
-              label="Repeat Password"
-              name="repeatPass"
-              type="password"
-              // autoFocus
+            //   autoFocus
               onChange={changeHandler}
             />
             {/* <FormControlLabel
@@ -117,7 +91,7 @@ const SignupForm = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Login
             </Button>
             {/* <Grid container> */}
               {/* <Grid item xs>
@@ -138,4 +112,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default LoginForm;
