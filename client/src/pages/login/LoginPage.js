@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Signup from "../../components/Signup";
+import Signup from "../../components/SignupForm";
 import { Box, Switch } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -15,7 +15,7 @@ const customTheme = createTheme({
           backgroundColor: "navy",
         },
         thumb: {
-          backgroundColor: "#769fb0",
+          backgroundColor: "#1d3682",
         },
       },
     },
@@ -29,8 +29,6 @@ const LoginPage = () => {
     setIsChecked(!isChecked);
   };
 
-  console.log(isChecked);
-
   return (
     <main className={classes.main}>
       <Box
@@ -40,15 +38,28 @@ const LoginPage = () => {
           alignItems: "center",
         }}
       >
-        <ThemeProvider theme={customTheme}>
-          <Switch
-            checked={isChecked}
-            onChange={handleSwitchChange}
-            color="secondary"
-          />
-        </ThemeProvider>
+        {!isChecked && <p>Login</p>}
 
-        <Signup />
+        {isChecked && <Signup />}
+
+        <ThemeProvider theme={customTheme}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <p>Login</p>
+            <Switch
+              checked={isChecked}
+              onChange={handleSwitchChange}
+              color="secondary"
+            />
+            <p>Signup</p>
+          </Box>
+        </ThemeProvider>
       </Box>
     </main>
   );
