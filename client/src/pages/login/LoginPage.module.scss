@@ -4,7 +4,7 @@
     @include alignFooterBottomInMinPageHeight();
     text-align: center;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 
     > * {

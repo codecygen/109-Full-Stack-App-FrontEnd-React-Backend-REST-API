@@ -37,6 +37,7 @@ const LoginPage = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          justifyContent: "flex-start",
         }}
       >
         {!isChecked && <LoginForm />}
