@@ -6,6 +6,8 @@ import editPostSlice from "./edit-post-slice";
 import deletePostSlice from "./delete-post-slice";
 import detailedPostSlice from "./detailed-post-slice";
 
+import signupSlice from "./signup-slice";
+
 const store = configureStore({
   reducer: {
     allPosts: allPostsSlice.reducer,
@@ -13,6 +15,8 @@ const store = configureStore({
     editPost: editPostSlice.reducer,
     deletePost: deletePostSlice.reducer,
     detailedPost: detailedPostSlice.reducer,
+    
+    signup: signupSlice.reducer,
   },
 });
 
