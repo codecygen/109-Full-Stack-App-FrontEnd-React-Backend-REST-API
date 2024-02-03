@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isEmailValid: false,
-  isUsernameValid: false,
-  isPasswordValid: false,
-  isFormValid: false,
+  isEmailValid: null,
+  isUsernameValid: null,
+  areBothPassesValid: null,
+  isPasswordValid: null,
+  isRepeatPasswordValid: null,
+  isFormValid: null,
 };
 
 const signupSlice = createSlice({
@@ -27,17 +29,21 @@ const signupSlice = createSlice({
     checkPassword(state, action) {
       const { password, repeatPassword } = action.payload;
 
+      state.isPasswordValid = password.trim().length > 5;
+      state.isRepeatPasswordValid = repeatPassword.trim().length > 5;
+
       if (password !== repeatPassword) {
-        state.isPasswordValid = false;
+        state.areBothPassesValid = false;
         return;
       }
 
-      state.isPasswordValid = password.trim().length > 5;
+      state.areBothPassesValid =
+        password.trim().length > 5 && repeatPassword.trim().length > 5;
     },
 
     checkForm(state, action) {
       state.isFormValid =
-        state.isEmailValid && state.isUsernameValid && state.isPasswordValid;
+        state.isEmailValid && state.isUsernameValid && state.areBothPassesValid;
     },
   },
 });

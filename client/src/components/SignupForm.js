@@ -30,12 +30,48 @@ const SignupForm = () => {
     repeatPass: "",
   });
 
-  const { isEmailValid, isUsernameValid, isPasswordValid, isFormValid } =
-    useSelector((state) => state.signup);
+  const {
+    isEmailValid,
+    isUsernameValid,
+    areBothPassesValid,
+    isPasswordValid,
+    isRepeatPasswordValid,
+    isFormValid,
+  } = useSelector((state) => state.signup);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    if (name === "email") {
+      dispatch(signupActions.checkEmail(formData.email));
+    } else if (name === "username") {
+      dispatch(signupActions.checkName(formData.username));
+    } else if (name === "password" || name === "repeatPass") {
+      dispatch(
+        signupActions.checkPassword({
+          password: formData.password,
+          repeatPassword: formData.repeatPass,
+        })
+      );
+    }
+  };
+
+  const blurHandler = (e) => {
+    const { name } = e.target;
+
+    if (name === "email") {
+      dispatch(signupActions.checkEmail(formData.email));
+    } else if (name === "username") {
+      dispatch(signupActions.checkName(formData.username));
+    } else if (name === "password" || name === "repeatPass") {
+      dispatch(
+        signupActions.checkPassword({
+          password: formData.password,
+          repeatPassword: formData.repeatPass,
+        })
+      );
+    }
   };
 
   const submitHandler = (e) => {
@@ -56,12 +92,21 @@ const SignupForm = () => {
   };
 
   useEffect(() => {
-    console.log("====================")
+    console.log("====================");
     console.log("email: ", isEmailValid);
     console.log("username: ", isUsernameValid);
+    console.log("all passes: ", areBothPassesValid);
     console.log("password: ", isPasswordValid);
+    console.log("repeat password: ", isRepeatPasswordValid);
     console.log("form: ", isFormValid);
-  }, [isEmailValid, isUsernameValid, isPasswordValid, isFormValid]);
+  }, [
+    isEmailValid,
+    isUsernameValid,
+    areBothPassesValid,
+    isPasswordValid,
+    isRepeatPasswordValid,
+    isFormValid,
+  ]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -92,6 +137,10 @@ const SignupForm = () => {
               type="email"
               autoFocus
               onChange={changeHandler}
+              onBlur={blurHandler}
+              sx={{
+                backgroundColor: isEmailValid === false && '#fae3ea',
+              }}
             />
             <TextField
               margin="normal"
@@ -103,6 +152,10 @@ const SignupForm = () => {
               type="text"
               // autoFocus
               onChange={changeHandler}
+              onBlur={blurHandler}
+              sx={{
+                backgroundColor: isUsernameValid === false && '#fae3ea',
+              }}
             />
             <TextField
               margin="normal"
@@ -114,6 +167,10 @@ const SignupForm = () => {
               type="password"
               // autoFocus
               onChange={changeHandler}
+              onBlur={blurHandler}
+              sx={{
+                backgroundColor: isPasswordValid === false && '#fae3ea',
+              }}
             />
             <TextField
               margin="normal"
@@ -125,6 +182,10 @@ const SignupForm = () => {
               type="password"
               // autoFocus
               onChange={changeHandler}
+              onBlur={blurHandler}
+              sx={{
+                backgroundColor: isRepeatPasswordValid === false && '#fae3ea',
+              }}
             />
             {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
