@@ -107,6 +107,7 @@ const SignupForm = () => {
             Sign Up
           </Typography>
           <Box component="form" onSubmit={submitHandler} noValidate>
+            <Typography variant="body1">sadsd</Typography>
             <TextField
               margin="normal"
               required
@@ -122,6 +123,7 @@ const SignupForm = () => {
                 backgroundColor: isEmailValid === false && "#fae3ea",
               }}
             />
+            <Typography variant="body1">sadsd</Typography>
             <TextField
               margin="normal"
               required
@@ -135,6 +137,7 @@ const SignupForm = () => {
                 backgroundColor: isUsernameValid === false && "#fae3ea",
               }}
             />
+            <Typography variant="body1">sadsd</Typography>
             <TextField
               margin="normal"
               required
@@ -148,6 +151,8 @@ const SignupForm = () => {
                 backgroundColor: isPasswordValid === false && "#fae3ea",
               }}
             />
+
+            {/* <Typography variant="body1">sadsd</Typography> */}
             <TextField
               margin="normal"
               required
