@@ -41,57 +41,38 @@ const SignupForm = () => {
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
 
     if (name === "email") {
-      dispatch(signupActions.checkEmail(formData.email));
+      dispatch(signupActions.checkEmail(value));
     } else if (name === "username") {
-      dispatch(signupActions.checkName(formData.username));
-    } else if (name === "password" || name === "repeatPass") {
+      dispatch(signupActions.checkName(value));
+    } else if (name === "password") {
       dispatch(
         signupActions.checkPassword({
-          password: formData.password,
+          password: value,
           repeatPassword: formData.repeatPass,
         })
       );
-    }
-  };
-
-  const blurHandler = (e) => {
-    const { name } = e.target;
-
-    if (name === "email") {
-      dispatch(signupActions.checkEmail(formData.email));
-    } else if (name === "username") {
-      dispatch(signupActions.checkName(formData.username));
-    } else if (name === "password" || name === "repeatPass") {
+    } else if (name === "repeatPass") {
       dispatch(
-        signupActions.checkPassword({
+        signupActions.checkRepeatPassword({
           password: formData.password,
-          repeatPassword: formData.repeatPass,
+          repeatPassword: value,
         })
       );
     }
+
+    dispatch(signupActions.checkForm());
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(signupActions.checkEmail(formData.email));
+    if (!isFormValid) {
+      return;
+    }
 
-    dispatch(signupActions.checkName(formData.username));
-
-    dispatch(
-      signupActions.checkPassword({
-        password: formData.password,
-        repeatPassword: formData.repeatPass,
-      })
-    );
-
-    dispatch(signupActions.checkForm());
-  };
-
-  useEffect(() => {
     console.log("====================");
     console.log("email: ", isEmailValid);
     console.log("username: ", isUsernameValid);
@@ -99,14 +80,14 @@ const SignupForm = () => {
     console.log("password: ", isPasswordValid);
     console.log("repeat password: ", isRepeatPasswordValid);
     console.log("form: ", isFormValid);
-  }, [
-    isEmailValid,
-    isUsernameValid,
-    areBothPassesValid,
-    isPasswordValid,
-    isRepeatPasswordValid,
-    isFormValid,
-  ]);
+  };
+
+  // Reset state when the login or signup button is toggled
+  useEffect(() => {
+    return () => {
+      dispatch(signupActions.resetState());
+    };
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -137,9 +118,8 @@ const SignupForm = () => {
               type="email"
               autoFocus
               onChange={changeHandler}
-              onBlur={blurHandler}
               sx={{
-                backgroundColor: isEmailValid === false && '#fae3ea',
+                backgroundColor: isEmailValid === false && "#fae3ea",
               }}
             />
             <TextField
@@ -150,11 +130,9 @@ const SignupForm = () => {
               label="Username"
               name="username"
               type="text"
-              // autoFocus
               onChange={changeHandler}
-              onBlur={blurHandler}
               sx={{
-                backgroundColor: isUsernameValid === false && '#fae3ea',
+                backgroundColor: isUsernameValid === false && "#fae3ea",
               }}
             />
             <TextField
@@ -165,11 +143,9 @@ const SignupForm = () => {
               label="Password"
               name="password"
               type="password"
-              // autoFocus
               onChange={changeHandler}
-              onBlur={blurHandler}
               sx={{
-                backgroundColor: isPasswordValid === false && '#fae3ea',
+                backgroundColor: isPasswordValid === false && "#fae3ea",
               }}
             />
             <TextField
@@ -180,18 +156,21 @@ const SignupForm = () => {
               label="Repeat Password"
               name="repeatPass"
               type="password"
-              // autoFocus
               onChange={changeHandler}
-              onBlur={blurHandler}
               sx={{
-                backgroundColor: isRepeatPasswordValid === false && '#fae3ea',
+                backgroundColor: isRepeatPasswordValid === false && "#fae3ea",
               }}
             />
             {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               /> */}
-            <Button type="submit" fullWidth variant="contained">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              disabled={!isFormValid}
+            >
               Sign Up
             </Button>
             {/* <Grid container> */}

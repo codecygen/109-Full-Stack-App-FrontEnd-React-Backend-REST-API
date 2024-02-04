@@ -30,7 +30,24 @@ const signupSlice = createSlice({
       const { password, repeatPassword } = action.payload;
 
       state.isPasswordValid = password.trim().length > 5;
-      state.isRepeatPasswordValid = repeatPassword.trim().length > 5;
+
+      state.isRepeatPasswordValid =
+        repeatPassword.trim().length > 5 && password === repeatPassword;
+
+      if (password !== repeatPassword) {
+        state.areBothPassesValid = false;
+        return;
+      }
+
+      state.areBothPassesValid =
+        password.trim().length > 5 && repeatPassword.trim().length > 5;
+    },
+
+    checkRepeatPassword(state, action) {
+      const { password, repeatPassword } = action.payload;
+
+      state.isRepeatPasswordValid =
+        repeatPassword.trim().length > 5 && password === repeatPassword;
 
       if (password !== repeatPassword) {
         state.areBothPassesValid = false;
@@ -45,6 +62,10 @@ const signupSlice = createSlice({
       state.isFormValid =
         state.isEmailValid && state.isUsernameValid && state.areBothPassesValid;
     },
+
+    resetState(state, action) {
+      return initialState;
+    }
   },
 });
 
