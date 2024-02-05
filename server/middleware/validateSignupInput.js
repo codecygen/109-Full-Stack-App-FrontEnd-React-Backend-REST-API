@@ -22,7 +22,7 @@ const validateSignupInput = async (req, res, next) => {
           return true;
         }),
       check("name")
-        .notEmpty()
+        .isLength({ min: 4 })
         .isString()
         .trim()
         .escape()
@@ -39,7 +39,7 @@ const validateSignupInput = async (req, res, next) => {
           return true;
         }),
       check("password")
-        .isLength({ min: 8 })
+        .isLength({ min: 6 })
         .isString()
         .trim()
         .escape()

@@ -107,7 +107,18 @@ const SignupForm = () => {
             Sign Up
           </Typography>
           <Box component="form" onSubmit={submitHandler} noValidate>
-            <Typography variant="body1">sadsd</Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "red",
+                visibility: isEmailValid === false ? "visible" : "hidden",
+              }}
+            >
+              Invalid email!
+            </Typography>
             <TextField
               margin="normal"
               required
@@ -123,7 +134,19 @@ const SignupForm = () => {
                 backgroundColor: isEmailValid === false && "#fae3ea",
               }}
             />
-            <Typography variant="body1">sadsd</Typography>
+
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "red",
+                visibility: isUsernameValid === false ? "visible" : "hidden",
+              }}
+            >
+              At least 4 characters!
+            </Typography>
             <TextField
               margin="normal"
               required
@@ -137,7 +160,19 @@ const SignupForm = () => {
                 backgroundColor: isUsernameValid === false && "#fae3ea",
               }}
             />
-            <Typography variant="body1">sadsd</Typography>
+
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "red",
+                visibility: isPasswordValid === false ? "visible" : "hidden",
+              }}
+            >
+              At least 6 characters!
+            </Typography>
             <TextField
               margin="normal"
               required
@@ -152,7 +187,18 @@ const SignupForm = () => {
               }}
             />
 
-            {/* <Typography variant="body1">sadsd</Typography> */}
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "red",
+                visibility: isRepeatPasswordValid === false ? "visible" : "hidden",
+              }}
+            >
+              Passwords don't match!
+            </Typography>
             <TextField
               margin="normal"
               required

@@ -23,16 +23,16 @@ const signupSlice = createSlice({
     checkName(state, action) {
       const username = action.payload;
 
-      state.isUsernameValid = username.trim().length > 0;
+      state.isUsernameValid = username.trim().length >= 4;
     },
 
     checkPassword(state, action) {
       const { password, repeatPassword } = action.payload;
 
-      state.isPasswordValid = password.trim().length > 5;
+      state.isPasswordValid = password.trim().length >= 6;
 
       state.isRepeatPasswordValid =
-        repeatPassword.trim().length > 5 && password === repeatPassword;
+        repeatPassword.trim().length >= 6 && password === repeatPassword;
 
       if (password !== repeatPassword) {
         state.areBothPassesValid = false;
@@ -40,14 +40,14 @@ const signupSlice = createSlice({
       }
 
       state.areBothPassesValid =
-        password.trim().length > 5 && repeatPassword.trim().length > 5;
+        password.trim().length >= 6 && repeatPassword.trim().length >= 6;
     },
 
     checkRepeatPassword(state, action) {
       const { password, repeatPassword } = action.payload;
 
       state.isRepeatPasswordValid =
-        repeatPassword.trim().length > 5 && password === repeatPassword;
+        repeatPassword.trim().length >= 6 && password === repeatPassword;
 
       if (password !== repeatPassword) {
         state.areBothPassesValid = false;
@@ -55,7 +55,7 @@ const signupSlice = createSlice({
       }
 
       state.areBothPassesValid =
-        password.trim().length > 5 && repeatPassword.trim().length > 5;
+        password.trim().length >= 6 && repeatPassword.trim().length >= 6;
     },
 
     checkForm(state, action) {
