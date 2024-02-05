@@ -35,7 +35,6 @@ const SignupForm = () => {
   const {
     isEmailValid,
     isUsernameValid,
-    areBothPassesValid,
     isPasswordValid,
     isRepeatPasswordValid,
     isFormValid,
@@ -204,6 +203,7 @@ const SignupForm = () => {
                 textAlign: "left",
                 lineHeight: "10px",
                 color: "red",
+                minWidth: "386px",
                 visibility:
                   isRepeatPasswordValid === false ? "visible" : "hidden",
               }}
