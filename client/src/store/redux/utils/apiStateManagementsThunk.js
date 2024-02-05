@@ -3,6 +3,7 @@ import { allPostsActions } from "../all-posts.slice";
 import { editPostActions } from "../edit-post-slice";
 import { deletePostActions } from "../delete-post-slice";
 import { detailedPostActions } from "../detailed-post-slice";
+import { signupActions } from "../signup-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
@@ -90,6 +91,9 @@ export const signup = (signupData) => {
     await signupOneUser(
       signupData,
       dispatch,
-    )
+      signupActions.success,
+      signupActions.loading,
+      signupActions.fail
+    );
   };
 };

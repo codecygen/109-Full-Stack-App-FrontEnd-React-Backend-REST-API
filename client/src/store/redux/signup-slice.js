@@ -7,6 +7,10 @@ const initialState = {
   isPasswordValid: null,
   isRepeatPasswordValid: null,
   isFormValid: null,
+
+  dataNewUser: null,
+  errorNewUser: null,
+  isLoadingNewUser: null,
 };
 
 const signupSlice = createSlice({
@@ -65,7 +69,19 @@ const signupSlice = createSlice({
 
     resetState(state, action) {
       return initialState;
-    }
+    },
+
+    success(state, action) {
+      state.dataNewUser = action.payload;
+    },
+
+    fail(state, action) {
+      state.errorNewUser = action.payload;
+    },
+
+    loading(state, action) {
+      state.isLoadingNewUser = action.payload;
+    },
   },
 });
 

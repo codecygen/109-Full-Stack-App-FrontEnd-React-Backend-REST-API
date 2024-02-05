@@ -18,6 +18,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { signup } from "../store/redux/utils/apiStateManagementsThunk";
+
 const defaultTheme = createTheme();
 
 const SignupForm = () => {
@@ -72,6 +74,14 @@ const SignupForm = () => {
     if (!isFormValid) {
       return;
     }
+
+    const signupData = {
+      email: formData.email,
+      name: formData.username,
+      password: formData.password,
+    };
+
+    dispatch(signup(signupData));
 
     console.log("====================");
     console.log("email: ", isEmailValid);
@@ -194,7 +204,8 @@ const SignupForm = () => {
                 textAlign: "left",
                 lineHeight: "10px",
                 color: "red",
-                visibility: isRepeatPasswordValid === false ? "visible" : "hidden",
+                visibility:
+                  isRepeatPasswordValid === false ? "visible" : "hidden",
               }}
             >
               Passwords don't match!
