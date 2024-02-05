@@ -19,15 +19,11 @@ const signupOneUser = async (
       },
     });
 
-    if (!res.ok) {
-      throw new Error(`HTTP error! Status Code: ${res.status}`);
-    }
-
     const data = await res.json();
     dispatch(successHandler(data));
     dispatch(loadingHandler(false));
   } catch (err) {
-    dispatch(failHandler(err.message));
+    dispatch(failHandler(err.errors));
   }
 };
 

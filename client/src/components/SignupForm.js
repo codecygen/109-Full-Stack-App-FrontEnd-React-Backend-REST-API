@@ -39,6 +39,9 @@ const SignupForm = () => {
     isPasswordValid,
     isRepeatPasswordValid,
     isFormValid,
+    dataNewUser,
+    errorNewUser,
+    isLoadingNewUser,
   } = useSelector((state) => state.signup);
 
   const changeHandler = (e) => {
@@ -82,15 +85,12 @@ const SignupForm = () => {
     };
 
     dispatch(signup(signupData));
-
-    console.log("====================");
-    console.log("email: ", isEmailValid);
-    console.log("username: ", isUsernameValid);
-    console.log("all passes: ", areBothPassesValid);
-    console.log("password: ", isPasswordValid);
-    console.log("repeat password: ", isRepeatPasswordValid);
-    console.log("form: ", isFormValid);
   };
+
+  console.log("data: ", dataNewUser);
+  console.log("loading: ", isLoadingNewUser);
+  console.log("error: ", errorNewUser);
+
 
   // Reset state when the login or signup button is toggled
   useEffect(() => {
