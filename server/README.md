@@ -2,7 +2,7 @@
 
 - Here are some differences in between a coupled front and backend vs REST API.
 
-  <img src="pictures/REST-API.png" alt="test" style="width:400px">
+  <img src="pictures/REST-API.png" alt="rest-api" style="width:400px">
 
 - There are 5 different requests in REST API. These are GET, POST, PUT, PATCH and DELETE requests.
 
@@ -119,3 +119,11 @@
     }
   }
   ```
+
+- **REST API Authentication**: Keep in mind that REST API is stateless. Meaning that there is no session storing like in a NodeJS, EJS app so every request is treated as a standalone request. Server sends a token and it is stored in front end. This stored token is then attached to every request by React client to backend server.
+
+  The token contains JSON Data + Signature = JWT (JSON Web Token)
+
+  Here, signature can only be verified by the server.
+
+  <img src="pictures/REST-API-Auth.png" alt="rest-api-auth" style="width:400px">
