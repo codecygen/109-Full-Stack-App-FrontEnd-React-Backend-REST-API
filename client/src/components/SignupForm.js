@@ -14,8 +14,7 @@ import TextField from "@mui/material/TextField";
 // import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import { CircularProgress, Container, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { signup } from "../store/redux/utils/apiStateManagementsThunk";
@@ -89,7 +88,6 @@ const SignupForm = () => {
   console.log("data: ", dataNewUser);
   console.log("loading: ", isLoadingNewUser);
   console.log("error: ", errorNewUser);
-
 
   // Reset state when the login or signup button is toggled
   useEffect(() => {
@@ -233,7 +231,12 @@ const SignupForm = () => {
               variant="contained"
               disabled={!isFormValid}
             >
-              Sign Up
+              {!isLoadingNewUser && "Sign Up"}
+              {isLoadingNewUser && (
+                <CircularProgress
+                  style={{ height: "24px", width: "24px", color: "white" }}
+                />
+              )}
             </Button>
             {/* <Grid container> */}
             {/* <Grid item xs>
