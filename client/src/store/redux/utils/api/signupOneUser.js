@@ -20,10 +20,16 @@ const signupOneUser = async (
     });
 
     const data = await res.json();
+
+    if (data.errors) {
+      throw new Error(data.errors[0].msg)
+    }
+
     dispatch(successHandler(data));
     dispatch(loadingHandler(false));
   } catch (err) {
-    dispatch(failHandler(err.errors));
+    dispatch(failHandler(err.message));
+    dispatch(loadingHandler(false));
   }
 };
 

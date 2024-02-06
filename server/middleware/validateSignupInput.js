@@ -16,7 +16,7 @@ const validateSignupInput = async (req, res, next) => {
           const foundUser = await DB.User.findUserWithEmail(email);
 
           if (foundUser) {
-            throw new Error("Email already exists in database!");
+            throw new Error("Email Address already exists in database!");
           }
 
           return true;
@@ -33,7 +33,7 @@ const validateSignupInput = async (req, res, next) => {
           const foundUser = await DB.User.findUserWithName(name);
 
           if (foundUser) {
-            throw new Error("Name already exists in database!");
+            throw new Error("Username already exists in database!");
           }
 
           return true;

@@ -114,6 +114,19 @@ const SignupForm = () => {
             Sign Up
           </Typography>
           <Box component="form" onSubmit={submitHandler} noValidate>
+
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "red",
+                visibility: errorNewUser ? "visible" : "hidden",
+              }}
+            >
+              {errorNewUser}
+            </Typography>
             <Typography
               variant="body2"
               sx={{
