@@ -20,7 +20,7 @@ const signup = async (req, res, next) => {
     const createdUser = await newUser.createUser();
 
     res.json({
-      message: "User successfully created!",
+      message: `User created!`,
       user: {
         email: createdUser.email,
         name: createdUser.name,

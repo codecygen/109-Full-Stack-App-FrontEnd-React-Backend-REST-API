@@ -31,6 +31,8 @@ const SignupForm = () => {
     repeatPass: "",
   });
 
+  const [successMessage, setSuccessMessage] = useState(null);
+
   const {
     isEmailValid,
     isUsernameValid,
@@ -85,9 +87,22 @@ const SignupForm = () => {
     dispatch(signup(signupData));
   };
 
-  console.log("data: ", dataNewUser);
-  console.log("loading: ", isLoadingNewUser);
-  console.log("error: ", errorNewUser);
+  // Once the user is created reset states in signup form
+  useEffect(() => {
+    const initialFormData = {
+      email: "",
+      username: "",
+      password: "",
+      repeatPass: "",
+    };
+
+    if (dataNewUser && dataNewUser.message) {
+      setFormData(initialFormData);
+      setSuccessMessage(dataNewUser.message);
+
+      dispatch(signupActions.resetState());
+    }
+  }, [dataNewUser, dispatch]);
 
   // Reset state when the login or signup button is toggled
   useEffect(() => {
@@ -114,7 +129,19 @@ const SignupForm = () => {
             Sign Up
           </Typography>
           <Box component="form" onSubmit={submitHandler} noValidate>
-
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "green",
+                visibility:
+                  successMessage ? "visible" : "hidden",
+              }}
+            >
+              {successMessage}
+            </Typography>
             <Typography
               variant="body2"
               sx={{
@@ -150,6 +177,7 @@ const SignupForm = () => {
               type="email"
               autoFocus
               onChange={changeHandler}
+              value={formData.email}
               sx={{
                 backgroundColor: isEmailValid === false && "#fae3ea",
               }}
@@ -176,6 +204,7 @@ const SignupForm = () => {
               name="username"
               type="text"
               onChange={changeHandler}
+              value={formData.username}
               sx={{
                 backgroundColor: isUsernameValid === false && "#fae3ea",
               }}
@@ -202,6 +231,7 @@ const SignupForm = () => {
               name="password"
               type="password"
               onChange={changeHandler}
+              value={formData.password}
               sx={{
                 backgroundColor: isPasswordValid === false && "#fae3ea",
               }}
@@ -230,6 +260,7 @@ const SignupForm = () => {
               name="repeatPass"
               type="password"
               onChange={changeHandler}
+              value={formData.repeatPass}
               sx={{
                 backgroundColor: isRepeatPasswordValid === false && "#fae3ea",
               }}
