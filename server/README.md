@@ -124,6 +124,6 @@
 
   The token contains JSON Data + Signature = JWT (JSON Web Token)
 
-  Here, signature can only be verified by the server.
+  Here, signature can only be verified by the server and it is created by the server.
 
   <img src="pictures/REST-API-Auth.png" alt="rest-api-auth" style="width:400px">
