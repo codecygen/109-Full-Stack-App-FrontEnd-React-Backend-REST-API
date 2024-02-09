@@ -1,5 +1,12 @@
 # REST API Notes:
 
+- I will share an .env file here. It is not important so I will share it but it is needed for this server to work.
+
+```dotenv
+MONGODB_URL="mongodb://root:root@localhost:27017/forumApiDB"
+JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
+```
+
 - Here are some differences in between a coupled front and backend vs REST API.
 
   <img src="pictures/REST-API.png" alt="rest-api" style="width:400px">
@@ -43,19 +50,22 @@
   ```
 
 - **ERROR HANDLING IN REST API**: For throwing data in nodejs here are the steps.
+
   - Create the errorMiddleware.js.
+
   ```javascript
   const errorMiddleware = (err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = err.message || "Internal Server Error";
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
 
-  res.status(statusCode).json({ message: message });
+    res.status(statusCode).json({ message: message });
   };
 
   module.exports = errorMiddleware;
   ```
 
   - Then hook it up to server.js and to the very end of the file
+
   ```javascript
   .....................
   app.use("/feed", feedRoutes);
@@ -66,7 +76,9 @@
   const SERVER_PORT = 4000;
   .....................
   ```
+
   - Then for normal req, res, next functions the error handling typically occurs as follows. Here, next(err) will pick up the thrown error and send it to the middleware error function up top. Check validateInputMiddleware.js for more info.
+
   ```javascript
   const someFunc = (req, res, next) => {
     try {
@@ -84,9 +96,11 @@
     } catch (err) {
       next(err);
     }
-  }
+  };
   ```
+
   - In case you want to propagate the error from someOtherFunc to someFunc, do this. Check feedController.js' "postPost" function and messageSchema.js' "createMessage" function for more info.
+
   ```javascript
   someOtherFunc = async () => {
     try {
@@ -117,7 +131,7 @@
       // This will pick the error thrown inside the someOtherFunc
       next(err);
     }
-  }
+  };
   ```
 
 - **REST API Authentication**: Keep in mind that REST API is stateless. Meaning that there is no session storing like in a NodeJS, EJS app so every request is treated as a standalone request. Server sends a token and it is stored in front end. This stored token is then attached to every request by React client to backend server.
@@ -127,3 +141,9 @@
   Here, signature can only be verified by the server and it is created by the server.
 
   <img src="pictures/REST-API-Auth.png" alt="rest-api-auth" style="width:400px">
+
+  To create JWT (Json Web Token) an npm package has to be installed and it is named as **jsonwebtoken**. Install it via
+
+  ```bash
+  npm i jsonwebtoken
+  ```

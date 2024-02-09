@@ -1,4 +1,6 @@
 const { promisify } = require("util");
+const jwt = require("jsonwebtoken");
+
 const bcrypt = require("bcrypt");
 const hashPass = promisify(bcrypt.hash);
 const comparePass = promisify(bcrypt.compare);
@@ -38,8 +40,30 @@ const login = async (req, res, next) => {
 
     const foundUser = await DB.User.findUserWithEmail(email);
 
-    const result = await comparePass(password, foundUser.password);
-    console.log(result);
+    if (!foundUser) {
+      throw new Error("Could not find user!");
+    }
+
+    const isPassCorrect = await comparePass(password, foundUser.password);
+
+    if (!isPassCorrect) {
+      throw new Error("Password mismatch!");
+    }
+
+    const token = jwt.sign(
+      {
+        _id: foundUser._id.toString(),
+        email: foundUser.email,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.json({
+      message: "Logged in!",
+      token,
+      userId: foundUser._id,
+    });
   } catch (err) {
     next(err);
   }
