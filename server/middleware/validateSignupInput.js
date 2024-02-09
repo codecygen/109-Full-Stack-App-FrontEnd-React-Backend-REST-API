@@ -6,44 +6,48 @@ const validateSignupInput = async (req, res, next) => {
     const inputList = [
       check("email")
         .notEmpty()
+        .withMessage("Email field cannot be empty for login!")
+        .bail()
         .isEmail()
         .normalizeEmail()
         .escape()
-        .withMessage("Not the correct email format!")
+        .withMessage("Not the correct email format for signup!")
         .bail()
         .custom(async (value, { req }) => {
           const email = value;
           const foundUser = await DB.User.findUserWithEmail(email);
 
           if (foundUser) {
-            throw new Error("Email Address already exists in database!");
+            throw new Error(
+              "Email address already exists in database for signup!"
+            );
           }
 
           return true;
         }),
       check("name")
+        .trim()
         .isLength({ min: 4 })
         .isString()
-        .trim()
         .escape()
-        .withMessage("Not the correct name format!")
+        .withMessage("Not the correct name format for signup!")
         .bail()
         .custom(async (value, { req }) => {
           const name = value;
           const foundUser = await DB.User.findUserWithName(name);
 
           if (foundUser) {
-            throw new Error("Username already exists in database!");
+            throw new Error("Username already exists in database for signup!");
           }
 
           return true;
         }),
       check("password")
+        .trim()
         .isLength({ min: 6 })
         .isString()
-        .trim()
         .escape()
-        .withMessage("Not the correct password format!"),
+        .withMessage("Not the correct password format for signup!"),
     ];
 
     await Promise.all(inputList.map((input) => input.run(req)));
@@ -51,10 +55,10 @@ const validateSignupInput = async (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      const validationError = new Error("Signup input validation error!");
-      validationError.inputErrors = errors.array();
-      validationError.statusCode = 422;
-      throw validationError;
+      const signupValidationError = new Error("Signup input validation error!");
+      signupValidationError.inputErrors = errors.array();
+      signupValidationError.statusCode = 422;
+      throw signupValidationError;
     }
 
     next();
