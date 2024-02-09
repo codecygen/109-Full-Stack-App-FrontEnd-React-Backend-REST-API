@@ -6,4 +6,6 @@ const validateSignupInput = require("../middleware/validateSignupInput");
 
 router.put("/signup", validateSignupInput, userController.signup);
 
+router.post("/login", userController.login);
+
 module.exports = router;
