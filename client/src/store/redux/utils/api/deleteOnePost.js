@@ -8,7 +8,6 @@ const deleteOnePost = async (
   failHandler
 ) => {
   dispatch(loadingHandler(true));
-  dispatch(failHandler(false));
 
   try {
     const res = await fetch(getAPI.deleteOnePost(id), {
@@ -22,6 +21,7 @@ const deleteOnePost = async (
     const data = await res.json();
     dispatch(successHandler(data.message));
     dispatch(loadingHandler(false));
+    dispatch(failHandler(false));
   } catch (err) {
     dispatch(failHandler(err.message));
     dispatch(loadingHandler(false));

@@ -8,7 +8,6 @@ const postOnePost = async (
   failHandler
 ) => {
   dispatch(loadingHandler(true));
-  dispatch(failHandler(false));
 
   try {
     const res = await fetch(getAPI.postOnePost, {
@@ -31,6 +30,7 @@ const postOnePost = async (
     const data = await res.json();
     dispatch(successHandler(data));
     dispatch(loadingHandler(false));
+    dispatch(failHandler(false));
     return data;
   } catch (err) {
     dispatch(failHandler(err.message));

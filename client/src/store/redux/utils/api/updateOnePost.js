@@ -9,7 +9,6 @@ const updateOnePost = async (
   failHandler
 ) => {
   dispatch(loadingHandler(true));
-  dispatch(failHandler(false));
 
   try {
     const res = await fetch(getAPI.updateOnePost(postId), {
@@ -32,6 +31,7 @@ const updateOnePost = async (
     const data = await res.json();
     dispatch(successHandler(data.post));
     dispatch(loadingHandler(false));
+    dispatch(failHandler(false));
   } catch (err) {
     dispatch(failHandler(err.message));
     dispatch(loadingHandler(false));

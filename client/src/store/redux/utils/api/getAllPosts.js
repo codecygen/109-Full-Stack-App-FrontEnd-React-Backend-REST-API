@@ -8,7 +8,6 @@ const getAllPosts = async (
   failHandler
 ) => {
   dispatch(loadingHandler(true));
-  dispatch(failHandler(false));
 
   try {
     const res = await fetch(getAPI.getAllPosts(currentPage));
@@ -20,6 +19,7 @@ const getAllPosts = async (
 
     dispatch(successHandler(data));
     dispatch(loadingHandler(false));
+    dispatch(failHandler(false));
   } catch (err) {
     dispatch(failHandler(err.message));
     dispatch(loadingHandler(false));

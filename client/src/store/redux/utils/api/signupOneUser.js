@@ -8,7 +8,6 @@ const signupOneUser = async (
   failHandler
 ) => {
   dispatch(loadingHandler(true));
-  dispatch(failHandler(false));
 
   try {
     const res = await fetch(getAPI.signupUser, {
@@ -27,6 +26,7 @@ const signupOneUser = async (
 
     dispatch(successHandler(data));
     dispatch(loadingHandler(false));
+    dispatch(failHandler(false));
   } catch (err) {
     dispatch(failHandler(err.message));
     dispatch(loadingHandler(false));
