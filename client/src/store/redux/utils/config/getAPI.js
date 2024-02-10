@@ -24,6 +24,8 @@ class getAPI {
 
   // User related endpoints
   static signupUser = `${this.link}/auth/signup`;
+
+  static loginUser = `${this.link}/auth/login`;
 }
 
 export default getAPI;

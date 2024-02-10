@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { useDispatch } from "react-redux";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -17,6 +19,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const defaultTheme = createTheme();
 
 const LoginForm = () => {
+  // const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,6 +29,12 @@ const LoginForm = () => {
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    if (name === "email") {
+      console.log(`email: ${value}`)
+    } else {
+      console.log(`password: ${value}`);
+    }
   };
 
   const submitHandler = (e) => {
@@ -36,9 +46,7 @@ const LoginForm = () => {
   };
 
   return (
-    <ThemeProvider
-      theme={defaultTheme}
-    >
+    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -70,6 +78,7 @@ const LoginForm = () => {
               autoComplete="email"
               type="email"
               autoFocus
+              value={formData.email}
               onChange={changeHandler}
             />
             <TextField
@@ -81,6 +90,7 @@ const LoginForm = () => {
               name="password"
               type="password"
               //   autoFocus
+              value={formData.password}
               onChange={changeHandler}
             />
             {/* <FormControlLabel

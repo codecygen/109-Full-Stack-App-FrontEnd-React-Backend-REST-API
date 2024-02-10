@@ -1,5 +1,8 @@
 # Front End - React
 
+## Instructions:
+For front end to work properly navigate to **./src/store/redux/config/getAPI.js**. From this file, change the backend link which is denoted as **API_LINK** to the backend in production.
+
 ## show-image-preview
 
 <img src="./readme-images/image-preview-window.png" style="width: 300px">

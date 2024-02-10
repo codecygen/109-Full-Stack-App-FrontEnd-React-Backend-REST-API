@@ -7,6 +7,7 @@ import deletePostSlice from "./delete-post-slice";
 import detailedPostSlice from "./detailed-post-slice";
 
 import signupSlice from "./signup-slice";
+import loginSlice from "./login-slice";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     detailedPost: detailedPostSlice.reducer,
     
     signup: signupSlice.reducer,
+    login: loginSlice.reducer,
   },
 });
 

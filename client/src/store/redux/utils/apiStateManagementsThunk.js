@@ -4,6 +4,7 @@ import { editPostActions } from "../edit-post-slice";
 import { deletePostActions } from "../delete-post-slice";
 import { detailedPostActions } from "../detailed-post-slice";
 import { signupActions } from "../signup-slice";
+import { loginActions } from "../login-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
@@ -11,6 +12,7 @@ import postOnePost from "./api/postOnePost";
 import updateOnePost from "./api/updateOnePost";
 import deleteOnePost from "./api/deleteOnePost";
 import signupOneUser from "./api/signupOneUser";
+import loginOneUser from "./api/loginOneUser";
 
 export const getPostsPagePosts = (currentPage) => {
   return async (dispatch) => {
@@ -94,6 +96,18 @@ export const signup = (signupData) => {
       signupActions.success,
       signupActions.loading,
       signupActions.fail
+    );
+  };
+};
+
+export const login = (loginData) => {
+  return async (dispatch) => {
+    await loginOneUser(
+      loginData,
+      dispatch,
+      loginActions.success,
+      loginActions.loading,
+      loginActions.fail
     );
   };
 };
