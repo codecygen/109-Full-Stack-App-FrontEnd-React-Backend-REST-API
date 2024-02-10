@@ -16,10 +16,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { login } from "../store/redux/utils/apiStateManagementsThunk";
+
 const defaultTheme = createTheme();
 
 const LoginForm = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -31,7 +33,7 @@ const LoginForm = () => {
     setFormData({ ...formData, [name]: value });
 
     if (name === "email") {
-      console.log(`email: ${value}`)
+      console.log(`email: ${value}`);
     } else {
       console.log(`password: ${value}`);
     }
@@ -43,6 +45,8 @@ const LoginForm = () => {
       email: formData.email,
       password: formData.password,
     });
+
+    dispatch(login(formData));
   };
 
   return (
