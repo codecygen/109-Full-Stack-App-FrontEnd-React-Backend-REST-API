@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { signup } from "../store/redux/utils/apiStateManagementsThunk";
 import { signupActions } from "../store/redux/signup-slice";
 
 import Avatar from "@mui/material/Avatar";
@@ -16,8 +17,6 @@ import Box from "@mui/material/Box";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { CircularProgress, Container, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { signup } from "../store/redux/utils/apiStateManagementsThunk";
 
 const defaultTheme = createTheme();
 

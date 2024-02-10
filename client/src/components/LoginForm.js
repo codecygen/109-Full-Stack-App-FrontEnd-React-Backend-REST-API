@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { login } from "../store/redux/utils/apiStateManagementsThunk";
+import { loginActions } from "../store/redux/login-slice";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -16,8 +19,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { login } from "../store/redux/utils/apiStateManagementsThunk";
-
 const defaultTheme = createTheme();
 
 const LoginForm = () => {
@@ -28,23 +29,34 @@ const LoginForm = () => {
     password: "",
   });
 
+  const {
+    isEmailValid,
+    isPasswordValid,
+    isFormValid,
+    dataLoginUser,
+    errorLoginUser,
+    isLoadingLoginUser,
+  } = useSelector((state) => state.login);
+
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
     if (name === "email") {
-      console.log(`email: ${value}`);
+      dispatch(loginActions.checkEmail(value));
     } else {
-      console.log(`password: ${value}`);
+      dispatch(loginActions.checkPassword(value));
     }
+
+    dispatch(loginActions.checkForm());
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log({
-      email: formData.email,
-      password: formData.password,
-    });
+
+    if (!isFormValid) {
+      return;
+    }
 
     dispatch(login(formData));
   };
