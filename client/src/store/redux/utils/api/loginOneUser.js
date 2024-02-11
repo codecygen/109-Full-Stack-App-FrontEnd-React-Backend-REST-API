@@ -33,7 +33,7 @@ const loginOneUser = async (
     dispatch(loadingHandler(false));
     dispatch(failHandler(false));
   } catch (err) {
-    dispatch(failHandler(err.messsage));
+    dispatch(failHandler(err.message));
     dispatch(loadingHandler(false));
   }
 };

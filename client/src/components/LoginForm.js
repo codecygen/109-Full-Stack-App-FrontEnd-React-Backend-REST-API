@@ -9,14 +9,9 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Checkbox from "@mui/material/Checkbox";
-// import Link from "@mui/material/Link";
-// import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+
 import LockIcon from "@material-ui/icons/Lock";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import { CircularProgress, Container, Typography, Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const defaultTheme = createTheme();
@@ -61,6 +56,13 @@ const LoginForm = () => {
     dispatch(login(formData));
   };
 
+  // Reset state when the login or signup button is toggled
+  useEffect(() => {
+    return () => {
+      dispatch(loginActions.resetState());
+    };
+  }, [dispatch]);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -84,6 +86,30 @@ const LoginForm = () => {
             noValidate
             sx={{ mt: 1 }}
           >
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "red",
+                visibility: errorLoginUser ? "visible" : "hidden",
+              }}
+            >
+              {errorLoginUser}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "red",
+                visibility: isEmailValid === false ? "visible" : "hidden",
+              }}
+            >
+              Invalid email!
+            </Typography>
             <TextField
               margin="normal"
               required
@@ -96,7 +122,23 @@ const LoginForm = () => {
               autoFocus
               value={formData.email}
               onChange={changeHandler}
+              sx={{
+                backgroundColor: isEmailValid === false && "#fae3ea",
+              }}
             />
+
+            <Typography
+              variant="body2"
+              sx={{
+                margin: "10px 0 -5px 10px",
+                textAlign: "left",
+                lineHeight: "10px",
+                color: "red",
+                visibility: isPasswordValid === false ? "visible" : "hidden",
+              }}
+            >
+              At least 6 characters!
+            </Typography>
             <TextField
               margin="normal"
               required
@@ -105,29 +147,24 @@ const LoginForm = () => {
               label="Password"
               name="password"
               type="password"
-              //   autoFocus
               value={formData.password}
               onChange={changeHandler}
+              sx={{ backgroundColor: isPasswordValid === false && "#fae3ea" }}
             />
-            {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
-            <Button type="submit" fullWidth variant="contained">
-              Login
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              disabled={!isFormValid}
+            >
+              {isLoadingLoginUser ? (
+                <CircularProgress
+                  style={{ height: "24px", width: "24px", color: "white" }}
+                />
+              ) : (
+                "Login"
+              )}
             </Button>
-            {/* <Grid container> */}
-            {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid> */}
-            {/* </Grid> */}
           </Box>
         </Box>
       </Container>

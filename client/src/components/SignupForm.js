@@ -13,9 +13,8 @@ import TextField from "@mui/material/TextField";
 // import Checkbox from "@mui/material/Checkbox";
 // import Link from "@mui/material/Link";
 // import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import { CircularProgress, Container, Typography } from "@mui/material";
+import { CircularProgress, Container, Typography, Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const defaultTheme = createTheme();
@@ -242,7 +241,6 @@ const SignupForm = () => {
                 textAlign: "left",
                 lineHeight: "10px",
                 color: "red",
-                minWidth: "386px",
                 visibility:
                   isRepeatPasswordValid === false ? "visible" : "hidden",
               }}
@@ -274,12 +272,11 @@ const SignupForm = () => {
               variant="contained"
               disabled={!isFormValid}
             >
-              {!isLoadingNewUser && "Sign Up"}
-              {isLoadingNewUser && (
+              {isLoadingNewUser ? (
                 <CircularProgress
                   style={{ height: "24px", width: "24px", color: "white" }}
                 />
-              )}
+              ) : "Sign Up"}
             </Button>
             {/* <Grid container> */}
             {/* <Grid item xs>
