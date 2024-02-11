@@ -135,8 +135,7 @@ const SignupForm = () => {
                 textAlign: "left",
                 lineHeight: "10px",
                 color: "green",
-                visibility:
-                  successMessage ? "visible" : "hidden",
+                visibility: successMessage ? "visible" : "hidden",
               }}
             >
               {successMessage}
@@ -264,6 +263,7 @@ const SignupForm = () => {
                 backgroundColor: isRepeatPasswordValid === false && "#fae3ea",
               }}
             />
+
             {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
