@@ -10,7 +10,15 @@ const getAllPosts = async (
   dispatch(loadingHandler(true));
 
   try {
-    const res = await fetch(getAPI.getAllPosts(currentPage));
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(getAPI.getAllPosts(currentPage), {
+      // Authentication-and-Authorization-Frontend
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     if (!res.ok) {
       throw new Error(`HTTP error! Status Code: ${res.status}`);
     }
@@ -25,6 +33,5 @@ const getAllPosts = async (
     dispatch(loadingHandler(false));
   }
 };
-
 
 export default getAllPosts;

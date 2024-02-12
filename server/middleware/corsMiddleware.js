@@ -8,6 +8,7 @@ const corsMiddleware = (req, res, next) => {
     "GET, POST, PUT, PATCH, DELETE"
   );
   // Allow to set a content type with fetch request
+  // Authentication-and-Authorization-Backend
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   next();
