@@ -41,13 +41,17 @@ const login = async (req, res, next) => {
     const foundUser = await DB.User.findUserWithEmail(email);
 
     if (!foundUser) {
-      throw new Error("Could not find user!");
+      const noUserError = new Error("Could not find user!");
+      noUserError.inputErrors = [{ msg: "No user found!" }];
+      throw noUserError;
     }
 
     const isPassCorrect = await comparePass(password, foundUser.password);
 
     if (!isPassCorrect) {
-      throw new Error("Password mismatch!");
+      const wrongPasswordError = new Error("Wrong password!");
+      wrongPasswordError.inputErrors = [{ msg: "Wrong password!" }];
+      throw wrongPasswordError;
     }
 
     const token = jwt.sign(

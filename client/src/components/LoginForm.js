@@ -28,7 +28,6 @@ const LoginForm = () => {
     isEmailValid,
     isPasswordValid,
     isFormValid,
-    dataLoginUser,
     errorLoginUser,
     isLoadingLoginUser,
   } = useSelector((state) => state.login);
