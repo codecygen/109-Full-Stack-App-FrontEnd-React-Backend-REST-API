@@ -18,7 +18,8 @@ const messageSchema = new mongoose.Schema(
     },
 
     creator: {
-      type: Object,
+      type: mongoose.Types.ObjectId,
+      ref: "User",
       required: true,
     },
   },
@@ -109,7 +110,7 @@ messageSchema.statics.deleteMessage = async function (postId) {
 messageSchema.statics.countMessages = async function () {
   try {
     const totalPosts = await this.countDocuments();
-    if (!totalPosts || !totalPosts === 0) {
+    if (!totalPosts && totalPosts !== 0) {
       const totalPostError = new Error("Could not count the posts!");
       totalPostError.statusCode = 500;
       throw totalPostError;

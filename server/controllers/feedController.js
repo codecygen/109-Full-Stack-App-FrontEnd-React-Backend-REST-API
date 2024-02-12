@@ -1,5 +1,6 @@
 const fs = require("fs");
 const DB = require("../models/DB");
+const { ObjectId } = require("mongodb");
 
 const getPosts = async (req, res, next) => {
   try {
@@ -40,9 +41,7 @@ const postPost = async (req, res, next) => {
       title,
       image: req.file.path,
       details,
-      creator: {
-        name: "Aras",
-      },
+      creator: new ObjectId("65c7ea30c6242e927cab802a"),
     });
 
     const createdMessage = await newMessage.createMessage();
