@@ -286,7 +286,7 @@ const PostOverlay = (props) => {
 
   let warningClasses;
 
-  if (errorNewPost) {
+  if (errorNewPost || errorEditResult) {
     warningClasses = classes.error;
   } else {
     warningClasses = classes.loading;
@@ -299,7 +299,7 @@ const PostOverlay = (props) => {
           {!dataEditForm ? "Create an Event" : "Edit the Event"}
         </h1>
         <p className={warningClasses}>
-          {errorEditForm && `Contact Admin: Fetch Error: ${errorEditForm}`}
+          {errorEditResult && `Contact Admin: Fetch Error: ${errorEditResult}`}
           {isLoadingEditForm && "Waiting to Get Post Info!"}
           {errorNewPost && `Contact Admin: Posting Error: ${errorNewPost}`}
           {isLoadingNewPost && "Waiting to Send Post!"}

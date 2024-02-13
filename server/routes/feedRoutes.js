@@ -10,7 +10,7 @@ const validateAuth = require("../middleware/validateAuth");
 const fileUploadConfig = require("../config/fileUploadConfig");
 
 // Authentication-and-Authorization-Backend
-router.get("/posts", validateAuth, feedController.getPosts);
+router.get("/posts", feedController.getPosts);
 
 router.post(
   "/post",
