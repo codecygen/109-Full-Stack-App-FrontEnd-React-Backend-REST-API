@@ -74,7 +74,7 @@ const EventIdPage = () => {
             </p>
           </div>
 
-          <h1>{title}:</h1>
+          <h1>{title}</h1>
           <img src={`${getAPI.link}/${image}`} alt="no-img" />
           <ReactMarkdown remarkPlugins={[remarkBreaks]}>
             {details}

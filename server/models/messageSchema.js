@@ -49,6 +49,10 @@ messageSchema.methods.createMessage = async function () {
 messageSchema.statics.getMessages = async function (currentPage, itemsPerPage) {
   try {
     const allPosts = await this.find()
+      .populate({
+        path: "creator",
+        select: "name",
+      })
       .sort({ createdAt: -1 })
       .skip((currentPage - 1) * itemsPerPage)
       .limit(itemsPerPage);
@@ -65,7 +69,10 @@ messageSchema.statics.getMessages = async function (currentPage, itemsPerPage) {
 
 messageSchema.statics.getMessage = async function (postId) {
   try {
-    const foundPost = await this.findById(postId);
+    const foundPost = await this.findById(postId).populate({
+      path: "creator",
+      select: "name",
+    });
     if (!foundPost) {
       const foundPostError = new Error("Could not get the post!");
       foundPostError.statusCode = 500;

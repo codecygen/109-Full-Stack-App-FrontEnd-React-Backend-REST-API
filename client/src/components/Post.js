@@ -33,7 +33,7 @@ const Post = ({
   return (
     <div className={currentStyle} key={post._id}>
       <p>
-        Posted by {post.creator.name || "Aras"} on {formattedDate}
+        Posted by {post.creator.name} on {formattedDate}
       </p>
       <h1>{post.title}</h1>
       <div className={classes.buttons}>
