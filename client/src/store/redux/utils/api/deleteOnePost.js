@@ -10,8 +10,13 @@ const deleteOnePost = async (
   dispatch(loadingHandler(true));
 
   try {
+    const token = localStorage.getItem("token");
+
     const res = await fetch(getAPI.deleteOnePost(id), {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (!res.ok) {

@@ -21,7 +21,7 @@ router.post(
 );
 
 router.get("/post/:postId", feedController.getPost);
-router.delete("/delete/:postId", feedController.deletePost);
+router.delete("/delete/:postId",validateAuth, feedController.deletePost);
 
 router.put(
   "/update/:postId",
