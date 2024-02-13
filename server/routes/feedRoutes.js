@@ -14,9 +14,9 @@ router.get("/posts", feedController.getPosts);
 
 router.post(
   "/post",
+  validateAuth,
   fileUploadConfig.single("image"),
   validateMessageInput,
-  validateAuth,
   feedController.postPost
 );
 
@@ -25,9 +25,9 @@ router.delete("/delete/:postId", feedController.deletePost);
 
 router.put(
   "/update/:postId",
+  validateAuth,
   fileUploadConfig.single("image"),
   validateMessageInput,
-  validateAuth,
   feedController.updatePost
 );
 
