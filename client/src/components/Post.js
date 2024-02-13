@@ -30,6 +30,8 @@ const Post = ({
     }
   }, [dataEditResult, blinkHandler, post._id]);
 
+  
+
   return (
     <div className={currentStyle} key={post._id}>
       <p>
