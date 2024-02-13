@@ -27,6 +27,7 @@ router.put(
   "/update/:postId",
   fileUploadConfig.single("image"),
   validateMessageInput,
+  validateAuth,
   feedController.updatePost
 );
 

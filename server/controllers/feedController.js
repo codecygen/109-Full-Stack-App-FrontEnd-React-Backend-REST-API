@@ -53,7 +53,6 @@ const postPost = async (req, res, next) => {
     res.json({
       message: "Post created!",
       post: {
-        _id: createdMessage._id,
         title: createdMessage.title,
         image: createdMessage.image,
         creator: createdMessage.creator.name,
@@ -119,9 +118,6 @@ const updatePost = async (req, res, next) => {
       title,
       image: req.file.path,
       details,
-      creator: {
-        name: "Aras",
-      },
     };
 
     const updatedPost = await DB.Message.updateMessage(postId, updatedData);
