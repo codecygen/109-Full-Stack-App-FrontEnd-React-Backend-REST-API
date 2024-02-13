@@ -16,6 +16,7 @@ router.post(
   "/post",
   fileUploadConfig.single("image"),
   validateMessageInput,
+  validateAuth,
   feedController.postPost
 );
 

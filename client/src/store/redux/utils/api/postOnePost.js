@@ -10,10 +10,15 @@ const postOnePost = async (
   dispatch(loadingHandler(true));
 
   try {
+    const token = localStorage.getItem("token");
+
     const res = await fetch(getAPI.postOnePost, {
       method: "POST",
       // sending-file-from-reactjs-to-nodejs-for-upload
       body: postDetails,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
 
       // Normally like this but here, we upload file to backend.
       // we use a different scenario

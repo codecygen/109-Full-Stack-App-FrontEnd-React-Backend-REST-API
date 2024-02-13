@@ -41,10 +41,14 @@ const postPost = async (req, res, next) => {
       title,
       image: req.file.path,
       details,
-      creator: new ObjectId("65c7ea30c6242e927cab802a"),
+      // This is coming from validateAuth.js middleware
+      // Authentication-and-Authorization-Backend
+      creator: req.userId,
     });
 
     const createdMessage = await newMessage.createMessage();
+
+    const updatedUser = await DB.User.findUserAndSavePostId(req.userId, createdMessage._id);
 
     res.json({
       message: "Post created!",
