@@ -25,8 +25,11 @@ const loginOneUser = async (
       throw new Error(data.errors[0].msg);
     }
 
+    const expiry = new Date().getTime() + 3600000;
+
     localStorage.setItem("token", data.token);
-    localStorage.setItem("tokenName", data.name)
+    localStorage.setItem("tokenName", data.name);
+    localStorage.setItem("tokenExpiry", expiry);
 
     dispatch(successHandler(data));
     dispatch(loadingHandler(false));
