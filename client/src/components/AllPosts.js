@@ -67,7 +67,17 @@ const AllPosts = (props) => {
   // so that the list can be updated live instead of refreshing the page.
   useEffect(() => {
     if (dataNewPost) {
-      setPostList((prevPostList) => [dataNewPost.post, ...prevPostList]);
+      setPostList((prevPostList) => [
+        {
+          ...dataNewPost.post,
+          creator: {
+            _id: "placeholder123",
+            name: localStorage.getItem("tokenName"),
+          },
+        },
+
+        ...prevPostList,
+      ]);
 
       setAnimationState("onAdd");
 
@@ -101,8 +111,6 @@ const AllPosts = (props) => {
       setPostList(updatedPostList);
     }
   }, [dataEditResult, postList]);
-
-  useEffect(() => {}, []);
 
   const openDeletePostWindow = (DB) => {
     dispatch(deletePostActions.toggleWindow());
