@@ -70,6 +70,7 @@ const AllPosts = (props) => {
       setPostList((prevPostList) => [
         {
           ...dataNewPost.post,
+          _id: "placeholder123",
           creator: {
             _id: "placeholder123",
             name: localStorage.getItem("tokenName"),

@@ -159,6 +159,9 @@ const deletePost = async (req, res, next) => {
 
     const deletedPost = await DB.Message.deleteMessage(postId);
 
+    // delete post id from the user in database
+    const updatedUser = await DB.User.findUserAndDeletePostId(existingPost.creator._id, postId);
+
     res.json({
       message: "Post deleted successfully!",
       post: deletedPost,

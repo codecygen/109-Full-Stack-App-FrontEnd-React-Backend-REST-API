@@ -72,4 +72,16 @@ userSchema.statics.findUserAndSavePostId = async function (userId, postId) {
   }
 };
 
+userSchema.statics.findUserAndDeletePostId = async function (userId, postId) {
+  try {
+    const foundUser = await this.findOne({ _id: userId });
+    foundUser.posts.pull(postId);
+    const updatedFoundUser = await foundUser.save();
+
+    return updatedFoundUser;
+  } catch (err) {
+    throw err;
+  }
+}
+
 module.exports = mongoose.model("User", userSchema);
