@@ -14,6 +14,10 @@ const useAuth = () => {
     } else {
       setToken(null);
       setName(null);
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("tokenName");
+      localStorage.removeItem("tokenExpiry");
     }
   }, []);
 

@@ -5,6 +5,7 @@ import MenuIcon from "./MenuIcon";
 
 import MobileMenuContext from "../store/context-api/mobile-menu-context";
 
+import useAuth from "../hooks/use-auth";
 import useWindowSize from "../hooks/use-windowSize";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,11 +13,14 @@ import {
   faFutbol,
   faMedal,
   faArrowRightFromBracket,
+  faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./NavBar.module.scss";
 
 const NavBar = () => {
+  const { token } = useAuth();
+
   const mobileMenuCtx = useContext(MobileMenuContext);
   const windowSize = useWindowSize();
 
@@ -33,11 +37,14 @@ const NavBar = () => {
     mobileMenuCtx.toggleMenuState();
   };
 
-  const outsideNavbarClickHandler = useCallback((e) => {
-    if (clickRef.current && !clickRef.current.contains(e.target)) {
-      mobileMenuCtx.closeMenuState();
-    }
-  }, [mobileMenuCtx]);
+  const outsideNavbarClickHandler = useCallback(
+    (e) => {
+      if (clickRef.current && !clickRef.current.contains(e.target)) {
+        mobileMenuCtx.closeMenuState();
+      }
+    },
+    [mobileMenuCtx]
+  );
 
   let leftSideAppName;
   let rightSideNavBarContent;
@@ -66,7 +73,7 @@ const NavBar = () => {
             to="/login"
             style={{ lineHeight: "1" }}
           >
-            Logout
+            {token ? "Logout" : "Login"}
           </NavLink>
         </li>
       </>
@@ -92,8 +99,17 @@ const NavBar = () => {
             to="/login"
             style={{ lineHeight: "1" }}
           >
-            <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            <span> Logout</span>
+            {token ? (
+              <>
+                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                <span> Logout</span>
+              </>
+            ) : (
+              <>
+                <FontAwesomeIcon icon={faArrowRightToBracket} />
+                <span> Login</span>
+              </>
+            )}
           </NavLink>
         </li>
       </ul>
