@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import useBlink from "../hooks/use-blink";
+import useAuth from "../hooks/use-auth";
 
 import classes from "./Post.module.scss";
 
@@ -15,6 +16,7 @@ const Post = ({
   editButtonClick,
   deleteButtonClick,
 }) => {
+  const { token } = useAuth();
   const { dataEditResult } = useSelector((state) => state.editPost);
 
   const { currentStyle, blinkHandler } = useBlink(
@@ -30,8 +32,6 @@ const Post = ({
     }
   }, [dataEditResult, blinkHandler, post._id]);
 
-  
-
   return (
     <div className={currentStyle} key={post._id}>
       <p>
@@ -44,18 +44,24 @@ const Post = ({
             View
           </NavLink>
         </button>
-        <button
-          className={classes.button1}
-          onClick={editButtonClick.bind(null, post._id)}
-        >
-          Edit
-        </button>
-        <button
-          className={classes.button4}
-          onClick={deleteButtonClick.bind(null, post)}
-        >
-          Delete
-        </button>
+
+        {token && (
+          <button
+            className={classes.button1}
+            onClick={editButtonClick.bind(null, post._id)}
+          >
+            Edit
+          </button>
+        )}
+
+        {token && (
+          <button
+            className={classes.button4}
+            onClick={deleteButtonClick.bind(null, post)}
+          >
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

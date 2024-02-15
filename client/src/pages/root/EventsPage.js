@@ -15,9 +15,12 @@ import DeletePostModal from "../../components/modals/delete-post-modal/DeletePos
 import AllPosts from "../../components/AllPosts";
 import Loader from "../../components/Loader";
 
+import useAuth from "../../hooks/use-auth";
+
 import classes from "./EventsPage.module.scss";
 
 const FeedPage = () => {
+  const { token } = useAuth();
   const [isPageChanged, setIsPageChanged] = useState(null);
   const dispatch = useDispatch();
 
@@ -77,9 +80,11 @@ const FeedPage = () => {
 
   return (
     <main className={classes.main}>
-      <button className={classes.button5} onClick={openPostWindow}>
-        New Event
-      </button>
+      {token && (
+        <button className={classes.button5} onClick={openPostWindow}>
+          New Event
+        </button>
+      )}
 
       <section className={classes.posts}>
         {isLoadingAllPosts && (

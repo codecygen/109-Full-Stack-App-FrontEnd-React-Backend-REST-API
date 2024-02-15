@@ -38,9 +38,8 @@ const LoginPage = () => {
 
   return (
     <main className={classes.main}>
-      {token !== null ? (
-        <Logout />
-      ) : (
+      {token && token !== null && <Logout />}
+      {token === null && (
         <Box
           sx={{
             display: "flex",
