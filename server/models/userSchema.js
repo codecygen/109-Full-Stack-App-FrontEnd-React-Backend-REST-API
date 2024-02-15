@@ -19,7 +19,16 @@ const userSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      default: "I am a new user!",
+      default: function () {
+        const emails = process.env.ADMIN_EMAILS.split(",");
+        const isAdmin = emails.includes(this.email);
+
+        if (isAdmin) {
+          return "admin";
+        } else {
+          return "user";
+        }
+      },
     },
 
     posts: [
@@ -82,6 +91,6 @@ userSchema.statics.findUserAndDeletePostId = async function (userId, postId) {
   } catch (err) {
     throw err;
   }
-}
+};
 
 module.exports = mongoose.model("User", userSchema);

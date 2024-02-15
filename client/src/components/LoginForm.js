@@ -68,10 +68,9 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (dataLoginUser) {
-      console.log("LOL!");
       navigate(0);
     }
-  }, [dataLoginUser]);
+  }, [dataLoginUser, navigate]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
