@@ -39,7 +39,7 @@ const NewPostOverlay = (props) => {
 
     const timeOut = setTimeout(() => {
       if (pageQueryParam === null || pageQueryParam === "1") {
-        window.location.reload();
+        navigate(0);
       } else {
         navigate("/");
       }

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { login } from "../store/redux/utils/apiStateManagementsThunk";
@@ -17,6 +19,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const defaultTheme = createTheme();
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -28,6 +31,7 @@ const LoginForm = () => {
     isEmailValid,
     isPasswordValid,
     isFormValid,
+    dataLoginUser,
     errorLoginUser,
     isLoadingLoginUser,
   } = useSelector((state) => state.login);
@@ -61,6 +65,13 @@ const LoginForm = () => {
       dispatch(loginActions.resetState());
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (dataLoginUser) {
+      console.log("LOL!");
+      navigate(0);
+    }
+  }, [dataLoginUser]);
 
   return (
     <ThemeProvider theme={defaultTheme}>

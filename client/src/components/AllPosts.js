@@ -87,7 +87,7 @@ const AllPosts = (props) => {
 
       setTimeout(() => {
         if (pageQueryParam === null || pageQueryParam === "1") {
-          window.location.reload();
+          navigate(0);
         } else {
           navigate("/");
         }
