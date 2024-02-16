@@ -48,7 +48,10 @@ const postPost = async (req, res, next) => {
 
     const createdMessage = await newMessage.createMessage();
 
-    const updatedUser = await DB.User.findUserAndSavePostId(req.userId, createdMessage._id);
+    const updatedUser = await DB.User.findUserAndSavePostId(
+      req.userId,
+      createdMessage._id
+    );
 
     res.json({
       message: "Post created!",
@@ -94,6 +97,22 @@ const updatePost = async (req, res, next) => {
       );
       existingPostError.statusCode = 500;
       throw existingPostError;
+    }
+
+    const adminEmails = process.env.ADMIN_EMAILS.split(",");
+    const postOwnerEmail = existingPost.creator.email;
+    const requestorEmail = req.userEmail;
+
+    // Check if the person who is editing either admin or the post owner
+    if (
+      requestorEmail !== postOwnerEmail &&
+      !adminEmails.includes(requestorEmail)
+    ) {
+      const authorizationError = new Error(
+        "You are not allowed to edit this post!"
+      );
+      authorizationError.statusCode = 401;
+      throw authorizationError;
     }
 
     // File uploaded?
@@ -160,7 +179,10 @@ const deletePost = async (req, res, next) => {
     const deletedPost = await DB.Message.deleteMessage(postId);
 
     // delete post id from the user in database
-    const updatedUser = await DB.User.findUserAndDeletePostId(existingPost.creator._id, postId);
+    const updatedUser = await DB.User.findUserAndDeletePostId(
+      existingPost.creator._id,
+      postId
+    );
 
     res.json({
       message: "Post deleted successfully!",

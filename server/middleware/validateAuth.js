@@ -13,6 +13,7 @@ const validateAuth = (req, res, next) => {
     }
 
     req.userId = decodedToken._id;
+    req.userEmail = decodedToken.email;
     next();
   } catch (err) {
     err.statusCode = 500;

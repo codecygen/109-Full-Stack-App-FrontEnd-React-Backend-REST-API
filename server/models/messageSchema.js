@@ -71,7 +71,7 @@ messageSchema.statics.getMessage = async function (postId) {
   try {
     const foundPost = await this.findById(postId).populate({
       path: "creator",
-      select: "name",
+      select: ["name", "email"],
     });
     if (!foundPost) {
       const foundPostError = new Error("Could not get the post!");
