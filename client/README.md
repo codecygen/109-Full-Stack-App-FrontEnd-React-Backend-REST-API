@@ -166,3 +166,21 @@ import { useSearchParams } from "react-router-dom";
 const [searchParams] = useSearchParams();
 console.log(searchParams.get("p"));
 ```
+
+## **REST API Authentication**:
+
+- **Websockets - Socket.io**: WebSocket protocol initially leverages HTTP during the handshake process to establish the connection between the client and the server. Unlike traditional HTTP requests, WebSocket connections remain open after the initial handshake, allowing for continuous communication without the overhead of repeatedly establishing new connections. This makes WebSockets particularly suitable for real-time applications such as chat applications, online gaming, and live data streaming.
+
+  <img src="readme-images/websockets.png" alt="websockets" style="width:400px">
+
+  Install the following packages to server and client apps respectively.
+
+  ```bash
+  # Install to the nodejs server
+  npm i socket.io
+
+  # Install to the ReactJS server
+  nom i socket.io-client
+  ```
+
+  

@@ -152,6 +152,14 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
 
   <img src="pictures/websockets.png" alt="websockets" style="width:400px">
 
+  Install the following packages to server and client apps respectively.
+
   ```bash
+  # Install to the nodejs server
   npm i socket.io
+
+  # Install to the ReactJS server
+  nom i socket.io-client
   ```
+
+  Check server.js for **websocket-server-establishment**.

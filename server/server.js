@@ -32,8 +32,14 @@ const SERVER_PORT = process.env.PORT || 4000;
 mongoose
   .connect(process.env.MONGODB_URL)
   .then((result) => {
-    app.listen(SERVER_PORT, () => {
+    const server = app.listen(SERVER_PORT, () => {
       console.log(`Server started on port ${SERVER_PORT}`);
+    });
+
+    const io = require("socket.io")(server);
+    // This function will be executed for every new client
+    io.on("connection", (socket) => {
+      console.log("Client connected to socket.io!")
     });
   })
   .catch((err) => {
