@@ -157,9 +157,7 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
   ```bash
   # Install to the nodejs server
   npm i socket.io
-
-  # Install to the ReactJS server
-  npm i socket.io-client
   ```
 
-  Check server.js for **websocket-server-establishment**.
+  There are number of steps to setup this for the backend.
+  - **Configuring Server**: Check server.js for **websocket-server-establishment**.

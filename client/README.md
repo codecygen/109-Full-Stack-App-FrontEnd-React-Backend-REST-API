@@ -176,10 +176,10 @@ console.log(searchParams.get("p"));
   Install the following packages to server and client apps respectively.
 
   ```bash
-  # Install to the nodejs server
-  npm i socket.io
-
   # Install to the ReactJS server
   npm i socket.io-client
   ```
+
+  There are number of steps to setup this for the frontend.
+  - **Configuring Client**: Check server.js for **websocket-client-establishment**.
 

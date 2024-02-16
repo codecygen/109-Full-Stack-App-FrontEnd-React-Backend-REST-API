@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { Route, Routes } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
@@ -11,7 +13,16 @@ import SignupPage from "./pages/signup/SignupPage";
 
 import NotFoundPage from "./pages/404/404";
 
+import io from "socket.io-client";
+
 const App = () => {
+  useEffect(() => {
+    const socket = io("http://localhost:4000");
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <NavBar />
