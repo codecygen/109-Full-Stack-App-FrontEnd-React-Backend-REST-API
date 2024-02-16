@@ -6,6 +6,7 @@ const validateMessageInput = require("../middleware/validateMessageInput");
 
 // Authentication-and-Authorization-Backend
 const validateAuth = require("../middleware/validateAuth");
+const postChangeAuthorization = require("../middleware/postChangeAuthorization");
 
 const fileUploadConfig = require("../config/fileUploadConfig");
 
@@ -21,11 +22,12 @@ router.post(
 );
 
 router.get("/post/:postId", feedController.getPost);
-router.delete("/delete/:postId",validateAuth, feedController.deletePost);
+router.delete("/delete/:postId", validateAuth, feedController.deletePost);
 
 router.put(
   "/update/:postId",
   validateAuth,
+  postChangeAuthorization,
   fileUploadConfig.single("image"),
   validateMessageInput,
   feedController.updatePost

@@ -88,32 +88,10 @@ const updatePost = async (req, res, next) => {
     const title = req.body.title;
     const details = req.body.details;
 
-    const existingPost = await DB.Message.getMessage(postId);
-
-    // Check if post exists in database
-    if (!existingPost) {
-      const existingPostError = new Error(
-        `Post ID ${postId} does not exist in database for updating!`
-      );
-      existingPostError.statusCode = 500;
-      throw existingPostError;
-    }
-
-    const adminEmails = process.env.ADMIN_EMAILS.split(",");
-    const postOwnerEmail = existingPost.creator.email;
-    const requestorEmail = req.userEmail;
-
-    // Check if the person who is editing either admin or the post owner
-    if (
-      requestorEmail !== postOwnerEmail &&
-      !adminEmails.includes(requestorEmail)
-    ) {
-      const authorizationError = new Error(
-        "You are not allowed to edit this post!"
-      );
-      authorizationError.statusCode = 401;
-      throw authorizationError;
-    }
+    // This is coming from postChangeAuthorization.js middleware
+    // the posts' existance and if the requestor is authorized to
+    // edit or delete it is determined in this middleware
+    const existingPost = req.existingPost;
 
     // File uploaded?
     if (!req.file || !req.file.path) {
