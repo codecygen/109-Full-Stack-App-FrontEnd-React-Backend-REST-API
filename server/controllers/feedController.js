@@ -132,7 +132,10 @@ const deletePost = async (req, res, next) => {
   try {
     const postId = req.params.postId;
 
-    const existingPost = await DB.Message.getMessage(postId);
+    // This is coming from postChangeAuthorization.js middleware
+    // the posts' existance and if the requestor is authorized to
+    // edit or delete it is determined in this middleware
+    const existingPost = req.existingPost;
 
     // Check if post exists in database
     if (!existingPost) {

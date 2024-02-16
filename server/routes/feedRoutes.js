@@ -22,7 +22,12 @@ router.post(
 );
 
 router.get("/post/:postId", feedController.getPost);
-router.delete("/delete/:postId", validateAuth, feedController.deletePost);
+router.delete(
+  "/delete/:postId",
+  validateAuth,
+  postChangeAuthorization,
+  feedController.deletePost
+);
 
 router.put(
   "/update/:postId",
