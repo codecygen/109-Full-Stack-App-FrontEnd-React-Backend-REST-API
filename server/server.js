@@ -27,7 +27,7 @@ app.use("/auth", userRoutes);
 // Always keep error middleware in the end of the app
 app.use(errorMiddleware);
 
-const SERVER_PORT = 4000;
+const SERVER_PORT = process.env.PORT || 4000;
 
 mongoose
   .connect(process.env.MONGODB_URL)

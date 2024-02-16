@@ -147,3 +147,11 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
   ```bash
   npm i jsonwebtoken
   ```
+
+- **Websockets - Socket.io**: WebSocket protocol initially leverages HTTP during the handshake process to establish the connection between the client and the server. Unlike traditional HTTP requests, WebSocket connections remain open after the initial handshake, allowing for continuous communication without the overhead of repeatedly establishing new connections. This makes WebSockets particularly suitable for real-time applications such as chat applications, online gaming, and live data streaming.
+
+  <img src="pictures/websockets.png" alt="websockets" style="width:400px">
+
+  ```bash
+  npm i socket.io
+  ```
