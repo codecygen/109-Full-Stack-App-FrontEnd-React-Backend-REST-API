@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { newPostActions } from "../../../store/redux/new-post-slice";
 import { editPostActions } from "../../../store/redux/edit-post-slice";
 
+import getAPI from "../../../store/redux/utils/config/getAPI";
+
 import {
   createNewPost,
   updatePost,
@@ -48,11 +50,11 @@ const PostOverlay = (props) => {
       dispatch(
         newPostActions.checkImage({
           fileData: {
-            name: "",
-            size: "",
-            type: "",
+            name: "current.jpg",
+            size: "1000000",
+            type: "image/jpeg",
           },
-          fileUrl: "",
+          fileUrl: `${getAPI.link}/${dataEditForm.image}`,
         })
       );
 
@@ -126,6 +128,10 @@ const PostOverlay = (props) => {
 
       fileUrl = "";
     }
+
+    console.log(actualFileData);
+    console.log(referenceFileData);
+    console.log(fileUrl);
 
     // sending-file-from-reactjs-to-nodejs-for-upload
     // Only passing referenceFileData to Redux for image extension assessment
