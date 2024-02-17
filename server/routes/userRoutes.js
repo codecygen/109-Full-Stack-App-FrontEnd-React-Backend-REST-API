@@ -7,6 +7,7 @@ const validateLoginInput = require("../middleware/validateLoginInput");
 
 router.put("/signup", validateSignupInput, userController.signup);
 
+// Authentication-and-Authorization-Backend
 router.post("/login", validateLoginInput, userController.login);
 
 module.exports = router;

@@ -140,13 +140,68 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
 
   Here, signature can only be verified by the server and it is created by the server.
 
-  <img src="pictures/REST-API-Auth.png" alt="rest-api-auth" style="width:400px">
+    <img src="pictures/REST-API-Auth.png" alt="rest-api-auth" style="width:400px">
 
   To create JWT (Json Web Token) an npm package has to be installed and it is named as **jsonwebtoken**. Install it via
 
   ```bash
   npm i jsonwebtoken
   ```
+
+  - **Login**: First login system has to be established. To do it, jsonwebtoken system is used. The details are shared in userRoutes.js and userController.js.
+
+    userRoutes.js
+
+    ```javascript
+    // Authentication-and-Authorization-Backend
+    router.post("/login", validateLoginInput, userController.login);
+    ```
+
+    userController.js
+
+    ```javascript
+    // Authentication-and-Authorization-Backend
+    const login = async (req, res, next) => {
+
+    try {
+      ............
+
+      const token = jwt.sign(
+        {
+          _id: foundUser._id.toString(),
+          email: foundUser.email,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+
+      res.json({
+        message: "Logged in!",
+        token,
+        userId: foundUser._id,
+        name: foundUser.name,
+        status: foundUser.status,
+      });
+      } catch (err) {
+        next(err);
+      }
+    }
+    ```
+
+    As you can see the token is created and **token**, **userId**, **name** and **status** info are sent to the frontend. Especially **token** will be used in future for authorization purposes such as updating and deleting post requests.
+
+  - **Update Post Request**: There are couple of sections for this purpose.
+
+    ```javascript
+    router.put(
+      "/update/:postId",
+      validateAuth,
+      postChangeAuthorization,
+      fileUploadConfig.single("image"),
+      validateMessageInput,
+      feedController.updatePost
+    );
+    ```
 
 - **Websockets - Socket.io**: WebSocket protocol initially leverages HTTP during the handshake process to establish the connection between the client and the server. Unlike traditional HTTP requests, WebSocket connections remain open after the initial handshake, allowing for continuous communication without the overhead of repeatedly establishing new connections. This makes WebSockets particularly suitable for real-time applications such as chat applications, online gaming, and live data streaming.
 
@@ -160,4 +215,5 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
   ```
 
   There are number of steps to setup this for the backend.
+
   - **Configuring Server**: Check server.js for **websocket-server-establishment**.
