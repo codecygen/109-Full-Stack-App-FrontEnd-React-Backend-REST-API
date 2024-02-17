@@ -61,7 +61,7 @@ const login = async (req, res, next) => {
         email: foundUser.email,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "24h" }
     );
 
     res.json({
@@ -70,6 +70,7 @@ const login = async (req, res, next) => {
       userId: foundUser._id,
       name: foundUser.name,
       status: foundUser.status,
+      expiry: new Date().getTime() + (24 * 60 * 59 * 1000),
     });
   } catch (err) {
     next(err);

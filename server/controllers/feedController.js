@@ -93,27 +93,33 @@ const updatePost = async (req, res, next) => {
     // edit or delete it is determined in this middleware
     const existingPost = req.existingPost;
 
+    let updatedData;
+
     // File uploaded?
-    if (!req.file || !req.file.path) {
-      const fileUploadError = new Error(
-        "Could not get the uploaded file for post updating!"
-      );
-      fileUploadError.statusCode = 422;
-      throw fileUploadError;
+    // If yes, delete old image
+    if (req.file && req.file.path) {
+      // delete the old image
+      const oldImage = existingPost.image;
+
+      fs.unlink(oldImage, (err) => {
+        if (err) {
+          throw new Error(
+            "Image could not be deleted for post update request!"
+          );
+        }
+      });
+
+      updatedData = {
+        title,
+        image: req.file.path,
+        details,
+      };
     }
 
-    // delete the old image
-    const oldImage = existingPost.image;
-
-    fs.unlink(oldImage, (err) => {
-      if (err) {
-        throw new Error("Image could not be deleted for post update request!");
-      }
-    });
-
-    const updatedData = {
+    // if no file uploaded, don't delete any image
+    // proceed with only title and details update
+    updatedData = {
       title,
-      image: req.file.path,
       details,
     };
 

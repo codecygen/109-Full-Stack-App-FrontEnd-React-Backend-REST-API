@@ -172,7 +172,7 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
           email: foundUser.email,
         },
         process.env.JWT_SECRET,
-        { expiresIn: "1h" }
+        { expiresIn: "24h" }
       );
 
       res.json({

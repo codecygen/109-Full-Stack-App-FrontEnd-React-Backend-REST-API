@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { useSelector } from "react-redux";
 
@@ -18,6 +18,7 @@ const Post = ({
 }) => {
   const { token, name, status } = useAuth();
   const { dataEditResult } = useSelector((state) => state.editPost);
+  const [writer, setWriter] = useState(null);
 
   const { currentStyle, blinkHandler } = useBlink(
     classes.post,
@@ -32,10 +33,14 @@ const Post = ({
     }
   }, [dataEditResult, blinkHandler, post._id]);
 
+  useEffect(() => {
+    setWriter(post.creator.name || name);
+  }, [post.creator.name, name]);
+
   return (
     <div className={currentStyle} key={post._id}>
       <p>
-        Posted by {post.creator.name} on {formattedDate}
+        Posted by {writer} on {formattedDate}
       </p>
       <h1>{post.title}</h1>
       <div className={classes.buttons}>
@@ -45,7 +50,7 @@ const Post = ({
           </NavLink>
         </button>
 
-        {((token && post.creator.name === name) ||
+        {((token && writer === name) ||
           (token && status === "admin")) && (
           <button
             className={classes.button1}
@@ -55,7 +60,7 @@ const Post = ({
           </button>
         )}
 
-        {((token && post.creator.name === name) ||
+        {((token && writer === name) ||
           (token && status === "admin")) && (
           <button
             className={classes.button4}
