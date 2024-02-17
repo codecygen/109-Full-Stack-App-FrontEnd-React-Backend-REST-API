@@ -68,6 +68,7 @@ const login = async (req, res, next) => {
       token,
       userId: foundUser._id,
       name: foundUser.name,
+      status: foundUser.status,
     });
   } catch (err) {
     next(err);

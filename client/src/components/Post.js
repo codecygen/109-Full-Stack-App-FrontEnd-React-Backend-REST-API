@@ -16,7 +16,7 @@ const Post = ({
   editButtonClick,
   deleteButtonClick,
 }) => {
-  const { token } = useAuth();
+  const { token, name, status } = useAuth();
   const { dataEditResult } = useSelector((state) => state.editPost);
 
   const { currentStyle, blinkHandler } = useBlink(
@@ -45,7 +45,8 @@ const Post = ({
           </NavLink>
         </button>
 
-        {token && (
+        {((token && post.creator.name === name) ||
+          (token && status === "admin")) && (
           <button
             className={classes.button1}
             onClick={editButtonClick.bind(null, post._id)}
@@ -54,7 +55,8 @@ const Post = ({
           </button>
         )}
 
-        {token && (
+        {((token && post.creator.name === name) ||
+          (token && status === "admin")) && (
           <button
             className={classes.button4}
             onClick={deleteButtonClick.bind(null, post)}

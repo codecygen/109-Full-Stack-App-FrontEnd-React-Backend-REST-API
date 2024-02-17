@@ -30,6 +30,7 @@ const loginOneUser = async (
     localStorage.setItem("token", data.token);
     localStorage.setItem("tokenName", data.name);
     localStorage.setItem("tokenExpiry", expiry);
+    localStorage.setItem("tokenStatus", data.status)
 
     dispatch(successHandler(data));
     dispatch(loadingHandler(false));
