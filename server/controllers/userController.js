@@ -70,7 +70,7 @@ const login = async (req, res, next) => {
       userId: foundUser._id,
       name: foundUser.name,
       status: foundUser.status,
-      expiry: new Date().getTime() + (24 * 60 * 59 * 1000),
+      expiry: new Date().getTime() + (24 * 60 * 60 * 1000),
     });
   } catch (err) {
     next(err);

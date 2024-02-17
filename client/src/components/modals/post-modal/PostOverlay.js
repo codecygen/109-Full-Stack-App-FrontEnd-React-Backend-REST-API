@@ -129,10 +129,6 @@ const PostOverlay = (props) => {
       fileUrl = "";
     }
 
-    console.log(actualFileData);
-    console.log(referenceFileData);
-    console.log(fileUrl);
-
     // sending-file-from-reactjs-to-nodejs-for-upload
     // Only passing referenceFileData to Redux for image extension assessment
     dispatch(
