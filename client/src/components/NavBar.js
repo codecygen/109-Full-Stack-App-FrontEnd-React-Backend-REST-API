@@ -123,8 +123,13 @@ const NavBar = () => {
       document.removeEventListener("click", outsideNavbarClickHandler);
   }, [outsideNavbarClickHandler]);
 
+  const LOL = () => {
+    console.log("LOL!");
+    console.log(token);
+  };
+
   return (
-    <section ref={clickRef}>
+    <section ref={clickRef} onClick={LOL}>
       <div className={classes["top-padding"]}></div>
       <main className={`${classes.navbar}`}>
         <ul>

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
 const useAuth = () => {
-  const [token, setToken] = useState();
-  const [name, setName] = useState();
-  const [status, setStatus] = useState();
+  const [token, setToken] = useState(null);
+  const [name, setName] = useState(null);
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     const expiry = +localStorage.getItem("tokenExpiry");
@@ -16,6 +16,7 @@ const useAuth = () => {
     } else {
       setToken(null);
       setName(null);
+      setStatus(null);
 
       localStorage.removeItem("token");
       localStorage.removeItem("tokenName");
