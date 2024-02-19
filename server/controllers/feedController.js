@@ -6,7 +6,7 @@ const getPosts = async (req, res, next) => {
   try {
     const currentPage = +req.query.page;
     const totalPosts = await DB.Message.countMessages();
-    const itemsPerPage = 3;
+    const itemsPerPage = 10;
 
     const totalPages = Math.ceil(+(totalPosts / itemsPerPage));
 
