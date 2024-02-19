@@ -61,7 +61,7 @@ const login = async (req, res, next) => {
         email: foundUser.email,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "10h" }
+      { expiresIn: "10hr" }
     );
 
     res.json({
