@@ -19,8 +19,7 @@ const useAuth = () => {
       setStatus(localStorage.getItem("tokenStatus"));
 
       const timeout = setTimeout(() => {
-        window.location.reload(true);
-        navigate("/login");
+        navigate(0);
       }, rest);
 
       return () => clearTimeout(timeout);
