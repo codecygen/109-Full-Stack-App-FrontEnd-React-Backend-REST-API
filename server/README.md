@@ -140,7 +140,7 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
 
   Here, signature can only be verified by the server and it is created by the server.
 
-    <img src="pictures/REST-API-Auth.png" alt="rest-api-auth" style="width:400px">
+      <img src="pictures/REST-API-Auth.png" alt="rest-api-auth" style="width:400px">
 
   To create JWT (Json Web Token) an npm package has to be installed and it is named as **jsonwebtoken**. Install it via
 
@@ -190,7 +190,7 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
 
     As you can see the token is created and **token**, **userId**, **name** and **status** info are sent to the frontend. Especially **token** will be used in future for authorization purposes such as updating and deleting post requests.
 
-  - **Update Post Request**: There are couple of sections for this purpose.
+  - **Update Post Request**: There are couple of sections for this purpose. Here, validateAuth.js checks if the user is authenticated, then we have postChangeAuthorization.js middleware which ensures the person who wants to update the post is authorized (either owner of the post or an admin), then file upload middleware comes into help which is represented with fileUploadConfig.single("image"), next we have to ensure that the title and details provided by the frontend is properly validated and sanitized. If it passes all the middleware, finally we can move towards updating the post by connecting to database.
 
     ```javascript
     router.put(
