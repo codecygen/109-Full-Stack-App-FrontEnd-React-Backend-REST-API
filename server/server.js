@@ -5,6 +5,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 require("dotenv").config();
+const { initIO } = require("./sockets/socket");
 
 const feedRoutes = require("./routes/feedRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -33,22 +34,12 @@ mongoose
   .connect(process.env.MONGODB_URL)
   .then((result) => {
     // websocket-server-establishment
-    const server = app.listen(SERVER_PORT, () => {
+    const nodeServer = app.listen(SERVER_PORT, () => {
       console.log(`Server started on port ${SERVER_PORT}`);
     });
 
     // websocket-server-establishment
-    const io = require("socket.io")(server, {
-      cors: {
-        origin: "*",
-        methods: ["GET", "POST"],
-      },
-    });
-    // websocket-server-establishment
-    // This function will be executed for every new client
-    io.on("connection", (socket) => {
-      console.log("Client connected to socket.io!");
-    });
+    initIO(nodeServer);
   })
   .catch((err) => {
     console.error(err);
