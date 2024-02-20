@@ -1,14 +1,14 @@
-const { validationResult, check } = require("express-validator");
+const { validationResult, body } = require("express-validator");
 
 const validateMessageInput = async (req, res, next) => {
   try {
     const inputs = [
-      check("title")
+      body("title")
         .trim()
         .isLength({ min: 5 })
         .escape()
         .withMessage("Not the correct title!"),
-      check("details")
+      body("details")
         .trim()
         .isLength({ min: 5 })
         // .escape()
