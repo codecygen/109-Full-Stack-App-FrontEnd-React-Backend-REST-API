@@ -216,4 +216,4 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
 
   There are number of steps to setup this for the backend.
 
-  - **Configuring Server**: Check server.js for **websocket-server-establishment**.
+  - **Configuring Server**: Check server.js for **websocket-server-establishment**. The imported file is called socket.js and it also has the socket configuration in it.

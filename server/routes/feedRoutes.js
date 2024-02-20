@@ -38,4 +38,7 @@ router.put(
   feedController.updatePost
 );
 
+// Make a comment underneath a post with socket.io
+router.post("/post/:postId/comments", feedController.postComment);
+
 module.exports = router;

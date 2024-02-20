@@ -2,6 +2,8 @@ const fs = require("fs");
 const DB = require("../models/DB");
 const { ObjectId } = require("mongodb");
 
+const { getIO } = require("../sockets/socket");
+
 const getPosts = async (req, res, next) => {
   try {
     const currentPage = +req.query.page;
@@ -180,4 +182,21 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-module.exports = { getPosts, postPost, getPost, updatePost, deletePost };
+const postComment = (req, res, next) => {
+  const io = getIO();
+  // io.broadcast
+  // if you only want to send it to everyone except for poster
+  io.emit("message", { message: "Works!" });
+
+  
+  console.log("Aras");
+};
+
+module.exports = {
+  getPosts,
+  postPost,
+  getPost,
+  updatePost,
+  deletePost,
+  postComment,
+};
