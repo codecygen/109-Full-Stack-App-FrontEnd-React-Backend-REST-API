@@ -1,6 +1,7 @@
 # Front End - React
 
 ## Instructions:
+
 For front end to work properly navigate to **./src/store/redux/config/getAPI.js**. From this file, change the backend link which is denoted as **API_LINK** to the backend in production.
 
 ## show-image-preview
@@ -149,9 +150,11 @@ try {
 ```
 
 ## get-link-params-and-queries
+
 In NodeJS, req.params and req.query are used for link parameters and queries. In React, we use useParams and useSearchParams for this type of requests.
 
 For **localhost:3000/:id** or **localhost:3000/65b3987308526049af2c1b9d** link where you need to get the **id** parameter
+
 ```javascript
 import { useParams } from "react-router-dom";
 const params = useParams();
@@ -160,6 +163,7 @@ console.log(params.id);
 ```
 
 For **localhost:3000/?p=2** link where you need to get the **p** parameter
+
 ```javascript
 import { useSearchParams } from "react-router-dom";
 
@@ -169,17 +173,35 @@ console.log(searchParams.get("p"));
 
 ## **REST API Authentication**:
 
-- **Websockets - Socket.io**: WebSocket protocol initially leverages HTTP during the handshake process to establish the connection between the client and the server. Unlike traditional HTTP requests, WebSocket connections remain open after the initial handshake, allowing for continuous communication without the overhead of repeatedly establishing new connections. This makes WebSockets particularly suitable for real-time applications such as chat applications, online gaming, and live data streaming.
+- **Login**: First section should be about login. The info is given in **loginOneUser.js**. Here the login data is sent to backend and after that backend provides a token which is saves to local storage area. The info that is provided backend to frontend is as give.
+
+```javascript
+res.json({
+  message: "Logged in!",
+  token,
+  userId: foundUser._id,
+  name: foundUser.name,
+  status: foundUser.status,
+  expiry: new Date().getTime() + 10 * 60 * 60 * 1000,
+});
+```
+  Here, token, name, status and expiry that are sent from backend are stored in localstorage as token, tokenName, tokenStatus and tokenExpiry. They hold info about the encrypted token, username, user status (e.g admin or regular user) and token expiry in new Date().getTime() + (10 * 60 * 60 * 1000) format. These are used to render pages properly.
+
+- **Update Post Request**: This section is totally dedicated to updating the post request.
+
+## **Websockets - Socket.io**:
+
+WebSocket protocol initially leverages HTTP during the handshake process to establish the connection between the client and the server. Unlike traditional HTTP requests, WebSocket connections remain open after the initial handshake, allowing for continuous communication without the overhead of repeatedly establishing new connections. This makes WebSockets particularly suitable for real-time applications such as chat applications, online gaming, and live data streaming.
 
   <img src="readme-images/websockets.png" alt="websockets" style="width:400px">
 
-  Install the following packages to server and client apps respectively.
+Install the following packages to server and client apps respectively.
 
-  ```bash
-  # Install to the ReactJS server
-  npm i socket.io-client
-  ```
+```bash
+# Install to the ReactJS server
+npm i socket.io-client
+```
 
-  There are number of steps to setup this for the frontend.
-  - **Configuring Client**: Check server.js for **websocket-client-establishment**.
+There are number of steps to setup this for the frontend.
 
+- **Configuring Client**: Check server.js for **websocket-client-establishment**.

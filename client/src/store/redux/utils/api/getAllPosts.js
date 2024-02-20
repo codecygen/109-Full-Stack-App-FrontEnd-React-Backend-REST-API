@@ -13,7 +13,6 @@ const getAllPosts = async (
     const token = localStorage.getItem("token");
 
     const res = await fetch(getAPI.getAllPosts(currentPage), {
-      // Authentication-and-Authorization-Frontend
       headers: {
         Authorization: `Bearer ${token}`,
       },
