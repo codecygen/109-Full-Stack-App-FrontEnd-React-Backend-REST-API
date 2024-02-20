@@ -15,6 +15,9 @@ socket.on("disconnect", () => {
 // Listen for the "message" event from the server
 socket.on("message", (data) => {
   console.log("Received message from server:", data); // Print the received message
+  
+  // Log the received message to the console
+  console.log("Received message from server:", data);
 });
 
 // Emit a message to the server
