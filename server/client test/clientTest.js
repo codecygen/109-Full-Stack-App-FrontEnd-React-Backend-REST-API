@@ -8,22 +8,15 @@ socket.on("connect", () => {
   console.log("Connected to server");
 });
 
-socket.on("disconnect", () => {
-  console.log("Disconnected from server");
-});
-
 // Listen for the "message" event from the server
 socket.on("message", (data) => {
-  console.log("Received message from server:", data); // Print the received message
-  
-  // Log the received message to the console
-  console.log("Received message from server:", data);
+  console.log("Received message from server:", data.message); // Print the received message
 });
 
 // Emit a message to the server
 socket.emit("message", { message: "Hello from client!" });
 
-// Disconnect when done
+// Listen for disconnect events
 socket.on("disconnect", () => {
   console.log("Disconnected from server");
 });
