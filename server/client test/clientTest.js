@@ -11,7 +11,7 @@ socket.on("connect", () => {
 
 // Listen for the "message" event from the server
 socket.on("message", (data) => {
-  console.log("Received message from server:", data.comment); // Print the received message
+  console.log("Received message from server:", data); // Print the received message
 });
 
 // Emit a message to the server
@@ -30,21 +30,39 @@ const options = {
   port: 4000,
   path: "/feed/post/65d3aa0e2afddb237cdd3383/comments", // Replace with the actual endpoint on your backend server
   method: "POST", // or 'POST', 'PUT', etc. depending on your backend API
+  headers: {
+    "Content-Type": "application/json", // Set the Content-Type header
+  },
 };
+
+// Define the data to be sent in the HTTP request
+const data = JSON.stringify({
+  token: "vahitaras@gmail.com", // Set the token value
+  comment: "This is a dummy comment!",
+});
+
+// Log the request data
+console.log("Request Data:", data);
 
 // Make the HTTP request
 const req = http.request(options, (res) => {
   console.log(`Status code: ${res.statusCode}`);
 
   // Accumulate the response data
-  let data = "";
+  let responseData = "";
+
   res.on("data", (chunk) => {
-    data += chunk;
+    responseData += chunk;
   });
 
   // When the response ends, parse and log the data
   res.on("end", () => {
-    console.log("Response:", data);
+    try {
+      const responseDataObj = JSON.parse(responseData); // Assuming the response is JSON data
+      console.log("Response:", responseDataObj);
+    } catch (error) {
+      console.error("Error parsing response:", error);
+    }
   });
 });
 
@@ -52,6 +70,9 @@ const req = http.request(options, (res) => {
 req.on("error", (error) => {
   console.error("Error:", error);
 });
+
+// Send the request data
+req.write(data);
 
 // End the request
 req.end();

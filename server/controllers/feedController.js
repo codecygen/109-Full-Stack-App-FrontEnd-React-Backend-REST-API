@@ -183,15 +183,41 @@ const deletePost = async (req, res, next) => {
 };
 
 const postComment = async (req, res, next) => {
-  const postId = req.params.postId;
+  try {
+    const postId = req.params.postId;
+    const { token, comment } = req.body;
 
-  const foundPost = await DB.Message.getMessage(postId);
+    const userEmail = token;
 
-  const io = getIO();
+    const foundPost = await DB.Message.getMessage(postId);
+    const foundUser = await DB.User.findUserWithEmail(userEmail);
 
-  // io.broadcast, if you want to show everyone except for the sender
-  // io.emit, if you want to show everyone
-  io.emit("message", { comment: foundPost });
+    if (!foundPost) {
+      throw new Error("No post found for posting comment!");
+    }
+
+    if (!foundUser) {
+      throw new Error("No user found for posting comment!");
+    }
+
+    const io = getIO();
+
+    // io.broadcast, if you want to show everyone except for the sender
+    // io.emit, if you want to show everyone
+    io.emit("message", {
+      message: "Comment successfully posted!",
+      postId: postId,
+      userId: foundUser._id,
+      comment: comment,
+    });
+
+    res.json({
+      message: "Comment successfully added!",
+      comment: comment,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = {
