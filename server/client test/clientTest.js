@@ -10,7 +10,7 @@ socket.on("connect", () => {
 
 // Listen for the "message" event from the server
 socket.on("message", (data) => {
-  console.log("Received message from server:", data.message); // Print the received message
+  console.log("Received message from server:", data.comment); // Print the received message
 });
 
 // Emit a message to the server

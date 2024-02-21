@@ -182,14 +182,16 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-const postComment = (req, res, next) => {
-  const io = getIO();
-  // io.broadcast
-  // if you only want to send it to everyone except for poster
-  io.emit("message", { message: "Works!" });
+const postComment = async (req, res, next) => {
+  const postId = req.params.postId;
 
-  
-  console.log("Aras");
+  const foundPost = await DB.Message.getMessage(postId);
+
+  const io = getIO();
+
+  // io.broadcast, if you want to show everyone except for the sender
+  // io.emit, if you want to show everyone
+  io.emit("message", { comment: foundPost });
 };
 
 module.exports = {
