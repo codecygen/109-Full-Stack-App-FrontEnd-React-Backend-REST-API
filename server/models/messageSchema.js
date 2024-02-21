@@ -18,7 +18,7 @@ const messageSchema = new mongoose.Schema(
     },
 
     creator: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
