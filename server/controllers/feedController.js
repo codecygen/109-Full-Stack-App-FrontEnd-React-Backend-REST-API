@@ -244,6 +244,13 @@ const postComment = async (req, res, next) => {
   }
 };
 
+const getComments = async (req, res, next) => {
+  const io = getIO();
+  io.emit("message", {
+    message: "Comments successfully retrieved!",
+  });
+};
+
 module.exports = {
   getPosts,
   postPost,
@@ -251,4 +258,5 @@ module.exports = {
   updatePost,
   deletePost,
   postComment,
+  getComments,
 };
