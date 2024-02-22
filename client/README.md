@@ -172,22 +172,26 @@ console.log(searchParams.get("p"));
 ```
 
 ## **REST API Authentication**:
+  Checkout **Authentication-and-Authorization-Frontend** keyword for more info
 
-- **Login**: First section should be about login. The info is given in **loginOneUser.js**. Here the login data is sent to backend and after that backend provides a token which is saves to local storage area. The info that is provided backend to frontend is as give.
+  - **Login**: First section should be about login. The info is given in **loginOneUser.js**. Here the login data is sent to backend and after that backend provides a token which is saves to local storage area. The info that is provided backend to frontend is as given.
 
-```javascript
-res.json({
-  message: "Logged in!",
-  token,
-  userId: foundUser._id,
-  name: foundUser.name,
-  status: foundUser.status,
-  expiry: new Date().getTime() + 10 * 60 * 60 * 1000,
-});
-```
-  Here, token, name, status and expiry that are sent from backend are stored in localstorage as token, tokenName, tokenStatus and tokenExpiry. They hold info about the encrypted token, username, user status (e.g admin or regular user) and token expiry in new Date().getTime() + (10 * 60 * 60 * 1000) format. These are used to render pages properly.
+  ```javascript
+  // Backend code
+  res.json({
+    message: "Logged in!",
+    token,
+    userId: foundUser._id,
+    name: foundUser.name,
+    status: foundUser.status,
+    expiry: new Date().getTime() + 10 * 60 * 60 * 1000,
+  });
+  ```
+    Here, token, name, status and expiry that are sent from backend are stored in localstorage as token, tokenName, tokenStatus and tokenExpiry. They hold info about the encrypted token, username, user status (e.g admin or regular user) and token expiry in new Date().getTime() + (10 * 60 * 60 * 1000) format. These are used to render pages properly.
 
-- **Update Post Request**: This section is totally dedicated to updating the post request.
+  - **Update Post Request**: This section is totally dedicated to updating the post request. First part is about having a custom hook called **use-auth.js**. This file is responsible of tracking the **token** (logged in user token), **name** (logged in username) and **status** (admin or user). It also checks if the token is expired and if it did, it auto deletes the token from local storage. This file also sets a timeout function based on the expiry time which refreshes the app so when the expiry time comes, it will auto logout the user from the app.
+  
+    Second section is about **updateOnePost.js**. In critical requests like this, our app will send our local storage token to backend as **Authorization: `Bearer ${token}`**, which will be double checked by backend and confirmed or rejected accordingly. As we already know in this project, **updateOnePost.js** is controlled by redux thunk to change states.
 
 ## **Websockets - Socket.io**:
 

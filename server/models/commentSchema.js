@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
   {
-    message: {
+    messageId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Message",
       required: true,
     },
 
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,

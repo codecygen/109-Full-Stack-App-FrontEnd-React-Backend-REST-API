@@ -200,20 +200,44 @@ const postComment = async (req, res, next) => {
       throw new Error("No user found for posting comment!");
     }
 
+    const newComment = new DB.Comment({
+      messageId: postId,
+      userId: foundUser._id,
+      comment: comment,
+    });
+
+    const createdComment = await newComment.createComment();
+
+    if (!createdComment) {
+      const commentCreationError = new Error("Could not create the comment!");
+      commentCreationError.statusCode = 500;
+      throw commentCreationError;
+    }
+
     const io = getIO();
 
     // io.broadcast, if you want to show everyone except for the sender
     // io.emit, if you want to show everyone
     io.emit("message", {
       message: "Comment successfully posted!",
-      postId: postId,
-      userId: foundUser._id,
-      comment: comment,
+      commentDetails: {
+        id: createdComment._id,
+        username: foundUser.name,
+        comment: createdComment._doc.comment,
+        createdAt: createdComment._doc.createdAt,
+        updatedAt: createdComment._doc.updatedAt,
+      },
     });
 
     res.json({
       message: "Comment successfully added!",
-      comment: comment,
+      commentDetails: {
+        id: createdComment._id,
+        username: foundUser.name,
+        comment: createdComment._doc.comment,
+        createdAt: createdComment._doc.createdAt,
+        updatedAt: createdComment._doc.updatedAt,
+      },
     });
   } catch (err) {
     next(err);

@@ -136,6 +136,8 @@ JWT_SECRET="7nw`f9-HGNGilVDcI>6:1s{r:-7)4.QR£@A.HN~~z6&~dXsx^n"
 
 - **REST API Authentication**: Keep in mind that REST API is stateless. Meaning that there is no session storing like in a NodeJS, EJS app so every request is treated as a standalone request. Server sends a token and it is stored in front end. This stored token is then attached to every request by React client to backend server.
 
+  Check out **Authentication-and-Authorization-Backend** keyword for more info.
+
   The token contains JSON Data + Signature = JWT (JSON Web Token)
 
   Here, signature can only be verified by the server and it is created by the server.
