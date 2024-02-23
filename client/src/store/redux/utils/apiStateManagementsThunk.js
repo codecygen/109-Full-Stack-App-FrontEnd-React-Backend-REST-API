@@ -13,6 +13,7 @@ import updateOnePost from "./api/updateOnePost";
 import deleteOnePost from "./api/deleteOnePost";
 import signupOneUser from "./api/signupOneUser";
 import loginOneUser from "./api/loginOneUser";
+import getPostComments from "./api/getPostComments";
 
 export const getPostsPagePosts = (currentPage) => {
   return async (dispatch) => {
@@ -110,4 +111,12 @@ export const login = (loginData) => {
       loginActions.fail
     );
   };
+};
+
+// No thunk needed for this, it seems redundant
+// but I made it 
+export const getComments = async (postId) => {
+  const comments = await getPostComments(postId);
+
+  return comments;
 };

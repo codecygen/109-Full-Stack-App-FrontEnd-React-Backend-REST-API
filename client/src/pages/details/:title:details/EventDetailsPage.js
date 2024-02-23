@@ -16,6 +16,8 @@ import getAPI from "../../../store/redux/utils/config/getAPI";
 
 import classes from "./eventDetailsPage.module.scss";
 
+import { getComments } from "../../../store/redux/utils/apiStateManagementsThunk";
+
 const EventIdPage = () => {
   const params = useParams();
   const dispatch = useDispatch();
@@ -25,6 +27,12 @@ const EventIdPage = () => {
 
   useEffect(() => {
     dispatch(getDetailsPagePost(params.id));
+
+    const comments = getComments("65d3aa0e2afddb237cdd3383").then((data) =>
+      console.log(data)
+    );
+
+    console.log(comments);
   }, [dispatch, params.id]);
 
   const {

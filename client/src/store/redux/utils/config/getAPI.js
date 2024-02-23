@@ -24,8 +24,12 @@ class getAPI {
 
   // User related endpoints
   static signupUser = `${this.link}/auth/signup`;
-
   static loginUser = `${this.link}/auth/login`;
+
+  // Socket.io comment related endpoints
+  static getComments(id) {
+    return `${this.link}/feed/post/${id}/comments`;
+  }
 }
 
 export default getAPI;
