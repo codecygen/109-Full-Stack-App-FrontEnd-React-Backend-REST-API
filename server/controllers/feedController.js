@@ -208,19 +208,13 @@ const postComment = async (req, res, next) => {
 
     const createdComment = await newComment.createComment();
 
-    if (!createdComment) {
-      const commentCreationError = new Error("Could not create the comment!");
-      commentCreationError.statusCode = 500;
-      throw commentCreationError;
-    }
-
     const io = getIO();
 
     // io.broadcast, if you want to show everyone except for the sender
     // io.emit, if you want to show everyone
     io.emit("message", {
-      message: "Comment successfully posted!",
-      commentDetails: {
+      action: "POST",
+      comment: {
         id: createdComment._id,
         username: foundUser.name,
         comment: createdComment._doc.comment,
@@ -230,8 +224,8 @@ const postComment = async (req, res, next) => {
     });
 
     res.json({
-      message: "Comment successfully added!",
-      commentDetails: {
+      message: "POST request for comment was successful!!",
+      comment: {
         id: createdComment._id,
         username: foundUser.name,
         comment: createdComment._doc.comment,
@@ -245,10 +239,25 @@ const postComment = async (req, res, next) => {
 };
 
 const getComments = async (req, res, next) => {
-  const io = getIO();
-  io.emit("message", {
-    message: "Comments successfully retrieved!",
-  });
+  try {
+    const postId = req.params.postId;
+
+    const comments = await DB.Comment.getComments(postId);
+
+    const io = getIO();
+
+    io.emit("message", {
+      action: "GET",
+      comment: comments,
+    });
+
+    res.json({
+      message: "GET request for comments was successful!!",
+      comment: comments,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = {

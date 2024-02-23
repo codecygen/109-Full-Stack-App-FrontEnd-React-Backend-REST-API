@@ -43,9 +43,6 @@ async function getRequest() {
 
     const response = await axios.get(
       "http://localhost:4000/feed/post/65d3aa0e2afddb237cdd3383/comments",
-      {
-        withCredentials: true,
-      }
     );
 
     document.getElementById("response").textContent = JSON.stringify(

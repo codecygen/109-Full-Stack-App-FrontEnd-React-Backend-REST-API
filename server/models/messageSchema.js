@@ -56,6 +56,7 @@ messageSchema.statics.getMessages = async function (currentPage, itemsPerPage) {
       .sort({ createdAt: -1 })
       .skip((currentPage - 1) * itemsPerPage)
       .limit(itemsPerPage);
+      
     if (!allPosts) {
       const allPostError = new Error("Could not get all posts!");
       allPostError.statusCode = 500;
