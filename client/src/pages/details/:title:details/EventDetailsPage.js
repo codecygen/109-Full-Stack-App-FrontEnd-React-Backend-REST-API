@@ -27,13 +27,20 @@ const EventIdPage = () => {
 
   useEffect(() => {
     dispatch(getDetailsPagePost(params.id));
-
-    const comments = getComments("65d3aa0e2afddb237cdd3383").then((data) =>
-      console.log(data)
-    );
-
-    console.log(comments);
   }, [dispatch, params.id]);
+
+  useEffect(() => {
+    const fetchComments = async (postId) => {
+      try {
+        const comments = await getComments("65d3aa0e2afddb237cdd3383");
+        console.log(comments);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchComments(params.id);
+  }, [params.id]);
 
   const {
     title,

@@ -11,7 +11,7 @@ const getPostComments = async (postId, dispatch) => {
     const data = res.json();
     return data;
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 };
 
