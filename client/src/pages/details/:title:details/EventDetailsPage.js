@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import io from "socket.io-client";
+
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 
@@ -28,6 +30,14 @@ const EventIdPage = () => {
   useEffect(() => {
     dispatch(getDetailsPagePost(params.id));
   }, [dispatch, params.id]);
+
+  useEffect(() => {
+    const socket = io(getAPI.link);
+
+    socket.on("message", (data) => {
+      console.log(data);
+    });
+  }, []);
 
   useEffect(() => {
     const fetchComments = async (postId) => {
