@@ -1,7 +1,7 @@
 // CORS-Error-Prevention
 const corsMiddleware = (req, res, next) => {
   // Allow to communicate from any origin
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
   // Allow to send any request
   res.setHeader(
     "Access-Control-Allow-Methods",
