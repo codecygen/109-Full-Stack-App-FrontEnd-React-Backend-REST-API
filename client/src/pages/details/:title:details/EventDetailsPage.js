@@ -21,7 +21,7 @@ import useSocket from "../../../hooks/use-socket";
 import classes from "./eventDetailsPage.module.scss";
 
 const EventIdPage = () => {
-  const comments = useSocket();
+  const commentsSocketIO = useSocket();
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -40,7 +40,8 @@ const EventIdPage = () => {
 
   useEffect(() => {
     console.log(dataAllComments);
-  }, [dataAllComments]);
+    console.log(commentsSocketIO);
+  }, [dataAllComments, commentsSocketIO]);
 
   const {
     title,

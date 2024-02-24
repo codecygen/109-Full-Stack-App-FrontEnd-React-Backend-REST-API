@@ -206,32 +206,21 @@ const postComment = async (req, res, next) => {
       comment: comment,
     });
 
-    const createdComment = await newComment.createComment();
+    await newComment.createComment();
+    const comments = await DB.Comment.getComments(postId);
 
     const io = getIO();
 
     // io.broadcast, if you want to show everyone except for the sender
     // io.emit, if you want to show everyone
-    io.emit("message", {
+    io.emit("comments", {
       action: "POST",
-      comment: {
-        id: createdComment._id,
-        username: foundUser.name,
-        comment: createdComment._doc.comment,
-        createdAt: createdComment._doc.createdAt,
-        updatedAt: createdComment._doc.updatedAt,
-      },
+      comment: comments,
     });
 
     res.json({
       message: "POST request for comment was successful!!",
-      comment: {
-        id: createdComment._id,
-        username: foundUser.name,
-        comment: createdComment._doc.comment,
-        createdAt: createdComment._doc.createdAt,
-        updatedAt: createdComment._doc.updatedAt,
-      },
+      comment: comments,
     });
   } catch (err) {
     next(err);
@@ -246,10 +235,7 @@ const getComments = async (req, res, next) => {
 
     const io = getIO();
 
-    io.emit("message", {
-      action: "GET",
-      comment: comments,
-    });
+    io.emit("comments");
 
     res.json({
       message: "GET request for comments was successful!!",

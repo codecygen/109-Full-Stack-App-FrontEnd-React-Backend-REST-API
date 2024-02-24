@@ -4,7 +4,8 @@ let io;
 const initIO = (nodeServer) => {
   io = require("socket.io")(nodeServer, {
     cors: {
-      origin: process.env.FRONTEND_URL,
+      origin: true,
+      // process.env.FRONTEND_URL
       methods: ["GET", "POST"],
     },
   });

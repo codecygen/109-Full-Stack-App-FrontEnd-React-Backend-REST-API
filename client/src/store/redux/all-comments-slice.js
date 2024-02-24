@@ -12,7 +12,7 @@ const allCommentsSlice = createSlice({
   reducers: {
     success(state, action) {
       const data = action.payload;
-      state.dataAllComments = data;
+      state.dataAllComments = data.comment;
     },
 
     fail(state, action) {

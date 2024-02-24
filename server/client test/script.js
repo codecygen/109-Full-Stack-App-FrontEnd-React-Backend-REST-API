@@ -7,7 +7,7 @@ socket.on("connect", () => {
 });
 
 // Listen for the "message" event from the server
-socket.on("message", (data) => {
+socket.on("comments", (data) => {
   console.log("Received message from server:", data); // Print the received message
 });
 

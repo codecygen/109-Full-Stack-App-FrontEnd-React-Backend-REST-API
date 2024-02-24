@@ -9,8 +9,7 @@ const useSocket = () => {
   useEffect(() => {
     const socketIO = io(getAPI.link);
     try {
-      socketIO.on("message", (data) => {
-        console.log(data);
+      socketIO.on("comments", (data) => {
         setComments(data);
       });
     } catch (err) {
