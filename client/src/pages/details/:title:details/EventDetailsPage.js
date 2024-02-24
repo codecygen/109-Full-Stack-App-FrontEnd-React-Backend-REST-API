@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import io from "socket.io-client";
-
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 
@@ -16,11 +14,15 @@ import convertDate from "../../../utils/convertDate";
 
 import getAPI from "../../../store/redux/utils/config/getAPI";
 
-import classes from "./eventDetailsPage.module.scss";
-
 import { getComments } from "../../../store/redux/utils/apiStateManagementsThunk";
 
+import useSocket from "../../../hooks/use-socket";
+
+import classes from "./eventDetailsPage.module.scss";
+
 const EventIdPage = () => {
+  const comments = useSocket();
+
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -30,22 +32,6 @@ const EventIdPage = () => {
   useEffect(() => {
     dispatch(getDetailsPagePost(params.id));
   }, [dispatch, params.id]);
-
-  useEffect(() => {
-    const socket = io(getAPI.link);
-
-    try {
-      socket.on("message", (data) => {
-        console.log(data);
-      });
-    } catch (err) {
-      console.error(err);
-    }
-
-    return () => {
-      socket.disconnect(); // Close socket connection when component unmounts
-    };
-  }, []);
 
   useEffect(() => {
     const fetchComments = async (postId) => {
