@@ -1,10 +1,11 @@
 import { newPostActions } from "../new-post-slice";
-import { allPostsActions } from "../all-posts.slice";
+import { allPostsActions } from "../all-posts-slice";
 import { editPostActions } from "../edit-post-slice";
 import { deletePostActions } from "../delete-post-slice";
 import { detailedPostActions } from "../detailed-post-slice";
 import { signupActions } from "../signup-slice";
 import { loginActions } from "../login-slice";
+import { allCommentsActions } from "../all-comments-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
@@ -114,9 +115,15 @@ export const login = (loginData) => {
 };
 
 // No thunk needed for this, it seems redundant
-// but I made it 
-export const getComments = async (postId) => {
-  const comments = await getPostComments(postId);
-
-  return comments;
+// but I made it
+export const getComments = (postId) => {
+  return async (dispatch) => {
+    await getPostComments(
+      postId,
+      dispatch,
+      allCommentsActions.success,
+      allCommentsActions.loading,
+      allCommentsActions.fail
+    );
+  };
 };

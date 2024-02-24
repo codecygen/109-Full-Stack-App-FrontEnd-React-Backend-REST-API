@@ -7,9 +7,8 @@ const getAllPosts = async (
   loadingHandler,
   failHandler
 ) => {
-  dispatch(loadingHandler(true));
-
   try {
+    dispatch(loadingHandler(true));
     const token = localStorage.getItem("token");
 
     const res = await fetch(getAPI.getAllPosts(currentPage), {

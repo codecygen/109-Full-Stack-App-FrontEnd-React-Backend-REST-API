@@ -29,22 +29,18 @@ const EventIdPage = () => {
   const { responseDetailedPost, errorDetailedPost, isLoadingDetailedPost } =
     useSelector((state) => state.detailedPost);
 
+  const { dataAllComments, errorAllComments, isLoadingAllComments } =
+    useSelector((state) => state.allComments);
+
   useEffect(() => {
     dispatch(getDetailsPagePost(params.id));
+
+    dispatch(getComments("65d3aa0e2afddb237cdd3383"));
   }, [dispatch, params.id]);
 
   useEffect(() => {
-    const fetchComments = async (postId) => {
-      try {
-        const comments = await getComments("65d3aa0e2afddb237cdd3383");
-        // console.log(comments);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchComments(params.id);
-  }, [params.id]);
+    console.log(dataAllComments);
+  }, [dataAllComments]);
 
   const {
     title,
