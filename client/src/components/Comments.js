@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import Loader from "./Loader";
 import convertDate from "../utils/convertDate";
+import commentUserNameColorHandler from "../utils/commentUserNameColorHandler";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -23,6 +24,8 @@ const Comments = () => {
   } else if (errorAllComments) {
     comments = <p>Error!</p>;
   } else if (dataAllComments) {
+    const colorUsername = commentUserNameColorHandler(dataAllComments);
+
     comments = dataAllComments.map((data, index) => {
       const convertedDate = convertDate(data.updatedAt, false);
 
@@ -33,7 +36,7 @@ const Comments = () => {
           )}
           <ListItem alignItems="flex-start" sx={{ padding: 0 }}>
             <ListItemAvatar>
-              <Avatar sx={{ bgcolor: "purple" }}>
+              <Avatar sx={{ bgcolor: "#006400" }}>
                 {data.userId.name.charAt(0)}
               </Avatar>
             </ListItemAvatar>

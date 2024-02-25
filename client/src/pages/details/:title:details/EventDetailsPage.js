@@ -39,10 +39,10 @@ const EventIdPage = () => {
     dispatch(getComments("65d3aa0e2afddb237cdd3383"));
   }, [dispatch, params.id]);
 
-  useEffect(() => {
-    console.log(dataAllComments);
-    console.log(commentsSocketIO);
-  }, [dataAllComments, commentsSocketIO]);
+  // useEffect(() => {
+  //   console.log(dataAllComments);
+  //   console.log(commentsSocketIO);
+  // }, [dataAllComments, commentsSocketIO]);
 
   const {
     title,
