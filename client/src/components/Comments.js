@@ -2,6 +2,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 
 import Loader from "./Loader";
+import convertDate from "../utils/convertDate";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import { Typography } from "@mui/material";
 
 const Comments = () => {
   const { dataAllComments, errorAllComments, isLoadingAllComments } =
@@ -21,37 +23,54 @@ const Comments = () => {
   } else if (errorAllComments) {
     comments = <p>Error!</p>;
   } else if (dataAllComments) {
-    comments = dataAllComments.map((data) => {
+    comments = dataAllComments.map((data, index) => {
+      const convertedDate = convertDate(data.updatedAt, false);
+
       return (
         <React.Fragment key={data._id}>
-          <ListItem alignItems="flex-start">
+          {index === 0 && (
+            <Divider variant="inset" component="li" sx={{ width: "80%" }} />
+          )}
+          <ListItem alignItems="flex-start" sx={{padding: 0}}>
             <ListItemAvatar>
-              <Avatar>A</Avatar>
+              <Avatar sx={{bgcolor: "purple"}}>{data.userId.name.charAt(0)}</Avatar>
             </ListItemAvatar>
             <ListItemText
               primary={<React.Fragment>{data.comment}</React.Fragment>}
-              secondary={data.userId.name}
+              secondary={convertedDate}
               secondaryTypographyProps={{
                 sx: {
                   position: "relative",
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-end",
-                  marginTop: "10px",
                 },
               }}
             />
           </ListItem>
-          <Divider variant="inset" component="li" />
+          <Typography
+            component="p"
+            sx={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+            }}
+          >
+            {data.userId.name}
+          </Typography>
+          <Divider
+            variant="inset"
+            component="li"
+            sx={{ width: "80%" }}
+          />
         </React.Fragment>
       );
     });
   }
 
   return (
-    <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {comments}
-    </List> //
+    <List sx={{ maxWidth: "600px", paddingRight: "10px" }}>{comments}</List> //
   );
 };
 
