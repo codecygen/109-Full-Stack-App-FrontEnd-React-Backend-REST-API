@@ -15,7 +15,7 @@ socket.on("comments", (data) => {
 async function sendPostRequest() {
   try {
     const data = {
-      token: "vahitaras@gmail.com", // Set the token value
+      token: "vahitaras2@gmail.com", // Set the token value
       comment: "This is a dummy comment!",
     };
 

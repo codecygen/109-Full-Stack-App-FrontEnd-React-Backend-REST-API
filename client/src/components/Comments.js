@@ -31,9 +31,11 @@ const Comments = () => {
           {index === 0 && (
             <Divider variant="inset" component="li" sx={{ width: "80%" }} />
           )}
-          <ListItem alignItems="flex-start" sx={{padding: 0}}>
+          <ListItem alignItems="flex-start" sx={{ padding: 0 }}>
             <ListItemAvatar>
-              <Avatar sx={{bgcolor: "purple"}}>{data.userId.name.charAt(0)}</Avatar>
+              <Avatar sx={{ bgcolor: "purple" }}>
+                {data.userId.name.charAt(0)}
+              </Avatar>
             </ListItemAvatar>
             <ListItemText
               primary={<React.Fragment>{data.comment}</React.Fragment>}
@@ -59,11 +61,7 @@ const Comments = () => {
           >
             {data.userId.name}
           </Typography>
-          <Divider
-            variant="inset"
-            component="li"
-            sx={{ width: "80%" }}
-          />
+          <Divider variant="inset" component="li" sx={{ width: "80%" }} />
         </React.Fragment>
       );
     });
