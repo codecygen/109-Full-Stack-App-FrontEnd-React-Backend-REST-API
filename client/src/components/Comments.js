@@ -24,10 +24,19 @@ const Comments = () => {
   } else if (errorAllComments) {
     comments = <p>Error!</p>;
   } else if (dataAllComments) {
-    const colorUsername = commentUserNameColorHandler(dataAllComments);
+    const nameColorList = commentUserNameColorHandler(dataAllComments);
+    console.log(nameColorList);
 
     comments = dataAllComments.map((data, index) => {
       const convertedDate = convertDate(data.updatedAt, false);
+
+      const matchedName = nameColorList.filter(
+        (nameColor) => nameColor.name === data.userId.name
+      );
+
+      const uniqueColor = matchedName[0].color;
+
+      console.log(uniqueColor);
 
       return (
         <React.Fragment key={data._id}>
@@ -36,8 +45,8 @@ const Comments = () => {
           )}
           <ListItem alignItems="flex-start" sx={{ padding: 0 }}>
             <ListItemAvatar>
-              <Avatar sx={{ bgcolor: "#006400" }}>
-                {data.userId.name.charAt(0)}
+              <Avatar sx={{ bgcolor: uniqueColor }}>
+                {data.userId.name.charAt(0) + data.userId.name.charAt(1)}
               </Avatar>
             </ListItemAvatar>
             <ListItemText
