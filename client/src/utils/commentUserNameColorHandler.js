@@ -64,7 +64,6 @@ const colorList = [
     "#2E8B57", // Sea Green
     "#B22222", // Firebrick
     "#006400", // Dark Green
-    "#9932CC", // Dark Orchid
     "#B0C4DE", // Light Steel Blue
     "#8B1200", // Dark Red
     "#FF4500", // Orange Red
