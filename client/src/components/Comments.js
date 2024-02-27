@@ -24,19 +24,19 @@ const Comments = () => {
   } else if (errorAllComments) {
     comments = <p>Error!</p>;
   } else if (dataAllComments) {
+    // Gets unique color list and corresponding name for comment
     const nameColorList = commentUserNameColorHandler(dataAllComments);
-    console.log(nameColorList);
 
     comments = dataAllComments.map((data, index) => {
       const convertedDate = convertDate(data.updatedAt, false);
 
+      // Filters and finds the corresponding name to apply its color
       const matchedName = nameColorList.filter(
         (nameColor) => nameColor.name === data.userId.name
       );
 
+      // Get its unique color
       const uniqueColor = matchedName[0].color;
-
-      console.log(uniqueColor);
 
       return (
         <React.Fragment key={data._id}>

@@ -9,6 +9,7 @@ import remarkBreaks from "remark-breaks";
 import { getDetailsPagePost } from "../../../store/redux/utils/apiStateManagementsThunk";
 
 import Loader from "../../../components/Loader";
+import CommentForm from "../../../components/CommentForm";
 import Comments from "../../../components/Comments";
 
 import convertDate from "../../../utils/convertDate";
@@ -97,6 +98,7 @@ const EventIdPage = () => {
             {details}
           </ReactMarkdown>
 
+          <CommentForm />
           <Comments />
         </div>
       )}
