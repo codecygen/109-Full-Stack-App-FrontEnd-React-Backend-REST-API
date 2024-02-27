@@ -10,6 +10,7 @@ import signupSlice from "./signup-slice";
 import loginSlice from "./login-slice";
 
 import allCommentsSlice from "./all-comments-slice";
+import postCommentSlice from "./post-comments-slice";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     login: loginSlice.reducer,
 
     allComments: allCommentsSlice.reducer,
+    postComment: postCommentSlice.reducer,
   },
 });
 
