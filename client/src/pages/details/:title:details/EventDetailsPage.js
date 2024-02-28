@@ -37,7 +37,7 @@ const EventIdPage = () => {
   useEffect(() => {
     dispatch(getDetailsPagePost(params.id));
 
-    dispatch(getComments("65d3aa0e2afddb237cdd3383"));
+    dispatch(getComments(params.id));
   }, [dispatch, params.id]);
 
   // useEffect(() => {

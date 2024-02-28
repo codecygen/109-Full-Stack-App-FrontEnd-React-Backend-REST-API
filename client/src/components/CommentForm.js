@@ -1,8 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { Button, Box, TextField } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { postComment } from "../store/redux/utils/apiStateManagementsThunk";
+
 const CommentForm = () => {
+  const dispatch = useDispatch();
+  const params = useParams();
+
   const [comment, setComment] = useState("");
   const [isCommentValid, setIsCommentValid] = useState(null);
 
@@ -27,7 +34,10 @@ const CommentForm = () => {
       return;
     }
 
-    console.log(comment);
+    const postId = params.id;
+
+    dispatch(postComment(postId, comment));
+
     setComment("");
     setIsCommentValid(null);
   };

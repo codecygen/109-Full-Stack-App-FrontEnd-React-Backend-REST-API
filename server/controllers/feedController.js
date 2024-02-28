@@ -185,9 +185,9 @@ const deletePost = async (req, res, next) => {
 const postComment = async (req, res, next) => {
   try {
     const postId = req.params.postId;
-    const { token, comment } = req.body;
-
-    const userEmail = token;
+    const comment = req.body.comment;
+    const userEmail = req.userEmail;
+    const userId = req.userId;
 
     const foundPost = await DB.Message.getMessage(postId);
     const foundUser = await DB.User.findUserWithEmail(userEmail);

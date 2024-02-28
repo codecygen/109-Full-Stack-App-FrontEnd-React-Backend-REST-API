@@ -6,6 +6,7 @@ import { detailedPostActions } from "../detailed-post-slice";
 import { signupActions } from "../signup-slice";
 import { loginActions } from "../login-slice";
 import { allCommentsActions } from "../all-comments-slice";
+import { postCommentActions } from "../post-comments-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
@@ -15,6 +16,7 @@ import deleteOnePost from "./api/deleteOnePost";
 import signupOneUser from "./api/signupOneUser";
 import loginOneUser from "./api/loginOneUser";
 import getPostComments from "./api/getPostComments";
+import postOneComment from "./api/postOneComment";
 
 export const getPostsPagePosts = (currentPage) => {
   return async (dispatch) => {
@@ -124,6 +126,19 @@ export const getComments = (postId) => {
       allCommentsActions.success,
       allCommentsActions.loading,
       allCommentsActions.fail
+    );
+  };
+};
+
+export const postComment = (postId, commentString) => {
+  return async (dispatch) => {
+    await postOneComment(
+      postId,
+      commentString,
+      dispatch,
+      postCommentActions.success,
+      postCommentActions.loading,
+      postCommentActions.fail
     );
   };
 };

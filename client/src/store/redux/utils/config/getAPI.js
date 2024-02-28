@@ -30,6 +30,11 @@ class getAPI {
   static getComments(id) {
     return `${this.link}/feed/post/${id}/comments`;
   }
+
+  // Socket.io comment related endpoints
+  static postComment(id) {
+    return `${this.link}/feed/post/${id}/comments`;
+  }
 }
 
 export default getAPI;

@@ -38,9 +38,9 @@ router.put(
   feedController.updatePost
 );
 
-// Make a comment underneath a post with socket.io
-router.post("/post/:postId/comments", feedController.postComment);
 // Make all comments underneath a post with socket.io
 router.get("/post/:postId/comments", feedController.getComments);
+// Make a comment underneath a post with socket.io
+router.post("/post/:postId/comments", validateAuth, feedController.postComment);
 
 module.exports = router;
