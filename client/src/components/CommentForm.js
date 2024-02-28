@@ -23,11 +23,13 @@ const CommentForm = () => {
     e.preventDefault();
 
     if (!isCommentValid) {
-      console.log("Cannot submit!");
+      setIsCommentValid(false);
       return;
     }
 
     console.log(comment);
+    setComment("");
+    setIsCommentValid(null);
   };
 
   return (
