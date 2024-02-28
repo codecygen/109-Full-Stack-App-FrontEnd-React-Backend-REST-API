@@ -1,9 +1,11 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import Loader from "./Loader";
 import convertDate from "../utils/convertDate";
 import commentUserNameColorHandler from "../utils/commentUserNameColorHandler";
+
+import useSocket from "../hooks/use-socket";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -14,10 +16,16 @@ import Avatar from "@mui/material/Avatar";
 import { Typography } from "@mui/material";
 
 const Comments = () => {
+  const commentsSocketIO = useSocket();
+
   const { dataAllComments, errorAllComments, isLoadingAllComments } =
     useSelector((state) => state.allComments);
 
   let comments;
+
+  useEffect(() => {
+    console.log(commentsSocketIO);
+  }, [commentsSocketIO]);
 
   if (isLoadingAllComments) {
     comments = <Loader />;
