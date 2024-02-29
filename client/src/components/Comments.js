@@ -7,6 +7,7 @@ import commentUserNameColorHandler from "../utils/commentUserNameColorHandler";
 import CommentDropdownMenu from "../components/CommentDropdownMenu";
 
 import useSocket from "../hooks/use-socket";
+import useAuth from "../hooks/use-auth";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -17,6 +18,7 @@ import Avatar from "@mui/material/Avatar";
 import { Typography } from "@mui/material";
 
 const Comments = () => {
+  const { token, name, status } = useAuth();
   const commentsSocketIO = useSocket();
 
   const { dataAllComments, errorAllComments, isLoadingAllComments } =
@@ -25,8 +27,11 @@ const Comments = () => {
   let comments;
 
   useEffect(() => {
-    console.log(commentsSocketIO);
-  }, [commentsSocketIO]);
+    console.log("socket", commentsSocketIO);
+    console.log("token", token);
+    console.log("name", name);
+    console.log("status", status);
+  }, [commentsSocketIO, token, name, status]);
 
   if (isLoadingAllComments) {
     comments = <Loader />;
@@ -50,7 +55,11 @@ const Comments = () => {
       return (
         <React.Fragment key={data._id}>
           {index === 0 && (
-            <Divider variant="inset" component="li" sx={{ width: "85%", margin: "0 0 10px 0" }} />
+            <Divider
+              variant="inset"
+              component="li"
+              sx={{ width: "85%", margin: "0 0 10px 0" }}
+            />
           )}
           <ListItem alignItems="flex-start" sx={{ padding: 0 }}>
             <ListItemAvatar>
@@ -67,11 +76,14 @@ const Comments = () => {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-end",
-                  marginRight: "6px"
+                  marginRight: ((token && data.userId.name === name) ||
+                  (token && status === "admin")) &&
+                "6px",
                 },
               }}
             />
-            <CommentDropdownMenu />
+            {((token && data.userId.name === name) ||
+              (token && status === "admin")) && <CommentDropdownMenu />}
           </ListItem>
           <Typography
             component="p"
@@ -80,12 +92,19 @@ const Comments = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-end",
-              marginRight: "34px"
+              marginRight:
+                ((token && data.userId.name === name) ||
+                  (token && status === "admin")) &&
+                "34px",
             }}
           >
             {data.userId.name}
           </Typography>
-          <Divider variant="inset" component="li" sx={{ width: "85%", margin: "10px 0 10px 0" }} />
+          <Divider
+            variant="inset"
+            component="li"
+            sx={{ width: "85%", margin: "10px 0 10px 0" }}
+          />
         </React.Fragment>
       );
     });
