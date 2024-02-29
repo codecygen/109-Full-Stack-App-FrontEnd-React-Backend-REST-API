@@ -65,6 +65,9 @@ const CommentForm = () => {
             isCommentValid === false ? "At Least 5 Characters" : "Add a Comment"
           }
           error={isCommentValid === false}
+          InputLabelProps={{
+            style: { zIndex: -1 } // Adjust the z-index of the label
+          }}
         />
         <Button
           type="submit"

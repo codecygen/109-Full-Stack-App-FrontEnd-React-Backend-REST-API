@@ -27,21 +27,29 @@ const Comments = () => {
   let comments;
 
   useEffect(() => {
-    console.log("socket", commentsSocketIO);
-    console.log("token", token);
-    console.log("name", name);
-    console.log("status", status);
-  }, [commentsSocketIO, token, name, status]);
+    // console.log("initialData", dataAllComments);
+    // console.log("socket", commentsSocketIO);
+    // console.log("token", token);
+    // console.log("name", name);
+    // console.log("status", status);
+  }, [dataAllComments, commentsSocketIO, token, name, status]);
 
   if (isLoadingAllComments) {
     comments = <Loader />;
   } else if (errorAllComments) {
     comments = <p>Error!</p>;
-  } else if (dataAllComments) {
-    // Gets unique color list and corresponding name for comment
-    const nameColorList = commentUserNameColorHandler(dataAllComments);
+  } else if (commentsSocketIO || dataAllComments) {
+    // Initially dataAllComments will load and socketio will just establish
+    // a connection
+    // When you add a new comment after loading the page, dataAllComments will
+    // still be there but since commentsSocketIO will have a value that will be
+    // assigned as the mapped data to be rendered.
+    const renderedData = commentsSocketIO ? commentsSocketIO.comment : dataAllComments;
 
-    comments = dataAllComments.map((data, index) => {
+    // Gets unique color list and corresponding name for comment
+    const nameColorList = commentUserNameColorHandler(renderedData);
+
+    comments = renderedData.map((data, index) => {
       const convertedDate = convertDate(data.updatedAt);
 
       // Filters and finds the corresponding name to apply its color
@@ -76,9 +84,10 @@ const Comments = () => {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-end",
-                  marginRight: ((token && data.userId.name === name) ||
-                  (token && status === "admin")) &&
-                "6px",
+                  marginRight:
+                    ((token && data.userId.name === name) ||
+                      (token && status === "admin")) &&
+                    "6px",
                 },
               }}
             />
