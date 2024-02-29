@@ -4,13 +4,9 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import classes from "./CommentDropdownMenu.module.scss";
-
 const options = ["Edit", "Delete"];
 
-const ITEM_HEIGHT = 48;
-
-export default function LongMenu() {
+const CommentDropdownMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -21,7 +17,7 @@ export default function LongMenu() {
   };
 
   return (
-    <div className={classes.dropdown}>
+    <div>
       <IconButton
         aria-label="more"
         id="long-button"
@@ -29,6 +25,7 @@ export default function LongMenu() {
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
+        style={{ padding: 0, backgroundColor: "#edf1f5", borderRadius: 0 }}
       >
         <MoreVertIcon />
       </IconButton>
@@ -40,12 +37,6 @@ export default function LongMenu() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: "20ch",
-          },
-        }}
       >
         {options.map((option) => (
           <MenuItem
@@ -59,4 +50,6 @@ export default function LongMenu() {
       </Menu>
     </div>
   );
-}
+};
+
+export default CommentDropdownMenu;

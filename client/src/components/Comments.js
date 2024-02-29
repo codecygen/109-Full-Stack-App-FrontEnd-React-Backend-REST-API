@@ -50,7 +50,7 @@ const Comments = () => {
       return (
         <React.Fragment key={data._id}>
           {index === 0 && (
-            <Divider variant="inset" component="li" sx={{ width: "85%" }} />
+            <Divider variant="inset" component="li" sx={{ width: "85%", margin: "0 0 10px 0" }} />
           )}
           <ListItem alignItems="flex-start" sx={{ padding: 0 }}>
             <ListItemAvatar>
@@ -67,6 +67,7 @@ const Comments = () => {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "flex-end",
+                  marginRight: "6px"
                 },
               }}
             />
@@ -79,19 +80,19 @@ const Comments = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-end",
-              marginRight: "40px"
+              marginRight: "34px"
             }}
           >
             {data.userId.name}
           </Typography>
-          <Divider variant="inset" component="li" sx={{ width: "85%" }} />
+          <Divider variant="inset" component="li" sx={{ width: "85%", margin: "10px 0 10px 0" }} />
         </React.Fragment>
       );
     });
   }
 
   return (
-    <List sx={{ maxWidth: "600px", paddingRight: "10px" }}>{comments}</List> //
+    <List sx={{ maxWidth: "600px" }}>{comments}</List> //
   );
 };
 
