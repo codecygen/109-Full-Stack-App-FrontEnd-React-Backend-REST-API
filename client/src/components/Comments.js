@@ -37,7 +37,7 @@ const Comments = () => {
   if (isLoadingAllComments) {
     comments = <Loader />;
   } else if (errorAllComments) {
-    comments = <p>Error!</p>;
+    comments = <p>{errorAllComments}: Couldn't fetch comments! Contact Admin!</p>;
   } else if (commentsSocketIO || dataAllComments) {
     // Initially dataAllComments will load and socketio will just establish
     // a connection
