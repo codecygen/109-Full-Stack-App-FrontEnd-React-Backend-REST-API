@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
+    // this is the hex color code for
+    // the specified user that will be 
+    // used in front end rendering
+    color: {
+      type: String,
+      required: true,
+    },
+
     status: {
       type: String,
       default: function () {

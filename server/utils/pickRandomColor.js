@@ -75,26 +75,10 @@ const colorList = [
   ]),
 ];
 
-const commentUserNameColorHandler = (commentsData) => {
-  const nameList = commentsData.map((comment) => comment.userId.name);
+const pickRandomColor = () => {
+  const pickedColor = colorList[Math.floor(Math.random() * colorList.length)];
 
-  const uniqueNames = [...new Set(nameList)];
-  let uniqueNumbersSet = new Set();
-
-  while (uniqueNumbersSet.size < uniqueNames.length) {
-    uniqueNumbersSet.add(Math.floor(Math.random() * colorList.length));
-  }
-
-  const uniqueNumbers = Array.from(uniqueNumbersSet);
-
-  const nameColorList = uniqueNames.map((uniqeName, index) => {
-    return {
-      name: uniqeName,
-      color: colorList[uniqueNumbers[index]],
-    };
-  });
-
-  return nameColorList;
+  return pickedColor;
 };
 
-export default commentUserNameColorHandler;
+module.exports = pickRandomColor;

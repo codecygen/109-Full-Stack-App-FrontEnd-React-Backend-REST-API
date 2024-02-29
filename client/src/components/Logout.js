@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/use-auth";
 import { Avatar, Button, Typography } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const { name } = useAuth();
+  const { name, color } = useAuth();
   const [firstChar, setFirstChar] = useState();
 
   const logoutHandler = () => {
@@ -27,7 +26,7 @@ const Logout = () => {
 
   return (
     <main>
-      <Avatar sx={{ bgcolor: deepPurple[500], margin: "auto" }}>
+      <Avatar sx={{ bgcolor: color, margin: "auto" }}>
         {firstChar}
       </Avatar>
       <Typography

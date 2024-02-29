@@ -36,7 +36,7 @@ commentSchema.statics.getComments = async function (postId) {
     const comments = await this.find({ messageId: postId })
       .populate({
         path: "userId",
-        select: ["name", "status"]
+        select: ["name", "status", "color"]
       })
       .sort({ createdAt: -1 });
 

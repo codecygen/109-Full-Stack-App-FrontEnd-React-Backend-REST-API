@@ -7,6 +7,8 @@ const comparePass = promisify(bcrypt.compare);
 
 const DB = require("../models/DB");
 
+const pickRandomColor = require("../utils/pickRandomColor");
+
 const signup = async (req, res, next) => {
   try {
     const { email, name, password } = req.body;
@@ -14,10 +16,13 @@ const signup = async (req, res, next) => {
     const saltRounds = 12;
     const hashedPassword = await hashPass(password, saltRounds);
 
+    const pickedColor = pickRandomColor();
+
     const newUser = new DB.User({
       email,
       password: hashedPassword,
       name,
+      color: pickedColor,
     });
 
     const createdUser = await newUser.createUser();
@@ -69,8 +74,9 @@ const login = async (req, res, next) => {
       token,
       userId: foundUser._id,
       name: foundUser.name,
+      color: foundUser.color,
       status: foundUser.status,
-      expiry: new Date().getTime() + (10 * 60 * 60 * 1000),
+      expiry: new Date().getTime() + 10 * 60 * 60 * 1000,
     });
   } catch (err) {
     next(err);

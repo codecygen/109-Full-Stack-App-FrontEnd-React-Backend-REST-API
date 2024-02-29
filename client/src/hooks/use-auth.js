@@ -7,6 +7,7 @@ const useAuth = () => {
 
   const [token, setToken] = useState(null);
   const [name, setName] = useState(null);
+  const [color, setColor] = useState(null);
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
@@ -17,6 +18,7 @@ const useAuth = () => {
     if (expiry && rest > 0) {
       setToken(localStorage.getItem("token"));
       setName(localStorage.getItem("tokenName"));
+      setColor(localStorage.getItem("tokenColor"));
       setStatus(localStorage.getItem("tokenStatus"));
 
       const timeout = setTimeout(() => {
@@ -31,6 +33,7 @@ const useAuth = () => {
 
       localStorage.removeItem("token");
       localStorage.removeItem("tokenName");
+      localStorage.removeItem("tokenColor");
       localStorage.removeItem("tokenExpiry");
       localStorage.removeItem("tokenStatus");
     }
@@ -39,6 +42,7 @@ const useAuth = () => {
   return {
     token,
     name,
+    color,
     status,
   };
 };

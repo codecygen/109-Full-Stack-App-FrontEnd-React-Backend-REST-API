@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 import Loader from "./Loader";
 import convertDate from "../utils/convertDate";
-import commentUserNameColorHandler from "../utils/commentUserNameColorHandler";
 import CommentDropdownMenu from "../components/CommentDropdownMenu";
 
 import useSocket from "../hooks/use-socket";
@@ -46,19 +45,8 @@ const Comments = () => {
     // assigned as the mapped data to be rendered.
     const renderedData = commentsSocketIO ? commentsSocketIO.comment : dataAllComments;
 
-    // Gets unique color list and corresponding name for comment
-    const nameColorList = commentUserNameColorHandler(renderedData);
-
     comments = renderedData.map((data, index) => {
       const convertedDate = convertDate(data.updatedAt);
-
-      // Filters and finds the corresponding name to apply its color
-      const matchedName = nameColorList.filter(
-        (nameColor) => nameColor.name === data.userId.name
-      );
-
-      // Get its unique color
-      const uniqueColor = matchedName[0].color;
 
       return (
         <React.Fragment key={data._id}>
@@ -71,7 +59,7 @@ const Comments = () => {
           )}
           <ListItem alignItems="flex-start" sx={{ padding: 0 }}>
             <ListItemAvatar>
-              <Avatar sx={{ bgcolor: uniqueColor }}>
+              <Avatar sx={{ bgcolor: data.userId.color }}>
                 {data.userId.name.charAt(0) + data.userId.name.charAt(1)}
               </Avatar>
             </ListItemAvatar>
