@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Loader from "./Loader";
 import convertDate from "../utils/convertDate";
 import commentUserNameColorHandler from "../utils/commentUserNameColorHandler";
+import CommentDropdownMenu from "../components/CommentDropdownMenu";
 
 import useSocket from "../hooks/use-socket";
 
@@ -36,7 +37,7 @@ const Comments = () => {
     const nameColorList = commentUserNameColorHandler(dataAllComments);
 
     comments = dataAllComments.map((data, index) => {
-      const convertedDate = convertDate(data.updatedAt, false);
+      const convertedDate = convertDate(data.updatedAt);
 
       // Filters and finds the corresponding name to apply its color
       const matchedName = nameColorList.filter(
@@ -49,7 +50,7 @@ const Comments = () => {
       return (
         <React.Fragment key={data._id}>
           {index === 0 && (
-            <Divider variant="inset" component="li" sx={{ width: "80%" }} />
+            <Divider variant="inset" component="li" sx={{ width: "85%" }} />
           )}
           <ListItem alignItems="flex-start" sx={{ padding: 0 }}>
             <ListItemAvatar>
@@ -69,6 +70,7 @@ const Comments = () => {
                 },
               }}
             />
+            <CommentDropdownMenu />
           </ListItem>
           <Typography
             component="p"
@@ -77,11 +79,12 @@ const Comments = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-end",
+              marginRight: "40px"
             }}
           >
             {data.userId.name}
           </Typography>
-          <Divider variant="inset" component="li" sx={{ width: "80%" }} />
+          <Divider variant="inset" component="li" sx={{ width: "85%" }} />
         </React.Fragment>
       );
     });

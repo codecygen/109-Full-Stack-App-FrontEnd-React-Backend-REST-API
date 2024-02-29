@@ -97,7 +97,6 @@ const EventIdPage = () => {
           <ReactMarkdown remarkPlugins={[remarkBreaks]}>
             {details}
           </ReactMarkdown>
-
           <CommentForm />
           <Comments />
         </div>
