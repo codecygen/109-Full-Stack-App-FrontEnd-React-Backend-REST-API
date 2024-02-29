@@ -18,21 +18,20 @@ import getAPI from "../../../store/redux/utils/config/getAPI";
 
 import { getComments } from "../../../store/redux/utils/apiStateManagementsThunk";
 
-import useSocket from "../../../hooks/use-socket";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./eventDetailsPage.module.scss";
 
 const EventIdPage = () => {
-  const commentsSocketIO = useSocket();
-
   const params = useParams();
   const dispatch = useDispatch();
 
   const { responseDetailedPost, errorDetailedPost, isLoadingDetailedPost } =
     useSelector((state) => state.detailedPost);
-
-  const { dataAllComments, errorAllComments, isLoadingAllComments } =
-    useSelector((state) => state.allComments);
 
   useEffect(() => {
     dispatch(getDetailsPagePost(params.id));
@@ -40,24 +39,17 @@ const EventIdPage = () => {
     dispatch(getComments(params.id));
   }, [dispatch, params.id]);
 
-  // useEffect(() => {
-  //   console.log(dataAllComments);
-  //   console.log(commentsSocketIO);
-  // }, [dataAllComments, commentsSocketIO]);
-
   const {
     title,
     image,
     details,
-    creator: { name: creatorName },
-    createdAt,
+    creator: { name: creatorName, status: creatorStatus, color: creatorColor },
     updatedAt,
   } = responseDetailedPost ?? {
     title: null,
     image: null,
     details: null,
-    creator: { name: null },
-    createdAt: null,
+    creator: { name: null, status: null, color: null },
     updatedAt: null,
   };
 
@@ -78,17 +70,21 @@ const EventIdPage = () => {
       {isLoadingDetailedPost === false && errorDetailedPost === false && (
         <div>
           <div>
-            <p>
-              <strong>Created: </strong>
-              {convertDate(createdAt)}
-            </p>
-            <p>
-              <strong>Last updated: </strong>
-              {convertDate(updatedAt)}
-            </p>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: creatorColor }}>
+                {creatorName.charAt(0) + creatorName.charAt(1)}
+              </Avatar>
+            </ListItemAvatar>
             <p className={classes.author}>
-              <strong>Written by: </strong>
+              <strong>Author: </strong>
+              {creatorStatus === "admin" && (
+                <FontAwesomeIcon icon={faStar} style={{ color: "#b4a011" }} />
+              )}
               {creatorName}
+            </p>
+            <p>
+              <strong>Updated: </strong>
+              {convertDate(updatedAt)}
             </p>
           </div>
 

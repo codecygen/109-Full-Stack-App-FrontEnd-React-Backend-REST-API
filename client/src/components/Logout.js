@@ -8,7 +8,7 @@ import { Avatar, Button, Typography } from "@mui/material";
 const Logout = () => {
   const navigate = useNavigate();
   const { name, color } = useAuth();
-  const [firstChar, setFirstChar] = useState();
+  const [firstChars, setFirstChars] = useState();
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
@@ -20,14 +20,14 @@ const Logout = () => {
 
   useEffect(() => {
     if (name) {
-      setFirstChar(name.charAt(0));
+      setFirstChars(name.charAt(0) + name.charAt(1));
     }
   }, [name]);
 
   return (
     <main>
       <Avatar sx={{ bgcolor: color, margin: "auto" }}>
-        {firstChar}
+        {firstChars}
       </Avatar>
       <Typography
         variant="body1"
