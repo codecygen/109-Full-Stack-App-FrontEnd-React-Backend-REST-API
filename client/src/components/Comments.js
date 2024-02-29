@@ -86,8 +86,8 @@ const Comments = () => {
                   justifyContent: "flex-end",
                   marginRight:
                     ((token && data.userId.name === name) ||
-                      (token && status === "admin")) &&
-                    "6px",
+                      (token && status === "admin")) ?
+                    "6px" : "30px",
                 },
               }}
             />
@@ -101,10 +101,7 @@ const Comments = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-end",
-              marginRight:
-                ((token && data.userId.name === name) ||
-                  (token && status === "admin")) &&
-                "34px",
+              marginRight: "34px",
             }}
           >
             {data.userId.name}
