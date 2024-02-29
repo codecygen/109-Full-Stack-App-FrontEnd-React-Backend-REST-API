@@ -25,7 +25,7 @@ const CommentDropdownMenu = () => {
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
-        style={{ padding: 0, backgroundColor: "#edf1f5", borderRadius: 0 }}
+        style={{ padding: 0, backgroundColor: "#bfc1db", borderRadius: "50%" }}
       >
         <MoreVertIcon />
       </IconButton>
