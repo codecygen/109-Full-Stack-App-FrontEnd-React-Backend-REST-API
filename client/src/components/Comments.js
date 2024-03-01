@@ -45,6 +45,7 @@ const Comments = () => {
       <p>{errorAllComments}: Couldn't fetch comments! Contact Admin!</p>
     );
   } else if (commentsSocketIO || initialData) {
+    
     // Initially initialData will load and socketio will just establish
     // a connection
     // When you add a new comment after loading the page, initialData will

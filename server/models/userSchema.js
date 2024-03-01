@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const crypto = require("crypto");
 
 const userSchema = new mongoose.Schema(
   {
@@ -18,7 +19,7 @@ const userSchema = new mongoose.Schema(
     },
 
     // this is the hex color code for
-    // the specified user that will be 
+    // the specified user that will be
     // used in front end rendering
     color: {
       type: String,
@@ -54,6 +55,24 @@ userSchema.methods.createUser = async function () {
   try {
     const createdUser = await this.save();
     return createdUser;
+  } catch (err) {
+    throw err;
+  }
+};
+
+userSchema.statics.createGuestUser = async function () {
+  try {
+    const newGuest = new this({
+      email: `${crypto.randomBytes(32).toString("hex")}@${crypto
+        .randomBytes(32)
+        .toString("hex")}.com`,
+      password: crypto.randomBytes(32).toString("hex"),
+      name: `Guest${crypto.randomBytes(32).toString("hex")}`,
+      color: "#4f4f4f",
+    });
+
+    const createdGuest = await newGuest.save();
+    return createdGuest;
   } catch (err) {
     throw err;
   }

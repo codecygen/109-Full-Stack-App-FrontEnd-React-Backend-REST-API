@@ -1,6 +1,6 @@
 const fs = require("fs");
+const jwt = require("jsonwebtoken");
 const DB = require("../models/DB");
-const { ObjectId } = require("mongodb");
 
 const { getIO } = require("../sockets/socket");
 
@@ -174,10 +174,7 @@ const deletePost = async (req, res, next) => {
     );
 
     // delete all associated comments with the post
-    await DB.Comment.deleteComments(
-      updatedUser._id,
-      postId
-    );
+    await DB.Comment.deleteComments(updatedUser._id, postId);
 
     res.json({
       message: "Post deleted successfully!",
@@ -190,24 +187,39 @@ const deletePost = async (req, res, next) => {
 
 const postComment = async (req, res, next) => {
   try {
+    const token = req.get("Authorization").split(" ")[1];
+    let decodedToken;
+
+    if (token === "null") {
+      decodedToken = null;
+    } else {
+      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    }
+
     const postId = req.params.postId;
     const comment = req.body.comment;
-    const userEmail = req.userEmail;
-    const userId = req.userId;
 
     const foundPost = await DB.Message.getMessage(postId);
-    const foundUser = await DB.User.findUserWithEmail(userEmail);
 
     if (!foundPost) {
       throw new Error("No post found for posting comment!");
     }
 
-    if (!foundUser) {
-      throw new Error("No user found for posting comment!");
+    let userEmail;
+    let foundUser;
+
+    if (decodedToken) {
+      userEmail = decodedToken.email;
+      foundUser = await DB.User.findUserWithEmail(userEmail);
+      if (!foundUser) {
+        throw new Error("No user found for posting comment!");
+      }
+    } else if (!decodedToken) {
+      foundUser = await DB.User.createGuestUser();
     }
 
     const newComment = new DB.Comment({
-      messageId: postId,
+      messageId: foundPost._id,
       userId: foundUser._id,
       comment: comment,
     });
@@ -241,7 +253,10 @@ const getComments = async (req, res, next) => {
 
     const io = getIO();
 
-    io.emit("comments");
+    io.emit("comments", {
+      action: "POST",
+      comment: comments,
+    });
 
     res.json({
       message: "GET request for comments was successful!!",
