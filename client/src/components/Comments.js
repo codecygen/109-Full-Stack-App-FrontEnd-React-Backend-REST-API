@@ -30,13 +30,13 @@ const Comments = () => {
 
   let comments;
 
-  useEffect(() => {
-    console.log("initialData", initialData);
-    console.log("socket", commentsSocketIO);
-    console.log("token", token);
-    console.log("name", name);
-    console.log("status", status);
-  }, [initialData, commentsSocketIO, token, name, status]);
+  // useEffect(() => {
+  //   console.log("initialData", initialData);
+  //   console.log("socket", commentsSocketIO);
+  //   console.log("token", token);
+  //   console.log("name", name);
+  //   console.log("status", status);
+  // }, [initialData, commentsSocketIO, token, name, status]);
 
   if (isLoadingAllComments) {
     comments = <Loader />;
@@ -45,7 +45,7 @@ const Comments = () => {
       <p>{errorAllComments}: Couldn't fetch comments! Contact Admin!</p>
     );
   } else if (commentsSocketIO || initialData) {
-    
+
     // Initially initialData will load and socketio will just establish
     // a connection
     // When you add a new comment after loading the page, initialData will
