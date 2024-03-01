@@ -159,9 +159,7 @@ const deletePost = async (req, res, next) => {
 
     fs.unlink(oldImage, (err) => {
       if (err) {
-        throw new Error(
-          "Image could not be deleted for post deletion request!"
-        );
+        next(err);
       }
     });
 

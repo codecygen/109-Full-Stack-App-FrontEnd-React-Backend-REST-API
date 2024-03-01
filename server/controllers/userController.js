@@ -21,7 +21,7 @@ const signup = async (req, res, next) => {
     const newUser = new DB.User({
       email,
       password: hashedPassword,
-      name,
+      name: name.toLowerCase(),
       color: pickedColor,
     });
 

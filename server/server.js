@@ -10,6 +10,7 @@ const { initIO } = require("./sockets/socket");
 const feedRoutes = require("./routes/feedRoutes");
 const userRoutes = require("./routes/userRoutes");
 
+const DB = require("./models/DB");
 const corsMiddleware = require("./middleware/corsMiddleware");
 const errorMiddleware = require("./middleware/errorMiddleware");
 
@@ -40,6 +41,18 @@ mongoose
 
     // websocket-server-establishment
     initIO(nodeServer);
+
+    // find guest user when server initializes
+    // this user will be used for comment section
+    // it will allow guests to comment on stuff.
+    return DB.User.findUserWithName("guest");
+  })
+  .then((foundGuestUser) => {
+    if (!foundGuestUser) {
+      // if guest user cannot be found
+      // create it
+      DB.User.createGuestUser();
+    }
   })
   .catch((err) => {
     console.error(err);

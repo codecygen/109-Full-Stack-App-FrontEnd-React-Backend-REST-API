@@ -67,7 +67,7 @@ userSchema.statics.createGuestUser = async function () {
         .randomBytes(32)
         .toString("hex")}.com`,
       password: crypto.randomBytes(32).toString("hex"),
-      name: `Guest${crypto.randomBytes(32).toString("hex")}`,
+      name: `guest`,
       color: "#4f4f4f",
     });
 
