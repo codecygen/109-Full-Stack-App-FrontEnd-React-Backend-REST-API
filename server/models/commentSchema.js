@@ -36,7 +36,7 @@ commentSchema.statics.getComments = async function (postId) {
     const comments = await this.find({ messageId: postId })
       .populate({
         path: "userId",
-        select: ["name", "status", "color"]
+        select: ["name", "status", "color"],
       })
       .sort({ createdAt: -1 });
 
@@ -47,6 +47,27 @@ commentSchema.statics.getComments = async function (postId) {
     }
 
     return comments;
+  } catch (err) {
+    throw err;
+  }
+};
+
+// This is initiated when a person deletes a post
+// associated comments should also be deleted
+commentSchema.statics.deleteComments = async function (userId, postId) {
+  try {
+    const deletedComments = await this.deleteMany({
+      userId: userId,
+      messageId: postId,
+    });
+
+    if (!deletedComments) {
+      const deletedPostError = new Error("There is no comment to be deleted!");
+      deletedPostError.statusCode = 500;
+      throw deletedPostError;
+    }
+
+    return deletedComments;
   } catch (err) {
     throw err;
   }

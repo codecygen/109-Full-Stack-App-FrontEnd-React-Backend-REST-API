@@ -26,15 +26,17 @@ const Comments = () => {
   const { dataAllComments, errorAllComments, isLoadingAllComments } =
     useSelector((state) => state.allComments);
 
+  const initialData = dataAllComments;
+
   let comments;
 
   useEffect(() => {
-    // console.log("initialData", dataAllComments);
-    // console.log("socket", commentsSocketIO);
-    // console.log("token", token);
-    // console.log("name", name);
-    // console.log("status", status);
-  }, [dataAllComments, commentsSocketIO, token, name, status]);
+    console.log("initialData", initialData);
+    console.log("socket", commentsSocketIO);
+    console.log("token", token);
+    console.log("name", name);
+    console.log("status", status);
+  }, [initialData, commentsSocketIO, token, name, status]);
 
   if (isLoadingAllComments) {
     comments = <Loader />;
@@ -42,15 +44,15 @@ const Comments = () => {
     comments = (
       <p>{errorAllComments}: Couldn't fetch comments! Contact Admin!</p>
     );
-  } else if (commentsSocketIO || dataAllComments) {
-    // Initially dataAllComments will load and socketio will just establish
+  } else if (commentsSocketIO || initialData) {
+    // Initially initialData will load and socketio will just establish
     // a connection
-    // When you add a new comment after loading the page, dataAllComments will
+    // When you add a new comment after loading the page, initialData will
     // still be there but since commentsSocketIO will have a value that will be
     // assigned as the mapped data to be rendered.
     const renderedData = commentsSocketIO
       ? commentsSocketIO.comment
-      : dataAllComments;
+      : initialData;
 
     if (renderedData.length === 0) {
       comments = <span>No comments to show...</span>;
