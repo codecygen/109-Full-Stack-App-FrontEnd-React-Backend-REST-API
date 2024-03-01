@@ -45,7 +45,6 @@ const Comments = () => {
       <p>{errorAllComments}: Couldn't fetch comments! Contact Admin!</p>
     );
   } else if (commentsSocketIO || initialData) {
-
     // Initially initialData will load and socketio will just establish
     // a connection
     // When you add a new comment after loading the page, initialData will
@@ -94,7 +93,9 @@ const Comments = () => {
                 }}
               />
               {((token && data.userId.name === name) ||
-                (token && status === "admin")) && <CommentDropdownMenu />}
+                (token && status === "admin")) && (
+                <CommentDropdownMenu commentDetails={data} />
+              )}
             </ListItem>
             <Typography
               component="p"

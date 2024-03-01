@@ -6,7 +6,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const options = ["Edit", "Delete"];
 
-const CommentDropdownMenu = () => {
+const CommentDropdownMenu = ({ commentDetails }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -14,7 +14,18 @@ const CommentDropdownMenu = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (action) => {
+    const commentId = commentDetails._id;
+
+    if (action === "Edit") {
+      // Perform edit action
+      console.log("Edit action clicked");
+      console.log(commentId);
+    } else if (action === "Delete") {
+      // Perform delete action
+      console.log("Delete action clicked");
+      console.log(commentId);
+    }
     setAnchorEl(null);
   };
 
@@ -38,13 +49,13 @@ const CommentDropdownMenu = () => {
         }}
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={() => handleClose("")}
       >
         {options.map((option) => (
           <MenuItem
             key={option}
             selected={option === "Pyxis"}
-            onClick={handleClose}
+            onClick={() => handleClose(option)}
           >
             {option}
           </MenuItem>
