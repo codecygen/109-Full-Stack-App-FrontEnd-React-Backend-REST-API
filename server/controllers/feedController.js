@@ -213,7 +213,7 @@ const postComment = async (req, res, next) => {
         throw new Error("No user found for posting comment!");
       }
     } else if (!decodedToken) {
-      foundUser = await DB.User.createGuestUser();
+      foundUser = await DB.User.findUserWithName("guest");
     }
 
     const newComment = new DB.Comment({

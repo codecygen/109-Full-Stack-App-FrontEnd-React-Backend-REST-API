@@ -1,5 +1,10 @@
+const { promisify } = require("util");
+
 const mongoose = require("mongoose");
 const crypto = require("crypto");
+
+const bcrypt = require("bcrypt");
+const hashPass = promisify(bcrypt.hash);
 
 const userSchema = new mongoose.Schema(
   {
@@ -62,11 +67,15 @@ userSchema.methods.createUser = async function () {
 
 userSchema.statics.createGuestUser = async function () {
   try {
+    const randomPass = crypto.randomBytes(32).toString("hex");
+    const saltRounds = 12;
+    const hashedPassword = await hashPass(randomPass, saltRounds);
+
     const newGuest = new this({
       email: `${crypto.randomBytes(32).toString("hex")}@${crypto
         .randomBytes(32)
         .toString("hex")}.com`,
-      password: crypto.randomBytes(32).toString("hex"),
+      password: hashedPassword,
       name: `guest`,
       color: "#4f4f4f",
     });
