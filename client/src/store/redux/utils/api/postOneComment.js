@@ -13,7 +13,7 @@ const postOneComment = async (
 
     const token = localStorage.getItem("token");
 
-    const res = await fetch(getAPI.postComment(postId), {
+    const res = await fetch(getAPI.postOneComment(postId), {
       method: "POST",
       body: JSON.stringify({ comment: commentString }),
       headers: {

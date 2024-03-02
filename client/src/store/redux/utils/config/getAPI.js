@@ -32,8 +32,12 @@ class getAPI {
   }
 
   // Socket.io comment related endpoints
-  static postComment(id) {
+  static postOneComment(id) {
     return `${this.link}/feed/post/${id}/comments`;
+  }
+
+  static deleteOneComment(id) {
+    return `${this.link}/feed/post/${id}/comment`;
   }
 }
 

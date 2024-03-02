@@ -265,6 +265,8 @@ const getComments = async (req, res, next) => {
   }
 };
 
+const deleteComment = async (req, res, next) => {};
+
 module.exports = {
   getPosts,
   postPost,
@@ -273,4 +275,5 @@ module.exports = {
   deletePost,
   postComment,
   getComments,
+  deleteComment,
 };

@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
+
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,6 +9,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 const options = ["Edit", "Delete"];
 
 const CommentDropdownMenu = ({ commentDetails }) => {
+  const params = useParams();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -15,15 +18,18 @@ const CommentDropdownMenu = ({ commentDetails }) => {
   };
 
   const handleClose = (action) => {
+    const postId = params.id;
     const commentId = commentDetails._id;
 
     if (action === "Edit") {
       // Perform edit action
       console.log("Edit action clicked");
+      console.log(postId);
       console.log(commentId);
     } else if (action === "Delete") {
       // Perform delete action
       console.log("Delete action clicked");
+      console.log(postId);
       console.log(commentId);
     }
     setAnchorEl(null);
