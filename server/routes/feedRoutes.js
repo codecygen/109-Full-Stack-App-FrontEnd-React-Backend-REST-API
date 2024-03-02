@@ -43,6 +43,6 @@ router.get("/post/:postId/comments", feedController.getComments);
 // Make a comment underneath a post with socket.io
 router.post("/post/:postId/comments", feedController.postComment);
 
-router.delete("/post/:postId/comment", feedController.deleteComment)
+router.delete("/post/:postId/comment", feedController.deleteComment);
 
 module.exports = router;
