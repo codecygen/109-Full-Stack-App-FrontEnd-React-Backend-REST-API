@@ -7,6 +7,7 @@ const validateMessageInput = require("../middleware/validateMessageInput");
 // Authentication-and-Authorization-Backend
 const validateAuth = require("../middleware/validateAuth");
 const postChangeAuthorization = require("../middleware/postChangeAuthorization");
+const commentChangeAuthorization = require("../middleware/commentChangeAuthorization");
 
 const fileUploadConfig = require("../config/fileUploadConfig");
 
@@ -43,6 +44,11 @@ router.get("/post/:postId/comments", feedController.getComments);
 // Make a comment underneath a post with socket.io
 router.post("/post/:postId/comments", feedController.postComment);
 
-router.delete("/post/:postId/comment", feedController.deleteComment);
+router.delete(
+  "/post/:postId/comment",
+  validateAuth,
+  commentChangeAuthorization,
+  feedController.deleteComment
+);
 
 module.exports = router;

@@ -31,6 +31,22 @@ commentSchema.methods.createComment = async function () {
   }
 };
 
+commentSchema.statics.getComment = async function (commentId) {
+  try {
+    const comment = await this.findOne({ _id: commentId });
+
+    if (!comment) {
+      const getCommentError = new Error("Could not get related comment!");
+      getCommentError.statusCode = 500;
+      throw getCommentError;
+    }
+
+    return comment;
+  } catch (err) {
+    throw err;
+  }
+};
+
 commentSchema.statics.getComments = async function (postId) {
   try {
     const comments = await this.find({ messageId: postId })

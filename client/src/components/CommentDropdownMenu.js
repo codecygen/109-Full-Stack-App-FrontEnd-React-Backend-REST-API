@@ -1,14 +1,18 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
+import { deleteComment } from "../store/redux/utils/apiStateManagementsThunk";
+
 const options = ["Edit", "Delete"];
 
 const CommentDropdownMenu = ({ commentDetails }) => {
+  const dispatch = useDispatch();
   const params = useParams();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -29,8 +33,8 @@ const CommentDropdownMenu = ({ commentDetails }) => {
     } else if (action === "Delete") {
       // Perform delete action
       console.log("Delete action clicked");
-      console.log(postId);
-      console.log(commentId);
+
+      dispatch(deleteComment(postId, commentId))
     }
     setAnchorEl(null);
   };

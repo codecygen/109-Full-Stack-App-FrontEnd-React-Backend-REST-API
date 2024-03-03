@@ -265,7 +265,11 @@ const getComments = async (req, res, next) => {
   }
 };
 
-const deleteComment = async (req, res, next) => {};
+const deleteComment = async (req, res, next) => {
+  const foundComment = req.foundComment;
+
+  console.log(foundComment);
+};
 
 module.exports = {
   getPosts,
