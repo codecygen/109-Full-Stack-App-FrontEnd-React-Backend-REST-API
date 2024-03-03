@@ -54,10 +54,9 @@ commentSchema.statics.getComments = async function (postId) {
 
 // This is initiated when a person deletes a post
 // associated comments should also be deleted
-commentSchema.statics.deleteComments = async function (userId, postId) {
+commentSchema.statics.deleteComments = async function (postId) {
   try {
     const deletedComments = await this.deleteMany({
-      userId: userId,
       messageId: postId,
     });
 

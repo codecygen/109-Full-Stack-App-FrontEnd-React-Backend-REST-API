@@ -172,7 +172,7 @@ const deletePost = async (req, res, next) => {
     );
 
     // delete all associated comments with the post
-    await DB.Comment.deleteComments(updatedUser._id, postId);
+    await DB.Comment.deleteComments(postId);
 
     res.json({
       message: "Post deleted successfully!",
