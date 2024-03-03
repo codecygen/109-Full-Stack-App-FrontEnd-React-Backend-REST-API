@@ -11,6 +11,7 @@ import loginSlice from "./login-slice";
 
 import allCommentsSlice from "./all-comments-slice";
 import postCommentSlice from "./post-comments-slice";
+import deleteCommentSlice from "./delete-comment-slice";
 
 const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ const store = configureStore({
 
     allComments: allCommentsSlice.reducer,
     postComment: postCommentSlice.reducer,
+    deleteComment: deleteCommentSlice.reducer,
   },
 });
 
