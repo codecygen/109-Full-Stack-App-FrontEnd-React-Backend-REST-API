@@ -229,7 +229,7 @@ const postComment = async (req, res, next) => {
 
     // io.broadcast, if you want to show everyone except for the sender
     // io.emit, if you want to show everyone
-    io.emit("comments", {
+    io.emit(`comments${postId}`, {
       action: "POST",
       comment: comments,
     });
@@ -251,7 +251,7 @@ const getComments = async (req, res, next) => {
 
     const io = getIO();
 
-    io.emit("comments", {
+    io.emit(`comments${postId}`, {
       action: "POST",
       comment: comments,
     });

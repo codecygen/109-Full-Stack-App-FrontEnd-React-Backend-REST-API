@@ -3,13 +3,13 @@ import getAPI from "../store/redux/utils/config/getAPI";
 
 import io from "socket.io-client";
 
-const useSocket = () => {
+const useSocket = (postId) => {
   const [comments, setComments] = useState();
 
   useEffect(() => {
     const socketIO = io(getAPI.link);
     try {
-      socketIO.on("comments", (data) => {
+      socketIO.on(`comments${postId}`, (data) => {
         setComments(data);
       });
     } catch (err) {
@@ -19,7 +19,7 @@ const useSocket = () => {
     return () => {
       socketIO.disconnect();
     };
-  }, []);
+  }, [postId]);
 
   return comments;
 };

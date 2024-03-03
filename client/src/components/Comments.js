@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Loader from "./Loader";
@@ -20,8 +21,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Comments = () => {
+  const params = useParams();
   const { token, name, status } = useAuth();
-  const commentsSocketIO = useSocket();
+  const commentsSocketIO = useSocket(params.id);
 
   const { dataAllComments, errorAllComments, isLoadingAllComments } =
     useSelector((state) => state.allComments);
@@ -29,14 +31,6 @@ const Comments = () => {
   const initialData = dataAllComments;
 
   let comments;
-
-  // useEffect(() => {
-  //   console.log("initialData", initialData);
-  //   console.log("socket", commentsSocketIO);
-  //   console.log("token", token);
-  //   console.log("name", name);
-  //   console.log("status", status);
-  // }, [initialData, commentsSocketIO, token, name, status]);
 
   if (isLoadingAllComments) {
     comments = <Loader />;
