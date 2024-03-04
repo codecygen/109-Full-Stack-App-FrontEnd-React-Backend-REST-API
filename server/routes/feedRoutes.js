@@ -51,4 +51,11 @@ router.delete(
   feedController.deleteComment
 );
 
+router.put(
+  "/post/:postId/comment",
+  validateAuth,
+  commentChangeAuthorization,
+  feedController.updateComment
+);
+
 module.exports = router;

@@ -290,6 +290,14 @@ const deleteComment = async (req, res, next) => {
   }
 };
 
+const updateComment = async (req, res, next) => {
+  try {
+    console.log("Updates Comment!");
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getPosts,
   postPost,
@@ -299,4 +307,5 @@ module.exports = {
   postComment,
   getComments,
   deleteComment,
+  updateComment,
 };

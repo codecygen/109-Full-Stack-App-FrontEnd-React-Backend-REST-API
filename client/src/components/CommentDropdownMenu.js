@@ -32,8 +32,6 @@ const CommentDropdownMenu = ({ commentDetails }) => {
       console.log(commentId);
     } else if (action === "Delete") {
       // Perform delete action
-      console.log("Delete action clicked");
-
       dispatch(deleteComment(postId, commentId))
     }
     setAnchorEl(null);
