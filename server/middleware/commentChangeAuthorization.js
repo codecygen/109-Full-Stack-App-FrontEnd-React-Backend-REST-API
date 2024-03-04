@@ -1,9 +1,10 @@
+const { ObjectId } = require("mongodb");
 const DB = require("../models/DB");
 
 const commentChangeAuthorization = async (req, res, next) => {
   try {
-    const commentId = req.body.commentId;
-    const requestorId = req.userId;
+    const commentId = new ObjectId(req.body.commentId);
+    const requestorId = new ObjectId(req.userId);
     const requestorEmail = req.userEmail;
 
     const foundComment = await DB.Comment.getComment(commentId);
@@ -13,7 +14,7 @@ const commentChangeAuthorization = async (req, res, next) => {
 
     // Check if the person who is editing either admin or the post owner
     if (
-      requestorId !== commentOwnerId &&
+      !requestorId.equals(commentOwnerId) &&
       !adminEmails.includes(requestorEmail)
     ) {
       const authorizationError = new Error(
