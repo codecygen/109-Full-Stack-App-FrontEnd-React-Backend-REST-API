@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Backdrop from "../Backdrop";
 import DeletePostOverlay from "./DeletePostOverlay";
 
-const NewPostModal = (props) => {
+const DeletePostModal = (props) => {
 
   return (
     <>
@@ -19,4 +19,4 @@ const NewPostModal = (props) => {
   );
 };
 
-export default NewPostModal;
+export default DeletePostModal;

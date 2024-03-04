@@ -9,7 +9,7 @@ import { deletePostActions } from "../../../store/redux/delete-post-slice";
 
 import classes from "./DeletePostOverlay.module.scss";
 
-const NewPostOverlay = (props) => {
+const DeletePostOverlay = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -81,4 +81,4 @@ const NewPostOverlay = (props) => {
   );
 };
 
-export default NewPostOverlay;
+export default DeletePostOverlay;
