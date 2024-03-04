@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const DB = require("../models/DB");
 
 const { getIO } = require("../sockets/socket");
+const { io } = require("socket.io-client");
 
 const getPosts = async (req, res, next) => {
   try {
@@ -266,9 +267,27 @@ const getComments = async (req, res, next) => {
 };
 
 const deleteComment = async (req, res, next) => {
-  const foundComment = req.foundComment;
+  try {
+    const foundComment = req.foundComment;
 
-  console.log(foundComment);
+    await DB.Comment.deleteComment(foundComment._id);
+
+    const comments = await DB.Comment.getComments(foundComment.messageId);
+
+    const io = getIO();
+
+    io.emit(`comments${foundComment.messageId}`, {
+      action: "DELETE",
+      comment: comments,
+    });
+
+    res.json({
+      message: "DELETE request for comment was successful!!",
+      comment: comments,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = {

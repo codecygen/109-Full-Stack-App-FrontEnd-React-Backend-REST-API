@@ -88,4 +88,20 @@ commentSchema.statics.deleteComments = async function (postId) {
   }
 };
 
+commentSchema.statics.deleteComment = async function (commentId) {
+  try {
+    const deletedComment = await this.deleteOne({ _id: commentId });
+
+    if (!deletedComment) {
+      const deleteCommentError = new Error("Could not delete the comment!");
+      deleteCommentError.statusCode = 500;
+      throw deleteCommentError;
+    }
+
+    return deletedComment;
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = mongoose.model("Comment", commentSchema);
