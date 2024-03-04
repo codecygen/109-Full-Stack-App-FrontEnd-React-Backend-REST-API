@@ -11,6 +11,7 @@ import { getDetailsPagePost } from "../../../store/redux/utils/apiStateManagemen
 import Loader from "../../../components/Loader";
 import CommentForm from "../../../components/CommentForm";
 import Comments from "../../../components/Comments";
+import DeleteCommentModal from "../../../components/modals/delete-comment-modal/DeleteCommentModal";
 
 import convertDate from "../../../utils/convertDate";
 
@@ -33,11 +34,25 @@ const EventIdPage = () => {
   const { responseDetailedPost, errorDetailedPost, isLoadingDetailedPost } =
     useSelector((state) => state.detailedPost);
 
+  const isWindowOpenDeleteComment = useSelector(
+    (state) => state.deleteComment.isWindowOpenDeleteComment
+  );
+
   useEffect(() => {
     dispatch(getDetailsPagePost(params.id));
 
     dispatch(getComments(params.id));
   }, [dispatch, params.id]);
+
+  useEffect(() => {
+    if (isWindowOpenDeleteComment) {
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100vh";
+    } else {
+      document.body.style.overflow = "scroll";
+      document.body.style.height = "auto";
+    }
+  }, [isWindowOpenDeleteComment]);
 
   const {
     title,
@@ -97,6 +112,7 @@ const EventIdPage = () => {
           <Comments />
         </div>
       )}
+      {isWindowOpenDeleteComment && <DeleteCommentModal />}
     </main>
   );
 };

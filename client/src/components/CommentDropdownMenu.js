@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { deleteComment } from "../store/redux/utils/apiStateManagementsThunk";
+import { deleteCommentActions } from "../store/redux/delete-comment-slice";
 
 const options = ["Edit", "Delete"];
 
@@ -32,7 +33,9 @@ const CommentDropdownMenu = ({ commentDetails }) => {
       console.log(commentId);
     } else if (action === "Delete") {
       // Perform delete action
-      dispatch(deleteComment(postId, commentId))
+      // dispatch(deleteComment(postId, commentId));
+
+      dispatch(deleteCommentActions.toggleWindow());
     }
     setAnchorEl(null);
   };
@@ -46,7 +49,11 @@ const CommentDropdownMenu = ({ commentDetails }) => {
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
-        style={{ padding: 0, backgroundColor: "#bfc1db", borderRadius: "50%" }}
+        style={{
+          padding: 0,
+          backgroundColor: "#bfc1db",
+          borderRadius: "50%",
+        }}
       >
         <MoreVertIcon />
       </IconButton>

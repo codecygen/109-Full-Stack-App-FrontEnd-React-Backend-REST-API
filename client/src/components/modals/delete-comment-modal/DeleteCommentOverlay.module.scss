@@ -1,0 +1,80 @@
+@import "../../../variables.scss";
+
+.box {
+    color: #351a1a;
+    background-color: #eaeaea;
+    position: fixed;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+    border-radius: $borderRadius;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    max-width: 400px;
+    width: 90%;
+    min-width: 100px;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 10;
+
+    caret-color: #592f0d;
+    height: auto;
+
+    text-align: center;
+
+    > header, > div, > p {
+        margin: 0 auto;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    > header {
+        text-align: center;
+        border-bottom: 1px solid black;
+        width: 90%;
+
+        > h1 {
+            font-size: 1.3rem;
+            margin: 10px;
+
+            &.delete-result {
+                color: #116c15; 
+            }
+        }
+
+        > p {
+            margin: 2px;
+            font-weight: bold;
+
+            &.loading {
+                color: #1f5796; 
+            }
+
+            &.error {
+                color: #961f1f;
+            }
+        }
+    }
+
+    > div {
+        padding: 10px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+
+        > .button2 {
+            @include buttonStyle(120px, 50px, 2);
+        }
+
+        > .button3 {
+            @include buttonStyle(120px, 50px, 3);
+        }
+    }
+}
