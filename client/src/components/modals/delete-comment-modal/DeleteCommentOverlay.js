@@ -51,7 +51,7 @@ const DeleteCommentOverlay = (props) => {
           {isLoadingDeleteComment && "Waiting to Delete Comment!"}
         </p>
       </header>
-      <p>{commentDetails.comment}</p>
+      <p>{commentDetails.comment.substring(0, 20)}...</p>
       <div>
         <button className={classes.button2} onClick={props.cancelFunc}>
           Cancel

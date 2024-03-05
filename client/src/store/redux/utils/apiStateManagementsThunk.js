@@ -8,6 +8,7 @@ import { loginActions } from "../login-slice";
 import { allCommentsActions } from "../all-comments-slice";
 import { postCommentActions } from "../post-comments-slice";
 import { deleteCommentActions } from "../delete-comment-slice";
+import { editCommentActions } from "../edit-comment-slice";
 
 import getAllPosts from "./api/getAllPosts";
 import getOnePost from "./api/getOnePost";
@@ -19,6 +20,7 @@ import loginOneUser from "./api/loginOneUser";
 import getPostComments from "./api/getPostComments";
 import postOneComment from "./api/postOneComment";
 import deleteOneComment from "./api/deleteOneComment";
+import editOneComment from "./api/editOneComment";
 
 export const getPostsPagePosts = (currentPage) => {
   return async (dispatch) => {
@@ -154,6 +156,19 @@ export const deleteComment = (postId, commentId) => {
       deleteCommentActions.success,
       deleteCommentActions.loading,
       deleteCommentActions.fail
+    );
+  };
+};
+
+export const editComment = (postId, commentId) => {
+  return async (dispatch) => {
+    await editOneComment(
+      postId,
+      commentId,
+      dispatch,
+      editCommentActions.success,
+      editCommentActions.loading,
+      editCommentActions.fail
     );
   };
 };

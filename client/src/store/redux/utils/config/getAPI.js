@@ -39,6 +39,10 @@ class getAPI {
   static deleteOneComment(id) {
     return `${this.link}/feed/post/${id}/comment`;
   }
+
+  static editOneComment(id) {
+    return `${this.link}/feed/post/${id}/comment`;
+  }
 }
 
 export default getAPI;
