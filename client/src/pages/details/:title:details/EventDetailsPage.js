@@ -76,7 +76,13 @@ const EventIdPage = () => {
   };
 
   return (
-    <main className={classes.details}>
+    <main
+      className={classes.details}
+      style={{
+        wordWrap: "wrap",
+        overflowWrap: "break-word",
+      }}
+    >
       {errorDetailedPost && (
         <section className={classes.center}>
           <p>{errorDetailedPost}</p>
@@ -112,9 +118,11 @@ const EventIdPage = () => {
 
           <h1>{title}</h1>
           <img src={`${getAPI.link}/${image}`} alt="no-img" />
-          <ReactMarkdown remarkPlugins={[remarkBreaks]}>
-            {details}
-          </ReactMarkdown>
+          <div>
+            <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+              {details}
+            </ReactMarkdown>
+          </div>
           <CommentForm />
           <Comments />
         </div>

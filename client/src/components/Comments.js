@@ -2,6 +2,9 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+
 import Loader from "./Loader";
 import convertDate from "../utils/convertDate";
 import CommentDropdownMenu from "../components/CommentDropdownMenu";
@@ -70,7 +73,13 @@ const Comments = () => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={<React.Fragment>{data.comment}</React.Fragment>}
+                primary={
+                  <React.Fragment>
+                    <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+                      {data.comment}
+                    </ReactMarkdown>
+                  </React.Fragment>
+                }
                 secondary={convertedDate}
                 secondaryTypographyProps={{
                   sx: {
