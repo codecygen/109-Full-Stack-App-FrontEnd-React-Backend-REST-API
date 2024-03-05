@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 
+import { deleteCommentActions } from "../../../store/redux/delete-comment-slice";
+
 import { getDetailsPagePost } from "../../../store/redux/utils/apiStateManagementsThunk";
 
 import Loader from "../../../components/Loader";
@@ -53,6 +55,11 @@ const EventIdPage = () => {
       document.body.style.height = "auto";
     }
   }, [isWindowOpenDeleteComment]);
+
+  const closeDeleteCommentWindow = () => {
+    dispatch(deleteCommentActions.toggleWindow());
+    dispatch(deleteCommentActions.reset());
+  };
 
   const {
     title,
@@ -112,7 +119,9 @@ const EventIdPage = () => {
           <Comments />
         </div>
       )}
-      {isWindowOpenDeleteComment && <DeleteCommentModal />}
+      {isWindowOpenDeleteComment && (
+        <DeleteCommentModal cancelWindow={closeDeleteCommentWindow} />
+      )}
     </main>
   );
 };

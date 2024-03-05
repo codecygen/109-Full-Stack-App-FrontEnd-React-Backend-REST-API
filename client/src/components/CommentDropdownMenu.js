@@ -1,13 +1,12 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import { deleteComment } from "../store/redux/utils/apiStateManagementsThunk";
 import { deleteCommentActions } from "../store/redux/delete-comment-slice";
 
 const options = ["Edit", "Delete"];
@@ -25,6 +24,7 @@ const CommentDropdownMenu = ({ commentDetails }) => {
   const handleClose = (action) => {
     const postId = params.id;
     const commentId = commentDetails._id;
+    const comment = commentDetails.comment;
 
     if (action === "Edit") {
       // Perform edit action
@@ -33,8 +33,9 @@ const CommentDropdownMenu = ({ commentDetails }) => {
       console.log(commentId);
     } else if (action === "Delete") {
       // Perform delete action
-      // dispatch(deleteComment(postId, commentId));
-
+      dispatch(
+        deleteCommentActions.getCommentDetails({ postId, commentId, comment })
+      );
       dispatch(deleteCommentActions.toggleWindow());
     }
     setAnchorEl(null);

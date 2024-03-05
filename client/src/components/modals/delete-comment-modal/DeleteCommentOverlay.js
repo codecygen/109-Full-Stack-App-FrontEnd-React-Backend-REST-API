@@ -1,56 +1,39 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { deleteComment } from "../../../store/redux/utils/apiStateManagementsThunk";
 
-import { deletePost } from "../../../store/redux/utils/apiStateManagementsThunk";
-
-import { deletePostActions } from "../../../store/redux/delete-post-slice";
+import { deleteCommentActions } from "../../../store/redux/delete-comment-slice";
 
 import classes from "./DeleteCommentOverlay.module.scss";
 
 const DeleteCommentOverlay = (props) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
   const dispatch = useDispatch();
 
   const {
-    dataDeletePost,
-    responseDeletePost,
-    errorDeletePost,
-    isLoadingDeletePost,
-  } = useSelector((state) => state.deletePost);
+    commentDetails,
+    errorDeleteComment,
+    isLoadingDeleteComment,
+  } = useSelector((state) => state.deleteComment);
 
   useEffect(() => {
-    // Only close errorpost window if the data deletion request
+    // Only close window if the data deletion request
     // successfully sent to backend
-
-    if (errorDeletePost === false && isLoadingDeletePost === false) {
-      dispatch(deletePostActions.toggleWindow());
-      dispatch(deletePostActions.reset());
+    if (errorDeleteComment === false && isLoadingDeleteComment === false) {
+      dispatch(deleteCommentActions.toggleWindow());
+      dispatch(deleteCommentActions.reset());
     }
-  }, [dispatch, errorDeletePost, isLoadingDeletePost]);
+  }, [dispatch, errorDeleteComment, isLoadingDeleteComment]);
 
   const deleteButtonHandler = () => {
-    dispatch(deletePost(dataDeletePost._id));
-
-    const queryParams = new URLSearchParams(location.search);
-    const pageQueryParam = queryParams.get("p");
-
-    const timeOut = setTimeout(() => {
-      if (pageQueryParam === null || pageQueryParam === "1") {
-        navigate(0);
-      } else {
-        navigate("/");
-      }
-    }, 750);
-
-    return () => clearTimeout(timeOut);
+    dispatch(deleteComment(commentDetails.postId, commentDetails.commentId));
   };
 
   let warningClasses;
 
-  if (errorDeletePost) {
+  if (errorDeleteComment) {
     warningClasses = classes.error;
   } else {
     warningClasses = classes.loading;
@@ -59,16 +42,16 @@ const DeleteCommentOverlay = (props) => {
   return (
     <section className={classes.box}>
       <header>
-        <h1 className={responseDeletePost && classes["delete-result"]}>
+        <h1 className={classes["delete-result"]}>
           Are you sure to delete?
         </h1>
         <p className={warningClasses}>
-          {errorDeletePost &&
-            `Contact Admin: Deletion Error: ${errorDeletePost}`}
-          {isLoadingDeletePost && "Waiting to Delete Post!"}
+          {errorDeleteComment &&
+            `Contact Admin: Deletion Error: ${errorDeleteComment}`}
+          {isLoadingDeleteComment && "Waiting to Delete Comment!"}
         </p>
       </header>
-      <p>{dataDeletePost.title}</p>
+      <p>{commentDetails.comment}</p>
       <div>
         <button className={classes.button2} onClick={props.cancelFunc}>
           Cancel

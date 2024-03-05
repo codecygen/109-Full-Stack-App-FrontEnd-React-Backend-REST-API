@@ -25,7 +25,7 @@ const deleteOneComment = async (
       throw new Error(`HTTP Error! Status Code: ${res.status}`);
     }
 
-    const data = res.json();
+    const data = await res.json();
     dispatch(successHandler(data));
     dispatch(loadingHandler(false));
     dispatch(failHandler(false));

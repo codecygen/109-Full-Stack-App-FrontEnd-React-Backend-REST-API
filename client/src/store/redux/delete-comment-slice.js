@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isWindowOpenDeleteComment: false,
+  commentDetails: {},
   dataDeleteComment: null,
   errorDeleteComment: null,
   isLoadingDeleteComment: null,
@@ -17,6 +18,10 @@ const deleteCommentSlice = createSlice({
 
     reset(state, action) {
       return initialState;
+    },
+
+    getCommentDetails(state, action) {
+      state.commentDetails = action.payload;
     },
 
     success(state, action) {
