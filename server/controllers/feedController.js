@@ -292,7 +292,16 @@ const deleteComment = async (req, res, next) => {
 
 const updateComment = async (req, res, next) => {
   try {
-    console.log("Updates Comment!");
+    const foundComment = req.foundComment;
+
+    const messageId = foundComment.messageId;
+    const newComment = req.newComment;
+    const commentId = foundComment._id;
+
+    console.log(foundComment);
+    console.log("messageId", messageId);
+    console.log("New Comment: ", newComment);
+    console.log("commentId", commentId);
   } catch (err) {
     next(err);
   }

@@ -20,7 +20,7 @@ import loginOneUser from "./api/loginOneUser";
 import getPostComments from "./api/getPostComments";
 import postOneComment from "./api/postOneComment";
 import deleteOneComment from "./api/deleteOneComment";
-import editOneComment from "./api/editOneComment";
+import updateOneComment from "./api/updateOneComment";
 
 export const getPostsPagePosts = (currentPage) => {
   return async (dispatch) => {
@@ -160,11 +160,12 @@ export const deleteComment = (postId, commentId) => {
   };
 };
 
-export const editComment = (postId, commentId) => {
+export const updateComment = (postId, commentId, updatedComment) => {
   return async (dispatch) => {
-    await editOneComment(
+    await updateOneComment(
       postId,
       commentId,
+      updatedComment,
       dispatch,
       editCommentActions.success,
       editCommentActions.loading,

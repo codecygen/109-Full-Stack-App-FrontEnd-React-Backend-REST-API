@@ -6,7 +6,7 @@ const commentChangeAuthorization = async (req, res, next) => {
     const commentId = new ObjectId(req.body.commentId);
     const requestorId = new ObjectId(req.userId);
     const requestorEmail = req.userEmail;
-
+;
     const foundComment = await DB.Comment.getComment(commentId);
 
     const adminEmails = process.env.ADMIN_EMAILS.split(",");
@@ -25,6 +25,7 @@ const commentChangeAuthorization = async (req, res, next) => {
     }
 
     req.foundComment = foundComment;
+    req.newComment = req.body.updatedComment;
 
     next();
   } catch (err) {

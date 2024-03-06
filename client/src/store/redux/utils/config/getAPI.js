@@ -40,7 +40,7 @@ class getAPI {
     return `${this.link}/feed/post/${id}/comment`;
   }
 
-  static editOneComment(id) {
+  static updateOneComment(id) {
     return `${this.link}/feed/post/${id}/comment`;
   }
 }
