@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 
 import Loader from "./Loader";
+import CommentEditForm from "./CommentEditForm";
 import convertDate from "../utils/convertDate";
 import CommentDropdownMenu from "../components/CommentDropdownMenu";
 
@@ -30,6 +31,12 @@ const Comments = () => {
 
   const { dataAllComments, errorAllComments, isLoadingAllComments } =
     useSelector((state) => state.allComments);
+
+  const { isEditingComment, editedCommentId } = useSelector(
+    (state) => state.editComment
+  );
+  console.log(isEditingComment);
+  console.log(editedCommentId);
 
   const initialData = dataAllComments;
 
@@ -56,6 +63,73 @@ const Comments = () => {
     } else {
       comments = renderedData.map((data, index) => {
         const convertedDate = convertDate(data.updatedAt);
+
+        if (data._id === editedCommentId) {
+          return (
+            <React.Fragment key={data._id}>
+              {index === 0 && (
+                <Divider
+                  variant="inset"
+                  component="li"
+                  sx={{ width: "85%", margin: "0 0 10px 0" }}
+                />
+              )}
+
+              <CommentEditForm comment={data.comment} />
+
+              <ListItem
+                alignItems="flex-start"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: 0,
+                  alignItems: "flex-end",
+                }}
+              >
+                <ListItemText
+                  secondary={convertedDate}
+                  secondaryTypographyProps={{
+                    sx: {
+                      position: "relative",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "flex-end",
+                      marginRight:
+                        (token && data.userId.name === name) ||
+                        (token && status === "admin")
+                          ? "6px"
+                          : "30px",
+                    },
+                  }}
+                />
+                <Typography
+                  component="p"
+                  sx={{
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                    marginRight: "34px",
+                  }}
+                >
+                  {data.userId.status === "admin" && (
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      style={{ color: "#b4a011" }}
+                    />
+                  )}
+                  {data.userId.name}
+                </Typography>
+              </ListItem>
+
+              <Divider
+                variant="inset"
+                component="li"
+                sx={{ width: "85%", margin: "10px 0 10px 0" }}
+              />
+            </React.Fragment>
+          );
+        }
 
         return (
           <React.Fragment key={data._id}>
@@ -96,9 +170,10 @@ const Comments = () => {
                 }}
               />
               {((token && data.userId.name === name) ||
-                (token && status === "admin")) && (
-                <CommentDropdownMenu commentDetails={data} />
-              )}
+                (token && status === "admin")) &&
+                !isEditingComment && (
+                  <CommentDropdownMenu commentDetails={data} />
+                )}
             </ListItem>
             <Typography
               component="p"

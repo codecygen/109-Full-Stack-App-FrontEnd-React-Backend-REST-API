@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isEditingComment: false,
+  editedCommentId: null,
 
   dataEditForm: null,
   errorEditForm: null,
@@ -18,6 +19,12 @@ const editCommentSlice = createSlice({
   reducers: {
     toggleEditing(state, action) {
       state.isEditingComment = !state.isEditingComment;
+
+      if (state.isEditingComment) {
+        state.editedCommentId = action.payload;
+      } else {
+        state.editedCommentId = null;
+      }
     },
 
     success(state, action) {
