@@ -5,6 +5,7 @@ import { Button, Box, TextField } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { postComment } from "../store/redux/utils/apiStateManagementsThunk";
+import { editCommentActions } from "../store/redux/edit-comment-slice";
 
 const CommentEditForm = (props) => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const CommentEditForm = (props) => {
   };
 
   const cancelHandler = () => {
-    console.log("Canceled!");
+    dispatch(editCommentActions.toggleEditing());
   };
 
   return (
