@@ -35,8 +35,8 @@ const Comments = () => {
   const { isEditingComment, editedCommentId } = useSelector(
     (state) => state.editComment
   );
-  console.log(isEditingComment);
-  console.log(editedCommentId);
+  // console.log(isEditingComment);
+  // console.log(editedCommentId);
 
   const initialData = dataAllComments;
 
@@ -94,11 +94,7 @@ const Comments = () => {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "flex-end",
-                      marginRight:
-                        (token && data.userId.name === name) ||
-                        (token && status === "admin")
-                          ? "6px"
-                          : "30px",
+                      marginRight: "0",
                     },
                   }}
                 />
@@ -109,7 +105,12 @@ const Comments = () => {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "flex-end",
-                    marginRight: "34px",
+                    marginRight:
+                      ((token && data.userId.name === name) ||
+                        (token && status === "admin")) &&
+                      !isEditingComment
+                        ? "24px"
+                        : "0",
                   }}
                 >
                   {data.userId.status === "admin" && (
@@ -161,11 +162,7 @@ const Comments = () => {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "flex-end",
-                    marginRight:
-                      (token && data.userId.name === name) ||
-                      (token && status === "admin")
-                        ? "6px"
-                        : "30px",
+                    marginRight: "0",
                   },
                 }}
               />
@@ -182,7 +179,12 @@ const Comments = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "flex-end",
-                marginRight: "34px",
+                marginRight:
+                  ((token && data.userId.name === name) ||
+                    (token && status === "admin")) &&
+                  !isEditingComment
+                    ? "24px"
+                    : "0",
               }}
             >
               {data.userId.status === "admin" && (

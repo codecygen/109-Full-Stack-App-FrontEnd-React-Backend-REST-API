@@ -42,13 +42,17 @@ const CommentEditForm = (props) => {
     setIsCommentValid(null);
   };
 
+  const cancelHandler = () => {
+    console.log("Canceled!");
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box
         component="form"
         noValidate
         onSubmit={formSubmitHandler}
-        sx={{ margin: "30px 0" }}
+        sx={{ margin: "10px 0" }}
       >
         <TextField
           required
@@ -70,8 +74,8 @@ const CommentEditForm = (props) => {
           }}
         />
         <Button
-          type="submit"
           variant="contained"
+          onClick={cancelHandler}
           sx={{
             bgcolor: "#9d0c2c",
             "&:hover": {
