@@ -75,7 +75,7 @@ const Comments = () => {
                 />
               )}
 
-              <CommentEditForm comment={data.comment} />
+              <CommentEditForm data={data} />
 
               <ListItem
                 alignItems="flex-start"

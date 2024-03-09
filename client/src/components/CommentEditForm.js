@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { Button, Box, TextField } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { postComment } from "../store/redux/utils/apiStateManagementsThunk";
 import { editCommentActions } from "../store/redux/edit-comment-slice";
+
+import { updateComment } from "../store/redux/utils/apiStateManagementsThunk";
 
 const CommentEditForm = (props) => {
   const dispatch = useDispatch();
-  const params = useParams();
 
-  const [comment, setComment] = useState(props.comment);
-  const [isCommentValid, setIsCommentValid] = useState(null);
+  const [comment, setComment] = useState(props.data.comment);
+  const [isCommentValid, setIsCommentValid] = useState(props.data.comment.length >= 5);
 
   const defaultTheme = createTheme();
 
@@ -35,12 +34,10 @@ const CommentEditForm = (props) => {
       return;
     }
 
-    const postId = params.id;
+    const postId = props.data.messageId;
+    const commentId = props.data._id;
 
-    dispatch(postComment(postId, comment));
-
-    setComment("");
-    setIsCommentValid(null);
+    dispatch(updateComment(postId, commentId, comment));
   };
 
   const cancelHandler = () => {

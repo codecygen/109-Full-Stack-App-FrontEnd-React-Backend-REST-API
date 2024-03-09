@@ -10,8 +10,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { deleteCommentActions } from "../store/redux/delete-comment-slice";
 import { editCommentActions } from "../store/redux/edit-comment-slice";
 
-import { updateComment } from "../store/redux/utils/apiStateManagementsThunk";
-
 const options = ["Edit", "Delete"];
 
 const CommentDropdownMenu = ({ commentDetails }) => {
@@ -31,8 +29,6 @@ const CommentDropdownMenu = ({ commentDetails }) => {
 
     if (action === "Edit") {
       // Perform edit action
-      console.log("Edit action clicked");
-      dispatch(updateComment(postId, commentId, "Here is my new comment!"));
       dispatch(editCommentActions.toggleEditing(commentId));
     } else if (action === "Delete") {
       // Perform delete action
